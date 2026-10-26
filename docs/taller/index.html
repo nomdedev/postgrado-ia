@@ -28,31 +28,20 @@
   </ul>
 <!-- /@nav -->
 
-  <p class="eyebrow">TALLER EN GRUPO · NO HACE FALTA SABER PROGRAMAR</p>
+  <p class="eyebrow">MAPA DEL TALLER · PARA RETOMAR DONDE QUEDARON</p>
   <h1>Construí tu propia FIN·LAB, paso a paso, con IA</h1>
-  <p class="lede">La terminal que vieron en clase (<span class="code-inline">127.0.0.1:4173/#/guiado</span>) no se escribió de una vez: se armó por capas. En este taller la reconstruyen en diez pasos cortos. En cada uno van a <b>entender el flujo</b> con un diagrama, <b>pedirle el código a la IA</b> con un prompt listo, <b>probarlo</b> y <b>comprobar</b> que los números estén bien.</p>
+  <p class="lede">Diez pasos en dos clases. Si es la primera vez, empiecen por el <a href="paso-0.html">paso 0</a>; si vienen de otra clase, elijan el paso donde quedaron. ¿Todavía no saben qué van a construir? Miren la <a href="../../index.html">bienvenida de la terminal</a>.</p>
   <div class="meta">
+    <span class="chip"><b>2</b> CLASES</span>
     <span class="chip"><b>10</b> PASOS</span>
-    <span class="chip"><b>10–20 MIN</b> CADA UNO</span>
     <span class="chip">GRUPOS DE <b>3–4</b></span>
     <span class="chip">CHAT DE IA + NAVEGADOR</span>
-    <span class="chip">COLAB Y N8N AL FINAL</span>
   </div>
 
-  <section class="block" aria-labelledby="mapa">
-    <span class="num">01</span>
-    <h2 id="mapa">El recorrido completo</h2>
-    <p>Arriba, todo lo que pasa <b>dentro de la página</b>: estructura, datos, pantallas y cálculos. Abajo, cómo esos datos <b>salen hacia otras herramientas</b> (una <a class="w" href="glosario.html#api">API</a>, <a class="w" href="glosario.html#colab">Google Colab</a> y <a class="w" href="glosario.html#n8n">n8n</a>) hasta llegar a la pestaña EMPEZAR de la terminal terminada.</p>
-    <div class="diagram">
-      <iframe src="diagramas/00-mapa.html" title="Diagrama del recorrido del taller" loading="lazy"></iframe>
-      <div class="diagram-foot"><span>Podés hacer zoom, arrastrar y buscar dentro del diagrama.</span><a href="diagramas/00-mapa.html" target="_blank" rel="noopener">ABRIR EN PANTALLA COMPLETA ↗</a></div>
-    </div>
-  </section>
-
-  <section class="block" aria-labelledby="pasos">
-    <span class="num">02</span>
-    <h2 id="pasos">Los diez pasos</h2>
-    <p>Cada página tiene siempre las mismas partes: <b>qué van a lograr</b> → <b>el flujo en un diagrama</b> → <b>palabras nuevas</b> → <b>qué hacer, clic por clic</b> → <b>el prompt</b> → <b>cómo comprobar</b> → <b>si algo falla</b>.</p>
+  <section class="block" aria-labelledby="clase1">
+    <span class="num"></span>
+    <h2 id="clase1">Clase 1 · Ver el mercado y medirlo <small style="font-weight:400;color:var(--mut)">· pasos 0 a 5 · unas 2 h 15</small></h2>
+    <p>Arman la página, generan un año de precios, construyen el dashboard de Mercado, calculan indicadores y comparan carteras. Terminan con <span class="code-inline">finlab-v5.html</span>.</p>
     <div class="cards">
       <a class="card" href="paso-0.html"><span class="k">PASO 0 · PREPARAR</span><h3>El equipo, el chat y el prompt de contexto</h3><p>Reparten roles, eligen la IA y le dan las reglas del proyecto.</p><span class="f"><span>10 MIN</span><span>SIN CÓDIGO</span></span></a>
       <a class="card" href="paso-1.html"><span class="k">PASO 1 · ESQUELETO</span><h3>Encabezado y cuatro pestañas</h3><p>El primer archivo .html y el ciclo pedir → probar → comprobar → guardar.</p><span class="f"><span>15 MIN</span><span>NAVEGADOR</span></span></a>
@@ -60,15 +49,38 @@
       <a class="card" href="paso-3.html"><span class="k">PASO 3 · MERCADO</span><h3>Tarjetas, tabla y gráfico</h3><p>La primera pantalla útil, con variación del día y gráfico por activo.</p><span class="f"><span>15 MIN</span><span>DASHBOARD</span></span></a>
       <a class="card" href="paso-4.html"><span class="k">PASO 4 · INDICADORES</span><h3>SMA, EMA, RSI y señales</h3><p>Análisis técnico y la primera verificación en Google Sheets.</p><span class="f"><span>20 MIN</span><span>SHEETS</span></span></a>
       <a class="card" href="paso-5.html"><span class="k">PASO 5 · CARTERAS</span><h3>Retorno, riesgo y Sharpe</h3><p>Tres perfiles de cartera y las métricas que los comparan.</p><span class="f"><span>20 MIN</span><span>FINANZAS</span></span></a>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="clase2">
+    <span class="num"></span>
+    <h2 id="clase2">Clase 2 · Sacarlo afuera <small style="font-weight:400;color:var(--mut)">· pasos 6 a 9 · unas 2 h 15</small></h2>
+    <p>Los datos salen de la página: una API, la verificación en Google Colab, una alerta automática en n8n y el cierre con la terminal terminada y una auditoría entre grupos.</p>
+    <div class="cards">
       <a class="card" href="paso-6.html"><span class="k">PASO 6 · API</span><h3>Los datos en formato JSON</h3><p>Una “ventanilla” para que otros programas pidan los datos, y alertas.</p><span class="f"><span>15 MIN</span><span>JSON</span></span></a>
       <a class="card" href="paso-7.html"><span class="k">PASO 7 · COLAB</span><h3>Verificar con Python en Google Colab</h3><p>Llevan el CSV a Colab y recalculan los indicadores con pandas.</p><span class="f"><span>20 MIN</span><span>PYTHON</span></span></a>
       <a class="card" href="paso-8.html"><span class="k">PASO 8 · N8N</span><h3>Un workflow que avisa solo</h3><p>Importan un flujo de n8n y lo adaptan con IA para avisar por RSI.</p><span class="f"><span>20 MIN</span><span>AUTOMATIZACIÓN</span></span></a>
       <a class="card" href="paso-9.html"><span class="k">PASO 9 · #/GUIADO</span><h3>La terminal terminada</h3><p>Abren /#/guiado (publicada, con doble clic o en 127.0.0.1:4173), lo prueban en n8n y cierran con una auditoría cruzada.</p><span class="f"><span>25 + 20 MIN</span><span>CIERRE</span></span></a>
     </div>
+    <p style="margin-top:16px"><a class="btn" href="diagramas/00-mapa.html" target="_blank" rel="noopener">VER EL MAPA COMPLETO DEL RECORRIDO ↗</a></p>
+  </section>
+
+  <section class="block" aria-labelledby="corto">
+    <span class="num"></span>
+    <h2 id="corto">Camino corto: si un grupo se atrasó o falta tiempo</h2>
+    <p>No hace falta construir cada paso para entender el recorrido. Bajen la versión ya resuelta del paso anterior, ábranla, lean qué cambió y vayan directo a <b>Cómo comprobar</b>. Desde el paso 7 conviene volver a construir.</p>
+    <div class="cards">
+      <a class="card" href="rescate/finlab-v2.html" download="finlab.html"><span class="k">PARA ARRANCAR EL PASO 3</span><h3>Versión de rescate v2</h3><p>Página y datos ya listos.</p></a>
+      <a class="card" href="rescate/finlab-v3.html" download="finlab.html"><span class="k">PARA ARRANCAR EL PASO 4</span><h3>Versión de rescate v3</h3><p>Con la pantalla de Mercado.</p></a>
+      <a class="card" href="rescate/finlab-v4.html" download="finlab.html"><span class="k">PARA ARRANCAR EL PASO 5</span><h3>Versión de rescate v4</h3><p>Con indicadores, señales y CSV.</p></a>
+      <a class="card" href="rescate/finlab-v5.html" download="finlab.html"><span class="k">PARA ARRANCAR LA CLASE 2</span><h3>Versión de rescate v5</h3><p>Todo lo de la clase 1, incluidas las carteras.</p></a>
+      <a class="card" href="rescate/finlab-v6.html" download="finlab.html"><span class="k">PARA ARRANCAR EL PASO 7</span><h3>Versión de rescate v6</h3><p>Con la API y las alertas.</p></a>
+      <a class="card" href="rescate/finlab-AAPL.csv" download><span class="k">PASO 7 · SI NO TIENEN CSV</span><h3>CSV de respaldo (AAPL)</h3><p>Para la verificación en Colab.</p></a>
+    </div>
   </section>
 
   <section class="block" aria-labelledby="necesitan">
-    <span class="num">03</span>
+    <span class="num"></span>
     <h2 id="necesitan">Qué necesita cada grupo</h2>
     <ul class="check">
       <li><b>Una computadora</b> con Chrome, Edge o Firefox actualizado.</li>
@@ -82,7 +94,7 @@
   </section>
 
   <div class="pager">
-    <a href="../automatizaciones/index.html">← AUTOMATIZACIONES</a>
+    <a href="../../index.html">← BIENVENIDA</a>
     <a href="paso-0.html">EMPEZAR · PASO 0 →</a>
   </div>
 </main>

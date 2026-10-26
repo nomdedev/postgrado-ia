@@ -42,6 +42,17 @@ test('el taller: 10 pasos encadenados, cada uno con diagrama Archify, glosario, 
   assert.match(read('index.html'), /href="\.\.\/taller\/index\.html"/, 'el índice de automatizaciones no enlaza el taller');
   const terminal = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
   assert.match(terminal, /href="docs\/taller\/index\.html"/, 'la terminal (#/guiado) no enlaza el taller');
+  // Plan de reestructura, etapa 4: la raíz abre INICIO (bienvenida) y EMPEZAR pasó a AUTOMATIZAR.
+  assert.match(terminal, /const PAGES=\[\['inicio','INICIO'\]/, 'INICIO tiene que ser la primera pestaña');
+  assert.equal((terminal.match(/\|\|'inicio'/g) || []).length, 2, 'la ruta por defecto (inicial y al cambiar el #) tiene que ser INICIO');
+  assert.match(terminal, /\['guiado','05 · AUTOMATIZAR'\]/, 'la pestaña de n8n tiene que llamarse AUTOMATIZAR');
+  assert.equal((terminal.match(/className="btn btn-primary wl-go"/g) || []).length, 1, 'la bienvenida tiene que tener un solo botón primario');
+  assert.match(terminal, /className="btn btn-primary wl-go" href="docs\/taller\/paso-0\.html"/, 'el botón de la bienvenida tiene que llevar al paso 0');
+  const preview = terminal.match(/<img src="(docs\/img\/[a-z-]+\.webp)"/);
+  assert.ok(preview && fs.existsSync(path.join(__dirname, '..', preview[1])), 'falta la captura de la vista previa');
+  const mapa = fs.readFileSync(path.join(TALLER, 'index.html'), 'utf8');
+  assert.match(mapa, /id="clase1"[\s\S]*href="paso-5\.html"[\s\S]*id="clase2"[\s\S]*href="paso-9\.html"/, 'el mapa tiene que mostrar la clase 1 (P0–P5) y la clase 2 (P6–P9)');
+  assert.match(mapa, /id="corto"[\s\S]*href="rescate\/finlab-v5\.html"/, 'el mapa tiene que ofrecer el camino corto con los rescates');
   // Auditoría 2026-10-26: la pestaña EMPEZAR no debe revelar respuestas antes de COMPROBAR (H3).
   assert.doesNotMatch(terminal, /el resultado esperado es|\{ex\.time\} · \{ex\.explain\}/, 'EMPEZAR vuelve a mostrar las respuestas antes de discutir');
   // H2 y H5: los prompts fijan el arranque del RSI de Wilder y piden la volatilidad individual.

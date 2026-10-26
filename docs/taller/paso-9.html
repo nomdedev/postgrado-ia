@@ -30,14 +30,14 @@
 
   <p class="eyebrow">PASO 9 · CIERRE DEL TALLER</p>
   <h1>La terminal terminada: <span class="code-inline">127.0.0.1:4173/#/guiado</span></h1>
-  <p class="lede">Ya construyeron cada pieza. Ahora abren la terminal FIN·LAB completa en la pestaña <b>EMPEZAR</b> (<a class="w" href="glosario.html#hash">#/guiado</a>), recorren su automatización guiada, la prueban en n8n y comparan con lo que hicieron ustedes.</p>
+  <p class="lede">Ya construyeron cada pieza. Ahora abren la terminal FIN·LAB completa en la pestaña <b>05 · AUTOMATIZAR</b> (<a class="w" href="glosario.html#hash">#/guiado</a>), recorren su automatización guiada, la prueban en n8n y comparan con lo que hicieron ustedes.</p>
   <div class="meta"><span class="chip">PARTE A · <b>25 MIN</b></span><span class="chip">PARTE B · <b>20 MIN</b></span><span class="chip">SIN INSTALAR NADA</span><span class="chip">N8N</span><span class="chip">SALIDA: <b>3/3 EJERCICIOS</b></span></div>
 
   <section class="block" aria-labelledby="logro">
     <span class="num"></span>
     <h2 id="logro">Qué van a lograr</h2>
     <p>Ver en el navegador la pantalla “Armá tu primera automatización”, descargar el workflow que genera, ejecutarlo en n8n y resolver los tres ejercicios en grupo del final de la página hasta que el contador diga <b>3/3 RESUELTOS</b>.</p>
-    <div class="mock" aria-label="Maqueta de la pestaña EMPEZAR">
+    <div class="mock" aria-label="Maqueta de la pestaña AUTOMATIZAR">
       <b>Armá tu primera automatización</b> <span class="tag flat">MODO DE PRUEBA · SIN CUENTAS</span>
       <div class="mock-tabs"><span>1 · Iniciar prueba</span><span>2 · Revisar ejemplos</span><span>3 · Buscar una señal</span><span>Si encuentra</span><span>Si no encuentra</span></div>
       <div style="color:var(--mut)">¿Qué señal querés que el flujo encuentre? <b style="color:var(--txt)">Señal de venta ▾</b></div>
@@ -53,7 +53,7 @@
     <p>Los tres caminos llevan a la misma pantalla. Empiecen por el primero; los otros dos son para cuando no hay internet o quieren verla en <span class="code-inline">127.0.0.1:4173</span>, como en clase.</p>
     <ol class="do">
       <li><b>Camino 1 · La versión publicada (recomendado, no hay que instalar nada).</b> Abran en el navegador <span class="code-inline c">https://postgrado-ia.vercel.app/#/guiado</span>.</li>
-      <li><b>Camino 2 · Doble clic en la carpeta del proyecto.</b> Consigan la carpeta del proyecto <span class="code-inline">Postgrado-IA</span> (el docente la comparte como .zip, o la bajan de GitHub con <em>Code → Download ZIP</em>), descomprímanla y hagan doble clic en <span class="code-inline">index.html</span>. Cuando abra, toquen la pestaña <em>EMPEZAR</em>. La primera vez necesita internet para cargar las herramientas de la página.</li>
+      <li><b>Camino 2 · Doble clic en la carpeta del proyecto.</b> Consigan la carpeta del proyecto <span class="code-inline">Postgrado-IA</span> (el docente la comparte como .zip, o la bajan de GitHub con <em>Code → Download ZIP</em>), descomprímanla y hagan doble clic en <span class="code-inline">index.html</span>. Cuando abra, toquen la pestaña <em>05 · AUTOMATIZAR</em>. La primera vez necesita internet para cargar las herramientas de la página.</li>
       <li><b>Camino 3 · Servidor local en 127.0.0.1:4173 (como en clase).</b> Con la carpeta descomprimida, abran una terminal en ella: en Windows, entren a la carpeta con el Explorador, hagan clic en la barra de dirección, escriban <span class="code-inline">powershell</span> y presionen <kbd>Enter</kbd>; en Mac, clic derecho sobre la carpeta → <em>Nueva terminal en la carpeta</em>. Escriban el comando que corresponda y presionen <kbd>Enter</kbd>:
         <div class="prompt" data-open style="margin-top:10px">
           <div class="prompt-h"><div><span class="t">WINDOWS, CON PYTHON (INSTALADO DESDE PYTHON.ORG)</span></div><button class="copy" data-copy="#s1" type="button">COPIAR</button></div>
@@ -93,7 +93,7 @@
     <span class="num"></span>
     <h2 id="comprobar">Cómo comprobar</h2>
     <ul class="check">
-      <li><b>La dirección</b> del navegador termina en <span class="code-inline">/#/guiado</span> (o tocaron la pestaña EMPEZAR) y esa pestaña está marcada.</li>
+      <li><b>La dirección</b> del navegador termina en <span class="code-inline">/#/guiado</span> (o tocaron la pestaña 05 · AUTOMATIZAR) y esa pestaña está marcada.</li>
       <li><b>En n8n,</b> la salida que se activa coincide con la predicción que anotaron, o pueden explicar por qué no.</li>
       <li><b>El contador</b> de ejercicios dice 3/3.</li>
       <li><b>Cada grupo presenta</b> un hallazgo de la auditoría que confirmó a mano y uno que la IA reportó y resultó falso.</li>
@@ -128,7 +128,7 @@ Para cada hallazgo indicá: dónde está (nombre de la función o sección), qu�
       <li><b>En Windows se abre la Microsoft Store, o dice que no se encontró Python o que <span class="code-inline">py</span> no se reconoce:</b> Python no está instalado. No hace falta: usen el camino 1 (versión publicada) o el 2 (doble clic).</li>
       <li><b>En Mac dice “command not found: python3”</b> o pide instalar herramientas de desarrollo: cancelen y usen el camino 1 o el 2.</li>
       <li><b>“Address already in use” o el puerto está ocupado:</b> otro programa usa el 4173. Cambien el número (por ejemplo, 4174) en el comando y en la dirección.</li>
-      <li><b>La página carga pero muestra Mercado:</b> les faltó <span class="code-inline">#/guiado</span> al final, o toquen la pestaña <em>EMPEZAR</em>.</li>
+      <li><b>La página abre en INICIO o en otra pestaña:</b> les faltó <span class="code-inline">#/guiado</span> al final; toquen la pestaña <em>05 · AUTOMATIZAR</em>.</li>
       <li><b>“No se puede acceder a este sitio”:</b> la terminal con el servidor se cerró. Vuelvan al punto A.3.</li>
     </ul>
   </section>

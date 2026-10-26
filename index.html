@@ -279,6 +279,44 @@ tbody tr{transition:background .12s}
 /* ---------- Docs ---------- */
 .doc-body{max-width:940px}
 .guide-wrap{max-width:1080px}
+/* ---------- INICIO: bienvenida al taller ---------- */
+.welcome{max-width:1180px;margin:0 auto}
+.wl-hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:36px;align-items:center;padding:18px 0 30px;border-bottom:1px solid var(--line)}
+.wl-flag{font:600 12px var(--mono);letter-spacing:.08em;color:var(--amb)}
+.wl-copy h1{font-size:clamp(28px,3.4vw,42px);line-height:1.12;margin:12px 0 14px}
+.wl-copy p{color:var(--mut);font-size:16px;line-height:1.65;max-width:620px}
+.wl-copy p b{color:var(--txt)}
+.wl-meta{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 22px}
+.wl-meta li{border:1px solid var(--line2);border-radius:999px;padding:5px 12px;font-size:13px;color:var(--mut)}
+.wl-meta b{color:var(--txt)}
+.wl-cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px}
+.wl-go{font-size:15px;padding:13px 22px;letter-spacing:.04em;border-radius:6px}
+.wl-link{color:var(--mut);font-size:14px;text-decoration:underline;text-underline-offset:3px}
+.wl-link:hover{color:var(--amb)}
+.wl-preview{margin:0;display:grid;gap:8px}
+.wl-before,.wl-preview figcaption{font-size:13px;color:var(--mut)}
+.wl-before span,.wl-preview figcaption span{display:inline-block;margin-right:8px;font:600 11px var(--mono);letter-spacing:.08em;color:var(--amb)}
+.wl-before{border:1px dashed var(--line2);border-radius:6px;padding:10px 12px;background:var(--panel)}
+.wl-arrow{color:var(--amb);text-align:center;font-size:18px;line-height:1}
+.wl-shot{border:1px solid var(--line2);border-radius:8px;overflow:hidden;background:var(--panel);box-shadow:0 18px 40px rgba(0,0,0,.28)}
+.wl-bar{display:flex;gap:6px;padding:8px 10px;border-bottom:1px solid var(--line);background:var(--panel3)}
+.wl-bar i{width:9px;height:9px;border-radius:50%;background:var(--line2)}
+.wl-shot img{display:block;width:100%;height:auto}
+.wl-h{font-size:19px;margin:28px 0 14px}
+.wl-etapas{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.wl-etapas li{position:relative;display:grid;gap:6px;padding:16px 16px 14px;background:var(--panel);border:1px solid var(--line);border-radius:8px}
+.wl-etapas b{font-size:16px}
+.wl-etapas span:not(.wl-n){color:var(--mut);font-size:14px;line-height:1.5}
+.wl-etapas small{font:12px var(--mono);color:var(--amb);letter-spacing:.04em}
+.wl-n{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--amb-soft);color:var(--amb);font-weight:700}
+.wl-need{margin-top:18px;padding:14px 16px;border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:6px;background:var(--panel);font-size:14px;line-height:1.6;color:var(--mut)}
+.wl-need b{color:var(--txt)}
+.wl-need code{font-family:var(--mono);color:var(--amb)}
+.wl-legal{margin-top:16px;font-size:12px;color:var(--dim)}
+.build-hint{display:block;margin:-6px 0 18px;padding:9px 14px;border:1px dashed var(--line2);border-radius:6px;font-size:13px;color:var(--mut)}
+.build-hint b{color:var(--amb)}
+.build-hint:hover{border-color:var(--amb);color:var(--txt);text-decoration:none}
+@media(max-width:900px){.wl-hero{grid-template-columns:1fr;gap:22px}.wl-etapas{grid-template-columns:1fr}.wl-go{width:100%;justify-content:center}}
 .guide-intro{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center;padding:20px 0 24px;border-bottom:1px solid var(--line);margin-bottom:22px}
 .guide-intro h2{font-size:25px;margin-bottom:7px}
 .guide-intro p{color:var(--mut);font-size:14px;line-height:1.6;max-width:680px}
@@ -2005,7 +2043,53 @@ function DocsPage({notify}){
 /* ================================================================
    8) APP PRINCIPAL — router por hash + estado global
    ================================================================ */
-const PAGES=[['guiado','EMPEZAR'],['mercado','01 · MERCADO'],['carteras','02 · CARTERAS'],['python','03 · PYTHON & COLAB'],['api','04 · API & ALERTAS'],['docs','DOCS']];
+const PAGES=[['inicio','INICIO'],['mercado','01 · MERCADO'],['carteras','02 · CARTERAS'],['python','03 · PYTHON & COLAB'],['api','04 · API & ALERTAS'],['guiado','05 · AUTOMATIZAR'],['docs','DOCS']];
+// Franja que conecta cada pestaña con el paso del taller donde se construye.
+const BUILD_HINTS={mercado:['3 y 4','paso-3'],carteras:['5','paso-5'],api:['6','paso-6'],python:['7','paso-7'],guiado:['8 y 9','paso-8']};
+function BuildHint({page}){
+  const h=BUILD_HINTS[page]; if(!h) return null;
+  return <a className="build-hint" href={'docs/taller/'+h[1]+'.html'}>Esta pantalla la construyen en el <b>Paso {h[0]}</b> del taller →</a>;
+}
+const ETAPAS=[
+  {n:'1',t:'Ver el mercado',d:'La página, un año de precios simulados y el primer dashboard.',p:'Pasos 0–3',c:'Clase 1'},
+  {n:'2',t:'Medirlo',d:'Medias móviles, RSI, señales y el riesgo de una cartera (Sharpe).',p:'Pasos 4–5',c:'Clase 1'},
+  {n:'3',t:'Sacarlo afuera',d:'Una API, la verificación en Google Colab y una alerta automática en n8n.',p:'Pasos 6–9',c:'Clase 2'}];
+/* ---------- PÁGINA #/ (INICIO) · BIENVENIDA AL TALLER ---------- */
+function Welcome(){
+  return (
+    <div className="welcome">
+      <div className="wl-hero">
+        <div className="wl-copy">
+          <span className="wl-flag">TALLER EN GRUPO · NO HACE FALTA SABER PROGRAMAR</span>
+          <h1>Construyan su propia terminal financiera, con IA</h1>
+          <p>En dos clases le van a pedir el código a una IA, paso a paso, y van a <b>comprobar que los números estén bien</b>. Terminan con una terminal como esta: precios, indicadores, riesgo de carteras y una alerta que llega sola. Es lo que un analista mira todos los días, armado por ustedes.</p>
+          <ul className="wl-meta"><li><b>2 clases</b> de unas 2 h 15</li><li>grupos de <b>3 o 4</b></li><li>sin instalar nada</li></ul>
+          <div className="wl-cta">
+            <a className="btn btn-primary wl-go" href="docs/taller/paso-0.html">EMPEZAR EL TALLER · PASO 0 →</a>
+            <a className="wl-link" href="docs/taller/index.html">¿Vienen de otra clase? Retomar donde quedaron</a>
+          </div>
+        </div>
+        <figure className="wl-preview">
+          <div className="wl-before"><span>ASÍ EMPIEZAN</span>un chat de IA y una hoja en blanco</div>
+          <div className="wl-arrow" aria-hidden="true">↓</div>
+          <div className="wl-shot">
+            <div className="wl-bar" aria-hidden="true"><i/><i/><i/></div>
+            <img src="docs/img/terminal-mercado.webp" width="1200" height="750" alt="La pestaña Mercado de la terminal terminada: tabla de activos, gráfico con medias móviles y señales."/>
+          </div>
+          <figcaption><span>ASÍ TERMINAN</span>esta misma terminal · <a href="#/mercado">explorala →</a></figcaption>
+        </figure>
+      </div>
+      <h3 className="wl-h">El recorrido en 3 etapas</h3>
+      <ol className="wl-etapas">
+        {ETAPAS.map(e=>(
+          <li key={e.n}><span className="wl-n">{e.n}</span><b>{e.t}</b><span>{e.d}</span><small>{e.p} · {e.c}</small></li>
+        ))}
+      </ol>
+      <div className="wl-need"><b>Qué necesita cada grupo:</b> una computadora con navegador, un chat de IA (alcanza la versión gratis), una cuenta de Google y una carpeta <code>finlab</code> en el escritorio. n8n recién hace falta en el paso 8. Si un grupo se atrasa, cada paso trae una versión de rescate: nadie queda afuera.</div>
+      <p className="wl-legal">Datos simulados con fines educativos. No es asesoramiento financiero.</p>
+    </div>
+  );
+}
 function SectionHead({n,t,d}){return (
   <div className="sec-head">
     <div className="sec-num">{n}</div>
@@ -2015,7 +2099,7 @@ function SectionHead({n,t,d}){return (
 
 function App(){
   // router mínimo por hash (#/mercado, #/docs, …)
-  const [page,setPage]=useState(()=>(location.hash.replace('#/','')||'guiado'));
+  const [page,setPage]=useState(()=>(location.hash.replace('#/','')||'inicio'));
   const [theme,setTheme]=useState(()=>{
     try{return localStorage.getItem('finlab_theme')==='light'?'light':'dark';}catch(e){return 'dark';}
   });
@@ -2024,7 +2108,7 @@ function App(){
     try{localStorage.setItem('finlab_theme',theme);}catch(e){}
   },[theme]);
   useEffect(()=>{
-    const h=()=>{ setPage(location.hash.replace('#/','')||'guiado'); window.scrollTo(0,0); };
+    const h=()=>{ setPage(location.hash.replace('#/','')||'inicio'); window.scrollTo(0,0); };
     addEventListener('hashchange',h);
     return ()=>removeEventListener('hashchange',h);
   },[]);
@@ -2105,6 +2189,8 @@ function App(){
       </header>
 
       <main className="wrap">
+        {page==='inicio'&&<Welcome/>}
+        <BuildHint page={page}/>
         {page==='guiado'&&<GuidedAutomation notify={notify}/>}
         {page==='mercado'&&(
           <React.Fragment>
