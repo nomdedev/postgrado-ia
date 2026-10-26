@@ -1,0 +1,126 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "P5 · Cómo se mide una cartera",
+    "quality_profile": "showcase",
+    "legend": {
+      "entries": {
+        "frontend": {
+          "label": "Pantalla"
+        },
+        "backend": {
+          "label": "Cálculo / lógica"
+        },
+        "database": {
+          "label": "Datos"
+        },
+        "cloud": {
+          "label": "Herramienta externa"
+        },
+        "security": {
+          "label": "Control / decisión"
+        },
+        "messagebus": {
+          "label": "Intercambio (archivo, JSON, HTTP)"
+        },
+        "external": {
+          "label": "Personas / IA"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "entrada",
+      "label": "Entrada"
+    },
+    {
+      "id": "calc",
+      "label": "Cálculo"
+    },
+    {
+      "id": "res",
+      "label": "Resultado"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "preset",
+      "lane": "entrada",
+      "col": 0,
+      "type": "external",
+      "label": "Cartera elegida",
+      "sublabel": "3 perfiles o a mano",
+      "width": 160
+    },
+    {
+      "id": "pesos",
+      "lane": "entrada",
+      "col": 1,
+      "type": "security",
+      "label": "Normalizar pesos",
+      "sublabel": "que sumen 100%",
+      "width": 160
+    },
+    {
+      "id": "retornos",
+      "lane": "calc",
+      "col": 2,
+      "type": "backend",
+      "label": "Retornos diarios",
+      "sublabel": "hoy / ayer − 1",
+      "width": 160
+    },
+    {
+      "id": "cov",
+      "lane": "calc",
+      "col": 3,
+      "type": "backend",
+      "label": "Media y covarianza",
+      "sublabel": "× 252 = anual",
+      "width": 160
+    },
+    {
+      "id": "metricas",
+      "lane": "res",
+      "col": 4,
+      "type": "frontend",
+      "label": "Retorno · Vol · Sharpe",
+      "sublabel": "tasa libre 4,3%",
+      "width": 160
+    },
+    {
+      "id": "base100",
+      "lane": "res",
+      "col": 5,
+      "type": "frontend",
+      "label": "Gráfico base 100",
+      "sublabel": "vs equiponderada",
+      "width": 160
+    }
+  ],
+  "edges": [
+    {
+      "from": "preset",
+      "to": "pesos"
+    },
+    {
+      "from": "pesos",
+      "to": "retornos"
+    },
+    {
+      "from": "retornos",
+      "to": "cov"
+    },
+    {
+      "from": "cov",
+      "to": "metricas"
+    },
+    {
+      "from": "metricas",
+      "to": "base100",
+      "label": "misma cartera"
+    }
+  ]
+}

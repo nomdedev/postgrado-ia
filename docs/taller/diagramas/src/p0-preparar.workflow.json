@@ -1,0 +1,126 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "P0 · Preparar el equipo y el chat",
+    "quality_profile": "showcase",
+    "legend": {
+      "entries": {
+        "frontend": {
+          "label": "Pantalla"
+        },
+        "backend": {
+          "label": "Cálculo / lógica"
+        },
+        "database": {
+          "label": "Datos"
+        },
+        "cloud": {
+          "label": "Herramienta externa"
+        },
+        "security": {
+          "label": "Control / decisión"
+        },
+        "messagebus": {
+          "label": "Intercambio (archivo, JSON, HTTP)"
+        },
+        "external": {
+          "label": "Personas / IA"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "grupo",
+      "label": "Ustedes (grupo)"
+    },
+    {
+      "id": "ia",
+      "label": "Chat de IA"
+    },
+    {
+      "id": "pc",
+      "label": "Computadora"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "roles",
+      "lane": "grupo",
+      "col": 0,
+      "type": "external",
+      "label": "Repartir roles",
+      "sublabel": "piloto · redactor · auditor",
+      "width": 160
+    },
+    {
+      "id": "constructor",
+      "lane": "grupo",
+      "col": 1,
+      "type": "frontend",
+      "label": "Constructor",
+      "sublabel": "nombre, activos, estilo",
+      "width": 160
+    },
+    {
+      "id": "contexto",
+      "lane": "ia",
+      "col": 2,
+      "type": "messagebus",
+      "label": "Prompt de contexto",
+      "sublabel": "reglas del proyecto",
+      "width": 160
+    },
+    {
+      "id": "entendido",
+      "lane": "ia",
+      "col": 3,
+      "type": "external",
+      "label": "IA responde",
+      "sublabel": "“Entendido”",
+      "width": 160
+    },
+    {
+      "id": "carpeta",
+      "lane": "pc",
+      "col": 4,
+      "type": "database",
+      "label": "Carpeta finlab",
+      "sublabel": "donde guardan versiones",
+      "width": 160
+    },
+    {
+      "id": "listo",
+      "lane": "pc",
+      "col": 5,
+      "type": "security",
+      "label": "Listos para P1",
+      "sublabel": "chat + carpeta",
+      "width": 160
+    }
+  ],
+  "edges": [
+    {
+      "from": "roles",
+      "to": "constructor"
+    },
+    {
+      "from": "constructor",
+      "to": "contexto",
+      "label": "copiar y pegar"
+    },
+    {
+      "from": "contexto",
+      "to": "entendido"
+    },
+    {
+      "from": "entendido",
+      "to": "carpeta"
+    },
+    {
+      "from": "carpeta",
+      "to": "listo"
+    }
+  ]
+}

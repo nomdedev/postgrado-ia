@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "P7 · Del CSV a Google Colab",
+    "quality_profile": "showcase",
+    "legend": {
+      "entries": {
+        "frontend": {
+          "label": "Pantalla"
+        },
+        "backend": {
+          "label": "Cálculo / lógica"
+        },
+        "database": {
+          "label": "Datos"
+        },
+        "cloud": {
+          "label": "Herramienta externa"
+        },
+        "security": {
+          "label": "Control / decisión"
+        },
+        "messagebus": {
+          "label": "Intercambio (archivo, JSON, HTTP)"
+        },
+        "external": {
+          "label": "Personas / IA"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "term",
+      "label": "Terminal FIN·LAB"
+    },
+    {
+      "id": "pc",
+      "label": "Tu computadora"
+    },
+    {
+      "id": "colab",
+      "label": "Google Colab"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "export",
+      "lane": "term",
+      "col": 0,
+      "type": "frontend",
+      "label": "Exportar CSV",
+      "sublabel": "botón del P4",
+      "width": 160
+    },
+    {
+      "id": "archivo",
+      "lane": "pc",
+      "col": 1,
+      "type": "messagebus",
+      "label": "finlab.csv",
+      "sublabel": "carpeta Descargas",
+      "width": 160
+    },
+    {
+      "id": "upload",
+      "lane": "colab",
+      "col": 2,
+      "type": "cloud",
+      "label": "files.upload()",
+      "sublabel": "subir el archivo",
+      "width": 160
+    },
+    {
+      "id": "pandas",
+      "lane": "colab",
+      "col": 3,
+      "type": "backend",
+      "label": "pandas.read_csv",
+      "sublabel": "tabla en memoria",
+      "width": 160
+    },
+    {
+      "id": "codigo",
+      "lane": "term",
+      "col": 3,
+      "type": "frontend",
+      "label": "Bloques A · B · C",
+      "sublabel": "botón Copiar",
+      "width": 160
+    },
+    {
+      "id": "recalc",
+      "lane": "colab",
+      "col": 4,
+      "type": "backend",
+      "label": "Recalcular",
+      "sublabel": "rolling + Wilder",
+      "width": 160
+    },
+    {
+      "id": "compara",
+      "lane": "colab",
+      "col": 5,
+      "type": "security",
+      "label": "Comparar",
+      "sublabel": "diferencia < 0,01",
+      "width": 160
+    }
+  ],
+  "edges": [
+    {
+      "from": "export",
+      "to": "archivo"
+    },
+    {
+      "from": "archivo",
+      "to": "upload"
+    },
+    {
+      "from": "upload",
+      "to": "pandas"
+    },
+    {
+      "from": "codigo",
+      "to": "pandas",
+      "label": "pegar en una celda",
+      "variant": "dashed"
+    },
+    {
+      "from": "pandas",
+      "to": "recalc"
+    },
+    {
+      "from": "recalc",
+      "to": "compara"
+    }
+  ]
+}

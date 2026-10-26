@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIN·LAB · versión de rescate del paso 1</title>
+<style>
+:root{--bg:#0B0F13;--panel:#111821;--line:#223040;--txt:#D8E1E9;--mut:#8394A5;--amb:#FFB020;--up:#2EBD85;--dn:#F6465D;--mono:ui-monospace,'JetBrains Mono',Consolas,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font-family:var(--mono);font-size:14px;line-height:1.5}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding:14px 20px;border-bottom:1px solid var(--line)}
+header b{color:var(--amb);font-size:16px}
+header span{color:var(--mut)}
+nav{display:flex;flex-wrap:wrap;gap:6px;padding:12px 20px;border-bottom:1px solid var(--line)}
+nav button{background:transparent;color:var(--mut);border:1px solid var(--line);border-radius:6px;padding:6px 12px;font:inherit;cursor:pointer}
+nav button.on{color:var(--amb);border-color:var(--amb)}
+main{max-width:1100px;margin:0 auto;padding:20px}
+h2{font-size:18px;margin-bottom:12px}
+h3{font-size:14px;margin:18px 0 8px;color:var(--mut)}
+footer{padding:16px 20px;border-top:1px solid var(--line);color:var(--mut);font-size:12px;text-align:center}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.card small{display:block;color:var(--mut);font-size:11px}
+.card b{font-size:20px}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{color:var(--mut);font-weight:500;font-size:12px}
+tbody tr{cursor:pointer}
+tbody tr:hover,tbody tr.sel{background:var(--panel)}
+.up{color:var(--up)}.dn{color:var(--dn)}.hot{color:var(--amb);font-weight:700}
+.tag{padding:1px 8px;border-radius:999px;font-size:11px;font-weight:700}
+.COMPRA{background:rgba(46,189,133,.15);color:var(--up)}.VENTA{background:rgba(246,70,93,.15);color:var(--dn)}.NEUTRAL{background:rgba(255,176,32,.12);color:var(--amb)}
+.btn{background:transparent;color:var(--txt);border:1px solid var(--line);border-radius:6px;padding:6px 12px;font:inherit;cursor:pointer}
+.btn.on,.btn.primary{background:var(--amb);color:#0B0F13;border-color:var(--amb)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px;margin-top:12px}
+.note{color:var(--mut);font-size:12px;margin-top:8px}
+.warn{color:var(--amb)}
+pre{background:#0A0E13;border:1px solid var(--line);border-radius:6px;padding:12px;overflow-x:auto;font-size:12.5px;white-space:pre-wrap}
+input,select{background:#0A0E13;color:var(--txt);border:1px solid var(--line);border-radius:6px;padding:6px 8px;font:inherit}
+input[type=range]{padding:0;width:160px;accent-color:var(--amb)}
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prop-types@15.8.1/prop-types.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/recharts@2.12.7/umd/Recharts.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.24.7/babel.min.js"></script>
+
+
+<script type="text/babel" data-presets="react">
+const { useState, useMemo } = React;
+const { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend, PieChart, Pie, Cell } = Recharts;
+const NOMBRE = 'FIN·LAB · rescate paso 1';
+const fmt = (x, d = 2) => x == null ? '—' : x.toLocaleString('es-AR', { minimumFractionDigits: d, maximumFractionDigits: d });
+const pct = x => (x > 0 ? '+' : '') + fmt(x) + ' %';
+
+
+
+
+
+const PESTANAS = [['mercado', '01 · Mercado'], ['carteras', '02 · Carteras'], ['python', '03 · Python & Colab'], ['api', '04 · API & Alertas']];
+function EnConstruccion({ titulo }) { return <section><h2>{titulo}</h2><p className="note">En construcción</p></section>; }
+function App() {
+  const [tab, setTab] = useState('mercado');
+  const hoy = new Date().toLocaleDateString('es-AR', { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' });
+  const vista = {
+    mercado: <EnConstruccion titulo="Mercado" />,
+    carteras: <EnConstruccion titulo="Carteras" />,
+    python: <EnConstruccion titulo="Python & Colab" />,
+    api: <EnConstruccion titulo="API & Alertas" />,
+  }[tab];
+  return (
+    <>
+      <header><b>{NOMBRE}</b><span>{hoy}</span></header>
+      <nav>{PESTANAS.map(([k, t]) => <button key={k} className={tab === k ? 'on' : ''} onClick={() => setTab(k)}>{t}</button>)}</nav>
+      <main>{vista}</main>
+      <footer>Datos simulados con fines educativos. No es asesoramiento financiero.</footer>
+    </>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

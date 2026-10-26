@@ -1,0 +1,163 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "P4 · De los cierres a la señal",
+    "quality_profile": "showcase",
+    "legend": {
+      "entries": {
+        "frontend": {
+          "label": "Pantalla"
+        },
+        "backend": {
+          "label": "Cálculo / lógica"
+        },
+        "database": {
+          "label": "Datos"
+        },
+        "cloud": {
+          "label": "Herramienta externa"
+        },
+        "security": {
+          "label": "Control / decisión"
+        },
+        "messagebus": {
+          "label": "Intercambio (archivo, JSON, HTTP)"
+        },
+        "external": {
+          "label": "Personas / IA"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "datos",
+      "label": "Datos"
+    },
+    {
+      "id": "medias",
+      "label": "Medias móviles"
+    },
+    {
+      "id": "senal",
+      "label": "Señal y pantalla"
+    },
+    {
+      "id": "verif",
+      "label": "Verificación"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cierres",
+      "lane": "datos",
+      "col": 0,
+      "type": "database",
+      "label": "Cierres",
+      "sublabel": "del activo elegido",
+      "width": 160
+    },
+    {
+      "id": "sma",
+      "lane": "medias",
+      "col": 1,
+      "type": "backend",
+      "label": "SMA 20 / 50",
+      "sublabel": "promedio simple",
+      "width": 160
+    },
+    {
+      "id": "ema",
+      "lane": "medias",
+      "col": 2,
+      "type": "backend",
+      "label": "EMA 12 / 26",
+      "sublabel": "alfa = 2 / (n+1)",
+      "width": 160
+    },
+    {
+      "id": "rsi",
+      "lane": "datos",
+      "col": 2,
+      "type": "backend",
+      "label": "RSI 14",
+      "sublabel": "Wilder · 0 a 100",
+      "width": 160
+    },
+    {
+      "id": "signal",
+      "lane": "senal",
+      "col": 3,
+      "type": "security",
+      "label": "signalOf()",
+      "sublabel": "COMPRA · VENTA · NEUTRAL",
+      "width": 160
+    },
+    {
+      "id": "ui",
+      "lane": "senal",
+      "col": 4,
+      "type": "frontend",
+      "label": "Tabla + gráfico",
+      "sublabel": "columnas RSI y Señal",
+      "width": 160
+    },
+    {
+      "id": "csv",
+      "lane": "verif",
+      "col": 4,
+      "type": "messagebus",
+      "label": "Exportar CSV",
+      "sublabel": "fecha, cierre, medias",
+      "width": 160
+    },
+    {
+      "id": "sheets",
+      "lane": "verif",
+      "col": 5,
+      "type": "cloud",
+      "label": "Google Sheets",
+      "sublabel": "=PROMEDIO() de 20",
+      "width": 160
+    }
+  ],
+  "edges": [
+    {
+      "from": "cierres",
+      "to": "sma"
+    },
+    {
+      "from": "sma",
+      "to": "ema"
+    },
+    {
+      "from": "cierres",
+      "to": "rsi"
+    },
+    {
+      "from": "ema",
+      "to": "signal",
+      "label": "comparar medias"
+    },
+    {
+      "from": "signal",
+      "to": "ui"
+    },
+    {
+      "from": "rsi",
+      "to": "ui",
+      "label": "resaltar extremos"
+    },
+    {
+      "from": "ui",
+      "to": "csv"
+    },
+    {
+      "from": "csv",
+      "to": "sheets",
+      "label": "recalcular a mano",
+      "variant": "dashed"
+    }
+  ]
+}

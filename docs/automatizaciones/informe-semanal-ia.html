@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ejemplo 03 · Informe semanal con IA · FIN·LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lab.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index.html"><span class="brand-dot"></span><b>FIN·LAB</b> AUTOMATIZACIONES</a>
+    <span class="crumb">EJEMPLO 03 / 04 · IA</span>
+  </div>
+</header>
+
+<main class="page">
+  <p class="eyebrow">EJEMPLO 03 · UN MODELO DE LENGUAJE COMO UN PASO MÁS</p>
+  <h1>Informe semanal redactado por IA</h1>
+  <p class="lede">Los números los calcula el flujo; el texto lo escribe un modelo de lenguaje. El secreto para que no invente nada está en dos decisiones: pasarle <b>solo hechos ya calculados</b> y darle reglas explícitas sobre qué hacer cuando falta un dato.</p>
+  <div class="meta">
+    <span class="chip"><b>6</b> NODOS</span>
+    <span class="chip"><b>25 MIN</b></span>
+    <span class="chip">NIVEL <b>MEDIO</b></span>
+    <span class="chip">REQUIERE <b>API KEY</b></span>
+    <span class="chip">SALIDA: <b>EMAIL</b></span>
+  </div>
+
+  <section class="block" aria-labelledby="resuelve">
+    <span class="num">01</span>
+    <h2 id="resuelve">Qué resuelve</h2>
+    <p>Un informe semanal es un trabajo de redacción, no de cálculo. El flujo ya sabe los precios, las señales y la amplitud del mercado; lo que falta es contarlo en cinco renglones. Ahí sí tiene sentido un modelo de lenguaje: <b>transformar una tabla en un párrafo</b>, todas las semanas, sin que nadie se siente a escribirlo.</p>
+    <div class="panel">
+      <div class="panel-h"><span class="panel-t">RESULTADO ESPERADO · CORREO</span><span class="panel-t" style="color:var(--dim)">VIERNES 17:00</span></div>
+      <div class="panel-b">
+        <pre>Asunto: FIN·LAB · informe semanal redactado con IA
+
+El índice FINLAB-8 cerró en 115.17 (+0.34%). La amplitud fue de 5 activos
+al alza y 3 a la baja. JNJ es el único activo con señal de venta y registra
+el RSI más bajo del grupo (28.1). En sentido contrario, AAPL y MSFT muestran
+variaciones negativas de -0.74% y -1.00%. YPF (+2.29%) y PAM (+2.33%)
+encabezan las subas de la sesión.</pre>
+      </div>
+    </div>
+    <div class="note tip"><b>Fijate en el orden:</b> primero los números, después el texto. Si le pedís al modelo que “analice el mercado” sin darle datos, va a inventar. Si le das la tabla y le prohibís salir de ahí, el riesgo baja muchísimo.</div>
+  </section>
+
+  <section class="block" aria-labelledby="como">
+    <span class="num">02</span>
+    <h2 id="como">Cómo funciona</h2>
+    <div class="flow">
+      <div class="flow-row"><span class="n">1</span><div><h4>Cada viernes 17:00</h4><p><b>Schedule Trigger</b> con expresión <span class="code-inline">0 17 * * 5</span>.</p><div class="io">SALE: una ejecución por semana</div></div></div>
+      <div class="flow-row"><span class="n">2</span><div><h4>Consultar API FIN·LAB</h4><p>HTTP GET. Trae los ocho activos, el índice y la amplitud.</p><div class="io">SALE: data.tickers[] + data.index + data.breadth</div></div></div>
+      <div class="flow-row"><span class="n">3</span><div><h4>Preparar hechos</h4><p>Un nodo <b>Code</b> convierte el JSON en un texto plano, ordenado, con todos los números que el modelo va a poder usar. Ni uno más.</p><div class="io">SALE: hechos (texto)</div></div></div>
+      <div class="flow-row"><span class="n">4</span><div><h4>Pedir informe al modelo</h4><p><b>HTTP Request</b> POST al proveedor. El cuerpo lleva dos mensajes: las reglas (system) y los hechos (user).</p><div class="io">ENTRA: hechos · SALE: choices[0].message.content</div></div></div>
+      <div class="flow-row"><span class="n">5</span><div><h4>Armar informe</h4><p>Se queda solo con el texto y <b>falla fuerte</b> si vino vacío, en lugar de mandar un correo en blanco.</p><div class="io">SALE: texto limpio</div></div></div>
+      <div class="flow-row"><span class="n">6</span><div><h4>Enviar informe</h4><p><b>Email</b> con el texto del modelo.</p><div class="io">SALE: un correo por semana</div></div></div>
+    </div>
+    <div class="note"><b>El mismo nodo sirve para cualquier proveedor.</b> OpenAI, Anthropic, Gemini o un modelo local con Ollama: cambia la URL, el header de autenticación y la forma del cuerpo. El resto del flujo no se toca. Por eso conviene tener el paso 4 separado del paso 3.</div>
+  </section>
+
+  <section class="block" aria-labelledby="armar">
+    <span class="num">03</span>
+    <h2 id="armar">Armalo paso a paso</h2>
+    <p style="margin-top:16px"><a class="btn btn-primary" href="workflows/informe-semanal-ia.json" download>DESCARGAR WORKFLOW (.JSON)</a></p>
+    <ol>
+      <li><b>Importá</b> <span class="code-inline">informe-semanal-ia.json</span> en n8n.</li>
+      <li><b>Reemplazá la URL</b> de la API FIN·LAB por tu dominio.</li>
+      <li><b>Creá la credencial del modelo</b> en n8n: tipo <em>Header Auth</em>, nombre <span class="code-inline">Authorization</span> y valor <span class="code-inline">Bearer TU_API_KEY</span>. La clave vive ahí, nunca en el nodo.</li>
+      <li><b>Elegí el modelo</b> en el cuerpo del nodo <em>Pedir informe al modelo</em>. El archivo viene con <span class="code-inline">gpt-4o-mini</span>; cambialo por el que tengas habilitado.</li>
+      <li><b>Ejecutá a mano</b> y leé el nodo <em>Armar informe</em>. Después abrí el correo y compará tres números con la respuesta de la API.</li>
+      <li><b>Activá</b> solo cuando el texto te parezca confiable y no invente datos.</li>
+    </ol>
+
+    <h3 style="margin-top:26px">Qué hay que completar en el archivo</h3>
+    <table class="tbl">
+      <thead><tr><th>NODO</th><th>CAMPO</th><th>QUÉ PONER</th></tr></thead>
+      <tbody>
+        <tr><td>Consultar API</td><td>url</td><td>Tu dominio de Vercel.</td></tr>
+        <tr><td>Pedir informe</td><td>url</td><td>El endpoint del proveedor (<span class="code-inline">/v1/chat/completions</span> en OpenAI).</td></tr>
+        <tr><td>Pedir informe</td><td>credencial</td><td>Header Auth con tu clave. No se escribe en el JSON.</td></tr>
+        <tr><td>Pedir informe</td><td>jsonBody → model</td><td>El nombre del modelo habilitado en tu cuenta.</td></tr>
+        <tr><td>Enviar informe</td><td>fromEmail / toEmail</td><td>Tu correo para la primera prueba.</td></tr>
+      </tbody>
+    </table>
+    <div class="note warn"><b>Ojo con los costos:</b> una corrida por semana con 8 activos es baratísima, pero el flujo activo consume todos los viernes para siempre. Si lo dejás en un repositorio compartido, no pongas tu clave: usá credenciales de n8n.</div>
+  </section>
+
+  <section class="block" data-section="prompts" aria-labelledby="ia">
+    <span class="num">04</span>
+    <h2 id="ia">Hablá con la IA</h2>
+    <p>Acá la IA hace dos trabajos distintos: escribe el informe <b>y</b> te ayuda a escribir el prompt que lo controla. El segundo pedido es el que casi nadie hace y el que más cambia el resultado.</p>
+
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT 1 · EL PROMPT DEL SISTEMA</span><div class="d">Pedile que diseñe las reglas, no el texto.</div></div><button class="copy" data-copy="#p1" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="p1">Necesito el prompt de sistema para un modelo que redacta un informe semanal de mercado a partir de una tabla de datos que le paso en el mensaje del usuario.
+
+Condiciones:
+- máximo 120 palabras, un solo párrafo, español rioplatense, tono neutro
+- puede usar SOLO los números que aparecen en el texto recibido
+- si un dato falta, escribe "sin dato" y sigue
+- no da recomendaciones de inversión, no predice precios, no menciona activos que no estén en la tabla
+- no repite la tabla: la cuenta
+
+Devolveme: 1) el prompt de sistema listo para copiar, 2) tres casos de prueba con datos incompletos, 3) una lista de las frases que NO debería producir nunca.</pre></div>
+    </div>
+
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT 2 · EL CUERPO DEL PEDIDO HTTP</span><div class="d">Para el nodo HTTP Request, con la expresión de n8n.</div></div><button class="copy" data-copy="#p2" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="p2">En n8n tengo un nodo HTTP Request (v4.2) que llama a un endpoint compatible con la API de chat completions.
+
+Necesito el campo jsonBody exacto para:
+- mandar un mensaje de sistema fijo (te lo paso abajo)
+- mandar como mensaje de usuario el texto que viene de $json.hechos
+- temperatura 0.2 y un máximo de 200 tokens
+
+El texto de $json.hechos tiene saltos de línea y comillas: quiero la expresión en una sola línea, con el prefijo "=" y usando JSON.stringify, para que no se rompa el JSON.
+
+Este es mi mensaje de sistema:
+[PEGAR EL PROMPT DEL SISTEMA]
+
+Decime también cómo configurar la credencial (Header Auth) y cómo leer la respuesta en el nodo siguiente.</pre></div>
+    </div>
+
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT 3 · AUDITORÍA ANTI-INVENCIÓN</span><div class="d">La prueba que separa un juguete de algo usable.</div></div><button class="copy" data-copy="#p3" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="p3">Te paso tres cosas: los datos que le envié al modelo, mi prompt de sistema y el texto que devolvió.
+
+DATOS ENVIADOS:
+[pegar los hechos]
+
+PROMPT DE SISTEMA:
+[pegar]
+
+TEXTO DEVUELTO POR EL MODELO:
+[pegar]
+
+Hacé una auditoría:
+1) marcá cada número, porcentaje, nombre de activo o fecha del texto que NO aparezca en los datos enviados;
+2) marcá cada afirmación que sea una recomendación o una predicción;
+3) si encontraste algo, reescribí el prompt de sistema agregando la regla mínima que lo impida;
+4) proponeme una comprobación automática que pueda hacer en n8n antes de enviar el correo.</pre></div>
+    </div>
+
+    <div class="builder" data-builder>
+      <div class="builder-h"><span class="t">ADAPTÁ EL INFORME A TU AUDIENCIA</span><span class="t" style="color:var(--dim)">EDITÁ Y COPIÁ</span></div>
+      <div class="fields">
+        <div class="field"><label for="b-audiencia">¿PARA QUIÉN ES?</label><select id="b-audiencia" data-key="audiencia"><option>compañeros del posgrado</option><option>mi equipo de trabajo</option><option>solo para mí</option><option>un cliente</option></select></div>
+        <div class="field"><label for="b-tono">TONO</label><select id="b-tono" data-key="tono"><option>neutro e informativo</option><option>didáctico y simple</option><option>directo, sin vueltas</option></select></div>
+        <div class="field"><label for="b-largo">LARGO MÁXIMO</label><input id="b-largo" data-key="largo" value="120 palabras"></div>
+        <div class="field"><label for="b-foco">QUÉ TIENE QUE DESTACAR</label><input id="b-foco" data-key="foco" value="las señales de venta y la amplitud del mercado"></div>
+      </div>
+      <pre id="b-out" data-output></pre>
+      <script type="text/template">Escribime el prompt de sistema para un modelo que redacta un informe semanal de mercado dirigido a {audiencia}.
+
+Tono: {tono}. Largo máximo: {largo}. Tiene que destacar {foco}.
+
+Recibe en el mensaje del usuario un texto con la sesión, el índice, la amplitud y una línea por activo (precio, variación, RSI y señal).
+
+Reglas:
+- usa solo los números del texto recibido
+- si falta un dato, escribe "sin dato"
+- no da recomendaciones de inversión ni predice precios
+- no menciona activos que no estén en la tabla
+
+Devolveme el prompt listo para copiar y dos ejemplos de salida: uno con datos completos y otro con un campo faltante.</script>
+      <div class="builder-foot"><button class="copy" data-copy="#b-out" type="button">COPIAR PROMPT</button></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="verificar">
+    <span class="num">05</span>
+    <h2 id="verificar">Cómo saber si funciona</h2>
+    <ul class="check">
+      <li><b>Elegí tres números al azar</b> del correo y buscalos en la respuesta de la API. Si uno no está, el modelo inventó.</li>
+      <li><b>Romped el dato:</b> borrá un campo en el nodo <em>Preparar hechos</em>. El informe debería decir “sin dato”, no completar el hueco.</li>
+      <li><b>Cortá la API:</b> si el nodo HTTP falla, no debe salir ningún correo. Verificá que el flujo se detenga.</li>
+      <li><b>Mirá el nodo <em>Armar informe</em>:</b> si el modelo devuelve texto vacío, tiene que lanzar el error que dice el código.</li>
+      <li><b>Guardá una corrida:</b> el texto enviado y los hechos que le pasaste. Es la única forma de auditar después qué dijo y con qué datos.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="limites">
+    <span class="num">06</span>
+    <h2 id="limites">Límites de este ejemplo</h2>
+    <ul>
+      <li><b>Puede alucinar.</b> Las reglas reducen el riesgo, no lo eliminan. Sin la verificación del punto 05, no lo actives.</li>
+      <li><b>El texto cambia entre corridas.</b> Con temperatura baja cambia poco, pero nunca es idéntico. Si necesitás exactitud, no uses un modelo de lenguaje para redactar.</li>
+      <li><b>No le pases datos personales</b> ni información que no puedas compartir con el proveedor del modelo.</li>
+      <li><b>Tiene costo por uso</b> y depende de un servicio externo. Si el proveedor se cae, el flujo no manda nada: eso es correcto.</li>
+      <li><b>No es análisis financiero.</b> Es un resumen de una tabla.</li>
+    </ul>
+  </section>
+
+  <div class="pager">
+    <a href="resumen-diario.html">← EJEMPLO 02</a>
+    <a href="precios-a-sheets.html">EJEMPLO 04 · PRECIOS A SHEETS →</a>
+  </div>
+</main>
+
+<footer>
+  FIN·LAB · material didáctico del posgrado de IA aplicada a Finanzas (UNLP).<br>
+  Datos simulados con fines educativos. No es asesoramiento financiero.
+</footer>
+
+<script src="lab.js"></script>
+</body>
+</html>

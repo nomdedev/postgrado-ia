@@ -1,0 +1,137 @@
+const test = require('node:test');
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+
+const DIR = path.join(__dirname, '..', 'docs', 'automatizaciones');
+const WORKFLOWS = path.join(DIR, 'workflows');
+const EXAMPLES = ['aviso-senal.html', 'resumen-diario.html', 'informe-semanal-ia.html', 'precios-a-sheets.html'];
+
+function read(file) {
+  return fs.readFileSync(path.join(DIR, file), 'utf8');
+}
+
+test('el índice y los cuatro ejemplos cargan la hoja de estilos y el script compartidos', () => {
+  for (const file of ['index.html', ...EXAMPLES]) {
+    const html = read(file);
+    assert.match(html, /<html lang="es">/, `${file}: falta lang="es"`);
+    assert.match(html, /<title>[^<]{10,}<\/title>/, `${file}: falta un título descriptivo`);
+    assert.match(html, /href="lab\.css"/, `${file}: no enlaza lab.css`);
+    assert.match(html, /src="lab\.js"/, `${file}: no enlaza lab.js`);
+  }
+});
+
+test('cada ejemplo trae prompts copiables, constructor y su workflow descargable', () => {
+  for (const file of EXAMPLES) {
+    const html = read(file);
+    assert.match(html, /data-section="prompts"/, `${file}: falta la sección de prompts`);
+    const copyButtons = html.match(/data-copy="#[a-z0-9-]+"/g) || [];
+    assert.ok(copyButtons.length >= 3, `${file}: menos de 3 prompts copiables`);
+    assert.match(html, /class="builder" data-builder/, `${file}: falta el constructor de prompts`);
+    assert.match(html, /<script type="text\/template">/, `${file}: el constructor no tiene plantilla`);
+
+    const workflow = html.match(/href="(workflows\/[a-z-]+\.json)" download/);
+    assert.ok(workflow, `${file}: no ofrece descargar el workflow`);
+    assert.ok(fs.existsSync(path.join(DIR, workflow[1])), `${file}: el workflow enlazado no existe`);
+  }
+});
+
+test('el taller: 10 pasos encadenados, cada uno con diagrama Archify, glosario, prompt copiable y comprobación', () => {
+  const TALLER = path.join(__dirname, '..', 'docs', 'taller');
+  const page = (file) => fs.readFileSync(path.join(TALLER, file), 'utf8');
+  assert.match(read('index.html'), /href="\.\.\/taller\/index\.html"/, 'el índice de automatizaciones no enlaza el taller');
+  assert.match(fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8'), /href="docs\/taller\/index\.html"/, 'la terminal (#/guiado) no enlaza el taller');
+
+  for (let n = 0; n <= 9; n++) {
+    const file = `paso-${n}.html`;
+    const html = page(file);
+    assert.match(html, /<html lang="es">/, `${file}: falta lang="es"`);
+    assert.match(html, /src="taller\.js"/, `${file}: no carga taller.js`);
+    assert.match(html, /class="mission"/, `${file}: falta la misión del paso`);
+    assert.match(html, /localStorage\.getItem\("finlab-tema"\)/, `${file}: no aplica el tema guardado antes de pintar`);
+    const diagram = html.match(/<iframe src="(diagramas\/[a-z0-9-]+\.html)"/);
+    assert.ok(diagram && fs.existsSync(path.join(TALLER, diagram[1])), `${file}: falta el diagrama Archify`);
+    assert.match(html, /href="glosario\.html#/, `${file}: no enlaza el glosario`);
+    assert.ok((html.match(/data-copy="#[a-zA-Z0-9-]+"/g) || []).length >= 1, `${file}: sin botones de copiar`);
+    for (const [, id] of html.matchAll(/data-copy="#([a-zA-Z0-9-]+)"/g)) {
+      assert.match(html, new RegExp(`id="${id}"`), `${file}: el botón copia #${id}, que no existe`);
+    }
+    assert.match(html, /<ul class="check">/, `${file}: falta la comprobación`);
+    if (n < 9) assert.match(html, new RegExp(`href="paso-${n + 1}\\.html"`), `${file}: no enlaza el paso siguiente`);
+  }
+
+  const glosario = page('glosario.html');
+  for (const file of fs.readdirSync(TALLER).filter((name) => name.endsWith('.html'))) {
+    const html = page(file);
+    for (const [, anchor] of html.matchAll(/href="glosario\.html#([a-z0-9-]+)"/g)) {
+      assert.match(glosario, new RegExp(`id="${anchor}"`), `${file}: el glosario no tiene #${anchor}`);
+    }
+    for (const [, ref] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
+      if (/^(https?:|#|mailto:|data:)/.test(ref)) continue;
+      const target = ref.split('#')[0].split('?')[0];
+      if (target) assert.ok(fs.existsSync(path.resolve(TALLER, target)), `${file}: enlace roto → ${ref}`);
+    }
+  }
+});
+
+test('las versiones de rescate del taller están generadas, sin marcas de plantilla y enlazadas desde su paso', () => {
+  const RESCATE = path.join(__dirname, '..', 'docs', 'taller', 'rescate');
+  const TALLER = path.dirname(RESCATE);
+  const bloqueB = fs.readFileSync(path.join(TALLER, 'paso-7.html'), 'utf8').match(/<pre id="cB">([^\n]+)/)[1];
+  for (let v = 1; v <= 7; v++) {
+    const html = fs.readFileSync(path.join(RESCATE, `finlab-v${v}.html`), 'utf8');
+    assert.doesNotMatch(html, /^\s*(?:\/\/|<!--|\{\/\*)\s*@(?:if|else|endif)\b|\{\{(?:V|BLOQUES)\}\}/m, `finlab-v${v}: quedaron marcas de la plantilla (¿falta correr build.js?)`);
+    assert.match(fs.readFileSync(path.join(TALLER, `paso-${v}.html`), 'utf8'), new RegExp(`href="rescate/finlab-v${v}\\.html"`), `paso-${v}: no enlaza su versión de rescate`);
+    assert.equal(/function simulateSeries/.test(html), v >= 2, `finlab-v${v}: los datos aparecen recién en la v2`);
+    assert.equal(/function rsi\(/.test(html), v >= 4, `finlab-v${v}: los indicadores aparecen recién en la v4`);
+  }
+  assert.ok(fs.readFileSync(path.join(RESCATE, 'finlab-v7.html'), 'utf8').includes(JSON.stringify(bloqueB).slice(1, -1)), 'finlab-v7: el bloque B no coincide con paso-7.html (correr build.js)');
+  const csv = fs.readFileSync(path.join(RESCATE, 'finlab-AAPL.csv'), 'utf8').trim().split('\n');
+  assert.equal(csv[0], 'fecha,cierre,sma20,sma50,rsi14');
+  assert.equal(csv.length, 253, 'el CSV de respaldo debe tener 252 ruedas');
+});
+
+test('los workflows de n8n son válidos y sus conexiones apuntan a nodos que existen', () => {
+  const files = fs.readdirSync(WORKFLOWS).filter((file) => file.endsWith('.json'));
+  assert.equal(files.length, 4, 'se esperan cuatro workflows');
+
+  for (const file of files) {
+    const workflow = JSON.parse(fs.readFileSync(path.join(WORKFLOWS, file), 'utf8'));
+    assert.ok(Array.isArray(workflow.nodes) && workflow.nodes.length > 1, `${file}: sin nodos`);
+
+    const names = new Set();
+    for (const node of workflow.nodes) {
+      assert.ok(node.name && node.type && node.id, `${file}: nodo incompleto`);
+      assert.ok(!names.has(node.name), `${file}: nombre de nodo repetido (${node.name})`);
+      assert.ok(Number.isFinite(node.typeVersion), `${file}: ${node.name} sin typeVersion`);
+      assert.ok(Array.isArray(node.position) && node.position.length === 2, `${file}: ${node.name} sin posición`);
+      names.add(node.name);
+    }
+
+    assert.ok(
+      workflow.nodes.some((node) => /trigger/i.test(node.type)),
+      `${file}: no tiene disparador`
+    );
+
+    for (const [from, connection] of Object.entries(workflow.connections)) {
+      assert.ok(names.has(from), `${file}: conexión desde un nodo inexistente (${from})`);
+      for (const output of connection.main) {
+        for (const link of output) {
+          assert.ok(names.has(link.node), `${file}: conexión hacia un nodo inexistente (${link.node})`);
+        }
+      }
+    }
+  }
+});
+
+test('los enlaces y recursos relativos de las páginas existen en disco', () => {
+  for (const file of fs.readdirSync(DIR).filter((name) => name.endsWith('.html'))) {
+    const html = read(file);
+    for (const [, ref] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
+      if (/^(https?:|#|mailto:|data:)/.test(ref)) continue;
+      const target = ref.split('#')[0].split('?')[0];
+      if (!target) continue;
+      assert.ok(fs.existsSync(path.resolve(DIR, target)), `${file}: enlace roto → ${ref}`);
+    }
+  }
+});

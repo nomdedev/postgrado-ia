@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taller · Construí FIN·LAB paso a paso con IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../automatizaciones/lab.css">
+<link rel="stylesheet" href="taller.css">
+<script>try{var t=localStorage.getItem("finlab-tema");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index.html"><span class="brand-dot"></span><b>FIN·LAB</b> TALLER</a>
+    <span class="crumb">MAPA DEL RECORRIDO</span>
+  </div>
+</header>
+
+<main class="page">
+  <ul class="steps" aria-label="Pasos del taller">
+    <li><a href="index.html" aria-current="page">MAPA</a></li><li><a href="paso-0.html">P0</a></li><li><a href="paso-1.html">P1</a></li><li><a href="paso-2.html">P2</a></li><li><a href="paso-3.html">P3</a></li><li><a href="paso-4.html">P4</a></li><li><a href="paso-5.html">P5</a></li><li><a href="paso-6.html">P6</a></li><li><a href="paso-7.html">P7</a></li><li><a href="paso-8.html">P8</a></li><li><a href="paso-9.html">P9</a></li><li><a href="glosario.html">GLOSARIO</a></li>
+  </ul>
+
+  <p class="eyebrow">TALLER EN GRUPO · NO HACE FALTA SABER PROGRAMAR</p>
+  <h1>Construí tu propia FIN·LAB, paso a paso, con IA</h1>
+  <p class="lede">La terminal que vieron en clase (<span class="code-inline">127.0.0.1:4173/#/guiado</span>) no se escribió de una vez: se armó por capas. En este taller la reconstruyen en diez pasos cortos. En cada uno van a <b>entender el flujo</b> con un diagrama, <b>pedirle el código a la IA</b> con un prompt listo, <b>probarlo</b> y <b>comprobar</b> que los números estén bien.</p>
+  <div class="meta">
+    <span class="chip"><b>10</b> PASOS</span>
+    <span class="chip"><b>10–20 MIN</b> CADA UNO</span>
+    <span class="chip">GRUPOS DE <b>3–4</b></span>
+    <span class="chip">CHAT DE IA + NAVEGADOR</span>
+    <span class="chip">COLAB Y N8N AL FINAL</span>
+  </div>
+
+  <section class="block" aria-labelledby="mapa">
+    <span class="num">01</span>
+    <h2 id="mapa">El recorrido completo</h2>
+    <p>Arriba, todo lo que pasa <b>dentro de la página</b>: estructura, datos, pantallas y cálculos. Abajo, cómo esos datos <b>salen hacia otras herramientas</b> (una <a class="w" href="glosario.html#api">API</a>, <a class="w" href="glosario.html#colab">Google Colab</a> y <a class="w" href="glosario.html#n8n">n8n</a>) hasta llegar a la pestaña EMPEZAR de la terminal terminada.</p>
+    <div class="diagram">
+      <iframe src="diagramas/00-mapa.html" title="Diagrama del recorrido del taller" loading="lazy"></iframe>
+      <div class="diagram-foot"><span>Podés hacer zoom, arrastrar y buscar dentro del diagrama.</span><a href="diagramas/00-mapa.html" target="_blank" rel="noopener">ABRIR EN PANTALLA COMPLETA ↗</a></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="pasos">
+    <span class="num">02</span>
+    <h2 id="pasos">Los diez pasos</h2>
+    <p>Cada página tiene siempre las mismas partes: <b>qué van a lograr</b> → <b>el flujo en un diagrama</b> → <b>palabras nuevas</b> → <b>qué hacer, clic por clic</b> → <b>el prompt</b> → <b>cómo comprobar</b> → <b>si algo falla</b>.</p>
+    <div class="cards">
+      <a class="card" href="paso-0.html"><span class="k">PASO 0 · PREPARAR</span><h3>El equipo, el chat y el prompt de contexto</h3><p>Reparten roles, eligen la IA y le dan las reglas del proyecto.</p><span class="f"><span>10 MIN</span><span>SIN CÓDIGO</span></span></a>
+      <a class="card" href="paso-1.html"><span class="k">PASO 1 · ESQUELETO</span><h3>Encabezado y cuatro pestañas</h3><p>El primer archivo .html y el ciclo pedir → probar → comprobar → guardar.</p><span class="f"><span>15 MIN</span><span>NAVEGADOR</span></span></a>
+      <a class="card" href="paso-2.html"><span class="k">PASO 2 · DATOS</span><h3>Un año de precios simulados</h3><p>252 ruedas por activo que salen iguales en cada recarga.</p><span class="f"><span>15 MIN</span><span>CONSOLA</span></span></a>
+      <a class="card" href="paso-3.html"><span class="k">PASO 3 · MERCADO</span><h3>Tarjetas, tabla y gráfico</h3><p>La primera pantalla útil, con variación del día y gráfico por activo.</p><span class="f"><span>15 MIN</span><span>DASHBOARD</span></span></a>
+      <a class="card" href="paso-4.html"><span class="k">PASO 4 · INDICADORES</span><h3>SMA, EMA, RSI y señales</h3><p>Análisis técnico y la primera verificación en Google Sheets.</p><span class="f"><span>20 MIN</span><span>SHEETS</span></span></a>
+      <a class="card" href="paso-5.html"><span class="k">PASO 5 · CARTERAS</span><h3>Retorno, riesgo y Sharpe</h3><p>Tres perfiles de cartera y las métricas que los comparan.</p><span class="f"><span>20 MIN</span><span>FINANZAS</span></span></a>
+      <a class="card" href="paso-6.html"><span class="k">PASO 6 · API</span><h3>Los datos en formato JSON</h3><p>Una “ventanilla” para que otros programas pidan los datos, y alertas.</p><span class="f"><span>15 MIN</span><span>JSON</span></span></a>
+      <a class="card" href="paso-7.html"><span class="k">PASO 7 · COLAB</span><h3>Verificar con Python en Google Colab</h3><p>Llevan el CSV a Colab y recalculan los indicadores con pandas.</p><span class="f"><span>20 MIN</span><span>PYTHON</span></span></a>
+      <a class="card" href="paso-8.html"><span class="k">PASO 8 · N8N</span><h3>Un workflow que avisa solo</h3><p>Importan un flujo de n8n y lo adaptan con IA para avisar por RSI.</p><span class="f"><span>20 MIN</span><span>AUTOMATIZACIÓN</span></span></a>
+      <a class="card" href="paso-9.html"><span class="k">PASO 9 · #/GUIADO</span><h3>La terminal terminada</h3><p>Encienden el servidor local, abren /#/guiado y resuelven los ejercicios.</p><span class="f"><span>15 MIN</span><span>CIERRE</span></span></a>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="necesitan">
+    <span class="num">03</span>
+    <h2 id="necesitan">Qué necesita cada grupo</h2>
+    <ul class="check">
+      <li><b>Una computadora</b> con Chrome, Edge o Firefox actualizado.</li>
+      <li><b>Un chat de IA</b>: ChatGPT, Claude o Gemini. La versión gratuita alcanza, aunque en los pasos largos puede cortar las respuestas (en <a href="paso-1.html#falla">Si algo falla</a> está cómo seguir).</li>
+      <li><b>Una cuenta de Google</b> para Sheets (paso 4) y Colab (paso 7).</li>
+      <li><b>Acceso a n8n</b> para el paso 8: la prueba gratuita de n8n.io o una instalación local. Si no tienen, el paso se puede hacer mirando a otro grupo.</li>
+      <li><b>Una carpeta</b> llamada <span class="code-inline">finlab</span> en el escritorio, donde van a ir guardando las versiones.</li>
+    </ul>
+    <div class="note tip"><b>Nadie queda afuera:</b> cada paso trae una <b>versión de rescate</b> ya resuelta. Si un grupo se atrasa o rompe su archivo, la baja con un botón y sigue desde ahí.</div>
+    <div class="note tip"><b>¿Una palabra que no entienden?</b> Las subrayadas con puntos llevan al <a href="glosario.html">glosario</a>. También pueden preguntarle a la IA: “explicame qué es X como si no supiera programar, en 3 líneas”.</div>
+  </section>
+
+  <div class="pager">
+    <a href="../automatizaciones/index.html">← AUTOMATIZACIONES</a>
+    <a href="paso-0.html">EMPEZAR · PASO 0 →</a>
+  </div>
+</main>
+
+<footer>
+  FIN·LAB · material didáctico del posgrado de IA aplicada a Finanzas (UNLP) — taller de construcción guiada.<br>
+  Datos simulados con fines educativos. No es asesoramiento financiero.
+</footer>
+
+<script src="../automatizaciones/lab.js"></script>
+<script src="taller.js"></script>
+</body>
+</html>

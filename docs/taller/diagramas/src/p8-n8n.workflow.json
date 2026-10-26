@@ -1,0 +1,131 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "P8 · El workflow de n8n que avisa solo",
+    "quality_profile": "showcase",
+    "legend": {
+      "entries": {
+        "frontend": {
+          "label": "Pantalla"
+        },
+        "backend": {
+          "label": "Cálculo / lógica"
+        },
+        "database": {
+          "label": "Datos"
+        },
+        "cloud": {
+          "label": "Herramienta externa"
+        },
+        "security": {
+          "label": "Control / decisión"
+        },
+        "messagebus": {
+          "label": "Intercambio (archivo, JSON, HTTP)"
+        },
+        "external": {
+          "label": "Personas / IA"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "disp",
+      "label": "Disparador"
+    },
+    {
+      "id": "pasos",
+      "label": "Pasos"
+    },
+    {
+      "id": "salida",
+      "label": "Salida"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "trigger",
+      "lane": "disp",
+      "col": 0,
+      "type": "external",
+      "label": "Manual o Schedule",
+      "sublabel": "cuándo corre",
+      "width": 160
+    },
+    {
+      "id": "http",
+      "lane": "pasos",
+      "col": 1,
+      "type": "messagebus",
+      "label": "HTTP Request",
+      "sublabel": "GET /api/market/summary",
+      "width": 160
+    },
+    {
+      "id": "code",
+      "lane": "pasos",
+      "col": 2,
+      "type": "backend",
+      "label": "Code",
+      "sublabel": "filtra señal y RSI",
+      "width": 160
+    },
+    {
+      "id": "if",
+      "lane": "pasos",
+      "col": 3,
+      "type": "security",
+      "label": "IF",
+      "sublabel": "¿hay algo para avisar?",
+      "width": 160
+    },
+    {
+      "id": "aviso",
+      "lane": "salida",
+      "col": 4,
+      "type": "cloud",
+      "label": "Email o Telegram",
+      "sublabel": "aviso con el motivo",
+      "width": 160
+    },
+    {
+      "id": "nada",
+      "lane": "salida",
+      "col": 5,
+      "type": "database",
+      "label": "Registrar",
+      "sublabel": "sin coincidencias",
+      "width": 160
+    }
+  ],
+  "edges": [
+    {
+      "from": "trigger",
+      "to": "http"
+    },
+    {
+      "from": "http",
+      "to": "code",
+      "label": "JSON"
+    },
+    {
+      "from": "code",
+      "to": "if"
+    },
+    {
+      "from": "if",
+      "to": "aviso",
+      "label": "sí",
+      "variant": "emphasis"
+    },
+    {
+      "from": "if",
+      "to": "nada",
+      "label": "no",
+      "variant": "dashed",
+      "role": "branch"
+    }
+  ]
+}

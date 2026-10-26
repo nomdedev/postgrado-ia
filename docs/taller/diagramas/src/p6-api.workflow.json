@@ -1,0 +1,143 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "P6 · Qué pasa cuando alguien consulta la API",
+    "quality_profile": "showcase",
+    "legend": {
+      "entries": {
+        "frontend": {
+          "label": "Pantalla"
+        },
+        "backend": {
+          "label": "Cálculo / lógica"
+        },
+        "database": {
+          "label": "Datos"
+        },
+        "cloud": {
+          "label": "Herramienta externa"
+        },
+        "security": {
+          "label": "Control / decisión"
+        },
+        "messagebus": {
+          "label": "Intercambio (archivo, JSON, HTTP)"
+        },
+        "external": {
+          "label": "Personas / IA"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "quien",
+      "label": "Quien pregunta"
+    },
+    {
+      "id": "router",
+      "label": "Router (dentro de la página)"
+    },
+    {
+      "id": "datos",
+      "label": "Datos"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "explorador",
+      "lane": "quien",
+      "col": 0,
+      "type": "frontend",
+      "label": "Explorador de API",
+      "sublabel": "elige una ruta",
+      "width": 160
+    },
+    {
+      "id": "get",
+      "lane": "quien",
+      "col": 1,
+      "type": "messagebus",
+      "label": "GET /api/...",
+      "sublabel": "pedido HTTP simulado",
+      "width": 160
+    },
+    {
+      "id": "ruta",
+      "lane": "router",
+      "col": 2,
+      "type": "security",
+      "label": "¿Existe la ruta?",
+      "sublabel": "y el símbolo",
+      "width": 160
+    },
+    {
+      "id": "mercado",
+      "lane": "datos",
+      "col": 3,
+      "type": "database",
+      "label": "Mercado + indicadores",
+      "sublabel": "lo calculado en P3–P4",
+      "width": 160
+    },
+    {
+      "id": "json",
+      "lane": "router",
+      "col": 4,
+      "type": "messagebus",
+      "label": "200 · JSON",
+      "sublabel": "symbol, last, rsi14…",
+      "width": 160
+    },
+    {
+      "id": "alertas",
+      "lane": "datos",
+      "col": 5,
+      "type": "database",
+      "label": "Alertas",
+      "sublabel": "guardadas en localStorage",
+      "width": 160
+    },
+    {
+      "id": "e404",
+      "lane": "quien",
+      "col": 3,
+      "type": "security",
+      "label": "404 · error",
+      "sublabel": "mensaje en español",
+      "width": 160
+    }
+  ],
+  "edges": [
+    {
+      "from": "explorador",
+      "to": "get"
+    },
+    {
+      "from": "get",
+      "to": "ruta"
+    },
+    {
+      "from": "ruta",
+      "to": "mercado",
+      "label": "sí"
+    },
+    {
+      "from": "mercado",
+      "to": "json"
+    },
+    {
+      "from": "json",
+      "to": "alertas",
+      "label": "¿se dispara?"
+    },
+    {
+      "from": "ruta",
+      "to": "e404",
+      "label": "no",
+      "variant": "security",
+      "role": "error"
+    }
+  ]
+}

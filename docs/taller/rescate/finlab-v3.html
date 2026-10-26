@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIN·LAB · versión de rescate del paso 3</title>
+<style>
+:root{--bg:#0B0F13;--panel:#111821;--line:#223040;--txt:#D8E1E9;--mut:#8394A5;--amb:#FFB020;--up:#2EBD85;--dn:#F6465D;--mono:ui-monospace,'JetBrains Mono',Consolas,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font-family:var(--mono);font-size:14px;line-height:1.5}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding:14px 20px;border-bottom:1px solid var(--line)}
+header b{color:var(--amb);font-size:16px}
+header span{color:var(--mut)}
+nav{display:flex;flex-wrap:wrap;gap:6px;padding:12px 20px;border-bottom:1px solid var(--line)}
+nav button{background:transparent;color:var(--mut);border:1px solid var(--line);border-radius:6px;padding:6px 12px;font:inherit;cursor:pointer}
+nav button.on{color:var(--amb);border-color:var(--amb)}
+main{max-width:1100px;margin:0 auto;padding:20px}
+h2{font-size:18px;margin-bottom:12px}
+h3{font-size:14px;margin:18px 0 8px;color:var(--mut)}
+footer{padding:16px 20px;border-top:1px solid var(--line);color:var(--mut);font-size:12px;text-align:center}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.card small{display:block;color:var(--mut);font-size:11px}
+.card b{font-size:20px}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{color:var(--mut);font-weight:500;font-size:12px}
+tbody tr{cursor:pointer}
+tbody tr:hover,tbody tr.sel{background:var(--panel)}
+.up{color:var(--up)}.dn{color:var(--dn)}.hot{color:var(--amb);font-weight:700}
+.tag{padding:1px 8px;border-radius:999px;font-size:11px;font-weight:700}
+.COMPRA{background:rgba(46,189,133,.15);color:var(--up)}.VENTA{background:rgba(246,70,93,.15);color:var(--dn)}.NEUTRAL{background:rgba(255,176,32,.12);color:var(--amb)}
+.btn{background:transparent;color:var(--txt);border:1px solid var(--line);border-radius:6px;padding:6px 12px;font:inherit;cursor:pointer}
+.btn.on,.btn.primary{background:var(--amb);color:#0B0F13;border-color:var(--amb)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px;margin-top:12px}
+.note{color:var(--mut);font-size:12px;margin-top:8px}
+.warn{color:var(--amb)}
+pre{background:#0A0E13;border:1px solid var(--line);border-radius:6px;padding:12px;overflow-x:auto;font-size:12.5px;white-space:pre-wrap}
+input,select{background:#0A0E13;color:var(--txt);border:1px solid var(--line);border-radius:6px;padding:6px 8px;font:inherit}
+input[type=range]{padding:0;width:160px;accent-color:var(--amb)}
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prop-types@15.8.1/prop-types.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/recharts@2.12.7/umd/Recharts.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.24.7/babel.min.js"></script>
+
+<script id="finlab-datos">
+// ===== Datos simulados (paso 2). Funciones globales: se pueden probar desde la consola (F12). =====
+var TICKERS = [
+  { symbol: 'AAPL', name: 'Apple Inc.',               p0: 172, vol: 0.22, drift: 0.30, vBase: 52e6 },
+  { symbol: 'MSFT', name: 'Microsoft Corp.',          p0: 375, vol: 0.20, drift: 0.18, vBase: 24e6 },
+  { symbol: 'JNJ',  name: 'Johnson & Johnson',        p0: 147, vol: 0.13, drift: 0.02, vBase: 8e6 },
+  { symbol: 'KO',   name: 'Coca-Cola Co.',            p0: 58,  vol: 0.11, drift: 0.08, vBase: 15e6 },
+  { symbol: 'PG',   name: 'Procter & Gamble',         p0: 142, vol: 0.12, drift: 0.03, vBase: 7e6 },
+  { symbol: 'GGAL', name: 'Grupo Financiero Galicia', p0: 39,  vol: 0.38, drift: 0.35, vBase: 2.4e6 },
+  { symbol: 'YPF',  name: 'YPF S.A.',                 p0: 28,  vol: 0.55, drift: 0.05, vBase: 6e6 },
+  { symbol: 'PAM',  name: 'Pampa Energía',            p0: 42,  vol: 0.34, drift: 0.25, vBase: 1.2e6 }
+];
+
+// Generador pseudoaleatorio con semilla: mismos números en cada recarga.
+function mulberry32(a) {
+  return function () {
+    a |= 0; a = a + 0x6D2B79F5 | 0;
+    var t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+function hashStr(s) { var h = 2166136261; for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+// Normal estándar (Box-Muller)
+function gauss(rng) { var u = 0, v = 0; while (u === 0) u = rng(); while (v === 0) v = rng(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
+function isoLocal(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+// Los últimos n días hábiles (lunes a viernes) que terminan hoy.
+function businessDays(n, end) {
+  var out = [], d = new Date(end || Date.now()); d.setHours(12, 0, 0, 0);
+  while (out.length < n) { var wd = d.getDay(); if (wd !== 0 && wd !== 6) out.unshift(isoLocal(d)); d.setDate(d.getDate() - 1); }
+  return out;
+}
+// Retorno diario = tendencia/252 + volatilidad/√252 · z
+function simulateSeries(t, end) {
+  var rng = mulberry32(hashStr(t.symbol)), price = t.p0;
+  return businessDays(252, end).map(function (d) {
+    var r = t.drift / 252 + t.vol / Math.sqrt(252) * gauss(rng);
+    price = Math.max(0.5, price * (1 + r));
+    return { d: d, c: +price.toFixed(2), v: Math.round(t.vBase * (0.6 + rng() * 0.9)) };
+  });
+}
+
+if (typeof window !== 'undefined') {
+  console.table(TICKERS.map(function (t) {
+    var s = simulateSeries(t);
+    return { 'símbolo': t.symbol, 'primer cierre': s[0].c, 'último cierre': s[s.length - 1].c, 'var. año %': +((s[s.length - 1].c / s[0].c - 1) * 100).toFixed(2) };
+  }));
+}
+</script>
+
+<script type="text/babel" data-presets="react">
+const { useState, useMemo } = React;
+const { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend, PieChart, Pie, Cell } = Recharts;
+const NOMBRE = 'FIN·LAB · rescate paso 3';
+const fmt = (x, d = 2) => x == null ? '—' : x.toLocaleString('es-AR', { minimumFractionDigits: d, maximumFractionDigits: d });
+const pct = x => (x > 0 ? '+' : '') + fmt(x) + ' %';
+
+// Mercado: la ÚNICA fuente de números para tabla, gráfico y API.
+const MARKET = TICKERS.map(t => {
+  const serie = simulateSeries(t);
+  const c = serie.map(x => x.c);
+  const last = c[c.length - 1], prev = c[c.length - 2];
+  const m = { ...t, serie, last, changePct: (last / prev - 1) * 100 };
+  return m;
+});
+const RANGOS = [['1M', 21], ['3M', 63], ['6M', 126], ['1A', 252]];
+
+function Mercado() {
+  const [sel, setSel] = useState(MARKET[0].symbol);
+  const [rango, setRango] = useState(252);
+  const suben = MARKET.filter(m => m.changePct > 0).length;
+  const bajan = MARKET.filter(m => m.changePct < 0).length;
+  const mayor = MARKET.reduce((a, b) => Math.abs(b.changePct) > Math.abs(a.changePct) ? b : a);
+  const act = MARKET.find(m => m.symbol === sel);
+  const datos = act.serie.map((x, i) => ({ d: x.d, c: x.c
+  })).slice(-rango);
+  return (
+    <section>
+      <h2>Mercado</h2>
+      <div className="cards">
+        <div className="card"><small>SUBEN HOY</small><b className="up">{suben}</b></div>
+        <div className="card"><small>BAJAN HOY</small><b className="dn">{bajan}</b></div>
+        <div className="card"><small>MAYOR MOVIMIENTO</small><b>{mayor.symbol} <span className={mayor.changePct >= 0 ? 'up' : 'dn'}>{pct(mayor.changePct)}</span></b></div>
+      </div>
+      <div className="scroll"><table>
+        <thead><tr><th>SÍMBOLO</th><th>NOMBRE</th><th>PRECIO</th><th>VAR. DÍA</th>
+          <th>30 DÍAS</th></tr></thead>
+        <tbody>{MARKET.map(m => (
+          <tr key={m.symbol} className={m.symbol === sel ? 'sel' : ''} onClick={() => setSel(m.symbol)}>
+            <td><b>{m.symbol}</b></td><td>{m.name}</td><td>{fmt(m.last)}</td>
+            <td className={m.changePct >= 0 ? 'up' : 'dn'}>{pct(m.changePct)}</td>
+            <td><LineChart width={110} height={30} data={m.serie.slice(-30)}><Line type="monotone" dataKey="c" dot={false} stroke={m.changePct >= 0 ? '#2EBD85' : '#F6465D'} strokeWidth={1.5} isAnimationActive={false} /><YAxis hide domain={['dataMin', 'dataMax']} /></LineChart></td>
+          </tr>))}</tbody>
+      </table></div>
+      <h3>{act.symbol} · {act.name}</h3>
+      <div className="row">
+        {RANGOS.map(([t, n]) => <button key={t} className={'btn' + (rango === n ? ' on' : '')} onClick={() => setRango(n)}>{t}</button>)}
+      </div>
+      <div style={{ height: 320 }}><ResponsiveContainer>
+        <LineChart data={datos}>
+          <XAxis dataKey="d" minTickGap={40} stroke="#8394A5" fontSize={11} />
+          <YAxis domain={['auto', 'auto']} stroke="#8394A5" fontSize={11} width={60} />
+          <Tooltip formatter={v => fmt(v)} contentStyle={{ background: '#111821', border: '1px solid #223040' }} />
+          <Line type="monotone" dataKey="c" name="Precio" dot={false} stroke="#FFB020" isAnimationActive={false} />
+        </LineChart>
+      </ResponsiveContainer></div>
+    </section>
+  );
+}
+
+
+
+
+const PESTANAS = [['mercado', '01 · Mercado'], ['carteras', '02 · Carteras'], ['python', '03 · Python & Colab'], ['api', '04 · API & Alertas']];
+function EnConstruccion({ titulo }) { return <section><h2>{titulo}</h2><p className="note">En construcción</p></section>; }
+function App() {
+  const [tab, setTab] = useState('mercado');
+  const hoy = new Date().toLocaleDateString('es-AR', { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' });
+  const vista = {
+    mercado: <Mercado />,
+    carteras: <EnConstruccion titulo="Carteras" />,
+    python: <EnConstruccion titulo="Python & Colab" />,
+    api: <EnConstruccion titulo="API & Alertas" />,
+  }[tab];
+  return (
+    <>
+      <header><b>{NOMBRE}</b><span>{hoy}</span></header>
+      <nav>{PESTANAS.map(([k, t]) => <button key={k} className={tab === k ? 'on' : ''} onClick={() => setTab(k)}>{t}</button>)}</nav>
+      <main>{vista}</main>
+      <footer>Datos simulados con fines educativos. No es asesoramiento financiero.</footer>
+    </>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

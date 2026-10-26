@@ -1,0 +1,61 @@
+{
+  "name": "postgrado-ia-agent-graph",
+  "version": "1.0.0",
+  "description": "Grafo declarativo de agentes — Postgrado-IA (FIN·LAB: demo didáctica HTML + API Vercel + workflows n8n + notebooks Colab). Dominio: api/, n8n/, notebooks/, docs/, test/.",
+  "nodes": [
+    { "id": "orchestrator", "kind": "coordinator", "phase": "init", "writes": [".claude/state/STATE.md"], "requiresApproval": false },
+    { "id": "planner", "kind": "coordinator", "phase": "plan", "writes": ["docs/"], "requiresApproval": false },
+    { "id": "implementer", "kind": "maker", "phase": "build", "writes": ["api/", "index.html"], "requiresApproval": false },
+    { "id": "automation-dev", "kind": "maker", "phase": "build", "writes": ["n8n/", "notebooks/"], "requiresApproval": false },
+    { "id": "verifier", "kind": "checker", "phase": "verify", "writes": [], "requiresApproval": false },
+    { "id": "qa-lead", "kind": "checker", "phase": "verify", "writes": [], "requiresApproval": false },
+    { "id": "docs", "kind": "maker", "phase": "close", "writes": ["docs/", "*.md"], "requiresApproval": false },
+    { "id": "state-manager", "kind": "coordinator", "phase": "close", "writes": [".claude/state/STATE.md"], "requiresApproval": false }
+  ],
+  "edges": [
+    { "from": "orchestrator", "to": "planner", "gate": "wip-limit-1" },
+    { "from": "planner", "to": "implementer", "gate": null },
+    { "from": "planner", "to": "automation-dev", "gate": null },
+    { "from": "implementer", "to": "verifier", "gate": "post-eval-matrix" },
+    { "from": "automation-dev", "to": "verifier", "gate": "post-eval-matrix" },
+    { "from": "verifier", "to": "qa-lead", "gate": "verdict-with-evidence" },
+    { "from": "qa-lead", "to": "docs", "gate": "verdict-with-evidence" },
+    { "from": "docs", "to": "state-manager", "gate": "verdict-with-evidence" }
+  ],
+  "gates": {
+    "wip-limit-1": { "type": "state-check", "target": ".claude/state/STATE.md", "rule": "exactly-one-in-progress" },
+    "post-eval-matrix": {
+      "type": "eval-matrix",
+      "precedence": ["backend", "eval", "docs"],
+      "matrix": {
+        "backend": { "pre": ["typecheck"], "post": ["typecheck", "test-unit"] },
+        "eval": { "pre": [], "post": ["test-unit"] },
+        "docs": { "pre": [], "post": ["verify-only"] }
+      },
+      "classify": {
+        "backend": ["api/"],
+        "eval": ["test/", "scripts/loops/"],
+        "docs": ["*.md", "docs/", "n8n/", "notebooks/", "index.html"]
+      }
+    },
+    "findings-have-evidence": { "type": "artifact-check", "rule": "every finding cites file:line" },
+    "verdict-with-evidence": { "type": "artifact-check", "rule": "verdict cites test output" },
+    "requires-approval": { "type": "approval", "rule": "human approval before writes" }
+  },
+  "hooks": [
+    { "trigger": "pre-session", "script": ".claude/hooks/pre-session-orchestrator.js" },
+    { "trigger": "pre-prompt", "script": "scripts/loops/agent-graph-runner.js --phase pre" },
+    { "trigger": "post-edit", "script": "scripts/loops/agent-graph-runner.js --phase post" },
+    { "trigger": "post-prompt", "script": "scripts/loops/agent-graph-runner.js --phase post" },
+    { "trigger": "post-session", "script": ".claude/hooks/post-session-state-manager.js" }
+  ],
+  "loops": [
+    { "id": "weekly-full-audit", "schedule": "0 3 * * 0", "evals": ["test-unit"] }
+  ],
+  "hardStops": {
+    "tokenBudgetCap": 100000,
+    "maxIterations": 5,
+    "timeLimitMinutes": 10,
+    "onEvalFailure": "STOP_AND_REPORT"
+  }
+}

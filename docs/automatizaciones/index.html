@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automatizaciones · FIN·LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lab.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="../../index.html"><span class="brand-dot"></span><b>FIN·LAB</b> AUTOMATIZACIONES</a>
+    <span class="crumb">4 EJEMPLOS · GUÍA + PROMPTS + WORKFLOW</span>
+  </div>
+</header>
+
+<main class="page">
+  <p class="eyebrow">EMPEZÁ POR ACÁ</p>
+  <h1>Cuatro automatizaciones para entender, copiar y adaptar</h1>
+  <p class="lede">Cada ejemplo tiene la misma estructura: qué resuelve, cómo funciona, cómo lo armás en n8n, qué pedirle a la IA y cómo comprobar que anda. No hace falta saber programar; sí hace falta animarse a probar y a leer lo que devuelve cada paso.</p>
+  <div class="meta">
+    <span class="chip"><b>4</b> EJEMPLOS</span>
+    <span class="chip"><b>15 MIN</b> CADA UNO</span>
+    <span class="chip">N8N + IA</span>
+    <span class="chip">SIN INSTALAR NADA</span>
+    <span class="chip">DATOS EDUCATIVOS</span>
+  </div>
+
+  <section class="block" aria-labelledby="que-es">
+    <span class="num">01</span>
+    <h2 id="que-es">Qué es una automatización (en una servilleta)</h2>
+    <p>Es una receta que se ejecuta sola: <b>algo la dispara</b>, <b>hace una o dos tareas</b> y <b>deja un resultado</b> en algún lugar. Nada más. La herramienta cambia, la idea no.</p>
+    <div class="flow">
+      <div class="flow-row"><span class="n">1</span><div><h4>Disparador</h4><p>El “cuándo”. Una hora fija, un botón, un formulario, un correo que llega.</p><div class="io">EJ.: todos los días a las 18:00</div></div></div>
+      <div class="flow-row"><span class="n">2</span><div><h4>Pasos</h4><p>El “qué hace”. Consultar una API, filtrar datos, calcular un total, redactar un texto.</p><div class="io">EJ.: pedir precios → quedarse con las señales de venta</div></div></div>
+      <div class="flow-row"><span class="n">3</span><div><h4>Salida</h4><p>El “para quién”. Un correo, un mensaje, una fila en una planilla, un archivo.</p><div class="io">EJ.: enviar un email solo si hay señales</div></div></div>
+    </div>
+    <div class="note tip"><b>La regla que evita el 80% de los problemas:</b> si no podés contar la receta en voz alta en tres frases, todavía no está lista para automatizar. Primero escribila en papel.</div>
+  </section>
+
+  <section class="block" aria-labelledby="ejemplos">
+    <span class="num">02</span>
+    <h2 id="ejemplos">Los cuatro ejemplos</h2>
+    <p>Cada página se puede usar sola. Igual conviene seguir el orden: los primeros dos no usan IA y preparan el terreno para el tercero.</p>
+    <div class="cards">
+      <a class="card" href="aviso-senal.html">
+        <span class="k">EJEMPLO 01 · AVISOS</span>
+        <h3>Aviso cuando aparece una señal de venta</h3>
+        <p>Consulta la API, filtra los activos con señal VENTA y manda un correo solo cuando encuentra algo.</p>
+        <span class="f"><span>NIVEL INICIAL</span><span>5 NODOS</span><span>15 MIN</span></span>
+      </a>
+      <a class="card" href="resumen-diario.html">
+        <span class="k">EJEMPLO 02 · INFORMES</span>
+        <h3>Resumen de tu cartera a las 8 de la mañana</h3>
+        <p>Cruza tus tenencias con los precios del día y te manda el valor total y la variación de cada activo.</p>
+        <span class="f"><span>NIVEL INICIAL</span><span>5 NODOS</span><span>20 MIN</span></span>
+      </a>
+      <a class="card" href="informe-semanal-ia.html">
+        <span class="k">EJEMPLO 03 · IA</span>
+        <h3>Informe semanal redactado por IA</h3>
+        <p>Le pasa los números a un modelo de lenguaje y recibe un texto breve. Incluye cómo evitar que invente datos.</p>
+        <span class="f"><span>NIVEL MEDIO</span><span>6 NODOS</span><span>25 MIN</span></span>
+      </a>
+      <a class="card" href="precios-a-sheets.html">
+        <span class="k">EJEMPLO 04 · DATOS</span>
+        <h3>Precios del mercado a Google Sheets</h3>
+        <p>Agrega una fila por activo cada día para que después puedas graficar o analizar en la planilla.</p>
+        <span class="f"><span>NIVEL INICIAL</span><span>4 NODOS</span><span>15 MIN</span></span>
+      </a>
+    </div>
+    <div class="cards" style="margin-top:14px">
+      <a class="card" href="../taller/index.html">
+        <span class="k">TALLER EN GRUPO · CONSTRUCCIÓN GUIADA</span>
+        <h3>Construí tu propia FIN·LAB paso a paso con IA</h3>
+        <p>Diez páginas conectadas, con diagramas, glosario, prompts y código listos para copiar, para rearmar la terminal completa hasta llegar a #/guiado.</p>
+        <span class="f"><span>NIVEL INICIAL</span><span>10 PASOS</span><span>2 CLASES</span></span>
+      </a>
+    </div>
+  </section>
+
+  <section class="block" data-section="prompts" aria-labelledby="hablar-ia">
+    <span class="num">03</span>
+    <h2 id="hablar-ia">Cómo hablarle a la IA para que te ayude de verdad</h2>
+    <p>La IA no adivina. Si le pedís “hacé una automatización para el mercado”, te va a devolver algo genérico. Si le contás el recorrido completo, te puede armar el workflow, el código de cada nodo y hasta el texto del correo.</p>
+
+    <h3 style="margin-top:22px">Los cinco ingredientes de un pedido útil</h3>
+    <table class="tbl">
+      <thead><tr><th>INGREDIENTE</th><th>QUÉ CONTESTAR</th><th>EJEMPLO</th></tr></thead>
+      <tbody>
+        <tr><td>Objetivo</td><td>Qué tiene que lograr, en una frase.</td><td>“Avisarme por correo cuando un activo tenga señal de venta.”</td></tr>
+        <tr><td>Datos</td><td>De dónde salen y con qué forma vienen.</td><td>“De <span class="code-inline">/api/market/summary</span>, que devuelve <span class="code-inline">data.tickers[]</span>.”</td></tr>
+        <tr><td>Disparador</td><td>Cuándo arranca.</td><td>“Todos los días hábiles a las 18:00.”</td></tr>
+        <tr><td>Salida</td><td>Dónde termina el resultado.</td><td>“Un email con la lista de activos.”</td></tr>
+        <tr><td>Límites</td><td>Qué NO querés que haga.</td><td>“No mandes nada si no hay señales. No inventes precios.”</td></tr>
+      </tbody>
+    </table>
+
+    <div class="duo">
+      <div class="bad">
+        <h4>PEDIDO DÉBIL</h4>
+        <p>“Haceme un workflow de n8n para invertir mejor.”</p>
+        <small>No dice datos, ni disparador, ni salida. Cualquier respuesta va a ser un ejemplo de juguete.</small>
+      </div>
+      <div class="good">
+        <h4>PEDIDO FUERTE</h4>
+        <p>“Quiero un flujo en n8n que todos los días a las 18:00 consulte <span class="code-inline">/api/market/summary</span>, filtre los activos con <span class="code-inline">signal === 'VENTA'</span> y me mande un email solo si hay al menos uno. Si no hay, que no envíe nada.”</p>
+        <small>Tiene los cinco ingredientes. La respuesta se puede probar hoy.</small>
+      </div>
+    </div>
+
+    <h3 style="margin-top:28px">Cuatro reglas de conversación</h3>
+    <ol>
+      <li><b>Pedí el plan antes del JSON.</b> “Explicame los pasos y los nodos, todavía sin código.” Corregir un plan de cinco líneas es más barato que corregir un workflow entero.</li>
+      <li><b>Pegá el error completo.</b> El mensaje rojo de n8n y la línea que falla. Con eso la respuesta apunta al problema real.</li>
+      <li><b>Pedí el cambio mínimo.</b> “¿Cuál es la línea que tengo que cambiar?” evita que te reescriba todo y te haga perder lo que ya funcionaba.</li>
+      <li><b>Pedile que te diga cómo verificarlo.</b> “¿Cómo compruebo que está bien sin esperar al horario?” Un buen ayudante te da la prueba, no solo el código.</li>
+    </ol>
+
+    <div class="builder" data-builder>
+      <div class="builder-h">
+        <span class="t">ARMÁ TU PROPIO PEDIDO</span>
+        <span class="t" style="color:var(--dim)">EDITÁ LOS CAMPOS</span>
+      </div>
+      <div class="fields">
+        <div class="field"><label for="f-objetivo">OBJETIVO</label><input id="f-objetivo" data-key="objetivo" value="Avisarme por correo cuando un activo tenga señal de venta"></div>
+        <div class="field"><label for="f-datos">DATOS QUE TENGO</label><input id="f-datos" data-key="datos" value="la API /api/market/summary, que devuelve data.tickers[]"></div>
+        <div class="field"><label for="f-disparador">CUÁNDO SE EJECUTA</label><input id="f-disparador" data-key="disparador" value="todos los días hábiles a las 18:00"></div>
+        <div class="field"><label for="f-salida">RESULTADO ESPERADO</label><input id="f-salida" data-key="salida" value="un email con los activos que coinciden"></div>
+        <div class="field" style="grid-column:1/-1"><label for="f-limites">LÍMITES (QUÉ NO DEBE HACER)</label><input id="f-limites" data-key="limites" value="no enviar nada si no hay coincidencias, no inventar precios, no dar recomendaciones de inversión"></div>
+      </div>
+      <pre id="builder-out" data-output></pre>
+      <script type="text/template">Quiero automatizar esto: {objetivo}.
+
+Datos que tengo: {datos}.
+Cuándo debe ejecutarse: {disparador}.
+Resultado que espero: {salida}.
+Límites: {limites}.
+
+Todavía no me escribas el workflow. Primero:
+1) contame en 5 pasos qué tiene que pasar y con qué nodo de n8n harías cada paso;
+2) listá qué credenciales o accesos necesito;
+3) marcá los dos puntos donde es más probable que falle;
+4) preguntame lo que te falte antes de seguir.</script>
+      <div class="builder-foot">
+        <button class="copy" data-copy="#builder-out" type="button">COPIAR PROMPT</button>
+        <span class="crumb">PEGALO EN TU ASISTENTE Y RESPONDÉ SUS PREGUNTAS</span>
+      </div>
+    </div>
+
+    <div class="note"><b>Un atajo que funciona:</b> cuando ya tenés el workflow armado, pedile a la IA que lo revise así: <em>“Te pego el JSON de mi workflow de n8n. Decime qué nodo puede fallar con datos vacíos y cuál es el cambio mínimo para que no se rompa.”</em></div>
+  </section>
+
+  <section class="block" aria-labelledby="ruta">
+    <span class="num">04</span>
+    <h2 id="ruta">Ruta sugerida</h2>
+    <div class="flow">
+      <div class="flow-row"><span class="n">01</span><div><h4>Aviso de señal</h4><p>Aprendés lo básico: disparador, HTTP, filtro y una salida condicional.</p><div class="io">SI NUNCA AUTOMATIZASTE NADA, EMPEZÁ ACÁ</div></div></div>
+      <div class="flow-row"><span class="n">02</span><div><h4>Resumen de cartera</h4><p>Sumás tu propia lista de datos y cálculos entre dos nodos.</p><div class="io">CRUZAR DATOS PROPIOS CON DATOS EXTERNOS</div></div></div>
+      <div class="flow-row"><span class="n">03</span><div><h4>Informe con IA</h4><p>Usás un modelo de lenguaje como un paso más del flujo, con reglas para que no invente.</p><div class="io">IA DENTRO DE UNA AUTOMATIZACIÓN</div></div></div>
+      <div class="flow-row"><span class="n">04</span><div><h4>Precios a Sheets</h4><p>Guardás histórico para analizar después. Acá aparece el problema de los duplicados.</p><div class="io">DATOS QUE QUEDAN PARA OTRA HERRAMIENTA</div></div></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="verificar">
+    <span class="num">05</span>
+    <h2 id="verificar">Cómo verificar cualquier automatización</h2>
+    <p>Una automatización que “parece andar” es una bomba de tiempo. Antes de activarla, comprobá estas cinco cosas:</p>
+    <ul class="check">
+      <li><b>Corrida manual:</b> ejecutala a mano y mirá la salida de cada nodo, no solo el resultado final.</li>
+      <li><b>Caso vacío:</b> ¿qué pasa si la API devuelve cero coincidencias? No debería mandar un correo raro ni romperse.</li>
+      <li><b>Caso con error:</b> cortá la conexión o poné una URL inválida. Tiene que fallar con un mensaje que se entienda.</li>
+      <li><b>Repetir dos veces:</b> si escribe en una planilla, revisá que no duplique filas.</li>
+      <li><b>Destinatario real:</b> una corrida con tu propio correo antes de sumar a nadie más.</li>
+    </ul>
+    <div class="note warn"><b>Nunca en un workflow:</b> claves, tokens o contraseñas escritas en un nodo. Van en las credenciales de n8n, que están separadas del archivo y no se exportan con el JSON.</div>
+  </section>
+
+  <section class="block" aria-labelledby="limites">
+    <span class="num">06</span>
+    <h2 id="limites">Qué no automatizar todavía</h2>
+    <ul>
+      <li><b>Decisiones de inversión.</b> Un flujo puede avisar; no debería decidir por vos. Nada de esto es asesoramiento financiero.</li>
+      <li><b>Datos personales de terceros.</b> Si el correo lleva información de otras personas, primero resolvé permisos y consentimiento.</li>
+      <li><b>Envíos masivos.</b> Una lista larga de destinatarios te convierte en spam y te puede bloquear la cuenta de correo.</li>
+      <li><b>Números que no podés verificar.</b> Si no sabés de dónde salió un dato del informe, no lo mandes.</li>
+    </ul>
+  </section>
+
+  <div class="pager">
+    <a href="../../index.html">← VOLVER A LA TERMINAL</a>
+    <a href="aviso-senal.html">EJEMPLO 01 · AVISO DE SEÑAL →</a>
+  </div>
+</main>
+
+<footer>
+  FIN·LAB · material didáctico del posgrado de IA aplicada a Finanzas (UNLP) — automatizaciones para análisis de mercado.<br>
+  Los ejemplos usan una muestra fija y educativa. No son cotizaciones en tiempo real ni recomendaciones de inversión.
+</footer>
+
+<script src="lab.js"></script>
+</body>
+</html>

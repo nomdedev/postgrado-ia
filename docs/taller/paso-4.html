@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paso 4 · Indicadores y señales · Taller FIN·LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../automatizaciones/lab.css">
+<link rel="stylesheet" href="taller.css">
+<script>try{var t=localStorage.getItem("finlab-tema");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index.html"><span class="brand-dot"></span><b>FIN·LAB</b> TALLER</a>
+    <span class="crumb">PASO 4 / 9 · INDICADORES</span>
+  </div>
+</header>
+
+<main class="page">
+  <ul class="steps" aria-label="Pasos del taller">
+    <li><a href="index.html">MAPA</a></li><li><a href="paso-0.html">P0</a></li><li><a href="paso-1.html">P1</a></li><li><a href="paso-2.html">P2</a></li><li><a href="paso-3.html">P3</a></li><li><a href="paso-4.html" aria-current="page">P4</a></li><li><a href="paso-5.html">P5</a></li><li><a href="paso-6.html">P6</a></li><li><a href="paso-7.html">P7</a></li><li><a href="paso-8.html">P8</a></li><li><a href="paso-9.html">P9</a></li><li><a href="glosario.html">GLOSARIO</a></li>
+  </ul>
+
+  <p class="eyebrow">PASO 4 · DONDE MÁS SE EQUIVOCA LA IA</p>
+  <h1>Indicadores y señales: SMA, EMA y RSI</h1>
+  <p class="lede">Entra el análisis técnico. Es el paso donde la IA más se equivoca: confunde el <a class="w" href="glosario.html#rsi">RSI</a> simple con el de Wilder o calcula medias con menos datos de los que dice. Por eso este paso termina con la <b>primera verificación en una planilla</b>.</p>
+  <div class="meta"><span class="chip"><b>20 MIN</b></span><span class="chip">GOOGLE SHEETS</span><span class="chip">SALIDA: <b>finlab-v4.html + CSV</b></span></div>
+  <ol class="mission" aria-label="Tu misión en este paso"><li><b>Copien el prompt</b>con el botón <span class="hl">⧉ COPIAR</span> y péguenlo en el chat, junto con su archivo</li><li><b>Guarden la respuesta</b>en <span class="code-inline">finlab.html</span> y ábranla con doble clic</li><li><b>Comprueben</b>una media móvil en Google Sheets</li></ol>
+  <p class="calm"><b>Tranquilos:</b> no hace falta entender el código. Todo lo que hay que llevar a otro lado tiene un botón <b>⧉ COPIAR</b>. Los textos largos están plegados y se abren con <b>VER EL TEXTO</b> solo si les da curiosidad.</p>
+  <div class="note tip"><b>¿Llegan tarde o se rompió el archivo?</b> Bajen la versión con la que termina el paso 3, guárdenla como <span class="code-inline">finlab.html</span> y arranquen este paso desde ahí. <a class="btn" href="rescate/finlab-v3.html" download="finlab.html">⬇ BAJAR EL PUNTO DE PARTIDA (PASO 3)</a></div>
+
+  <section class="block" aria-labelledby="logro">
+    <span class="num">01</span>
+    <h2 id="logro">Qué van a lograr</h2>
+    <p>Dos columnas nuevas en la tabla (RSI y Señal), las medias móviles dibujadas en el gráfico y un botón para descargar los datos en <a class="w" href="glosario.html#csv">CSV</a>. La señal sigue la misma regla que la terminal final:</p>
+    <div class="mock" aria-label="Regla de señal de FIN·LAB">
+      <table><thead><tr><th>SI LAS MEDIAS CORTAS…</th><th>SEÑAL</th></tr></thead>
+      <tbody><tr><td>están <b>las dos por encima</b> de las largas (SMA20 &gt; SMA50 y EMA12 &gt; EMA26)</td><td><span class="tag buy">COMPRA</span></td></tr>
+      <tr><td>están <b>las dos por debajo</b> de las largas</td><td><span class="tag sell">VENTA</span></td></tr>
+      <tr><td><b>no se ponen de acuerdo</b></td><td><span class="tag flat">NEUTRAL</span></td></tr></tbody></table>
+    </div>
+    <p style="margin-top:12px">En palabras: si las dos medias “cortas” (las que miran menos días) están por encima de las “largas”, el precio viene subiendo; si están por debajo, viene bajando; si no se ponen de acuerdo, no hay señal clara.</p>
+  </section>
+
+  <section class="block" aria-labelledby="flujo">
+    <span class="num">02</span>
+    <h2 id="flujo">El flujo: de los cierres a la señal</h2>
+    <div class="diagram">
+      <iframe src="diagramas/p4-indicadores.html" title="Diagrama de indicadores y señal" loading="lazy"></iframe>
+      <div class="diagram-foot"><span>Tres cálculos, una regla, una pantalla y una verificación.</span><a href="diagramas/p4-indicadores.html" target="_blank" rel="noopener">ABRIR EN PANTALLA COMPLETA ↗</a></div>
+    </div>
+    <ul class="legend-read">
+      <li><b>Cierres</b> · La serie del activo elegido (del paso 2).</li>
+      <li><b>SMA 20 / 50</b> · Promedio de los últimos 20 y 50 cierres, recalculado cada día.</li>
+      <li><b>EMA 12 / 26</b> · Como la SMA, pero los días recientes pesan más.</li>
+      <li><b>RSI 14</b> · Compara subas y bajas de las últimas 14 ruedas. Se resalta si pasa de 70 o baja de 30.</li>
+      <li><b>signalOf()</b> · Aplica la regla de arriba y devuelve COMPRA, VENTA o NEUTRAL.</li>
+      <li><b>Exportar CSV → Google Sheets</b> · La línea punteada es la verificación humana: recalcular a mano y comparar.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="palabras">
+    <span class="num">03</span>
+    <h2 id="palabras">Palabras nuevas de este paso</h2>
+    <dl class="terms">
+      <div class="term-card"><dt>SMA</dt><dd>Media móvil simple: promedio de los últimos N cierres. <a href="glosario.html#sma">Más →</a></dd></div>
+      <div class="term-card"><dt>EMA</dt><dd>Media móvil que pesa más lo reciente. <a href="glosario.html#ema">Más →</a></dd></div>
+      <div class="term-card"><dt>RSI 14 (Wilder)</dt><dd>Fuerza de las subas vs. bajas, de 0 a 100. <a href="glosario.html#rsi">Más →</a></dd></div>
+      <div class="term-card"><dt>Señal</dt><dd>Etiqueta que resume una regla; no es una recomendación. <a href="glosario.html#senal">Más →</a></dd></div>
+      <div class="term-card"><dt>CSV</dt><dd>Una tabla como texto, que abre cualquier planilla. <a href="glosario.html#csv">Más →</a></dd></div>
+    </dl>
+  </section>
+
+  <section class="block" aria-labelledby="hacer">
+    <span class="num">04</span>
+    <h2 id="hacer">Qué hacer, clic por clic</h2>
+    <ol class="do">
+      <li><b>Peguen el prompt y el archivo actual,</b> guarden la respuesta y abran la página.</li>
+      <li><b>Elijan un activo</b> en la tabla y toquen <em>Exportar CSV</em>. Se descarga un archivo en la carpeta <em>Descargas</em>.</li>
+      <li><b>Abran Google Sheets</b> (sheets.new) → <em>Archivo → Importar → Subir</em> → elijan el CSV → <em>Reemplazar hoja actual</em>.</li>
+      <li><b>En una celda libre</b> de la última fila escriban <span class="code-inline">=PROMEDIO(B…:B…)</span> con los últimos 20 cierres (por ejemplo, <span class="code-inline c">=PROMEDIO(B234:B253)</span> si los datos terminan en la fila 253).</li>
+      <li><b>Comparen</b> con la columna SMA20 de esa misma fila.</li>
+      <li><b>Guarden</b> <span class="code-inline">finlab-v4.html</span> y el CSV: lo van a usar en el paso 7.</li>
+    </ol>
+    <div class="note warn"><b>Si la planilla está en inglés,</b> la fórmula es <span class="code-inline c">=AVERAGE(B234:B253)</span>. Y si los decimales salen raros (por ejemplo, 22915 en lugar de 229,15), vayan a <em>Archivo → Configuración → Configuración regional</em> y elijan Estados Unidos antes de importar.</div>
+  </section>
+
+  <section class="block" data-section="prompts" aria-labelledby="prompt">
+    <span class="num">05</span>
+    <h2 id="prompt">El prompt</h2>
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT · PASO 4</span><div class="d">Pegar debajo el archivo del paso 3.</div></div><button class="copy" data-copy="#p4" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="p4">Paso 4. Agregá indicadores técnicos, cada uno en su propia función con la fórmula comentada:
+- sma(precios, n): media móvil simple
+- ema(precios, n): media móvil exponencial con alfa = 2/(n+1)
+- rsi(precios, 14): RSI de Wilder (suavizado con alfa = 1/14), entre 0 y 100
+- signalOf(): COMPRA si SMA20 > SMA50 y EMA12 > EMA26; VENTA si ambas son menores; si no, NEUTRAL
+
+Mostralos así:
+- en la tabla de Mercado, dos columnas nuevas: RSI 14 (resaltado si es > 70 o < 30) y Señal (etiqueta de color)
+- en el gráfico grande, las líneas SMA20 y SMA50 superpuestas al precio, con leyenda
+
+Además agregá un botón "Exportar CSV" que descargue fecha, cierre, SMA20, SMA50 y RSI del activo seleccionado, con punto como separador decimal, para que podamos verificar los cálculos en una planilla. Los días sin datos suficientes van vacíos, no en cero.
+
+[pegar el archivo completo]</pre></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="comprobar">
+    <span class="num">06</span>
+    <h2 id="comprobar">Cómo comprobar</h2>
+    <ul class="check">
+      <li><b>SMA20 en la planilla:</b> el <span class="code-inline">=PROMEDIO()</span> de los últimos 20 cierres coincide con la SMA20 de la última fila (como mucho, difiere en el último decimal).</li>
+      <li><b>Coherencia de la señal:</b> elijan un activo con señal COMPRA y miren el gráfico. Al final, la SMA20 tiene que estar por encima de la SMA50.</li>
+      <li><b>Las primeras 49 filas</b> del CSV no tienen SMA50 (vacío, no cero). Si dicen 0, la IA calculó mal.</li>
+      <li><b>RSI entre 0 y 100:</b> ningún valor sale de ese rango.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="falla">
+    <span class="num">07</span>
+    <h2 id="falla">Si algo falla</h2>
+    <div class="note tip"><b>¿Se trabaron después de tres intentos?</b> Esta es una versión que ya cumple todo lo de este paso. Pueden abrirla para comparar o bajarla y seguir con el próximo. <a class="btn" href="rescate/finlab-v4.html" target="_blank" rel="noopener">VER EL RESULTADO</a> <a class="btn btn-primary" href="rescate/finlab-v4.html" download="finlab.html">⬇ BAJAR LA VERSIÓN DE RESCATE</a></div>
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT DE RESCATE · EL NÚMERO NO COINCIDE</span><div class="d">Peguen los 20 cierres que usaron en la planilla.</div></div><button class="copy" data-copy="#r4" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="r4">En el CSV, la SMA20 del último día da X, pero en la planilla me da Y con estos 20 cierres:
+
+[pegar los 20 cierres]
+
+Encontrá el error en la función sma, mostrame el cálculo paso a paso con estos números y devolveme el archivo completo corregido.</pre></div>
+    </div>
+  </section>
+
+  <div class="pager">
+    <a href="paso-3.html">← PASO 3 · MERCADO</a>
+    <a href="paso-5.html">PASO 5 · CARTERAS →</a>
+  </div>
+</main>
+
+<footer>
+  FIN·LAB · material didáctico del posgrado de IA aplicada a Finanzas (UNLP) — taller de construcción guiada.<br>
+  Datos simulados con fines educativos. No es asesoramiento financiero.
+</footer>
+
+<script src="../automatizaciones/lab.js"></script>
+<script src="taller.js"></script>
+</body>
+</html>

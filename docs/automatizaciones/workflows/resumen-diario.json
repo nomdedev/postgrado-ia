@@ -1,0 +1,91 @@
+{
+  "name": "FINLAB - Resumen diario de cartera (completar credenciales)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 8 * * 1-5"
+            }
+          ]
+        }
+      },
+      "id": "2b000000-0000-4000-8000-000000000001",
+      "name": "Cada día 08:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 320]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "// Editá esta lista: símbolo y cantidad. Los símbolos deben existir en la API.\nconst cartera = [\n  { symbol: 'AAPL', cantidad: 10 },\n  { symbol: 'GGAL', cantidad: 50 },\n  { symbol: 'YPF', cantidad: 80 }\n];\n\nreturn [{ json: { cartera } }];"
+      },
+      "id": "2b000000-0000-4000-8000-000000000002",
+      "name": "Mi cartera",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [480, 320]
+    },
+    {
+      "parameters": {
+        "url": "https://TU-PROYECTO.vercel.app/api/market/summary",
+        "options": {
+          "timeout": 10000
+        }
+      },
+      "id": "2b000000-0000-4000-8000-000000000003",
+      "name": "Consultar API FIN·LAB",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [720, 320]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "// Toma la lista del nodo \"Mi cartera\" y los precios de la API, y calcula el valor.\nconst cartera = $('Mi cartera').first().json.cartera;\nconst respuesta = $input.first().json;\n\nif (!respuesta.ok || !respuesta.data || !Array.isArray(respuesta.data.tickers)) {\n  throw new Error('La API no devolvió una lista de activos válida.');\n}\n\nconst precios = new Map(respuesta.data.tickers.map((t) => [t.symbol, t]));\nconst filas = cartera.map(({ symbol, cantidad }) => {\n  const ticker = precios.get(symbol);\n  if (!ticker) throw new Error('El activo ' + symbol + ' no está en la muestra de la API.');\n  return {\n    symbol,\n    cantidad,\n    ultimo: ticker.last,\n    valor: Math.round(cantidad * ticker.last * 100) / 100,\n    cambio_pct: ticker.change_pct\n  };\n});\n\nconst total = Math.round(filas.reduce((suma, f) => suma + f.valor, 0) * 100) / 100;\nconst detalle = filas.map((f) => '- ' + f.symbol + ': ' + f.cantidad + ' u. x ' + f.ultimo + ' USD = ' + f.valor + ' USD (' + f.cambio_pct + '%)').join('\\n');\n\nreturn [{\n  json: {\n    total,\n    filas,\n    session: respuesta.data.session,\n    texto: 'Cartera al ' + respuesta.data.session + '\\n\\n' + detalle + '\\n\\nTotal: ' + total + ' USD\\n\\nMuestra educativa fija de FIN·LAB. No es una recomendación de inversión.'\n  }\n}];"
+      },
+      "id": "2b000000-0000-4000-8000-000000000004",
+      "name": "Calcular valor",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [960, 320]
+    },
+    {
+      "parameters": {
+        "fromEmail": "tu-correo@ejemplo.com",
+        "toEmail": "destinatario@ejemplo.com",
+        "subject": "=FIN·LAB · resumen de cartera · {{ $json.total }} USD",
+        "text": "={{ $json.texto }}",
+        "options": {}
+      },
+      "id": "2b000000-0000-4000-8000-000000000005",
+      "name": "Enviar resumen",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [1200, 320]
+    }
+  ],
+  "connections": {
+    "Cada día 08:00": {
+      "main": [[{ "node": "Mi cartera", "type": "main", "index": 0 }]]
+    },
+    "Mi cartera": {
+      "main": [[{ "node": "Consultar API FIN·LAB", "type": "main", "index": 0 }]]
+    },
+    "Consultar API FIN·LAB": {
+      "main": [[{ "node": "Calcular valor", "type": "main", "index": 0 }]]
+    },
+    "Calcular valor": {
+      "main": [[{ "node": "Enviar resumen", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "pinData": {},
+  "tags": []
+}

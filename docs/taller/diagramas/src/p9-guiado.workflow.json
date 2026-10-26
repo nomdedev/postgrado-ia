@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "P9 · Llegar a 127.0.0.1:4173/#/guiado",
+    "quality_profile": "showcase",
+    "legend": {
+      "entries": {
+        "frontend": {
+          "label": "Pantalla"
+        },
+        "backend": {
+          "label": "Cálculo / lógica"
+        },
+        "database": {
+          "label": "Datos"
+        },
+        "cloud": {
+          "label": "Herramienta externa"
+        },
+        "security": {
+          "label": "Control / decisión"
+        },
+        "messagebus": {
+          "label": "Intercambio (archivo, JSON, HTTP)"
+        },
+        "external": {
+          "label": "Personas / IA"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "pc",
+      "label": "Tu computadora"
+    },
+    {
+      "id": "term",
+      "label": "Terminal FIN·LAB"
+    },
+    {
+      "id": "n8n",
+      "label": "n8n"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "server",
+      "lane": "pc",
+      "col": 0,
+      "type": "backend",
+      "label": "Servidor local",
+      "sublabel": "http.server 4173",
+      "width": 160
+    },
+    {
+      "id": "browser",
+      "lane": "pc",
+      "col": 1,
+      "type": "frontend",
+      "label": "Navegador",
+      "sublabel": "abrir /#/guiado",
+      "width": 160
+    },
+    {
+      "id": "elegir",
+      "lane": "term",
+      "col": 2,
+      "type": "frontend",
+      "label": "Elegir señal",
+      "sublabel": "VENTA · COMPRA · NEUTRAL",
+      "width": 160
+    },
+    {
+      "id": "json",
+      "lane": "term",
+      "col": 3,
+      "type": "messagebus",
+      "label": "Descargar JSON",
+      "sublabel": "monitor-mercado-n8n",
+      "width": 160
+    },
+    {
+      "id": "importar",
+      "lane": "n8n",
+      "col": 4,
+      "type": "cloud",
+      "label": "Importar archivo",
+      "sublabel": "Import from file",
+      "width": 160
+    },
+    {
+      "id": "ejecutar",
+      "lane": "n8n",
+      "col": 5,
+      "type": "security",
+      "label": "Ejecutar workflow",
+      "sublabel": "¿qué salida se activa?",
+      "width": 160
+    },
+    {
+      "id": "ejercicios",
+      "lane": "term",
+      "col": 5,
+      "type": "external",
+      "label": "Ejercicios en grupo",
+      "sublabel": "3 preguntas",
+      "width": 160
+    }
+  ],
+  "edges": [
+    {
+      "from": "server",
+      "to": "browser"
+    },
+    {
+      "from": "browser",
+      "to": "elegir"
+    },
+    {
+      "from": "elegir",
+      "to": "json"
+    },
+    {
+      "from": "json",
+      "to": "importar"
+    },
+    {
+      "from": "importar",
+      "to": "ejecutar"
+    },
+    {
+      "from": "ejecutar",
+      "to": "ejercicios",
+      "label": "comparar predicción",
+      "variant": "emphasis"
+    }
+  ]
+}

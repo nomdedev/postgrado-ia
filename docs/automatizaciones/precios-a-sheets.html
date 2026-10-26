@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ejemplo 04 · Precios a Google Sheets · FIN·LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lab.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index.html"><span class="brand-dot"></span><b>FIN·LAB</b> AUTOMATIZACIONES</a>
+    <span class="crumb">EJEMPLO 04 / 04 · DATOS</span>
+  </div>
+</header>
+
+<main class="page">
+  <p class="eyebrow">EJEMPLO 04 · GUARDAR PARA ANALIZAR DESPUÉS</p>
+  <h1>Precios del mercado a Google Sheets</h1>
+  <p class="lede">El flujo convierte la respuesta de la API en filas y las agrega a una planilla. Es el puente entre una automatización y el análisis que hacés después a mano o en Colab: la automatización junta, la planilla acumula.</p>
+  <div class="meta">
+    <span class="chip"><b>4</b> NODOS</span>
+    <span class="chip"><b>15 MIN</b></span>
+    <span class="chip">NIVEL <b>INICIAL</b></span>
+    <span class="chip">REQUIERE <b>GOOGLE</b></span>
+    <span class="chip">SALIDA: <b>PLANILLA</b></span>
+  </div>
+
+  <section class="block" aria-labelledby="resuelve">
+    <span class="num">01</span>
+    <h2 id="resuelve">Qué resuelve</h2>
+    <p>Toda automatización que solo manda mensajes se olvida. Una que <b>guarda datos</b> deja un rastro que podés graficar, comparar entre semanas y usar como entrada de otro proceso. Acá la planilla hace de memoria.</p>
+    <div class="panel">
+      <div class="panel-h"><span class="panel-t">RESULTADO ESPERADO · PLANILLA</span><span class="panel-t" style="color:var(--dim)">8 FILAS POR CORRIDA</span></div>
+      <div class="panel-b">
+        <table class="tbl" style="margin-top:0">
+          <thead><tr><th>FECHA</th><th>SYMBOL</th><th>ULTIMO</th><th>CAMBIO_PCT</th><th>RSI14</th><th>SENAL</th></tr></thead>
+          <tbody>
+            <tr><td>2026-10-26</td><td>AAPL</td><td>308.43</td><td>-0.74</td><td>53.5</td><td>COMPRA</td></tr>
+            <tr><td>2026-10-26</td><td>MSFT</td><td>471.79</td><td>-1.00</td><td>58.1</td><td>COMPRA</td></tr>
+            <tr><td>2026-10-26</td><td>JNJ</td><td>117.88</td><td>0.25</td><td>28.1</td><td>VENTA</td></tr>
+            <tr><td>2026-10-26</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="note tip"><b>El concepto que hay que entender:</b> en n8n, <b>un item es una fila</b>. Si el nodo Code devuelve 8 items, la planilla recibe 8 filas. Si devuelve 1 item con un arreglo adentro, recibe una sola fila con todo apilado. Casi todos los errores de este tipo de flujo son eso.</div>
+  </section>
+
+  <section class="block" aria-labelledby="como">
+    <span class="num">02</span>
+    <h2 id="como">Cómo funciona</h2>
+    <div class="flow">
+      <div class="flow-row"><span class="n">1</span><div><h4>Cada día 18:30</h4><p><b>Schedule Trigger</b>. Después del cierre, cuando ya te interesa guardar.</p><div class="io">SALE: una ejecución</div></div></div>
+      <div class="flow-row"><span class="n">2</span><div><h4>Consultar API FIN·LAB</h4><p>HTTP GET. Un solo item con los ocho activos adentro de <span class="code-inline">data.tickers[]</span>.</p><div class="io">SALE: 1 item</div></div></div>
+      <div class="flow-row"><span class="n">3</span><div><h4>Aplanar activos</h4><p>El nodo <b>Code</b> recorre el arreglo y devuelve <b>un item por activo</b>, con la fecha de sesión incluida.</p><div class="io">SALE: 8 items</div></div></div>
+      <div class="flow-row"><span class="n">4</span><div><h4>Agregar filas en Sheets</h4><p><b>Google Sheets → Append</b>. Escribe ocho filas nuevas debajo de las que ya había.</p><div class="io">SALE: 8 filas en la planilla</div></div></div>
+    </div>
+    <p style="margin-top:14px">El paso 3 es el que hay que mirar con atención: no “sube la respuesta”, la <b>desarma</b>. Esa es toda la técnica.</p>
+  </section>
+
+  <section class="block" aria-labelledby="armar">
+    <span class="num">03</span>
+    <h2 id="armar">Armalo paso a paso</h2>
+    <p style="margin-top:16px"><a class="btn btn-primary" href="workflows/precios-a-sheets.json" download>DESCARGAR WORKFLOW (.JSON)</a></p>
+    <ol>
+      <li><b>Prepará la planilla</b> antes del flujo: creá una hoja con la fila 1 de encabezados <span class="code-inline">fecha</span>, <span class="code-inline">symbol</span>, <span class="code-inline">nombre</span>, <span class="code-inline">ultimo</span>, <span class="code-inline">cambio_pct</span>, <span class="code-inline">volumen</span>, <span class="code-inline">rsi14</span>, <span class="code-inline">senal</span>. Los nombres tienen que coincidir exactamente.</li>
+      <li><b>Importá</b> <span class="code-inline">precios-a-sheets.json</span> en n8n.</li>
+      <li><b>Conectá Google</b> en el nodo <em>Agregar filas en Sheets</em>: n8n te guía con OAuth. Después elegí el documento y la hoja desde los desplegables.</li>
+      <li><b>Reemplazá la URL</b> de la API por tu dominio.</li>
+      <li><b>Ejecutá a mano</b> y contá las filas nuevas: tienen que ser ocho, con la fecha de hoy.</li>
+      <li><b>Ejecutá de nuevo.</b> Vas a tener 16 filas. Eso no es un error: es <em>append</em>. En el punto 06 está cómo evitarlo si no lo querés.</li>
+    </ol>
+
+    <h3 style="margin-top:26px">Qué hay que completar en el archivo</h3>
+    <table class="tbl">
+      <thead><tr><th>NODO</th><th>CAMPO</th><th>QUÉ PONER</th></tr></thead>
+      <tbody>
+        <tr><td>Consultar API</td><td>url</td><td>Tu dominio de Vercel.</td></tr>
+        <tr><td>Agregar filas</td><td>credencial</td><td>Cuenta de Google autorizada desde n8n.</td></tr>
+        <tr><td>Agregar filas</td><td>documentId</td><td>El ID de tu planilla, no la URL completa.</td></tr>
+        <tr><td>Agregar filas</td><td>sheetName</td><td>El nombre exacto de la hoja, por ejemplo <span class="code-inline">Hoja 1</span>.</td></tr>
+        <tr><td>Cada día 18:30</td><td>cronExpression</td><td><span class="code-inline">30 18 * * 1-5</span> = 18:30 de lunes a viernes.</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><b>Si el nodo de Sheets te pide otra cosa</b> (la versión del nodo cambia entre instalaciones de n8n), elegí el documento y la hoja con los desplegables y dejá <em>Mapping Column Mode</em> en <em>Auto-map input data</em>. No escribas el ID a mano si podés elegirlo de la lista.</div>
+  </section>
+
+  <section class="block" data-section="prompts" aria-labelledby="ia">
+    <span class="num">04</span>
+    <h2 id="ia">Hablá con la IA</h2>
+    <p>El pedido clave acá es de concepto, no de código: “por qué me guarda una sola fila”. Una vez que entendés items y filas, el resto sale solo.</p>
+
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT 1 · ENTENDER ITEMS Y FILAS</span><div class="d">El malentendido que arruina este flujo.</div></div><button class="copy" data-copy="#p1" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="p1">En n8n tengo un HTTP Request que devuelve:
+{ "ok": true, "data": { "session": "2026-10-26", "tickers": [ {symbol, name, last, change_pct, volume, rsi14, signal}, ... 8 en total ] } }
+
+Después tengo un nodo de Google Sheets que agrega filas, pero me escribe una sola fila con todo apilado.
+
+Explicame, sin escribir el workflow: 1) qué es un "item" en n8n y cómo se relaciona con una fila de la planilla; 2) por qué la respuesta del HTTP es un solo item; 3) qué tiene que hacer el nodo intermedio para que salgan 8 filas; 4) cómo compruebo, mirando la salida del nodo, cuántos items hay.</pre></div>
+    </div>
+
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT 2 · EL CÓDIGO QUE APLANA</span><div class="d">Para el nodo Code del paso 3.</div></div><button class="copy" data-copy="#p2" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="p2">Escribime el código de un nodo Code de n8n (Run Once for All Items) que:
+- lea $input.first().json.data
+- si no existe data.tickers, tire un Error claro en español
+- devuelva un item por cada activo, con estas claves exactas: fecha (la session), symbol, nombre, ultimo, cambio_pct, volumen, rsi14, senal
+- no agregue claves de más
+
+Después decime cómo comprobar en la salida del nodo que hay 8 items y no uno, y cómo probarlo con una lista vacía.</pre></div>
+    </div>
+
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT 3 · EVITAR DUPLICADOS</span><div class="d">Cuando el flujo corre dos veces el mismo día.</div></div><button class="copy" data-copy="#p3" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="p3">Tengo un flujo en n8n que agrega 8 filas por día a Google Sheets (una por activo, con la fecha de sesión en la columna "fecha"). Si lo ejecuto dos veces, duplica las filas.
+
+Comparame estas dos soluciones y decime cuál conviene para un flujo diario:
+1) antes de agregar, buscar si ya hay filas con esa fecha y no agregar nada si existen
+2) usar "append or update" con una columna clave fecha+symbol
+
+Para la que recomiendes, contame qué nodos necesito, qué columna tiene que ser la clave y cómo pruebo que no duplica sin borrar la planilla. Tené en cuenta que la hoja puede llegar a tener miles de filas.</pre></div>
+    </div>
+
+    <div class="builder" data-builder>
+      <div class="builder-h"><span class="t">ADAPTÁ LA PLANILLA A TU CASO</span><span class="t" style="color:var(--dim)">EDITÁ Y COPIÁ</span></div>
+      <div class="fields">
+        <div class="field"><label for="b-planilla">NOMBRE DE LA PLANILLA</label><input id="b-planilla" data-key="planilla" value="Precios FIN·LAB"></div>
+        <div class="field"><label for="b-hoja">HOJA</label><input id="b-hoja" data-key="hoja" value="Hoja 1"></div>
+        <div class="field"><label for="b-hora">HORARIO</label><input id="b-hora" data-key="hora" value="18:30"></div>
+        <div class="field"><label for="b-extra">QUÉ COLUMNA MÁS QUERÉS GUARDAR</label><input id="b-extra" data-key="extra" value="el volumen operado"></div>
+      </div>
+      <pre id="b-out" data-output></pre>
+      <script type="text/template">Quiero adaptar un workflow de n8n que guarda precios en Google Sheets.
+
+Planilla: "{planilla}", hoja "{hoja}". Debe correr todos los días hábiles a las {hora} y agregar una fila por activo.
+Columnas actuales: fecha, symbol, nombre, ultimo, cambio_pct, volumen, rsi14, senal.
+Además quiero guardar: {extra}.
+
+Los datos vienen de /api/market/summary en data.tickers[].
+
+Decime: 1) cómo tengo que cambiar el nodo Code que aplana los datos; 2) qué pasa si la columna nueva no existe en la hoja; 3) cómo evito duplicar filas si el flujo corre dos veces el mismo día.</script>
+      <div class="builder-foot"><button class="copy" data-copy="#b-out" type="button">COPIAR PROMPT</button></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="verificar">
+    <span class="num">05</span>
+    <h2 id="verificar">Cómo saber si funciona</h2>
+    <ul class="check">
+      <li><b>Contá los items</b> en la salida de <em>Aplanar activos</em>: dice <span class="code-inline">8 items</span>, no 1.</li>
+      <li><b>Contá las filas nuevas</b> en la planilla después de una corrida manual: ocho, todas con la fecha de la sesión.</li>
+      <li><b>Revisá las cabeceras:</b> si una columna queda vacía, el nombre de la clave no coincide con el encabezado.</li>
+      <li><b>Probá con la lista vacía:</b> si la API devolviera cero activos, el flujo no debería escribir una fila en blanco.</li>
+      <li><b>Corré dos veces seguidas</b> y decí en voz alta qué esperabas que pasara. Si te sorprende, todavía no entendiste el append.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="limites">
+    <span class="num">06</span>
+    <h2 id="limites">Límites de este ejemplo</h2>
+    <ul>
+      <li><b>Append no actualiza.</b> Si el mismo día corrés dos veces, tenés 16 filas. Para evitarlo necesitás una columna clave y un nodo de búsqueda previa, o <em>append or update</em>.</li>
+      <li><b>Los encabezados son un contrato.</b> Si cambiás el nombre de una columna en la planilla, las filas nuevas van a quedar con celdas vacías.</li>
+      <li><b>Una planilla no es una base de datos.</b> Sirve para miles de filas, no para millones. Cuando crece, conviene pasar a una base real.</li>
+      <li><b>Cuotas de Google:</b> hay límites de pedidos por minuto. Un flujo diario está lejísimos, uno cada minuto no.</li>
+      <li><b>Privacidad:</b> la planilla la ve quien tenga el enlace. No guardes ahí datos de terceros sin permiso.</li>
+      <li><b>Los datos son de una muestra fija:</b> todas las corridas van a escribir los mismos precios con fechas distintas. Sirve para practicar el circuito, no para analizar el mercado.</li>
+    </ul>
+    <div class="note warn"><b>Ojo con la fecha:</b> la muestra de la API devuelve la fecha de hoy en <span class="code-inline">session</span>, pero los precios no cambian. Si vas a graficar después, aclará en la planilla que los datos son de práctica.</div>
+  </section>
+
+  <div class="pager">
+    <a href="informe-semanal-ia.html">← EJEMPLO 03</a>
+    <a href="index.html">VOLVER AL ÍNDICE →</a>
+  </div>
+</main>
+
+<footer>
+  FIN·LAB · material didáctico del posgrado de IA aplicada a Finanzas (UNLP).<br>
+  Datos simulados con fines educativos. No es asesoramiento financiero.
+</footer>
+
+<script src="lab.js"></script>
+</body>
+</html>

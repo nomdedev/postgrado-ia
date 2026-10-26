@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paso 2 · Los datos simulados · Taller FIN·LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../automatizaciones/lab.css">
+<link rel="stylesheet" href="taller.css">
+<script>try{var t=localStorage.getItem("finlab-tema");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index.html"><span class="brand-dot"></span><b>FIN·LAB</b> TALLER</a>
+    <span class="crumb">PASO 2 / 9 · DATOS</span>
+  </div>
+</header>
+
+<main class="page">
+  <ul class="steps" aria-label="Pasos del taller">
+    <li><a href="index.html">MAPA</a></li><li><a href="paso-0.html">P0</a></li><li><a href="paso-1.html">P1</a></li><li><a href="paso-2.html" aria-current="page">P2</a></li><li><a href="paso-3.html">P3</a></li><li><a href="paso-4.html">P4</a></li><li><a href="paso-5.html">P5</a></li><li><a href="paso-6.html">P6</a></li><li><a href="paso-7.html">P7</a></li><li><a href="paso-8.html">P8</a></li><li><a href="paso-9.html">P9</a></li><li><a href="glosario.html">GLOSARIO</a></li>
+  </ul>
+
+  <p class="eyebrow">PASO 2 · SIN DATOS NO HAY ANÁLISIS</p>
+  <h1>Un año de precios simulados que no cambia</h1>
+  <p class="lede">La terminal genera 252 <a class="w" href="glosario.html#rueda">ruedas</a> (un año hábil) para cada activo. Parecen aleatorias, pero salen <b>iguales en cada recarga</b> gracias a una <a class="w" href="glosario.html#semilla">semilla</a>. Así todo el curso puede comparar los mismos números.</p>
+  <div class="meta"><span class="chip"><b>15 MIN</b></span><span class="chip">CONSOLA</span><span class="chip">SALIDA: <b>finlab-v2.html</b></span></div>
+  <ol class="mission" aria-label="Tu misión en este paso"><li><b>Copien el prompt</b>con el botón <span class="hl">⧉ COPIAR</span> y péguenlo en el chat, junto con su archivo</li><li><b>Guarden la respuesta</b>en <span class="code-inline">finlab.html</span> y ábranla con doble clic</li><li><b>Comprueben</b>que al recargar salen los mismos números</li></ol>
+  <p class="calm"><b>Tranquilos:</b> no hace falta entender el código. Todo lo que hay que llevar a otro lado tiene un botón <b>⧉ COPIAR</b>. Los textos largos están plegados y se abren con <b>VER EL TEXTO</b> solo si les da curiosidad.</p>
+  <div class="note tip"><b>¿Llegan tarde o se rompió el archivo?</b> Bajen la versión con la que termina el paso 1, guárdenla como <span class="code-inline">finlab.html</span> y arranquen este paso desde ahí. <a class="btn" href="rescate/finlab-v1.html" download="finlab.html">⬇ BAJAR EL PUNTO DE PARTIDA (PASO 1)</a></div>
+
+  <section class="block" aria-labelledby="logro">
+    <span class="num">01</span>
+    <h2 id="logro">Qué van a lograr</h2>
+    <p>Todavía no se ve nada nuevo en la pantalla: los datos se generan “por detrás” y se muestran en la <a class="w" href="glosario.html#consola">consola</a> como una tabla de control.</p>
+    <div class="mock" aria-label="Ejemplo de la tabla de control en la consola">
+      <b>Tabla de control en la consola</b> <span style="color:var(--dim)">· sus números van a ser otros</span>
+      <table style="margin-top:8px"><thead><tr><th>SÍMBOLO</th><th>PRIMER CIERRE</th><th>ÚLTIMO CIERRE</th><th>VARIACIÓN DEL AÑO</th></tr></thead>
+      <tbody><tr><td>AAPL</td><td>171,62</td><td>229,15</td><td class="up">+33,5 %</td></tr><tr><td>KO</td><td>58,40</td><td>62,07</td><td class="up">+6,3 %</td></tr><tr><td>YPF</td><td>28,11</td><td>34,90</td><td class="up">+24,2 %</td></tr><tr><td colspan="4" style="color:var(--dim)">… y los otros cinco activos</td></tr></tbody></table>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="flujo">
+    <span class="num">02</span>
+    <h2 id="flujo">El flujo: cómo nace un precio simulado</h2>
+    <div class="diagram">
+      <iframe src="diagramas/p2-datos.html" title="Diagrama de la generación de datos" loading="lazy"></iframe>
+      <div class="diagram-foot"><span>De la definición de los activos a la tabla de control.</span><a href="diagramas/p2-datos.html" target="_blank" rel="noopener">ABRIR EN PANTALLA COMPLETA ↗</a></div>
+    </div>
+    <ul class="legend-read">
+      <li><b>TICKERS</b> · Una <a class="w" href="glosario.html#lista">lista</a> con los 8 activos: símbolo, nombre, precio inicial aproximado y volatilidad anual (cuánto se mueve).</li>
+      <li><b>Semilla</b> · Un número fijo por activo que hace que el “azar” sea siempre el mismo. Es lo que garantiza que todos vean los mismos datos.</li>
+      <li><b>simulateSeries() → Retorno diario</b> · Para cada uno de los 252 días hábiles calcula cuánto sube o baja: una tendencia más un movimiento al azar proporcional a la volatilidad.</li>
+      <li><b>Serie { d, c, v }</b> · El resultado: por día, la fecha (<em>d</em>), el cierre (<em>c</em>) y el volumen operado (<em>v</em>).</li>
+      <li><b>Consola</b> · Una tabla para verificar sin necesidad de pantalla.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="palabras">
+    <span class="num">03</span>
+    <h2 id="palabras">Palabras nuevas de este paso</h2>
+    <dl class="terms">
+      <div class="term-card"><dt>Semilla</dt><dd>El número de arranque que hace repetible al azar. <a href="glosario.html#semilla">Más →</a></dd></div>
+      <div class="term-card"><dt>Rueda</dt><dd>Un día hábil de mercado; un año tiene ~252. <a href="glosario.html#rueda">Más →</a></dd></div>
+      <div class="term-card"><dt>Función</dt><dd>Un bloque de código con nombre, como una fórmula. <a href="glosario.html#funcion">Más →</a></dd></div>
+      <div class="term-card"><dt>Objeto { d, c, v }</dt><dd>Un día con fecha, cierre y volumen. <a href="glosario.html#objeto">Más →</a></dd></div>
+    </dl>
+  </section>
+
+  <section class="block" aria-labelledby="hacer">
+    <span class="num">04</span>
+    <h2 id="hacer">Qué hacer, clic por clic</h2>
+    <ol class="do">
+      <li><b>Abran <span class="code-inline">finlab.html</span> con el Bloc de notas</b> (clic derecho → <em>Abrir con</em>), seleccionen todo (<kbd>Ctrl</kbd> + <kbd>A</kbd>) y cópienlo.</li>
+      <li><b>En el chat,</b> peguen primero el prompt de la sección 05 y, debajo, el archivo completo. Envíen.</li>
+      <li><b>Reemplacen</b> todo el contenido de <span class="code-inline">finlab.html</span> por la respuesta y guarden.</li>
+      <li><b>Abran la página</b> y la consola (<kbd>F12</kbd> → <em>Console</em>). Tiene que aparecer la tabla.</li>
+      <li><b>El auditor</b> hace las comprobaciones de la sección 06 y, si todo está bien, guardan <span class="code-inline">finlab-v2.html</span>.</li>
+    </ol>
+  </section>
+
+  <section class="block" data-section="prompts" aria-labelledby="prompt">
+    <span class="num">05</span>
+    <h2 id="prompt">El prompt</h2>
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT · PASO 2</span><div class="d">Pegar debajo el archivo del paso 1.</div></div><button class="copy" data-copy="#p2" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="p2">Paso 2. Agregá la capa de datos (todavía sin mostrarla en pantalla, solo en la consola):
+- una lista TICKERS con símbolo, nombre, precio inicial aproximado y volatilidad anual de cada activo
+- una función simulateSeries(ticker) que genere 252 días hábiles (lunes a viernes) terminando hoy, con {d: 'AAAA-MM-DD', c: cierre, v: volumen}
+- retorno diario = tendencia/252 + volatilidad/√252 · z (normal estándar)
+- usá un generador pseudoaleatorio con semilla (por ejemplo mulberry32) y semilla distinta por símbolo, para que los datos sean SIEMPRE los mismos
+- imprimí en la consola una tabla con símbolo, primer cierre, último cierre y variación % del año
+
+Explicame en 3 líneas, para alguien que no programa, qué es una semilla y por qué la necesitamos.
+
+[pegar el archivo completo]</pre></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="comprobar">
+    <span class="num">06</span>
+    <h2 id="comprobar">Cómo comprobar</h2>
+    <ul class="check">
+      <li><b>Recarguen tres veces</b> (<kbd>F5</kbd>): la tabla muestra exactamente los mismos números.</li>
+      <li><b>Cuenten las ruedas:</b> en la consola escriban <span class="code-inline c">simulateSeries(TICKERS[0]).length</span> y presionen <kbd>Enter</kbd>. Tiene que dar <b>252</b>.</li>
+      <li><b>Sin fines de semana:</b> escriban <span class="code-inline c">simulateSeries(TICKERS[0]).slice(-7)</span> y miren las fechas. No puede aparecer ningún sábado ni domingo.</li>
+      <li><b>Sentido común:</b> los activos más volátiles (GGAL, YPF) tienen que moverse más en el año que KO o JNJ.</li>
+    </ul>
+    <div class="note tip"><b>Para discutir en grupo:</b> ¿por qué un dato simulado sirve más que uno real para aprender? (Pista: todos pueden verificar el mismo número, y nadie confunde el ejercicio con una recomendación.)</div>
+  </section>
+
+  <section class="block" aria-labelledby="falla">
+    <span class="num">07</span>
+    <h2 id="falla">Si algo falla</h2>
+    <div class="note tip"><b>¿Se trabaron después de tres intentos?</b> Esta es una versión que ya cumple todo lo de este paso. Pueden abrirla para comparar o bajarla y seguir con el próximo. <a class="btn" href="rescate/finlab-v2.html" target="_blank" rel="noopener">VER EL RESULTADO</a> <a class="btn btn-primary" href="rescate/finlab-v2.html" download="finlab.html">⬇ BAJAR LA VERSIÓN DE RESCATE</a></div>
+    <ul>
+      <li><b>“simulateSeries is not defined”:</b> la función quedó “encerrada” dentro del código de React. Pídanle a la IA: “Exponé TICKERS y simulateSeries en <span class="code-inline">window</span> para poder probarlas desde la consola”.</li>
+      <li><b>Los números cambian al recargar:</b> la IA usó <span class="code-inline">Math.random()</span>, que no tiene semilla. Pidan que use solo el generador con semilla.</li>
+      <li><b>La página quedó en blanco:</b> usen el <a href="paso-1.html#falla">prompt de rescate del paso 1</a>.</li>
+    </ul>
+  </section>
+
+  <div class="pager">
+    <a href="paso-1.html">← PASO 1 · ESQUELETO</a>
+    <a href="paso-3.html">PASO 3 · MERCADO →</a>
+  </div>
+</main>
+
+<footer>
+  FIN·LAB · material didáctico del posgrado de IA aplicada a Finanzas (UNLP) — taller de construcción guiada.<br>
+  Datos simulados con fines educativos. No es asesoramiento financiero.
+</footer>
+
+<script src="../automatizaciones/lab.js"></script>
+<script src="taller.js"></script>
+</body>
+</html>

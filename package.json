@@ -1,0 +1,12 @@
+{
+  "name": "finlab-postgrado-ia",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Demo educativa de análisis de mercado, n8n y Google Colab",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test"
+  }
+}

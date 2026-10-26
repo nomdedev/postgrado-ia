@@ -1,0 +1,126 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "P3 · De la serie a la pantalla de Mercado",
+    "quality_profile": "showcase",
+    "legend": {
+      "entries": {
+        "frontend": {
+          "label": "Pantalla"
+        },
+        "backend": {
+          "label": "Cálculo / lógica"
+        },
+        "database": {
+          "label": "Datos"
+        },
+        "cloud": {
+          "label": "Herramienta externa"
+        },
+        "security": {
+          "label": "Control / decisión"
+        },
+        "messagebus": {
+          "label": "Intercambio (archivo, JSON, HTTP)"
+        },
+        "external": {
+          "label": "Personas / IA"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "datos",
+      "label": "Datos"
+    },
+    {
+      "id": "calc",
+      "label": "Cálculo"
+    },
+    {
+      "id": "pant",
+      "label": "Pantalla"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "serie",
+      "lane": "datos",
+      "col": 0,
+      "type": "database",
+      "label": "Serie del P2",
+      "sublabel": "252 cierres",
+      "width": 160
+    },
+    {
+      "id": "var",
+      "lane": "calc",
+      "col": 1,
+      "type": "backend",
+      "label": "Variación del día",
+      "sublabel": "hoy / ayer − 1",
+      "width": 160
+    },
+    {
+      "id": "conteo",
+      "lane": "calc",
+      "col": 2,
+      "type": "backend",
+      "label": "Conteo",
+      "sublabel": "suben / bajan",
+      "width": 160
+    },
+    {
+      "id": "tarjetas",
+      "lane": "pant",
+      "col": 3,
+      "type": "frontend",
+      "label": "Tarjetas",
+      "sublabel": "resumen del día",
+      "width": 160
+    },
+    {
+      "id": "tabla",
+      "lane": "pant",
+      "col": 4,
+      "type": "frontend",
+      "label": "Tabla + sparkline",
+      "sublabel": "precio, %, 30 días",
+      "width": 160
+    },
+    {
+      "id": "grafico",
+      "lane": "pant",
+      "col": 5,
+      "type": "frontend",
+      "label": "Gráfico Recharts",
+      "sublabel": "rango 1M a 1A",
+      "width": 160
+    }
+  ],
+  "edges": [
+    {
+      "from": "serie",
+      "to": "var"
+    },
+    {
+      "from": "var",
+      "to": "conteo"
+    },
+    {
+      "from": "conteo",
+      "to": "tarjetas"
+    },
+    {
+      "from": "tarjetas",
+      "to": "tabla"
+    },
+    {
+      "from": "tabla",
+      "to": "grafico",
+      "label": "clic en una fila"
+    }
+  ]
+}

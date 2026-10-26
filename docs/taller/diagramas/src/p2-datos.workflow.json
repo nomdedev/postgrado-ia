@@ -1,0 +1,127 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "P2 · Cómo se generan los datos simulados",
+    "quality_profile": "showcase",
+    "legend": {
+      "entries": {
+        "frontend": {
+          "label": "Pantalla"
+        },
+        "backend": {
+          "label": "Cálculo / lógica"
+        },
+        "database": {
+          "label": "Datos"
+        },
+        "cloud": {
+          "label": "Herramienta externa"
+        },
+        "security": {
+          "label": "Control / decisión"
+        },
+        "messagebus": {
+          "label": "Intercambio (archivo, JSON, HTTP)"
+        },
+        "external": {
+          "label": "Personas / IA"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "def",
+      "label": "Definición"
+    },
+    {
+      "id": "gen",
+      "label": "Generador"
+    },
+    {
+      "id": "res",
+      "label": "Resultado"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "tickers",
+      "lane": "def",
+      "col": 0,
+      "type": "database",
+      "label": "TICKERS",
+      "sublabel": "8 activos + volatilidad",
+      "width": 160
+    },
+    {
+      "id": "semilla",
+      "lane": "def",
+      "col": 1,
+      "type": "security",
+      "label": "Semilla",
+      "sublabel": "mulberry32 por símbolo",
+      "width": 160
+    },
+    {
+      "id": "sim",
+      "lane": "gen",
+      "col": 2,
+      "type": "backend",
+      "label": "simulateSeries()",
+      "sublabel": "252 días hábiles",
+      "width": 160
+    },
+    {
+      "id": "formula",
+      "lane": "gen",
+      "col": 3,
+      "type": "backend",
+      "label": "Retorno diario",
+      "sublabel": "tendencia + vol · z",
+      "width": 160
+    },
+    {
+      "id": "serie",
+      "lane": "res",
+      "col": 4,
+      "type": "database",
+      "label": "Serie { d, c, v }",
+      "sublabel": "fecha, cierre, volumen",
+      "width": 160
+    },
+    {
+      "id": "consola",
+      "lane": "res",
+      "col": 5,
+      "type": "frontend",
+      "label": "Consola (F12)",
+      "sublabel": "tabla de control",
+      "width": 160
+    }
+  ],
+  "edges": [
+    {
+      "from": "tickers",
+      "to": "semilla"
+    },
+    {
+      "from": "semilla",
+      "to": "sim",
+      "label": "mismos números"
+    },
+    {
+      "from": "sim",
+      "to": "formula",
+      "label": "cada día"
+    },
+    {
+      "from": "formula",
+      "to": "serie"
+    },
+    {
+      "from": "serie",
+      "to": "consola"
+    }
+  ]
+}

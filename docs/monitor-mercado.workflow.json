@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Monitor de mercado con n8n",
+    "quality_profile": "showcase",
+    "animation": "trace",
+    "views": [
+      { "id": "ruta-principal", "label": "Del inicio al resultado", "focus": ["manual", "muestra", "decision", "aviso", "normal"], "note": "Ejecuta una muestra local y separa señales de venta del resto." },
+      { "id": "datos-de-prueba", "label": "Qué datos usa", "focus": ["manual", "muestra", "decision"], "note": "Esta plantilla funciona con datos de ejemplo y no necesita una API ni credenciales." },
+      { "id": "dos-resultados", "label": "Las dos salidas", "focus": ["decision", "aviso", "normal"], "note": "La condición decide entre preparar un aviso de muestra o registrar que no hay venta." }
+    ]
+  },
+  "lanes": [
+    { "id": "persona", "label": "Persona que prueba" },
+    { "id": "n8n", "label": "Workflow n8n" },
+    { "id": "salidas", "label": "Resultados de la prueba" }
+  ],
+  "phases": [
+    { "id": "inicio", "label": "Iniciar", "fromCol": 0, "toCol": 0 },
+    { "id": "revisar", "label": "Revisar señales", "fromCol": 1, "toCol": 3, "variant": "emphasis" },
+    { "id": "resultado", "label": "Ver resultado", "fromCol": 4, "toCol": 5 }
+  ],
+  "mainPath": ["manual", "muestra", "decision", "aviso"],
+  "nodes": [
+    { "id": "manual", "lane": "persona", "col": 0, "type": "external", "label": "Pulsar Ejecutar", "sublabel": "inicio manual", "width": 132 },
+    { "id": "muestra", "lane": "n8n", "col": 1, "type": "backend", "label": "Cargar muestra", "sublabel": "datos incluidos", "width": 132 },
+    { "id": "decision", "lane": "n8n", "col": 3, "type": "backend", "label": "¿Hay señal VENTA?", "sublabel": "revisar tickers", "tag": "IF", "width": 148 },
+    { "id": "aviso", "lane": "salidas", "col": 5, "type": "external", "label": "Preparar aviso", "sublabel": "solo demostración", "width": 132 },
+    { "id": "normal", "lane": "salidas", "col": 4, "type": "database", "label": "Sin señal de venta", "sublabel": "fin de la prueba", "width": 148 }
+  ],
+  "edges": [
+    { "id": "ejecutar-muestra", "from": "manual", "to": "muestra", "label": "iniciar", "variant": "emphasis" },
+    { "id": "muestra-decision", "from": "muestra", "to": "decision", "label": "precios y señales" },
+    { "id": "si-venta", "from": "decision", "to": "aviso", "label": "sí · hay VENTA", "variant": "emphasis", "role": "branch" },
+    { "id": "si-normal", "from": "decision", "to": "normal", "label": "no · seguir mirando", "variant": "dashed", "role": "branch" }
+  ],
+  "cards": [
+    { "dot": "amber", "title": "Límite de esta prueba", "items": ["Usa datos ficticios dentro de n8n; no requiere una API ni credenciales.", "Para cotizaciones reales, hay que publicar un backend accesible y sustituir la muestra por una petición HTTP."] }
+  ]
+}

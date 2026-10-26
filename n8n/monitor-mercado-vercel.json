@@ -1,0 +1,114 @@
+{
+  "name": "FIN·LAB - Monitor de mercado (Vercel)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "2bc79111-7413-4a5a-b4c8-7e7821365bd1",
+      "name": "Iniciar prueba",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://TU-PROYECTO.vercel.app/api/market/summary",
+        "options": {
+          "timeout": 10000
+        }
+      },
+      "id": "d96a00d2-4ff2-47f8-b03e-b4be6ddc2cdc",
+      "name": "Consultar API FIN·LAB",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [470, 300]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "const response = $input.first().json;\nif (!response.ok || !response.data || !Array.isArray(response.data.tickers)) {\n  throw new Error('La API no devolvió una lista de activos válida.');\n}\nconst matches = response.data.tickers.filter((ticker) => ticker.signal === 'VENTA');\nreturn [{ json: { condition: 'VENTA', hasSignal: matches.length > 0, matches, session: response.data.session, message: matches.length ? 'Se encontraron ' + matches.length + ' señales VENTA.' : 'No se encontraron señales VENTA.' } }];"
+      },
+      "id": "947fbe26-718f-4621-92a6-618b387f31c1",
+      "name": "Buscar señales de venta",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [710, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c7ab28ac-1a44-4f6a-a883-3b77d82ddf17",
+              "leftValue": "={{ $json.hasSignal }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "6d7d53e8-8c71-4d20-b51d-cfae7871b274",
+      "name": "¿Hay una señal?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [950, 300]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "return $input.all().map(({ json }) => ({ json: { ...json, result: 'AVISO DE PRUEBA' } }));"
+      },
+      "id": "36c4bdb6-2b96-41f8-843c-0ad6a9286104",
+      "name": "Preparar aviso de prueba",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1200, 200]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "return $input.all().map(({ json }) => ({ json: { ...json, result: 'SIN COINCIDENCIAS' } }));"
+      },
+      "id": "e16f1a50-c70b-4b7e-a586-99b8f5362109",
+      "name": "Registrar que no hubo señal",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1200, 400]
+    }
+  ],
+  "connections": {
+    "Iniciar prueba": {
+      "main": [[{"node": "Consultar API FIN·LAB", "type": "main", "index": 0}]]
+    },
+    "Consultar API FIN·LAB": {
+      "main": [[{"node": "Buscar señales de venta", "type": "main", "index": 0}]]
+    },
+    "Buscar señales de venta": {
+      "main": [[{"node": "¿Hay una señal?", "type": "main", "index": 0}]]
+    },
+    "¿Hay una señal?": {
+      "main": [
+        [{"node": "Preparar aviso de prueba", "type": "main", "index": 0}],
+        [{"node": "Registrar que no hubo señal", "type": "main", "index": 0}]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {"executionOrder": "v1"},
+  "pinData": {},
+  "tags": []
+}

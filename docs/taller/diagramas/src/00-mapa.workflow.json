@@ -1,0 +1,181 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Mapa del taller: de la hoja en blanco a #/guiado",
+    "quality_profile": "showcase",
+    "legend": {
+      "entries": {
+        "frontend": {
+          "label": "Pantalla"
+        },
+        "backend": {
+          "label": "Cálculo / lógica"
+        },
+        "database": {
+          "label": "Datos"
+        },
+        "cloud": {
+          "label": "Herramienta externa"
+        },
+        "security": {
+          "label": "Control / decisión"
+        },
+        "messagebus": {
+          "label": "Intercambio (archivo, JSON, HTTP)"
+        },
+        "external": {
+          "label": "Personas / IA"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "pagina",
+      "label": "Construir la página (navegador)"
+    },
+    {
+      "id": "conectar",
+      "label": "Conectar con otras herramientas"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "contexto",
+      "lane": "pagina",
+      "col": 0,
+      "type": "external",
+      "label": "P0 · Preparar",
+      "sublabel": "prompt de contexto",
+      "width": 160
+    },
+    {
+      "id": "esqueleto",
+      "lane": "pagina",
+      "col": 1,
+      "type": "frontend",
+      "label": "P1 · Esqueleto",
+      "sublabel": "encabezado + pestañas",
+      "width": 160
+    },
+    {
+      "id": "datos",
+      "lane": "pagina",
+      "col": 2,
+      "type": "database",
+      "label": "P2 · Datos",
+      "sublabel": "año simulado",
+      "width": 160
+    },
+    {
+      "id": "mercado",
+      "lane": "pagina",
+      "col": 3,
+      "type": "frontend",
+      "label": "P3 · Mercado",
+      "sublabel": "tabla + gráficos",
+      "width": 160
+    },
+    {
+      "id": "indicadores",
+      "lane": "pagina",
+      "col": 4,
+      "type": "backend",
+      "label": "P4 · Indicadores",
+      "sublabel": "SMA · EMA · RSI",
+      "width": 160
+    },
+    {
+      "id": "carteras",
+      "lane": "pagina",
+      "col": 5,
+      "type": "backend",
+      "label": "P5 · Carteras",
+      "sublabel": "riesgo + Sharpe",
+      "width": 160
+    },
+    {
+      "id": "api",
+      "lane": "conectar",
+      "col": 2,
+      "type": "messagebus",
+      "label": "P6 · API JSON",
+      "sublabel": "datos para otros",
+      "width": 160
+    },
+    {
+      "id": "colab",
+      "lane": "conectar",
+      "col": 3,
+      "type": "cloud",
+      "label": "P7 · Colab",
+      "sublabel": "verificar en Python",
+      "width": 160
+    },
+    {
+      "id": "n8n",
+      "lane": "conectar",
+      "col": 4,
+      "type": "cloud",
+      "label": "P8 · n8n",
+      "sublabel": "avisos automáticos",
+      "width": 160
+    },
+    {
+      "id": "guiado",
+      "lane": "conectar",
+      "col": 5,
+      "type": "security",
+      "label": "P9 · #/guiado",
+      "sublabel": "la terminal final",
+      "width": 160
+    }
+  ],
+  "edges": [
+    {
+      "from": "contexto",
+      "to": "esqueleto"
+    },
+    {
+      "from": "esqueleto",
+      "to": "datos"
+    },
+    {
+      "from": "datos",
+      "to": "mercado"
+    },
+    {
+      "from": "mercado",
+      "to": "indicadores"
+    },
+    {
+      "from": "indicadores",
+      "to": "carteras",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "from": "carteras",
+      "to": "api",
+      "label": "publicar datos",
+      "variant": "emphasis"
+    },
+    {
+      "from": "api",
+      "to": "colab",
+      "label": "CSV / JSON",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "from": "colab",
+      "to": "n8n"
+    },
+    {
+      "from": "n8n",
+      "to": "guiado",
+      "variant": "emphasis"
+    }
+  ]
+}

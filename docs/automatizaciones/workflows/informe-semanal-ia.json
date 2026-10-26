@@ -1,0 +1,113 @@
+{
+  "name": "FINLAB - Informe semanal con IA (completar credenciales)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 17 * * 5"
+            }
+          ]
+        }
+      },
+      "id": "3c000000-0000-4000-8000-000000000001",
+      "name": "Cada viernes 17:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 320]
+    },
+    {
+      "parameters": {
+        "url": "https://TU-PROYECTO.vercel.app/api/market/summary",
+        "options": {
+          "timeout": 10000
+        }
+      },
+      "id": "3c000000-0000-4000-8000-000000000002",
+      "name": "Consultar API FIN·LAB",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 320]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "// Convierte la respuesta de la API en un texto plano y verificable.\nconst d = $input.first().json.data;\nif (!d || !Array.isArray(d.tickers)) {\n  throw new Error('La API no devolvió la lista de activos.');\n}\n\nconst lineas = d.tickers.map((t) => t.symbol + ': ' + t.last + ' USD (' + t.change_pct + '%), RSI ' + t.rsi14 + ', señal ' + t.signal);\nconst hechos = [\n  'Sesión: ' + d.session,\n  'Índice ' + d.index.name + ': ' + d.index.level + ' (' + d.index.change_pct + '%)',\n  'Amplitud: ' + d.breadth.advancing + ' al alza / ' + d.breadth.declining + ' a la baja',\n  '',\n  ...lineas\n].join('\\n');\n\nreturn [{ json: { hechos } }];"
+      },
+      "id": "3c000000-0000-4000-8000-000000000003",
+      "name": "Preparar hechos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [720, 320]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model: 'gpt-4o-mini', temperature: 0.2, messages: [{ role: 'system', content: 'Sos un analista que redacta informes breves de mercado. Usá SOLO los datos que recibís. Si falta un dato, escribí \"sin dato\". Máximo 160 palabras. No des recomendaciones de inversión ni predigas precios.' }, { role: 'user', content: $json.hechos }] }) }}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "3c000000-0000-4000-8000-000000000004",
+      "name": "Pedir informe al modelo",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [960, 320]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "// Se queda solo con el texto del modelo y falla fuerte si vino vacío.\nconst respuesta = $input.first().json;\nconst texto = respuesta.choices && respuesta.choices[0] && respuesta.choices[0].message\n  ? respuesta.choices[0].message.content\n  : '';\n\nif (!texto) {\n  throw new Error('El modelo no devolvió texto. Revisá la credencial, el nombre del modelo y el saldo de la cuenta.');\n}\n\nreturn [{ json: { texto: texto.trim() } }];"
+      },
+      "id": "3c000000-0000-4000-8000-000000000005",
+      "name": "Armar informe",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1200, 320]
+    },
+    {
+      "parameters": {
+        "fromEmail": "tu-correo@ejemplo.com",
+        "toEmail": "destinatario@ejemplo.com",
+        "subject": "FIN·LAB · informe semanal redactado con IA",
+        "text": "={{ $json.texto }}",
+        "options": {}
+      },
+      "id": "3c000000-0000-4000-8000-000000000006",
+      "name": "Enviar informe",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [1440, 320]
+    }
+  ],
+  "connections": {
+    "Cada viernes 17:00": {
+      "main": [[{ "node": "Consultar API FIN·LAB", "type": "main", "index": 0 }]]
+    },
+    "Consultar API FIN·LAB": {
+      "main": [[{ "node": "Preparar hechos", "type": "main", "index": 0 }]]
+    },
+    "Preparar hechos": {
+      "main": [[{ "node": "Pedir informe al modelo", "type": "main", "index": 0 }]]
+    },
+    "Pedir informe al modelo": {
+      "main": [[{ "node": "Armar informe", "type": "main", "index": 0 }]]
+    },
+    "Armar informe": {
+      "main": [[{ "node": "Enviar informe", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "pinData": {},
+  "tags": []
+}

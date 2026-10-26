@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paso 5 · Carteras, riesgo y Sharpe · Taller FIN·LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../automatizaciones/lab.css">
+<link rel="stylesheet" href="taller.css">
+<script>try{var t=localStorage.getItem("finlab-tema");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index.html"><span class="brand-dot"></span><b>FIN·LAB</b> TALLER</a>
+    <span class="crumb">PASO 5 / 9 · CARTERAS</span>
+  </div>
+</header>
+
+<main class="page">
+  <ul class="steps" aria-label="Pasos del taller">
+    <li><a href="index.html">MAPA</a></li><li><a href="paso-0.html">P0</a></li><li><a href="paso-1.html">P1</a></li><li><a href="paso-2.html">P2</a></li><li><a href="paso-3.html">P3</a></li><li><a href="paso-4.html">P4</a></li><li><a href="paso-5.html" aria-current="page">P5</a></li><li><a href="paso-6.html">P6</a></li><li><a href="paso-7.html">P7</a></li><li><a href="paso-8.html">P8</a></li><li><a href="paso-9.html">P9</a></li><li><a href="glosario.html">GLOSARIO</a></li>
+  </ul>
+
+  <p class="eyebrow">PASO 5 · LA PESTAÑA MÁS “DE FINANZAS”</p>
+  <h1>Carteras: retorno, riesgo y Sharpe</h1>
+  <p class="lede">Tres <a class="w" href="glosario.html#cartera">carteras</a> predefinidas que pueden ajustar con controles deslizantes, y las métricas que responden la pregunta de siempre: <b>¿cuánto riesgo asumo por cada punto de retorno?</b></p>
+  <div class="meta"><span class="chip"><b>20 MIN</b></span><span class="chip">FINANZAS</span><span class="chip">SALIDA: <b>finlab-v5.html</b></span></div>
+  <ol class="mission" aria-label="Tu misión en este paso"><li><b>Copien el prompt</b>con el botón <span class="hl">⧉ COPIAR</span> y péguenlo en el chat, junto con su archivo</li><li><b>Guarden la respuesta</b>en <span class="code-inline">finlab.html</span> y ábranla con doble clic</li><li><b>Comprueben</b>que con 100% en un activo el riesgo es el de ese activo</li></ol>
+  <p class="calm"><b>Tranquilos:</b> no hace falta entender el código. Todo lo que hay que llevar a otro lado tiene un botón <b>⧉ COPIAR</b>. Los textos largos están plegados y se abren con <b>VER EL TEXTO</b> solo si les da curiosidad.</p>
+  <div class="note tip"><b>¿Llegan tarde o se rompió el archivo?</b> Bajen la versión con la que termina el paso 4, guárdenla como <span class="code-inline">finlab.html</span> y arranquen este paso desde ahí. <a class="btn" href="rescate/finlab-v4.html" download="finlab.html">⬇ BAJAR EL PUNTO DE PARTIDA (PASO 4)</a></div>
+
+  <section class="block" aria-labelledby="logro">
+    <span class="num">01</span>
+    <h2 id="logro">Qué van a lograr</h2>
+    <div class="mock" aria-label="Maqueta de la pestaña Carteras, con valores ilustrativos">
+      <div class="mock-btns" style="margin:0 0 12px"><span>Conservadora</span><span class="ghost">Moderada</span><span class="ghost">Agresiva</span></div>
+      <div class="mock-cards"><div><small>RETORNO ANUAL</small><b>8,1 %</b></div><div><small>VOLATILIDAD</small><b>9,4 %</b></div><div><small>SHARPE</small><b>0,40</b></div><div><small>MÁXIMA CAÍDA</small><b class="dn">−7,2 %</b></div></div>
+      <table><tbody><tr><td>JNJ</td><td>30 %</td></tr><tr><td>KO</td><td>25 %</td></tr><tr><td>PG</td><td>25 %</td></tr><tr><td>MSFT</td><td>20 %</td></tr></tbody></table>
+      <div class="mock-foot">“Por cada unidad de riesgo, esta cartera rinde 0,40 por encima de la tasa libre de riesgo.” · Valores ilustrativos. Abajo van la torta de pesos y el gráfico base 100.</div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="flujo">
+    <span class="num">02</span>
+    <h2 id="flujo">El flujo: cómo se mide una cartera</h2>
+    <div class="diagram">
+      <iframe src="diagramas/p5-carteras.html" title="Diagrama del cálculo de carteras" loading="lazy"></iframe>
+      <div class="diagram-foot"><span>De los pesos elegidos a las métricas y el gráfico.</span><a href="diagramas/p5-carteras.html" target="_blank" rel="noopener">ABRIR EN PANTALLA COMPLETA ↗</a></div>
+    </div>
+    <ul class="legend-read">
+      <li><b>Cartera elegida</b> · Uno de los tres perfiles o pesos ajustados a mano.</li>
+      <li><b>Normalizar pesos</b> · Si los controles suman 90% o 110%, se reescalan para que sumen 100% y se avisa.</li>
+      <li><b>Retornos diarios</b> · Para cada activo: cierre de hoy ÷ cierre de ayer − 1, en las 251 ruedas.</li>
+      <li><b>Media y covarianza</b> · El promedio de esos retornos y cómo se mueven juntos los activos. Ambos × 252 para llevarlos a un año.</li>
+      <li><b>Retorno · Vol · Sharpe</b> · Las tres métricas principales, con tasa libre de riesgo del 4,3%.</li>
+      <li><b>Gráfico base 100</b> · Cuánto habrían valido 100 pesos invertidos en la cartera vs. en una cartera equiponderada.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="palabras">
+    <span class="num">03</span>
+    <h2 id="palabras">Palabras nuevas de este paso</h2>
+    <dl class="terms">
+      <div class="term-card"><dt>Volatilidad</dt><dd>Cuánto se mueve el precio; la medida de riesgo. <a href="glosario.html#volatilidad">Más →</a></dd></div>
+      <div class="term-card"><dt>Covarianza</dt><dd>Si dos activos se mueven juntos o no. <a href="glosario.html#covarianza">Más →</a></dd></div>
+      <div class="term-card"><dt>Sharpe</dt><dd>Retorno extra por unidad de riesgo. <a href="glosario.html#sharpe">Más →</a></dd></div>
+      <div class="term-card"><dt>Base 100</dt><dd>Todo arranca en 100 para comparar recorridos. <a href="glosario.html#base-100">Más →</a></dd></div>
+      <div class="term-card"><dt>Equiponderada</dt><dd>El mismo peso en todos los activos. <a href="glosario.html#equiponderada">Más →</a></dd></div>
+    </dl>
+  </section>
+
+  <section class="block" aria-labelledby="hacer">
+    <span class="num">04</span>
+    <h2 id="hacer">Qué hacer, clic por clic</h2>
+    <ol class="do">
+      <li><b>Peguen el prompt y el archivo actual,</b> guarden la respuesta y abran la pestaña <em>02 · Carteras</em>.</li>
+      <li><b>Toquen los tres perfiles</b> y anoten en un papel retorno, volatilidad y Sharpe de cada uno.</li>
+      <li><b>Hagan la prueba de un solo activo</b> (sección 06) moviendo los controles.</li>
+      <li><b>Discutan en grupo</b> qué perfil elegirían para alguien que necesita la plata en un año, y por qué.</li>
+      <li><b>Guarden</b> <span class="code-inline">finlab-v5.html</span>.</li>
+    </ol>
+  </section>
+
+  <section class="block" data-section="prompts" aria-labelledby="prompt">
+    <span class="num">05</span>
+    <h2 id="prompt">El prompt</h2>
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT · PASO 5</span><div class="d">Pegar debajo el archivo del paso 4.</div></div><button class="copy" data-copy="#p5" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="p5">Paso 5. En la pestaña "02 · Carteras":
+- 3 botones de cartera predefinida:
+  Conservadora: JNJ 30%, KO 25%, PG 25%, MSFT 20%
+  Moderada: AAPL 20%, MSFT 20%, KO 15%, JNJ 15%, GGAL 15%, PG 15%
+  Agresiva: GGAL 30%, YPF 25%, PAM 20%, AAPL 15%, MSFT 10%
+- un control deslizante de peso por activo; si los pesos no suman 100%, normalizalos y avisalo
+- tarjetas con: retorno anualizado (media diaria × 252), volatilidad anualizada (con la matriz de covarianzas × 252), Sharpe con tasa libre de riesgo 4,3% y máxima caída
+- un gráfico de torta con los pesos
+- un gráfico de línea base 100 de la cartera contra una cartera equiponderada de todos los activos
+
+Debajo de las tarjetas, una línea en lenguaje simple que interprete el Sharpe (por ejemplo: "por cada unidad de riesgo, esta cartera rinde X por encima de la tasa libre de riesgo").
+
+[pegar el archivo completo]</pre></div>
+    </div>
+    <div class="note tip"><b>Para pensar:</b> si el grupo usó activos distintos en el paso 0, pídanle a la IA que proponga tres perfiles con esos activos y que justifique cada peso en una línea. Después comparen su propuesta con la de otro grupo.</div>
+  </section>
+
+  <section class="block" aria-labelledby="comprobar">
+    <span class="num">06</span>
+    <h2 id="comprobar">Cómo comprobar</h2>
+    <ul class="check">
+      <li><b>Prueba de un solo activo:</b> 100% en KO. La volatilidad de la cartera tiene que ser igual a la volatilidad individual de KO. Si no, la covarianza está mal.</li>
+      <li><b>Diversificación:</b> la volatilidad de la Moderada tiene que ser <em>menor</em> que el promedio ponderado de las volatilidades individuales.</li>
+      <li><b>Orden esperado:</b> la Agresiva tiene más volatilidad que la Conservadora.</li>
+      <li><b>Sharpe a mano:</b> con los números de las tarjetas, calculen (retorno − 4,3%) ÷ volatilidad. Tiene que dar lo mismo.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="falla">
+    <span class="num">07</span>
+    <h2 id="falla">Si algo falla</h2>
+    <div class="note tip"><b>¿Se trabaron después de tres intentos?</b> Esta es una versión que ya cumple todo lo de este paso. Pueden abrirla para comparar o bajarla y seguir con el próximo. <a class="btn" href="rescate/finlab-v5.html" target="_blank" rel="noopener">VER EL RESULTADO</a> <a class="btn btn-primary" href="rescate/finlab-v5.html" download="finlab.html">⬇ BAJAR LA VERSIÓN DE RESCATE</a></div>
+    <ul>
+      <li><b>La volatilidad de un solo activo no coincide:</b> “Con 100% en KO la volatilidad de la cartera da X, pero la de KO sola da Y. Revisá el cálculo de la matriz de covarianzas y mostrame la fórmula que usás.”</li>
+      <li><b>El Sharpe da enorme (más de 5):</b> probablemente mezcló retornos diarios con anuales. Pídanle que muestre las dos cifras antes de dividir.</li>
+      <li><b>La página quedó en blanco:</b> usen el <a href="paso-1.html#falla">prompt de rescate</a>.</li>
+    </ul>
+  </section>
+
+  <div class="pager">
+    <a href="paso-4.html">← PASO 4 · INDICADORES</a>
+    <a href="paso-6.html">PASO 6 · API →</a>
+  </div>
+</main>
+
+<footer>
+  FIN·LAB · material didáctico del posgrado de IA aplicada a Finanzas (UNLP) — taller de construcción guiada.<br>
+  Datos simulados con fines educativos. No es asesoramiento financiero.
+</footer>
+
+<script src="../automatizaciones/lab.js"></script>
+<script src="taller.js"></script>
+</body>
+</html>

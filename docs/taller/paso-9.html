@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paso 9 · La terminal terminada en #/guiado · Taller FIN·LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../automatizaciones/lab.css">
+<link rel="stylesheet" href="taller.css">
+<script>try{var t=localStorage.getItem("finlab-tema");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index.html"><span class="brand-dot"></span><b>FIN·LAB</b> TALLER</a>
+    <span class="crumb">PASO 9 / 9 · #/GUIADO</span>
+  </div>
+</header>
+
+<main class="page">
+  <ul class="steps" aria-label="Pasos del taller">
+    <li><a href="index.html">MAPA</a></li><li><a href="paso-0.html">P0</a></li><li><a href="paso-1.html">P1</a></li><li><a href="paso-2.html">P2</a></li><li><a href="paso-3.html">P3</a></li><li><a href="paso-4.html">P4</a></li><li><a href="paso-5.html">P5</a></li><li><a href="paso-6.html">P6</a></li><li><a href="paso-7.html">P7</a></li><li><a href="paso-8.html">P8</a></li><li><a href="paso-9.html" aria-current="page">P9</a></li><li><a href="glosario.html">GLOSARIO</a></li>
+  </ul>
+
+  <p class="eyebrow">PASO 9 · CIERRE DEL TALLER</p>
+  <h1>La terminal terminada: <span class="code-inline">127.0.0.1:4173/#/guiado</span></h1>
+  <p class="lede">Ya construyeron cada pieza. Ahora abren la terminal FIN·LAB completa en la pestaña <b>EMPEZAR</b> (<a class="w" href="glosario.html#hash">#/guiado</a>), recorren su automatización guiada, la prueban en n8n y comparan con lo que hicieron ustedes.</p>
+  <div class="meta"><span class="chip"><b>15 MIN</b></span><span class="chip">SERVIDOR LOCAL</span><span class="chip">N8N</span><span class="chip">SALIDA: <b>3/3 EJERCICIOS</b></span></div>
+  <ol class="mission" aria-label="Tu misión en este paso"><li><b>Enciendan la terminal</b>con un solo comando (tiene botón para copiar)</li><li><b>Abran #/guiado</b>y elijan qué señal buscar</li><li><b>Pruébenlo en n8n</b>y resuelvan los 3 ejercicios en grupo</li></ol>
+  <p class="calm"><b>Tranquilos:</b> no hace falta entender el código. Todo lo que hay que llevar a otro lado tiene un botón <b>⧉ COPIAR</b>. Los textos largos están plegados y se abren con <b>VER EL TEXTO</b> solo si les da curiosidad.</p>
+
+  <section class="block" aria-labelledby="logro">
+    <span class="num">01</span>
+    <h2 id="logro">Qué van a lograr</h2>
+    <p>Ver en el navegador la pantalla “Armá tu primera automatización”, descargar el workflow que genera, ejecutarlo en n8n y resolver los tres ejercicios en grupo del final de la página hasta que el contador diga <b>3/3 RESUELTOS</b>.</p>
+    <div class="mock" aria-label="Maqueta de la pestaña EMPEZAR">
+      <b>Armá tu primera automatización</b> <span class="tag flat">MODO DE PRUEBA · SIN CUENTAS</span>
+      <div class="mock-tabs"><span>1 · Iniciar prueba</span><span>2 · Revisar ejemplos</span><span>3 · Buscar una señal</span><span>Si encuentra</span><span>Si no encuentra</span></div>
+      <div style="color:var(--mut)">¿Qué señal querés que el flujo encuentre? <b style="color:var(--txt)">Señal de venta ▾</b></div>
+      <div class="mock-btns"><span>DESCARGAR PARA N8N</span><span class="ghost">COPIAR JSON</span><span class="ghost">VER DIAGRAMA</span></div>
+      <div class="mock-foot">Más abajo: <b>Pónganlo a prueba en equipo</b> · 15 MIN · 0/3 RESUELTOS</div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="flujo">
+    <span class="num">02</span>
+    <h2 id="flujo">El flujo: de tu computadora a n8n y de vuelta</h2>
+    <div class="diagram">
+      <iframe src="diagramas/p9-guiado.html" title="Diagrama para llegar a la pestaña guiada" loading="lazy"></iframe>
+      <div class="diagram-foot"><span>Servidor local → terminal → n8n → ejercicios.</span><a href="diagramas/p9-guiado.html" target="_blank" rel="noopener">ABRIR EN PANTALLA COMPLETA ↗</a></div>
+    </div>
+    <ul class="legend-read">
+      <li><b>Servidor local → Navegador</b> · Un pequeño programa sirve la carpeta del proyecto en <a class="w" href="glosario.html#localhost">127.0.0.1</a>, <a class="w" href="glosario.html#puerto">puerto</a> 4173. Abren esa dirección con <span class="code-inline">/#/guiado</span> al final.</li>
+      <li><b>Elegir señal → Descargar JSON</b> · La página arma un workflow de n8n según la señal elegida: <span class="code-inline">monitor-mercado-n8n.json</span>.</li>
+      <li><b>Importar archivo → Ejecutar workflow</b> · Igual que en el paso 8. Este workflow usa una muestra incluida (AAPL, GGAL, YPF), así que no necesita URL ni credenciales.</li>
+      <li><b>Ejercicios en grupo</b> · Comparan lo que predijeron con la salida que se activó en n8n.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="palabras">
+    <span class="num">03</span>
+    <h2 id="palabras">Palabras nuevas de este paso</h2>
+    <dl class="terms">
+      <div class="term-card"><dt>Servidor local</dt><dd>Tu computadora sirviendo una carpeta como sitio web. <a href="glosario.html#servidor-local">Más →</a></dd></div>
+      <div class="term-card"><dt>127.0.0.1 · puerto</dt><dd>La dirección de tu propia compu y el “departamento” 4173. <a href="glosario.html#localhost">Más →</a></dd></div>
+      <div class="term-card"><dt>Terminal</dt><dd>La ventana de texto para dar órdenes. <a href="glosario.html#terminal">Más →</a></dd></div>
+      <div class="term-card"><dt>#/guiado</dt><dd>La parte de la dirección que elige la pestaña. <a href="glosario.html#hash">Más →</a></dd></div>
+    </dl>
+  </section>
+
+  <section class="block" aria-labelledby="hacer">
+    <span class="num">04</span>
+    <h2 id="hacer">Qué hacer, clic por clic</h2>
+    <h3 style="margin-top:14px">A · Encender el servidor local</h3>
+    <ol class="do">
+      <li><b>Consigan la carpeta del proyecto</b> <span class="code-inline">Postgrado-IA</span> (el docente la comparte como .zip; descomprímanla en el escritorio).</li>
+      <li><b>Abran una terminal en esa carpeta:</b> en Windows, entren a la carpeta con el Explorador, hagan clic en la barra de dirección, escriban <span class="code-inline">powershell</span> y presionen <kbd>Enter</kbd>. En Mac: clic derecho sobre la carpeta → <em>Nueva terminal en la carpeta</em>.</li>
+      <li><b>Escriban uno de estos comandos</b> y presionen <kbd>Enter</kbd>:
+        <div class="prompt" data-open style="margin-top:10px">
+          <div class="prompt-h"><div><span class="t">CON PYTHON (VIENE EN MAC; EN WINDOWS, DESDE PYTHON.ORG)</span></div><button class="copy" data-copy="#s1" type="button">COPIAR</button></div>
+          <div class="prompt-b"><pre id="s1">python -m http.server 4173 --bind 127.0.0.1</pre></div>
+        </div>
+        <div class="prompt" data-open style="margin-top:10px">
+          <div class="prompt-h"><div><span class="t">O CON NODE.JS</span></div><button class="copy" data-copy="#s2" type="button">COPIAR</button></div>
+          <div class="prompt-b"><pre id="s2">npx serve -l 4173</pre></div>
+        </div>
+      </li>
+      <li><b>Dejen esa ventana abierta.</b> Si la cierran, el sitio deja de funcionar. (Para apagarlo al final: <kbd>Ctrl</kbd> + <kbd>C</kbd>.)</li>
+      <li><b>Abran en el navegador</b> <a href="http://127.0.0.1:4173/#/guiado" target="_blank" rel="noopener"><span class="code-inline">http://127.0.0.1:4173/#/guiado</span></a>.</li>
+    </ol>
+    <div class="note tip"><b>¿No pueden instalar nada?</b> Si el docente publicó el proyecto en Vercel, abran directamente <span class="code-inline c">https://TU-PROYECTO.vercel.app/#/guiado</span>: es la misma pantalla.</div>
+
+    <h3 style="margin-top:18px">B · Recorrer la automatización guiada</h3>
+    <ol class="do">
+      <li><b>Lean los cinco pasos</b> dibujados arriba (Iniciar prueba → … → Registrar resultado). Es el mismo flujo del paso 8, simplificado.</li>
+      <li><b>En “1 · Elegí qué querés buscar”</b> seleccionen <em>Señal de venta</em>.</li>
+      <li><b>Antes de seguir, predigan en grupo</b> qué activo va a aparecer. Anótenlo.</li>
+      <li><b>Toquen “DESCARGAR PARA N8N”.</b> Se descarga <span class="code-inline">monitor-mercado-n8n.json</span>. (A la derecha pueden ver ese mismo JSON.)</li>
+      <li><b>En n8n:</b> <em>Create workflow</em> → <em>⋯</em> → <em>Import from File…</em> → elijan el archivo → <em>Execute workflow</em>.</li>
+      <li><b>Miren cuál de las dos salidas se puso verde</b> después del nodo <em>¿Hay una señal?</em>: <em>Preparar aviso de prueba</em> (encontró algo) o <em>Registrar que no hubo señal</em>. Hagan clic en ella. ¿Coincide con lo que predijeron?</li>
+      <li><b>Repitan</b> con <em>Señal de compra</em> y <em>Señal neutral</em>.</li>
+    </ol>
+
+    <h3 style="margin-top:18px">C · Los ejercicios en grupo</h3>
+    <ol class="do">
+      <li><b>Bajen hasta “Pónganlo a prueba en equipo”.</b> Asignen los cuatro roles que propone la página (coordina, sigue el flujo, opera n8n, relata).</li>
+      <li><b>Para cada ejercicio,</b> conversen, elijan una opción y recién después toquen <em>COMPROBAR</em>.</li>
+      <li><b>El contador</b> de arriba a la derecha tiene que llegar a <b>3/3 RESUELTOS</b>.</li>
+    </ol>
+  </section>
+
+  <section class="block" data-section="prompts" aria-labelledby="prompt">
+    <span class="num">05</span>
+    <h2 id="prompt">El prompt de cierre: auditoría cruzada</h2>
+    <p>Cada grupo le pasa su <span class="code-inline">finlab.html</span> a otro. El grupo que lo recibe usa este prompt en un chat <b>nuevo</b> (la IA que escribió el código no debería corregirse a sí misma) y después verifica a mano dos de los hallazgos.</p>
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT · AUDITORÍA</span><div class="d">Chat nuevo, archivo de otro grupo.</div></div><button class="copy" data-copy="#p9" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="p9">Sos auditor de una herramienta educativa de análisis financiero. Te paso un archivo HTML completo.
+
+Revisá solamente:
+1. Fórmulas: SMA, EMA, RSI de Wilder, retorno y volatilidad anualizados, Sharpe con tasa libre de riesgo 4,3%. ¿Están bien implementadas?
+2. Consistencia: ¿la tabla, el gráfico y la API muestran los mismos números?
+3. Comunicación: ¿en algún lugar se presentan los datos como reales o se sugiere una recomendación de inversión?
+
+Para cada hallazgo indicá: dónde está (nombre de la función o sección), qué está mal, cómo lo verificaría una persona sin programar y la corrección. Si no encontrás problemas en un punto, decilo; no inventes hallazgos.
+
+[pegar el archivo]</pre></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="comprobar">
+    <span class="num">06</span>
+    <h2 id="comprobar">Cómo comprobar</h2>
+    <ul class="check">
+      <li><b>La dirección</b> del navegador es <span class="code-inline">127.0.0.1:4173/#/guiado</span> y la pestaña EMPEZAR está marcada.</li>
+      <li><b>En n8n,</b> con <em>Señal de venta</em> se activa <em>Preparar aviso de prueba</em> y aparece YPF.</li>
+      <li><b>El contador</b> de ejercicios dice 3/3.</li>
+      <li><b>Cada grupo presenta</b> un hallazgo de la auditoría que confirmó a mano y uno que la IA reportó y resultó falso.</li>
+    </ul>
+    <div class="note tip"><b>Pregunta de cierre del taller:</b> ¿en qué paso la IA se equivocó más y cómo lo detectaron? Esa respuesta es el aprendizaje más importante: la IA escribe rápido, pero la verificación sigue siendo trabajo de ustedes.</div>
+  </section>
+
+  <section class="block" aria-labelledby="falla">
+    <span class="num">07</span>
+    <h2 id="falla">Si algo falla</h2>
+    <ul>
+      <li><b>“python no se reconoce como un comando”:</b> no está instalado. Prueben con <span class="code-inline c">py -m http.server 4173 --bind 127.0.0.1</span> o usen la opción de Node.js.</li>
+      <li><b>“Address already in use” o el puerto está ocupado:</b> otro programa usa el 4173. Cambien el número (por ejemplo, 4174) en el comando y en la dirección.</li>
+      <li><b>La página carga pero muestra Mercado:</b> les faltó <span class="code-inline">#/guiado</span> al final, o toquen la pestaña <em>EMPEZAR</em>.</li>
+      <li><b>“No se puede acceder a este sitio”:</b> la terminal con el servidor se cerró. Vuelvan al punto A.3.</li>
+    </ul>
+  </section>
+
+  <div class="pager">
+    <a href="paso-8.html">← PASO 8 · N8N</a>
+    <a href="index.html">VOLVER AL MAPA DEL TALLER →</a>
+  </div>
+</main>
+
+<footer>
+  FIN·LAB · material didáctico del posgrado de IA aplicada a Finanzas (UNLP) — taller de construcción guiada.<br>
+  Datos simulados con fines educativos. No es asesoramiento financiero.
+</footer>
+
+<script src="../automatizaciones/lab.js"></script>
+<script src="taller.js"></script>
+</body>
+</html>

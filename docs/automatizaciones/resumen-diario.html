@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ejemplo 02 · Resumen diario de cartera · FIN·LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lab.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index.html"><span class="brand-dot"></span><b>FIN·LAB</b> AUTOMATIZACIONES</a>
+    <span class="crumb">EJEMPLO 02 / 04 · INFORMES</span>
+  </div>
+</header>
+
+<main class="page">
+  <p class="eyebrow">EJEMPLO 02 · TUS DATOS + DATOS EXTERNOS</p>
+  <h1>Resumen de tu cartera a las 8 de la mañana</h1>
+  <p class="lede">El flujo guarda tu lista de tenencias, pide los precios del día, calcula el valor de cada posición y el total, y te manda el resumen antes de empezar. Es la automatización que reemplaza abrir tres pestañas para hacer una cuenta que ya sabés hacer.</p>
+  <div class="meta">
+    <span class="chip"><b>5</b> NODOS</span>
+    <span class="chip"><b>20 MIN</b></span>
+    <span class="chip">NIVEL <b>INICIAL</b></span>
+    <span class="chip">N8N</span>
+    <span class="chip">SALIDA: <b>EMAIL</b></span>
+  </div>
+
+  <section class="block" aria-labelledby="resuelve">
+    <span class="num">01</span>
+    <h2 id="resuelve">Qué resuelve</h2>
+    <p>Acá aparece la idea central de casi toda automatización útil: <b>cruzar tus datos con datos de afuera</b>. Tus tenencias viven en una lista que escribís una vez; los precios llegan por HTTP. El flujo los junta y hace la cuenta.</p>
+    <div class="panel">
+      <div class="panel-h"><span class="panel-t">RESULTADO ESPERADO · CORREO</span><span class="panel-t" style="color:var(--dim)">08:00 · LUN A VIE</span></div>
+      <div class="panel-b">
+        <pre>Asunto: FIN·LAB · resumen de cartera · 6628.2 USD
+
+Cartera al 2026-10-26
+
+- AAPL: 10 u. x 308.43 USD = 3084.3 USD (-0.74%)
+- GGAL: 50 u. x 28.75 USD = 1437.5 USD (0.52%)
+- YPF: 80 u. x 26.33 USD = 2106.4 USD (2.29%)
+
+Total: 6628.2 USD
+
+Muestra educativa fija de FIN·LAB. No es una recomendación de inversión.</pre>
+      </div>
+    </div>
+    <div class="note tip"><b>Por qué la lista va en un nodo aparte:</b> “mis datos” y “datos externos” son dos cosas distintas. Si mañana comprás otro activo, editás un solo lugar y no tocás la parte que consulta la API.</div>
+  </section>
+
+  <section class="block" aria-labelledby="como">
+    <span class="num">02</span>
+    <h2 id="como">Cómo funciona</h2>
+    <div class="flow">
+      <div class="flow-row"><span class="n">1</span><div><h4>Cada día 08:00</h4><p><b>Schedule Trigger</b>. Antes de la apertura, para que el resumen esté listo cuando lo busques.</p><div class="io">SALE: una ejecución</div></div></div>
+      <div class="flow-row"><span class="n">2</span><div><h4>Mi cartera</h4><p>Un nodo <b>Code</b> que solo devuelve la lista de tenencias: símbolo y cantidad.</p><div class="io">SALE: cartera = [{ symbol, cantidad }]</div></div></div>
+      <div class="flow-row"><span class="n">3</span><div><h4>Consultar API FIN·LAB</h4><p>HTTP GET. Devuelve los ocho activos con último precio y variación.</p><div class="io">SALE: data.tickers[]</div></div></div>
+      <div class="flow-row"><span class="n">4</span><div><h4>Calcular valor</h4><p>El nodo <b>Code</b> más importante: cruza las dos listas por símbolo, multiplica cantidad por precio y suma. Si un símbolo no existe, falla con un mensaje claro.</p><div class="io">SALE: total, filas, texto</div></div></div>
+      <div class="flow-row"><span class="n">5</span><div><h4>Enviar resumen</h4><p><b>Email</b>. El asunto incluye el total, el cuerpo es el texto armado en el paso anterior.</p><div class="io">SALE: un correo por día</div></div></div>
+    </div>
+    <p style="margin-top:14px">Fijate que <b>no hay ningún nodo de IA</b>. Es a propósito: sumar multiplicaciones no necesita un modelo de lenguaje. Usar IA donde alcanza una multiplicación es la forma más cara de complicar algo.</p>
+  </section>
+
+  <section class="block" aria-labelledby="armar">
+    <span class="num">03</span>
+    <h2 id="armar">Armalo paso a paso</h2>
+    <p style="margin-top:16px"><a class="btn btn-primary" href="workflows/resumen-diario.json" download>DESCARGAR WORKFLOW (.JSON)</a></p>
+    <ol>
+      <li><b>Importá el archivo</b> <span class="code-inline">resumen-diario.json</span> en n8n.</li>
+      <li><b>Editá tu cartera</b> en el nodo <em>Mi cartera</em>. Cada línea es <span class="code-inline">{ symbol: 'AAPL', cantidad: 10 }</span>. Usá símbolos que existan en la API: AAPL, MSFT, JNJ, KO, PG, GGAL, YPF, PAM.</li>
+      <li><b>Reemplazá la URL</b> del nodo <em>Consultar API FIN·LAB</em> por tu dominio.</li>
+      <li><b>Conectá el correo</b> en <em>Enviar resumen</em> y poné tu dirección en <em>from</em> y <em>to</em>.</li>
+      <li><b>Ejecutá a mano</b> y hacé la cuenta con calculadora. Si el total no coincide, el problema está en el código, no en el correo.</li>
+      <li><b>Activá</b> el flujo. La primera corrida real la vas a ver al día hábil siguiente.</li>
+    </ol>
+
+    <h3 style="margin-top:26px">Qué hay que completar en el archivo</h3>
+    <table class="tbl">
+      <thead><tr><th>NODO</th><th>CAMPO</th><th>QUÉ PONER</th></tr></thead>
+      <tbody>
+        <tr><td>Mi cartera</td><td>lista cartera</td><td>Tus símbolos y cantidades. Es el único lugar donde vive tu cartera.</td></tr>
+        <tr><td>Consultar API</td><td>url</td><td>La URL de tu despliegue, sin <span class="code-inline">TU-PROYECTO</span>.</td></tr>
+        <tr><td>Enviar resumen</td><td>fromEmail / toEmail</td><td>Tu correo, igual en los dos campos para la prueba.</td></tr>
+        <tr><td>Cada día 08:00</td><td>cronExpression</td><td><span class="code-inline">0 8 * * 1-5</span> = 08:00 de lunes a viernes.</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><b>Un problema que vas a tener:</b> si tu cartera cambia seguido, editar un nodo de código no es cómodo. La solución natural es leer las tenencias de una planilla de Google Sheets y reemplazar el nodo <em>Mi cartera</em> por un nodo de Sheets. Ese es, de hecho, el <a href="precios-a-sheets.html">ejemplo 04</a> al revés.</div>
+  </section>
+
+  <section class="block" data-section="prompts" aria-labelledby="ia">
+    <span class="num">04</span>
+    <h2 id="ia">Hablá con la IA</h2>
+    <p>El pedido más útil acá no es “hacé el flujo”: es “explicame cómo pasar datos de un nodo a otro”. Ese es el concepto que después se repite en todo.</p>
+
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT 1 · ENTENDER EL CRUCE DE DATOS</span><div class="d">Para no copiar un código que no sabés qué hace.</div></div><button class="copy" data-copy="#p1" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="p1">Estoy armando un flujo en n8n con estos nodos: Schedule Trigger → Code ("Mi cartera", devuelve una lista de {symbol, cantidad}) → HTTP Request (devuelve data.tickers[] con symbol y last) → Code (calcula el valor) → Email.
+
+Explicame en lenguaje simple:
+1) cómo hace el segundo nodo Code para leer los datos de "Mi cartera" si ya pasaron dos nodos;
+2) qué diferencia hay entre $input.first().json y $('Mi cartera').first().json;
+3) qué pasa si el nodo HTTP devuelve dos items en lugar de uno.
+
+No me escribas el workflow: quiero entender el concepto.</pre></div>
+    </div>
+
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT 2 · EL CÓDIGO QUE CRUZA LAS LISTAS</span><div class="d">Incluye el caso del símbolo inexistente, que es donde se rompe.</div></div><button class="copy" data-copy="#p2" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="p2">En un nodo Code de n8n (Run Once for All Items) tengo que cruzar dos listas:
+- la cartera: [{ symbol: 'AAPL', cantidad: 10 }, ...], guardada en el nodo "Mi cartera"
+- los precios: $input.first().json.data.tickers, cada uno con symbol, last y change_pct
+
+Escribime el código que:
+- arma una fila por posición con: symbol, cantidad, last, valor y change_pct
+- redondea los importes a 2 decimales
+- suma el total
+- devuelve UN item con { total, filas, texto } donde texto es el cuerpo del email con un renglón por activo
+- si un símbolo de la cartera no aparece en los precios, tira un Error que diga cuál símbolo falta
+
+Sin librerías externas. Después decime cómo probarlo cambiando un símbolo por uno inexistente.</pre></div>
+    </div>
+
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT 3 · EL TOTAL NO CIERRA</span><div class="d">El error más común: números que no coinciden con la calculadora.</div></div><button class="copy" data-copy="#p3" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="p3">El total que calcula mi nodo Code no coincide con el que hago a mano.
+
+Cartera: [pegar lista]
+Precios que devuelve la API: [pegar los tres o cuatro que uses]
+Total que da n8n: [número]
+Total que me da la calculadora: [número]
+
+Este es el código del nodo:
+[PEGAR EL CÓDIGO]
+
+Decime dónde está el error y cuál es el cambio mínimo. Si el problema es de redondeo, explicame por qué pasa y qué conviene hacer (redondear al final, guardar decimales, etc.).</pre></div>
+    </div>
+
+    <div class="builder" data-builder>
+      <div class="builder-h"><span class="t">ADAPTÁ EL FLUJO A TU CARTERA</span><span class="t" style="color:var(--dim)">EDITÁ Y COPIÁ</span></div>
+      <div class="fields">
+        <div class="field" style="grid-column:1/-1"><label for="b-cartera">TU CARTERA (SÍMBOLO:CANTIDAD, SEPARADOS POR COMA)</label><input id="b-cartera" data-key="cartera" value="AAPL:10, GGAL:50, YPF:80"></div>
+        <div class="field"><label for="b-hora">HORARIO</label><input id="b-hora" data-key="hora" value="08:00"></div>
+        <div class="field"><label for="b-destino">DESTINATARIO</label><input id="b-destino" data-key="destino" value="mi-correo@ejemplo.com"></div>
+        <div class="field" style="grid-column:1/-1"><label for="b-extra">QUÉ MÁS QUERÉS VER EN EL RESUMEN</label><input id="b-extra" data-key="extra" value="la variación del día por activo y el total de la cartera"></div>
+      </div>
+      <pre id="b-out" data-output></pre>
+      <script type="text/template">Quiero adaptar un workflow de n8n que calcula el valor de una cartera con precios de la API /api/market/summary.
+
+Mi cartera es: {cartera} (formato símbolo:cantidad).
+Debe correr todos los días hábiles a las {hora} y mandar el resumen a {destino}.
+En el correo quiero ver {extra}.
+
+Los precios vienen de data.tickers[], con symbol, last y change_pct. Los símbolos disponibles son AAPL, MSFT, JNJ, KO, PG, GGAL, YPF y PAM.
+
+Decime: qué nodo tengo que editar para cargar mi cartera, cómo se escribe la lista, y cómo compruebo el cálculo con una calculadora antes de activar el flujo.</script>
+      <div class="builder-foot"><button class="copy" data-copy="#b-out" type="button">COPIAR PROMPT</button></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="verificar">
+    <span class="num">05</span>
+    <h2 id="verificar">Cómo saber si funciona</h2>
+    <ul class="check">
+      <li><b>Hacé la cuenta a mano</b> con dos activos y compará con el total del correo.</li>
+      <li><b>Probá un símbolo inexistente</b> (por ejemplo <span class="code-inline">'TSLA'</span>): el flujo tiene que fallar diciendo cuál falta, no mandar un total incompleto.</li>
+      <li><b>Revisá los decimales:</b> 10 × 308.43 tiene que dar 3084.3, no 3084.299999. Si ves colas de decimales, falta redondeo.</li>
+      <li><b>Mirá el nodo <em>Calcular valor</em></b> en la corrida manual: ahí ves <span class="code-inline">total</span> y <span class="code-inline">filas</span> antes del correo.</li>
+      <li><b>Confirmá la zona horaria</b> del servidor de n8n: si dice 08:00 pero llega a otra hora, es eso.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="limites">
+    <span class="num">06</span>
+    <h2 id="limites">Límites de este ejemplo</h2>
+    <ul>
+      <li><b>No calcula ganancia real:</b> para eso hace falta el precio de compra de cada posición, que este flujo no tiene. Agregalo a la lista y el cálculo es una resta más.</li>
+      <li><b>Una sola moneda:</b> todos los precios se tratan como dólares. Si mezclás monedas, hace falta convertir antes de sumar.</li>
+      <li><b>La cartera está escrita a mano</b> en el nodo. Si cambia todos los días, conviene leerla de una planilla.</li>
+      <li><b>No ejecuta órdenes.</b> Solo informa. Una automatización que compra y vende sola es un problema de otro tamaño.</li>
+      <li><b>Los precios son de una muestra fija:</b> sirve para practicar, no para decidir.</li>
+    </ul>
+  </section>
+
+  <div class="pager">
+    <a href="aviso-senal.html">← EJEMPLO 01</a>
+    <a href="informe-semanal-ia.html">EJEMPLO 03 · INFORME CON IA →</a>
+  </div>
+</main>
+
+<footer>
+  FIN·LAB · material didáctico del posgrado de IA aplicada a Finanzas (UNLP).<br>
+  Datos simulados con fines educativos. No es asesoramiento financiero.
+</footer>
+
+<script src="lab.js"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glosario del taller · FIN·LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../automatizaciones/lab.css">
+<link rel="stylesheet" href="taller.css">
+<script>try{var t=localStorage.getItem("finlab-tema");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index.html"><span class="brand-dot"></span><b>FIN·LAB</b> TALLER</a>
+    <span class="crumb">GLOSARIO</span>
+  </div>
+</header>
+
+<main class="page">
+  <p class="eyebrow">PALABRAS RARAS, EXPLICADAS SIN JERGA</p>
+  <h1>Glosario del taller</h1>
+  <p class="lede">Cada vez que en una página aparece una palabra subrayada con puntos, el enlace te trae acá. Las definiciones son cortas a propósito: alcanza con entender para qué sirve cada cosa, no cómo está hecha por dentro.</p>
+  <label class="sr" for="buscar">Buscar en el glosario</label>
+  <input id="buscar" class="gloss-search" type="search" placeholder="Escribí una palabra: rsi, api, nodo, csv…" autocomplete="off">
+
+  <section class="block" aria-labelledby="g-ia">
+    <span class="num">01</span>
+    <h2 id="g-ia">Trabajar con IA</h2>
+    <dl class="gloss">
+      <div id="prompt"><dt>Prompt</dt><dd>El texto con el que le pedís algo a la IA. Cuanto más claro digas <em>qué querés, con qué datos y en qué formato</em>, mejor sale la respuesta.</dd></div>
+      <div id="prompt-contexto"><dt>Prompt de contexto</dt><dd>Un prompt que se pega una sola vez al principio del chat y fija las reglas de todo el proyecto (un solo archivo, datos simulados, español…). Es como la consigna general de un trabajo práctico.</dd></div>
+      <div id="chat"><dt>Chat de IA <small>ChatGPT, Claude, Gemini</small></dt><dd>La ventana donde conversás con el modelo. Recuerda lo que se dijo <em>en ese chat</em>, pero no en otros: si abrís uno nuevo, hay que volver a darle el contexto y el archivo.</dd></div>
+      <div id="alucinacion"><dt>Alucinación</dt><dd>Cuando la IA inventa un dato, una función o un resultado con total seguridad. Por eso cada paso del taller tiene una comprobación hecha por una persona.</dd></div>
+      <div id="version"><dt>Versión</dt><dd>Una copia guardada del archivo en un momento en que funcionaba (<span class="code-inline">finlab-v3.html</span>). Si un cambio rompe todo, se vuelve a la última versión buena.</dd></div>
+    </dl>
+  </section>
+
+  <section class="block" aria-labelledby="g-web">
+    <span class="num">02</span>
+    <h2 id="g-web">La página web</h2>
+    <dl class="gloss">
+      <div id="html"><dt>HTML <small>.html</small></dt><dd>El tipo de archivo de las páginas web. Es texto con etiquetas que el <a href="#navegador">navegador</a> sabe dibujar. Todo el taller produce un solo archivo: <span class="code-inline">finlab.html</span>.</dd></div>
+      <div id="navegador"><dt>Navegador</dt><dd>Chrome, Edge, Firefox o Safari. Abre el archivo HTML y lo muestra como página.</dd></div>
+      <div id="consola"><dt>Consola del navegador <small>F12</small></dt><dd>Un panel oculto del navegador donde aparecen los errores y los mensajes del código. Se abre con <kbd>F12</kbd> (o clic derecho → <em>Inspeccionar</em>) y la pestaña <em>Console</em>. Si la página queda en blanco, la respuesta casi siempre está ahí, en rojo.</dd></div>
+      <div id="codigo"><dt>Código</dt><dd>Las instrucciones escritas para la computadora. En este taller no lo escriben ustedes: lo escribe la IA, y ustedes lo prueban y lo verifican.</dd></div>
+      <div id="javascript"><dt>JavaScript</dt><dd>El lenguaje que hace que una página haga cosas: calcular, responder a clics, dibujar gráficos. Va dentro del HTML.</dd></div>
+      <div id="cdn"><dt>CDN</dt><dd>Un servidor público desde donde la página descarga herramientas ya hechas (React, Recharts) en lugar de instalarlas. Por eso el archivo funciona sin instalar nada, pero necesita internet la primera vez.</dd></div>
+      <div id="react"><dt>React</dt><dd>Una herramienta para armar interfaces con piezas reutilizables (<a href="#componente">componentes</a>). La terminal FIN·LAB está hecha con React.</dd></div>
+      <div id="babel"><dt>Babel</dt><dd>Un traductor que convierte el código de React a uno que el navegador entiende. Lo cargamos desde el CDN para no tener que instalar nada.</dd></div>
+      <div id="recharts"><dt>Recharts</dt><dd>Una librería de gráficos para React: líneas, tortas, barras. Es la que dibuja los gráficos de Mercado y Carteras.</dd></div>
+      <div id="componente"><dt>Componente</dt><dd>Una pieza de la pantalla con su propia lógica: la tabla, una tarjeta, el gráfico. Se arman por separado y se combinan.</dd></div>
+      <div id="pestana"><dt>Pestaña</dt><dd>Cada sección de la terminal (Mercado, Carteras…). Al hacer clic se muestra solo esa parte.</dd></div>
+      <div id="hash"><dt>#/guiado <small>ruta con numeral</small></dt><dd>Lo que va después del <span class="code-inline">#</span> en la dirección indica qué pestaña mostrar. <span class="code-inline">#/guiado</span> abre la pestaña EMPEZAR; <span class="code-inline">#/mercado</span>, la de Mercado.</dd></div>
+      <div id="funcion"><dt>Función</dt><dd>Un bloque de código con nombre que recibe datos y devuelve un resultado, como una fórmula de Excel con nombre propio: <span class="code-inline">sma(precios, 20)</span>.</dd></div>
+      <div id="variable"><dt>Variable / constante</dt><dd>Un nombre que guarda un valor. <span class="code-inline">RF = 0.043</span> guarda la tasa libre de riesgo para usarla en varios lugares.</dd></div>
+      <div id="lista"><dt>Lista (array)</dt><dd>Una colección ordenada de valores, entre corchetes: <span class="code-inline">[172.4, 173.1, 171.9]</span>. Una serie de precios es una lista.</dd></div>
+      <div id="objeto"><dt>Objeto</dt><dd>Un conjunto de datos con nombre, entre llaves: <span class="code-inline">{ d: '2026-10-26', c: 308.43, v: 51000000 }</span> es un día con fecha, cierre y volumen.</dd></div>
+      <div id="localstorage"><dt>localStorage</dt><dd>Un pequeño espacio de memoria del navegador donde una página puede guardar datos que sobreviven a la recarga (por ejemplo, tus alertas). Vive solo en esa computadora y ese navegador.</dd></div>
+    </dl>
+  </section>
+
+  <section class="block" aria-labelledby="g-datos">
+    <span class="num">03</span>
+    <h2 id="g-datos">Datos y archivos</h2>
+    <dl class="gloss">
+      <div id="simulacion"><dt>Datos simulados</dt><dd>Números generados por una fórmula que imitan cómo se mueve un precio. No son cotizaciones reales; sirven para aprender porque todos ven lo mismo.</dd></div>
+      <div id="semilla"><dt>Semilla <small>seed</small></dt><dd>El número de arranque de un generador de “azar”. Con la misma semilla salen siempre los mismos números, como barajar un mazo siempre de la misma manera.</dd></div>
+      <div id="rueda"><dt>Rueda</dt><dd>Un día hábil de mercado. Un año tiene unas 252 ruedas (no 365: no se opera fines de semana ni feriados).</dd></div>
+      <div id="serie"><dt>Serie de precios</dt><dd>La lista de cierres de un activo, uno por rueda, ordenados por fecha.</dd></div>
+      <div id="ticker"><dt>Ticker / símbolo</dt><dd>El código corto de un activo: AAPL (Apple), GGAL (Galicia), YPF.</dd></div>
+      <div id="csv"><dt>CSV <small>.csv</small></dt><dd>Una tabla guardada como texto, con los valores separados por comas. Se abre con Excel o Google Sheets y con Python.</dd></div>
+      <div id="json"><dt>JSON</dt><dd>Un formato de texto para intercambiar datos entre programas, con llaves y corchetes: <span class="code-inline">{ "symbol": "YPF", "signal": "VENTA" }</span>. Es lo que devuelve una API y lo que se importa en n8n.</dd></div>
+    </dl>
+  </section>
+
+  <section class="block" aria-labelledby="g-fin">
+    <span class="num">04</span>
+    <h2 id="g-fin">Indicadores y carteras</h2>
+    <dl class="gloss">
+      <div id="variacion"><dt>Variación del día</dt><dd>Cuánto cambió el precio respecto de la rueda anterior, en %: (cierre de hoy ÷ cierre de ayer − 1) × 100.</dd></div>
+      <div id="kpi"><dt>KPI / tarjeta</dt><dd>Un número clave destacado arriba de la pantalla para leerlo de un vistazo: cuántos activos suben, cuál se movió más.</dd></div>
+      <div id="sparkline"><dt>Sparkline</dt><dd>Un gráfico de línea mínimo, sin ejes, que muestra la tendencia reciente al lado de un número.</dd></div>
+      <div id="sma"><dt>SMA <small>media móvil simple</small></dt><dd>El promedio de los últimos N cierres, que se recalcula cada día. La SMA20 promedia 20 ruedas; la SMA50, 50. Suaviza el ruido para ver la tendencia.</dd></div>
+      <div id="ema"><dt>EMA <small>media móvil exponencial</small></dt><dd>Como la SMA, pero los días más recientes pesan más, así que reacciona antes a los cambios. Se usan EMA12 y EMA26.</dd></div>
+      <div id="rsi"><dt>RSI 14 <small>índice de fuerza relativa</small></dt><dd>Un número entre 0 y 100 que compara las subas con las bajas de las últimas 14 ruedas. Arriba de 70 se suele leer como “sobrecomprado”; abajo de 30, “sobrevendido”. La versión de Wilder suaviza los promedios de una manera particular: hay que pedirla con ese nombre.</dd></div>
+      <div id="senal"><dt>Señal</dt><dd>Una etiqueta que resume una regla: en FIN·LAB, COMPRA si las medias cortas están por encima de las largas, VENTA si están por debajo, NEUTRAL si no coinciden. Es didáctica, no una recomendación.</dd></div>
+      <div id="cartera"><dt>Cartera</dt><dd>Un conjunto de activos con un peso cada uno (por ejemplo, 30% JNJ, 25% KO…). Los pesos suman 100%.</dd></div>
+      <div id="normalizar"><dt>Normalizar pesos</dt><dd>Reescalar los pesos para que sumen exactamente 100% sin cambiar sus proporciones.</dd></div>
+      <div id="retorno"><dt>Retorno anualizado</dt><dd>El rendimiento promedio diario llevado a un año (× 252). Responde “¿cuánto rindió por año, en promedio?”.</dd></div>
+      <div id="volatilidad"><dt>Volatilidad</dt><dd>Cuánto se mueve un precio alrededor de su promedio (desvío estándar), anualizada con × √252. Es la medida de riesgo más usada.</dd></div>
+      <div id="covarianza"><dt>Covarianza / correlación</dt><dd>Miden si dos activos tienden a moverse juntos. Si no se mueven igual, combinarlos baja el riesgo: eso es <em>diversificar</em>.</dd></div>
+      <div id="tasa-libre"><dt>Tasa libre de riesgo</dt><dd>Lo que rendiría una inversión “segura” (como un bono del Tesoro). En FIN·LAB se usa 4,3% anual.</dd></div>
+      <div id="sharpe"><dt>Ratio de Sharpe</dt><dd>(retorno − tasa libre de riesgo) ÷ volatilidad. Cuánto rendimiento extra da la cartera por cada unidad de riesgo. Más alto es mejor.</dd></div>
+      <div id="maxima-caida"><dt>Máxima caída <small>drawdown</small></dt><dd>La peor baja desde un máximo hasta el mínimo siguiente. Responde “¿cuánto llegué a perder en el peor momento?”.</dd></div>
+      <div id="base-100"><dt>Base 100</dt><dd>Un gráfico donde todo arranca en 100 para comparar recorridos: si una cartera termina en 112, ganó 12%.</dd></div>
+      <div id="equiponderada"><dt>Cartera equiponderada</dt><dd>La que pone el mismo peso en todos los activos. Se usa como punto de comparación (<em>benchmark</em>).</dd></div>
+    </dl>
+  </section>
+
+  <section class="block" aria-labelledby="g-api">
+    <span class="num">05</span>
+    <h2 id="g-api">APIs y servidores</h2>
+    <dl class="gloss">
+      <div id="api"><dt>API</dt><dd>Una “ventanilla” que entrega datos a otros programas en lugar de a personas. Le hacés un pedido a una dirección y te contesta en JSON.</dd></div>
+      <div id="endpoint"><dt>Endpoint / ruta</dt><dd>Cada dirección concreta de una API: <span class="code-inline">/api/market/summary</span> devuelve el resumen del mercado.</dd></div>
+      <div id="http"><dt>HTTP / GET</dt><dd>HTTP es el idioma con el que se hablan los navegadores y los servidores. GET es el pedido de “dame esto” (leer, sin modificar nada).</dd></div>
+      <div id="status"><dt>Código de estado <small>200 · 404</small></dt><dd>El número con el que responde una API: 200 significa “todo bien, acá están los datos”; 404, “eso no existe”.</dd></div>
+      <div id="router"><dt>Router</dt><dd>La parte del programa que mira qué ruta te pidieron y decide qué responder.</dd></div>
+      <div id="servidor-local"><dt>Servidor local</dt><dd>Un programa que corre en tu computadora y sirve los archivos de una carpeta como si fueran un sitio web. Solo lo ves vos.</dd></div>
+      <div id="localhost"><dt>127.0.0.1 / localhost</dt><dd>La dirección de tu propia computadora. <span class="code-inline">http://127.0.0.1:4173</span> significa “el sitio que sirve mi computadora en el puerto 4173”.</dd></div>
+      <div id="puerto"><dt>Puerto</dt><dd>Un número que distingue programas dentro de la misma computadora, como el número de departamento en un edificio. Usamos el 4173.</dd></div>
+      <div id="terminal"><dt>Terminal / línea de comandos</dt><dd>La ventana de texto donde se escriben órdenes (PowerShell en Windows, Terminal en Mac). Se usa una sola vez, en el paso 9, para encender el servidor local.</dd></div>
+      <div id="vercel"><dt>Vercel</dt><dd>Un servicio que publica sitios y APIs en internet. La API “de verdad” del proyecto vive ahí, para que n8n y Colab puedan consultarla.</dd></div>
+    </dl>
+  </section>
+
+  <section class="block" aria-labelledby="g-colab">
+    <span class="num">06</span>
+    <h2 id="g-colab">Python y Colab</h2>
+    <dl class="gloss">
+      <div id="python"><dt>Python</dt><dd>El lenguaje más usado en análisis de datos. Lo usamos para recalcular los indicadores con otra herramienta y comprobar que la página no se equivocó.</dd></div>
+      <div id="colab"><dt>Google Colab</dt><dd>Un sitio de Google (colab.research.google.com) donde se escribe y ejecuta Python en el navegador, sin instalar nada. Solo hace falta una cuenta de Google.</dd></div>
+      <div id="notebook"><dt>Notebook / cuaderno <small>.ipynb</small></dt><dd>Un documento de Colab hecho de bloques de código y texto que se ejecutan de a uno.</dd></div>
+      <div id="celda"><dt>Celda</dt><dd>Cada bloque de un notebook. Se ejecuta con el botón ▶ de su izquierda o con <kbd>Shift</kbd> + <kbd>Enter</kbd>.</dd></div>
+      <div id="pandas"><dt>pandas</dt><dd>La librería de Python para trabajar con tablas, como una planilla manejada con código. <span class="code-inline">rolling(20).mean()</span> es una SMA20 en una línea.</dd></div>
+      <div id="matplotlib"><dt>matplotlib</dt><dd>La librería clásica de Python para dibujar gráficos.</dd></div>
+    </dl>
+  </section>
+
+  <section class="block" aria-labelledby="g-n8n">
+    <span class="num">07</span>
+    <h2 id="g-n8n">Automatización con n8n</h2>
+    <dl class="gloss">
+      <div id="n8n"><dt>n8n</dt><dd>Una herramienta visual para armar automatizaciones conectando cajas, sin programar (o programando poco). Se usa en la nube (n8n.io) o instalada en tu computadora.</dd></div>
+      <div id="workflow"><dt>Workflow / flujo</dt><dd>Una automatización completa: el conjunto de cajas conectadas que se ejecuta sola. Se puede exportar e importar como archivo JSON.</dd></div>
+      <div id="nodo"><dt>Nodo</dt><dd>Cada caja de un workflow. Hace una sola cosa: consultar una API, filtrar, decidir, mandar un correo.</dd></div>
+      <div id="trigger"><dt>Disparador <small>trigger</small></dt><dd>El nodo que arranca el workflow: un botón (<em>Manual</em>), un horario (<em>Schedule</em>), un formulario, un correo que llega.</dd></div>
+      <div id="http-request"><dt>Nodo HTTP Request</dt><dd>El nodo que hace un pedido a una API y trae la respuesta en JSON.</dd></div>
+      <div id="code-node"><dt>Nodo Code</dt><dd>Un nodo donde se pega un poco de JavaScript para transformar datos (filtrar, calcular, armar un texto). La IA lo escribe por vos.</dd></div>
+      <div id="if-node"><dt>Nodo IF</dt><dd>Un nodo que decide: si se cumple la condición, sigue por la salida <em>true</em>; si no, por la <em>false</em>.</dd></div>
+      <div id="credencial"><dt>Credencial</dt><dd>La contraseña o permiso para que n8n use tu correo o tu Telegram. Se carga aparte, en el menú de credenciales: nunca se escribe dentro de un nodo.</dd></div>
+      <div id="importar"><dt>Importar workflow</dt><dd>Cargar en n8n un archivo JSON con un flujo ya armado: menú <em>⋯</em> → <em>Import from File</em>.</dd></div>
+    </dl>
+  </section>
+
+  <div class="pager">
+    <a href="index.html">← VOLVER AL MAPA DEL TALLER</a>
+    <a href="paso-0.html">EMPEZAR POR EL PASO 0 →</a>
+  </div>
+</main>
+
+<footer>
+  FIN·LAB · material didáctico del posgrado de IA aplicada a Finanzas (UNLP).<br>
+  Datos simulados con fines educativos. No es asesoramiento financiero.
+</footer>
+
+<script src="../automatizaciones/lab.js"></script>
+<script src="taller.js"></script>
+<script>
+  // Filtro del glosario: oculta las definiciones que no contienen el texto buscado.
+  document.getElementById('buscar').addEventListener('input', function (e) {
+    var q = e.target.value.trim().toLowerCase();
+    document.querySelectorAll('.gloss > div').forEach(function (item) {
+      item.hidden = q !== '' && item.textContent.toLowerCase().indexOf(q) === -1;
+    });
+  });
+</script>
+</body>
+</html>

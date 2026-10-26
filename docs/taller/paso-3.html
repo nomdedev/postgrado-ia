@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paso 3 · La pantalla de Mercado · Taller FIN·LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../automatizaciones/lab.css">
+<link rel="stylesheet" href="taller.css">
+<script>try{var t=localStorage.getItem("finlab-tema");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index.html"><span class="brand-dot"></span><b>FIN·LAB</b> TALLER</a>
+    <span class="crumb">PASO 3 / 9 · MERCADO</span>
+  </div>
+</header>
+
+<main class="page">
+  <ul class="steps" aria-label="Pasos del taller">
+    <li><a href="index.html">MAPA</a></li><li><a href="paso-0.html">P0</a></li><li><a href="paso-1.html">P1</a></li><li><a href="paso-2.html">P2</a></li><li><a href="paso-3.html" aria-current="page">P3</a></li><li><a href="paso-4.html">P4</a></li><li><a href="paso-5.html">P5</a></li><li><a href="paso-6.html">P6</a></li><li><a href="paso-7.html">P7</a></li><li><a href="paso-8.html">P8</a></li><li><a href="paso-9.html">P9</a></li><li><a href="glosario.html">GLOSARIO</a></li>
+  </ul>
+
+  <p class="eyebrow">PASO 3 · EL PRIMER DASHBOARD</p>
+  <h1>Mercado: tarjetas, tabla y un gráfico</h1>
+  <p class="lede">Ahora los datos se ven. Arriba, tres <a class="w" href="glosario.html#kpi">tarjetas</a> que resumen el día; en el medio, una tabla con cada activo y su <a class="w" href="glosario.html#sparkline">sparkline</a>; abajo, el gráfico del activo que elijan. Es la estructura de casi cualquier dashboard: <b>resumen → detalle → zoom</b>.</p>
+  <div class="meta"><span class="chip"><b>15 MIN</b></span><span class="chip">DASHBOARD</span><span class="chip">SALIDA: <b>finlab-v3.html</b></span></div>
+  <ol class="mission" aria-label="Tu misión en este paso"><li><b>Copien el prompt</b>con el botón <span class="hl">⧉ COPIAR</span> y péguenlo en el chat, junto con su archivo</li><li><b>Guarden la respuesta</b>en <span class="code-inline">finlab.html</span> y ábranla con doble clic</li><li><b>Comprueben</b>la variación del día con la calculadora</li></ol>
+  <p class="calm"><b>Tranquilos:</b> no hace falta entender el código. Todo lo que hay que llevar a otro lado tiene un botón <b>⧉ COPIAR</b>. Los textos largos están plegados y se abren con <b>VER EL TEXTO</b> solo si les da curiosidad.</p>
+  <div class="note tip"><b>¿Llegan tarde o se rompió el archivo?</b> Bajen la versión con la que termina el paso 2, guárdenla como <span class="code-inline">finlab.html</span> y arranquen este paso desde ahí. <a class="btn" href="rescate/finlab-v2.html" download="finlab.html">⬇ BAJAR EL PUNTO DE PARTIDA (PASO 2)</a></div>
+
+  <section class="block" aria-labelledby="logro">
+    <span class="num">01</span>
+    <h2 id="logro">Qué van a lograr</h2>
+    <div class="mock" aria-label="Maqueta de la pestaña Mercado">
+      <div class="mock-cards"><div><small>SUBEN HOY</small><b class="up">5</b></div><div><small>BAJAN HOY</small><b class="dn">3</b></div><div><small>MAYOR MOVIMIENTO</small><b>YPF <span class="up">+2,29 %</span></b></div></div>
+      <table><thead><tr><th>SÍMBOLO</th><th>NOMBRE</th><th>PRECIO</th><th>HOY</th><th>30 DÍAS</th></tr></thead>
+      <tbody><tr><td>AAPL</td><td>Apple Inc.</td><td>229,15</td><td class="dn">−0,74 %</td><td aria-hidden="true">〰️</td></tr><tr><td>GGAL</td><td>Grupo Fin. Galicia</td><td>28,75</td><td class="up">+0,52 %</td><td aria-hidden="true">〰️</td></tr><tr><td>YPF</td><td>YPF S.A.</td><td>26,33</td><td class="up">+2,29 %</td><td aria-hidden="true">〰️</td></tr></tbody></table>
+      <div class="mock-btns"><span class="ghost">1M</span><span class="ghost">3M</span><span class="ghost">6M</span><span>1A</span></div>
+      <div class="mock-foot">Debajo, el gráfico de línea del activo que elijan en la tabla.</div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="flujo">
+    <span class="num">02</span>
+    <h2 id="flujo">El flujo: de la serie a la pantalla</h2>
+    <div class="diagram">
+      <iframe src="diagramas/p3-mercado.html" title="Diagrama de la pantalla de Mercado" loading="lazy"></iframe>
+      <div class="diagram-foot"><span>Datos → cálculos → piezas de la pantalla.</span><a href="diagramas/p3-mercado.html" target="_blank" rel="noopener">ABRIR EN PANTALLA COMPLETA ↗</a></div>
+    </div>
+    <ul class="legend-read">
+      <li><b>Serie del P2</b> · Los 252 cierres que generaron en el paso anterior. No se vuelven a inventar: se reutilizan.</li>
+      <li><b>Variación del día</b> · (cierre de hoy ÷ cierre de ayer − 1) × 100. Es la cuenta más importante de la pantalla.</li>
+      <li><b>Conteo → Tarjetas</b> · Cuántos activos suben, cuántos bajan y cuál se movió más.</li>
+      <li><b>Tabla + sparkline</b> · Una fila por activo, en verde o rojo según la variación, con la mini curva de los últimos 30 días.</li>
+      <li><b>Gráfico Recharts</b> · Al hacer clic en una fila se dibuja la serie de ese activo, con botones de rango.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="palabras">
+    <span class="num">03</span>
+    <h2 id="palabras">Palabras nuevas de este paso</h2>
+    <dl class="terms">
+      <div class="term-card"><dt>Variación del día</dt><dd>Cuánto cambió el precio contra ayer, en %. <a href="glosario.html#variacion">Más →</a></dd></div>
+      <div class="term-card"><dt>KPI / tarjeta</dt><dd>Un número clave para leer de un vistazo. <a href="glosario.html#kpi">Más →</a></dd></div>
+      <div class="term-card"><dt>Sparkline</dt><dd>Un mini gráfico sin ejes que muestra la tendencia. <a href="glosario.html#sparkline">Más →</a></dd></div>
+      <div class="term-card"><dt>Recharts</dt><dd>La librería que dibuja los gráficos. <a href="glosario.html#recharts">Más →</a></dd></div>
+    </dl>
+  </section>
+
+  <section class="block" aria-labelledby="hacer">
+    <span class="num">04</span>
+    <h2 id="hacer">Qué hacer, clic por clic</h2>
+    <ol class="do">
+      <li><b>Copien el archivo actual</b> completo (<kbd>Ctrl</kbd> + <kbd>A</kbd>, <kbd>Ctrl</kbd> + <kbd>C</kbd> desde el Bloc de notas).</li>
+      <li><b>Peguen el prompt y, debajo, el archivo,</b> y envíen.</li>
+      <li><b>Guarden la respuesta</b> en <span class="code-inline">finlab.html</span> y ábranla.</li>
+      <li><b>Hagan clic en dos o tres filas</b> y prueben los botones de rango del gráfico.</li>
+      <li><b>El auditor comprueba</b> la variación con la calculadora (sección 06). Si todo está bien, guardan <span class="code-inline">finlab-v3.html</span>.</li>
+    </ol>
+  </section>
+
+  <section class="block" data-section="prompts" aria-labelledby="prompt">
+    <span class="num">05</span>
+    <h2 id="prompt">El prompt</h2>
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT · PASO 3</span><div class="d">Pegar debajo el archivo del paso 2.</div></div><button class="copy" data-copy="#p3" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="p3">Paso 3. En la pestaña "01 · Mercado" mostrá:
+- 3 tarjetas arriba: cantidad de activos que suben hoy, cantidad que bajan y el activo con mayor variación del día
+- una tabla con: símbolo, nombre, último precio, variación % del día (verde si sube, rojo si baja) y una sparkline de los últimos 30 días
+- al hacer clic en una fila, un gráfico de línea (Recharts) con los 252 cierres de ese activo, con selector de rango 1M / 3M / 6M / 1A
+- el tooltip del gráfico muestra la fecha y el precio con 2 decimales
+
+La variación del día es (cierre de hoy / cierre de ayer − 1) × 100.
+
+[pegar el archivo completo]</pre></div>
+    </div>
+    <div class="note tip"><b>Para personalizar:</b> cambien el pedido de las tarjetas por otras que les interesen (“volumen total del día”, “cantidad de activos en máximo de 30 días”). Es un buen ejercicio para ver qué tan bien entiende la IA una métrica nueva.</div>
+  </section>
+
+  <section class="block" aria-labelledby="comprobar">
+    <span class="num">06</span>
+    <h2 id="comprobar">Cómo comprobar</h2>
+    <ul class="check">
+      <li><b>Variación con calculadora:</b> en la consola escriban <span class="code-inline c">simulateSeries(TICKERS[0]).slice(-2)</span>. Con los dos cierres que aparecen, calculen (hoy ÷ ayer − 1) × 100. Tiene que coincidir con la tabla.</li>
+      <li><b>Las tarjetas cierran:</b> suben + bajan (+ sin cambio) = cantidad de activos.</li>
+      <li><b>El rango 1M</b> muestra unas 21 ruedas, no 30 días corridos.</li>
+      <li><b>Colores:</b> ningún número negativo aparece en verde.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="falla">
+    <span class="num">07</span>
+    <h2 id="falla">Si algo falla</h2>
+    <div class="note tip"><b>¿Se trabaron después de tres intentos?</b> Esta es una versión que ya cumple todo lo de este paso. Pueden abrirla para comparar o bajarla y seguir con el próximo. <a class="btn" href="rescate/finlab-v3.html" target="_blank" rel="noopener">VER EL RESULTADO</a> <a class="btn btn-primary" href="rescate/finlab-v3.html" download="finlab.html">⬇ BAJAR LA VERSIÓN DE RESCATE</a></div>
+    <ul>
+      <li><b>“Recharts is not defined”</b> o el gráfico no aparece: pídanle que revise el orden de los <span class="code-inline">&lt;script&gt;</span>. Recharts necesita que React y PropTypes estén cargados antes.</li>
+      <li><b>La variación no coincide:</b> “La variación de AAPL en la tabla da X pero con los cierres A y B me da Y. Revisá la función y mostrame la cuenta.”</li>
+      <li><b>La página quedó en blanco:</b> usen el <a href="paso-1.html#falla">prompt de rescate</a>.</li>
+    </ul>
+  </section>
+
+  <div class="pager">
+    <a href="paso-2.html">← PASO 2 · DATOS</a>
+    <a href="paso-4.html">PASO 4 · INDICADORES →</a>
+  </div>
+</main>
+
+<footer>
+  FIN·LAB · material didáctico del posgrado de IA aplicada a Finanzas (UNLP) — taller de construcción guiada.<br>
+  Datos simulados con fines educativos. No es asesoramiento financiero.
+</footer>
+
+<script src="../automatizaciones/lab.js"></script>
+<script src="taller.js"></script>
+</body>
+</html>

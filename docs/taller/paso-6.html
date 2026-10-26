@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paso 6 · API y alertas en JSON · Taller FIN·LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../automatizaciones/lab.css">
+<link rel="stylesheet" href="taller.css">
+<script>try{var t=localStorage.getItem("finlab-tema");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index.html"><span class="brand-dot"></span><b>FIN·LAB</b> TALLER</a>
+    <span class="crumb">PASO 6 / 9 · API</span>
+  </div>
+</header>
+
+<main class="page">
+  <ul class="steps" aria-label="Pasos del taller">
+    <li><a href="index.html">MAPA</a></li><li><a href="paso-0.html">P0</a></li><li><a href="paso-1.html">P1</a></li><li><a href="paso-2.html">P2</a></li><li><a href="paso-3.html">P3</a></li><li><a href="paso-4.html">P4</a></li><li><a href="paso-5.html">P5</a></li><li><a href="paso-6.html" aria-current="page">P6</a></li><li><a href="paso-7.html">P7</a></li><li><a href="paso-8.html">P8</a></li><li><a href="paso-9.html">P9</a></li><li><a href="glosario.html">GLOSARIO</a></li>
+  </ul>
+
+  <p class="eyebrow">PASO 6 · QUE LOS DATOS SALGAN DE LA PÁGINA</p>
+  <h1>API &amp; Alertas: los datos en formato JSON</h1>
+  <p class="lede">Hasta ahora los datos solo se ven en pantalla, para personas. Para que <b>otros programas</b> los usen (n8n, Colab, una planilla) hace falta una <a class="w" href="glosario.html#api">API</a>: una ventanilla que contesta en <a class="w" href="glosario.html#json">JSON</a>. En la terminal final es el <a class="w" href="glosario.html#endpoint">endpoint</a> <span class="code-inline">/api/market/summary</span>. Acá lo simulan dentro de la página y suman alertas.</p>
+  <div class="meta"><span class="chip"><b>15 MIN</b></span><span class="chip">JSON</span><span class="chip">SALIDA: <b>finlab-v6.html</b></span></div>
+  <ol class="mission" aria-label="Tu misión en este paso"><li><b>Copien el prompt</b>con el botón <span class="hl">⧉ COPIAR</span> y péguenlo en el chat, junto con su archivo</li><li><b>Guarden la respuesta</b>en <span class="code-inline">finlab.html</span> y ábranla con doble clic</li><li><b>Comprueben</b>que la API muestra los mismos números que la tabla</li></ol>
+  <p class="calm"><b>Tranquilos:</b> no hace falta entender el código. Todo lo que hay que llevar a otro lado tiene un botón <b>⧉ COPIAR</b>. Los textos largos están plegados y se abren con <b>VER EL TEXTO</b> solo si les da curiosidad.</p>
+  <div class="note tip"><b>¿Llegan tarde o se rompió el archivo?</b> Bajen la versión con la que termina el paso 5, guárdenla como <span class="code-inline">finlab.html</span> y arranquen este paso desde ahí. <a class="btn" href="rescate/finlab-v5.html" download="finlab.html">⬇ BAJAR EL PUNTO DE PARTIDA (PASO 5)</a></div>
+
+  <section class="block" aria-labelledby="logro">
+    <span class="num">01</span>
+    <h2 id="logro">Qué van a lograr</h2>
+    <p>Un “explorador” donde eligen qué pedir, tocan <em>Enviar</em> y ven la respuesta tal como la recibiría otro programa. Leída por una persona, la respuesta dice esto:</p>
+    <div class="mock" aria-label="La respuesta de la API, leída como tabla">
+      <table><thead><tr><th>ACTIVO</th><th>PRECIO</th><th>HOY</th><th>RSI</th><th>SEÑAL</th></tr></thead>
+      <tbody><tr><td>AAPL</td><td>229,15</td><td class="dn">−0,74 %</td><td>58,2</td><td><span class="tag buy">COMPRA</span></td></tr><tr><td>YPF</td><td>26,33</td><td class="up">+2,29 %</td><td>41,7</td><td><span class="tag sell">VENTA</span></td></tr></tbody></table>
+      <div class="mock-foot">Respuesta “200 · todo bien” del 26/10/2026.</div>
+    </div>
+    <p style="margin-top:12px">Y así la ve un programa (en <a class="w" href="glosario.html#json">JSON</a>). No tienen que escribirla: la arma la página.</p>
+    <div class="prompt code">
+      <div class="prompt-h"><div><span class="t">LA MISMA RESPUESTA, EN JSON</span><div class="d">GET /api/market/summary · 200 OK</div></div><button class="copy" data-copy="#json6" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="json6">{
+  "session": "2026-10-26",
+  "tickers": [
+    { "symbol": "AAPL", "last": 229.15, "changePct": -0.74, "rsi14": 58.2,
+      "sma20": 226.4, "sma50": 219.8, "signal": "COMPRA" },
+    { "symbol": "YPF",  "last": 26.33,  "changePct": 2.29,  "rsi14": 41.7,
+      "sma20": 27.1,  "sma50": 28.0,  "signal": "VENTA" }
+  ]
+}</pre></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="flujo">
+    <span class="num">02</span>
+    <h2 id="flujo">El flujo: qué pasa cuando alguien consulta la API</h2>
+    <div class="diagram">
+      <iframe src="diagramas/p6-api.html" title="Diagrama del recorrido de una consulta a la API" loading="lazy"></iframe>
+      <div class="diagram-foot"><span>Un pedido, una decisión y dos respuestas posibles.</span><a href="diagramas/p6-api.html" target="_blank" rel="noopener">ABRIR EN PANTALLA COMPLETA ↗</a></div>
+    </div>
+    <ul class="legend-read">
+      <li><b>Explorador de API → GET /api/...</b> · Ustedes eligen una ruta y la página arma un <a class="w" href="glosario.html#http">pedido GET</a>, como haría n8n.</li>
+      <li><b>¿Existe la ruta?</b> · El <a class="w" href="glosario.html#router">router</a> decide. Si la ruta o el símbolo no existen → <b>404 · error</b> con un mensaje en español.</li>
+      <li><b>Mercado + indicadores → 200 · JSON</b> · Si existe, arma la respuesta con lo que ya calcularon en los pasos 3 y 4. No inventa números nuevos.</li>
+      <li><b>Alertas</b> · Reglas guardadas en <a class="w" href="glosario.html#localstorage">localStorage</a> (“avisame si el RSI de YPF baja de 30”) que se comparan con el JSON del día.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="palabras">
+    <span class="num">03</span>
+    <h2 id="palabras">Palabras nuevas de este paso</h2>
+    <dl class="terms">
+      <div class="term-card"><dt>API</dt><dd>Una ventanilla de datos para otros programas. <a href="glosario.html#api">Más →</a></dd></div>
+      <div class="term-card"><dt>JSON</dt><dd>El formato de texto con llaves y corchetes. <a href="glosario.html#json">Más →</a></dd></div>
+      <div class="term-card"><dt>GET · 200 · 404</dt><dd>El pedido de lectura y sus respuestas posibles. <a href="glosario.html#status">Más →</a></dd></div>
+      <div class="term-card"><dt>localStorage</dt><dd>La memoria del navegador que sobrevive a la recarga. <a href="glosario.html#localstorage">Más →</a></dd></div>
+    </dl>
+  </section>
+
+  <section class="block" aria-labelledby="hacer">
+    <span class="num">04</span>
+    <h2 id="hacer">Qué hacer, clic por clic</h2>
+    <ol class="do">
+      <li><b>Peguen el prompt y el archivo actual,</b> guarden la respuesta y abran la pestaña <em>04 · API &amp; Alertas</em>.</li>
+      <li><b>Prueben las dos rutas</b> con un símbolo que exista y con uno inventado (<span class="code-inline">XXXX</span>).</li>
+      <li><b>Creen dos alertas:</b> una que seguro se dispare (“precio mayor que 0”) y una que no (“precio mayor que 100000”).</li>
+      <li><b>Recarguen la página</b> (<kbd>F5</kbd>): las alertas tienen que seguir ahí.</li>
+      <li><b>Lean la explicación</b> que dio la IA sobre qué falta para que sea una API real, y guarden <span class="code-inline">finlab-v6.html</span>.</li>
+    </ol>
+  </section>
+
+  <section class="block" data-section="prompts" aria-labelledby="prompt">
+    <span class="num">05</span>
+    <h2 id="prompt">El prompt</h2>
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT · PASO 6</span><div class="d">Pegar debajo el archivo del paso 5.</div></div><button class="copy" data-copy="#p6" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="p6">Paso 6. En la pestaña "04 · API & Alertas":
+- un "explorador de API": un selector con las rutas GET /api/market/summary y GET /api/tickers/{símbolo}, un botón "Enviar" y la respuesta JSON formateada, con el código de estado (200 o 404)
+- /api/market/summary devuelve: fecha de la sesión y, por activo, symbol, last, changePct, rsi14, sma20, sma50 y signal
+- un símbolo inexistente devuelve 404 con {"error": "..."} en español
+- un formulario de alertas: activo + condición (precio mayor que, precio menor que, RSI mayor que, RSI menor que) + umbral
+- una lista de alertas creadas que muestre si hoy se dispararía (sí/no) y con qué valor actual
+- las alertas se guardan en localStorage y sobreviven a la recarga
+
+Explicame en 3 líneas qué le faltaría a esto para ser una API real accesible desde n8n.
+
+[pegar el archivo completo]</pre></div>
+    </div>
+    <div class="note tip"><b>Puente con el proyecto real:</b> la respuesta de la IA a esa última pregunta debería decir algo como “publicarla en un servidor con una URL pública”. Eso es exactamente lo que hace <span class="code-inline">api/market/summary.js</span> en Vercel, y es la URL que usa n8n en el paso 8.</div>
+  </section>
+
+  <section class="block" aria-labelledby="comprobar">
+    <span class="num">06</span>
+    <h2 id="comprobar">Cómo comprobar</h2>
+    <ul class="check">
+      <li><b>Mismos números:</b> el precio, el RSI y la señal de un activo en la API son los mismos que muestra la tabla de Mercado.</li>
+      <li><b>Error controlado:</b> <span class="code-inline">/api/tickers/XXXX</span> devuelve 404 y la página no se rompe.</li>
+      <li><b>Alerta trivial:</b> “precio mayor que 0” figura como disparada; “mayor que 100000”, no.</li>
+      <li><b>Persistencia:</b> después de recargar, las alertas siguen en la lista.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="falla">
+    <span class="num">07</span>
+    <h2 id="falla">Si algo falla</h2>
+    <div class="note tip"><b>¿Se trabaron después de tres intentos?</b> Esta es una versión que ya cumple todo lo de este paso. Pueden abrirla para comparar o bajarla y seguir con el próximo. <a class="btn" href="rescate/finlab-v6.html" target="_blank" rel="noopener">VER EL RESULTADO</a> <a class="btn btn-primary" href="rescate/finlab-v6.html" download="finlab.html">⬇ BAJAR LA VERSIÓN DE RESCATE</a></div>
+    <ul>
+      <li><b>La API muestra números distintos a la tabla:</b> “La API y la tabla deberían usar la misma función de cálculo. Hacé que las dos lean del mismo objeto de mercado.”</li>
+      <li><b>Las alertas desaparecen al recargar:</b> pidan que guarde y lea con <span class="code-inline">localStorage</span>, y que muestre un mensaje si el navegador no lo permite (por ejemplo, en una ventana privada).</li>
+      <li><b>La página quedó en blanco:</b> usen el <a href="paso-1.html#falla">prompt de rescate</a>.</li>
+    </ul>
+  </section>
+
+  <div class="pager">
+    <a href="paso-5.html">← PASO 5 · CARTERAS</a>
+    <a href="paso-7.html">PASO 7 · COLAB →</a>
+  </div>
+</main>
+
+<footer>
+  FIN·LAB · material didáctico del posgrado de IA aplicada a Finanzas (UNLP) — taller de construcción guiada.<br>
+  Datos simulados con fines educativos. No es asesoramiento financiero.
+</footer>
+
+<script src="../automatizaciones/lab.js"></script>
+<script src="taller.js"></script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paso 0 · Preparar el equipo y el chat · Taller FIN·LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../automatizaciones/lab.css">
+<link rel="stylesheet" href="taller.css">
+<script>try{var t=localStorage.getItem("finlab-tema");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index.html"><span class="brand-dot"></span><b>FIN·LAB</b> TALLER</a>
+    <span class="crumb">PASO 0 / 9 · PREPARAR</span>
+  </div>
+</header>
+
+<main class="page">
+  <ul class="steps" aria-label="Pasos del taller">
+    <li><a href="index.html">MAPA</a></li><li><a href="paso-0.html" aria-current="page">P0</a></li><li><a href="paso-1.html">P1</a></li><li><a href="paso-2.html">P2</a></li><li><a href="paso-3.html">P3</a></li><li><a href="paso-4.html">P4</a></li><li><a href="paso-5.html">P5</a></li><li><a href="paso-6.html">P6</a></li><li><a href="paso-7.html">P7</a></li><li><a href="paso-8.html">P8</a></li><li><a href="paso-9.html">P9</a></li><li><a href="glosario.html">GLOSARIO</a></li>
+  </ul>
+
+  <p class="eyebrow">PASO 0 · ANTES DE ESCRIBIR UNA SOLA LÍNEA</p>
+  <h1>Preparar el equipo, el chat y las reglas del proyecto</h1>
+  <p class="lede">La IA trabaja mejor cuando sabe desde el principio qué están construyendo y con qué reglas. En este paso reparten roles, crean la carpeta de trabajo y le dan a la IA un <a class="w" href="glosario.html#prompt-contexto">prompt de contexto</a> que va a valer para todo el taller.</p>
+  <div class="meta"><span class="chip"><b>10 MIN</b></span><span class="chip">SIN CÓDIGO</span><span class="chip">SALIDA: <b>CHAT LISTO</b></span></div>
+  <ol class="mission" aria-label="Tu misión en este paso"><li><b>Repartan los roles</b>piloto, redactor, auditor y presentador</li><li><b>Armen el prompt de contexto</b>completando 4 casilleros</li><li><b>Péguenlo en el chat</b>y esperen que la IA diga “Entendido”</li></ol>
+  <p class="calm"><b>Tranquilos:</b> no hace falta entender el código. Todo lo que hay que llevar a otro lado tiene un botón <b>⧉ COPIAR</b>. Los textos largos están plegados y se abren con <b>VER EL TEXTO</b> solo si les da curiosidad.</p>
+
+  <section class="block" aria-labelledby="logro">
+    <span class="num">01</span>
+    <h2 id="logro">Qué van a lograr</h2>
+    <p>Un chat de IA que ya “sabe” que van a construir una terminal financiera en un solo <a class="w" href="glosario.html#html">archivo HTML</a>, con datos simulados y en español, y una carpeta donde guardar cada versión.</p>
+    <div class="panel"><div class="panel-h"><span class="panel-t">RESULTADO ESPERADO · RESPUESTA DE LA IA</span></div><div class="panel-b"><pre>Entendido. Vamos a construir “FIN·LAB Grupo 1” en un único archivo HTML,
+con React y Recharts por CDN, datos simulados deterministas y textos en español.
+Cuando me pases el primer paso, te devuelvo el archivo completo.</pre></div></div>
+  </section>
+
+  <section class="block" aria-labelledby="flujo">
+    <span class="num">02</span>
+    <h2 id="flujo">El flujo de este paso</h2>
+    <div class="diagram">
+      <iframe src="diagramas/p0-preparar.html" title="Diagrama del paso 0" loading="lazy"></iframe>
+      <div class="diagram-foot"><span>Cada fila es un “quién”: ustedes, la IA o la computadora.</span><a href="diagramas/p0-preparar.html" target="_blank" rel="noopener">ABRIR EN PANTALLA COMPLETA ↗</a></div>
+    </div>
+    <ul class="legend-read">
+      <li><b>Repartir roles</b> · Cada paso tiene un <em>piloto</em> (maneja el chat y los archivos), un <em>redactor</em> (adapta el prompt), un <em>auditor</em> (comprueba los números) y un <em>presentador</em> (cuenta qué pasó). Rotan en cada paso.</li>
+      <li><b>Constructor</b> · Más abajo completan nombre, activos, público y estilo. El texto del prompt se arma solo.</li>
+      <li><b>Prompt de contexto → IA responde</b> · Lo pegan en un chat nuevo. La IA tiene que contestar “Entendido” y nada más.</li>
+      <li><b>Carpeta finlab → Listos para P1</b> · Ahí va a vivir el archivo y sus versiones.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="palabras">
+    <span class="num">03</span>
+    <h2 id="palabras">Palabras nuevas de este paso</h2>
+    <dl class="terms">
+      <div class="term-card"><dt>Prompt</dt><dd>El texto con el que le pedís algo a la IA. <a href="glosario.html#prompt">Más →</a></dd></div>
+      <div class="term-card"><dt>Prompt de contexto</dt><dd>Las reglas generales, pegadas una sola vez al inicio. <a href="glosario.html#prompt-contexto">Más →</a></dd></div>
+      <div class="term-card"><dt>CDN</dt><dd>De donde la página descarga React y los gráficos, sin instalar nada. <a href="glosario.html#cdn">Más →</a></dd></div>
+      <div class="term-card"><dt>Datos simulados</dt><dd>Precios inventados por una fórmula, iguales para todos. <a href="glosario.html#simulacion">Más →</a></dd></div>
+    </dl>
+  </section>
+
+  <section class="block" aria-labelledby="hacer">
+    <span class="num">04</span>
+    <h2 id="hacer">Qué hacer, clic por clic</h2>
+    <ol class="do">
+      <li><b>Repartan los roles</b> y anoten en un papel quién hace qué en los pasos 1 a 3. Después rotan.</li>
+      <li><b>Creen la carpeta</b> <span class="code-inline">finlab</span> en el escritorio de la computadora del piloto.</li>
+      <li><b>Abran un chat nuevo</b> en ChatGPT, Claude o Gemini. Usen uno solo para todo el taller: si lo cierran, vuelvan a empezar desde el paso 6 de esta lista.</li>
+      <li><b>Completen el constructor</b> de abajo. Si no saben qué poner, dejen los valores que trae.</li>
+      <li><b>Toquen “COPIAR PROMPT”</b>, péguenlo en el chat y envíenlo.</li>
+      <li><b>Lean la respuesta.</b> Si la IA ya empezó a escribir código, respóndanle: “Todavía no. Esperá el paso 1.”</li>
+    </ol>
+  </section>
+
+  <section class="block" data-section="prompts" aria-labelledby="prompt">
+    <span class="num">05</span>
+    <h2 id="prompt">El prompt de contexto</h2>
+    <div class="builder" data-builder>
+      <div class="builder-h"><span class="t">ARMÁ EL CONTEXTO DE TU GRUPO</span><span class="t" style="color:var(--dim)">EDITÁ Y COPIÁ</span></div>
+      <div class="fields">
+        <div class="field"><label for="b-nombre">NOMBRE DE LA TERMINAL</label><input id="b-nombre" data-key="nombre" value="FIN·LAB Grupo 1"></div>
+        <div class="field"><label for="b-activos">ACTIVOS (8 MÁXIMO)</label><input id="b-activos" data-key="activos" value="AAPL, MSFT, JNJ, KO, PG, GGAL, YPF, PAM"></div>
+        <div class="field"><label for="b-publico">¿PARA QUIÉN ES?</label><select id="b-publico" data-key="publico"><option>alumnos de un posgrado de finanzas</option><option>un equipo de tesorería</option><option>un inversor minorista que recién empieza</option></select></div>
+        <div class="field"><label for="b-estilo">ESTILO VISUAL</label><select id="b-estilo" data-key="estilo"><option>terminal financiera oscura, tipografía monoespaciada</option><option>panel claro y sobrio, estilo informe bancario</option><option>minimalista, mucho espacio en blanco</option></select></div>
+      </div>
+      <pre id="b-out" data-output></pre>
+      <script type="text/template">Vamos a construir juntos, en varios pasos, una página web educativa llamada "{nombre}": una terminal de análisis de mercado para {publico}.
+
+Reglas fijas del proyecto (respetalas en todas tus respuestas):
+1. Todo vive en UN solo archivo HTML que se abre con doble clic, sin servidor ni instalación.
+2. Usá React 18 y Recharts por CDN (jsdelivr) con Babel standalone. Nada de npm.
+3. Activos del proyecto: {activos}. Los datos son SIMULADOS y deterministas (mismos números en cada recarga). Nunca digas que son cotizaciones reales.
+4. Estilo: {estilo}. Textos de la interfaz en español.
+5. Cuando cambies el archivo, devolveme SIEMPRE el archivo completo, no fragmentos.
+6. Cada cálculo financiero va en una función con nombre claro y un comentario con la fórmula.
+7. Al final de cada respuesta, listá en 3 viñetas qué cambiaste y cómo lo puedo comprobar yo.
+
+Si algo de lo que pido es ambiguo, preguntame antes de escribir código. Respondé "Entendido" y esperá el primer paso.</script>
+      <div class="builder-foot"><button class="copy" data-copy="#b-out" type="button">COPIAR PROMPT</button></div>
+    </div>
+    <div class="note tip"><b>Por qué cada regla:</b> la 1 y la 2 evitan instalar programas; la 3 evita que la IA diga que los datos son reales; la 5 evita que tengan que pegar pedazos de código a mano (la causa número uno de páginas en blanco); la 6 permite que el auditor encuentre cada fórmula; la 7 les deja la comprobación lista.</div>
+  </section>
+
+  <section class="block" aria-labelledby="comprobar">
+    <span class="num">06</span>
+    <h2 id="comprobar">Cómo comprobar</h2>
+    <ul class="check">
+      <li><b>La IA respondió “Entendido”</b> (o algo equivalente) sin escribir código.</li>
+      <li><b>Si hizo preguntas,</b> las contestaron en el mismo chat.</li>
+      <li><b>La carpeta existe</b> y todos saben dónde está.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="falla">
+    <span class="num">07</span>
+    <h2 id="falla">Si algo falla</h2>
+    <ul>
+      <li><b>La IA escribió código igual:</b> no pasa nada. Respondan “Gracias, todavía no. Esperá el paso 1” y sigan.</li>
+      <li><b>La IA se niega o dice que no puede crear archivos:</b> aclárenle “Solo escribí el contenido del archivo; yo lo guardo”.</li>
+    </ul>
+  </section>
+
+  <div class="pager">
+    <a href="index.html">← MAPA DEL TALLER</a>
+    <a href="paso-1.html">PASO 1 · ESQUELETO →</a>
+  </div>
+</main>
+
+<footer>
+  FIN·LAB · material didáctico del posgrado de IA aplicada a Finanzas (UNLP) — taller de construcción guiada.<br>
+  Datos simulados con fines educativos. No es asesoramiento financiero.
+</footer>
+
+<script src="../automatizaciones/lab.js"></script>
+<script src="taller.js"></script>
+</body>
+</html>

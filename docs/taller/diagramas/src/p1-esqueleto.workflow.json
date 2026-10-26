@@ -1,0 +1,155 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "P1 · El ciclo de trabajo de cada paso",
+    "quality_profile": "showcase",
+    "legend": {
+      "entries": {
+        "frontend": {
+          "label": "Pantalla"
+        },
+        "backend": {
+          "label": "Cálculo / lógica"
+        },
+        "database": {
+          "label": "Datos"
+        },
+        "cloud": {
+          "label": "Herramienta externa"
+        },
+        "security": {
+          "label": "Control / decisión"
+        },
+        "messagebus": {
+          "label": "Intercambio (archivo, JSON, HTTP)"
+        },
+        "external": {
+          "label": "Personas / IA"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "grupo",
+      "label": "Ustedes (grupo + navegador)"
+    },
+    {
+      "id": "control",
+      "label": "Verificación"
+    },
+    {
+      "id": "ia",
+      "label": "Chat de IA"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "prompt",
+      "lane": "grupo",
+      "col": 0,
+      "type": "external",
+      "label": "Copiar prompt",
+      "sublabel": "+ archivo actual",
+      "width": 160
+    },
+    {
+      "id": "respuesta",
+      "lane": "ia",
+      "col": 1,
+      "type": "external",
+      "label": "IA responde",
+      "sublabel": "archivo completo",
+      "width": 160
+    },
+    {
+      "id": "guardar",
+      "lane": "grupo",
+      "col": 2,
+      "type": "database",
+      "label": "Guardar finlab.html",
+      "sublabel": "reemplazar todo",
+      "width": 160
+    },
+    {
+      "id": "abrir",
+      "lane": "grupo",
+      "col": 3,
+      "type": "frontend",
+      "label": "Abrir con doble clic",
+      "sublabel": "mirar la consola",
+      "width": 160
+    },
+    {
+      "id": "verificar",
+      "lane": "control",
+      "col": 4,
+      "type": "security",
+      "label": "Comprobar",
+      "sublabel": "lista “lo lograron si”",
+      "width": 160
+    },
+    {
+      "id": "version",
+      "lane": "control",
+      "col": 5,
+      "type": "database",
+      "label": "Guardar versión",
+      "sublabel": "finlab-v1.html",
+      "width": 160
+    },
+    {
+      "id": "rescate",
+      "lane": "ia",
+      "col": 4,
+      "type": "external",
+      "label": "Prompt de rescate",
+      "sublabel": "pegar el error",
+      "width": 160
+    }
+  ],
+  "edges": [
+    {
+      "from": "prompt",
+      "to": "respuesta",
+      "fromSide": "bottom",
+      "toSide": "left"
+    },
+    {
+      "from": "respuesta",
+      "to": "guardar",
+      "label": "archivo nuevo",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "from": "guardar",
+      "to": "abrir"
+    },
+    {
+      "from": "abrir",
+      "to": "verificar"
+    },
+    {
+      "from": "verificar",
+      "to": "version",
+      "label": "salió bien",
+      "variant": "emphasis"
+    },
+    {
+      "from": "verificar",
+      "to": "rescate",
+      "label": "algo falla",
+      "variant": "security",
+      "role": "error"
+    },
+    {
+      "from": "rescate",
+      "to": "respuesta",
+      "label": "volver a pedir",
+      "variant": "dashed",
+      "role": "return"
+    }
+  ]
+}

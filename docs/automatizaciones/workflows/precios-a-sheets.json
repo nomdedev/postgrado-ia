@@ -1,0 +1,90 @@
+{
+  "name": "FINLAB - Precios a Google Sheets (completar credenciales)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "30 18 * * 1-5"
+            }
+          ]
+        }
+      },
+      "id": "4d000000-0000-4000-8000-000000000001",
+      "name": "Cada día 18:30",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 320]
+    },
+    {
+      "parameters": {
+        "url": "https://TU-PROYECTO.vercel.app/api/market/summary",
+        "options": {
+          "timeout": 10000
+        }
+      },
+      "id": "4d000000-0000-4000-8000-000000000002",
+      "name": "Consultar API FIN·LAB",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 320]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "// Un item por activo: así la planilla recibe una fila por cada uno.\nconst d = $input.first().json.data;\nif (!d || !Array.isArray(d.tickers)) {\n  throw new Error('La API no devolvió la lista de activos.');\n}\n\nreturn d.tickers.map((t) => ({\n  json: {\n    fecha: d.session,\n    symbol: t.symbol,\n    nombre: t.name,\n    ultimo: t.last,\n    cambio_pct: t.change_pct,\n    volumen: t.volume,\n    rsi14: t.rsi14,\n    senal: t.signal\n  }\n}));"
+      },
+      "id": "4d000000-0000-4000-8000-000000000003",
+      "name": "Aplanar activos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [720, 320]
+    },
+    {
+      "parameters": {
+        "resource": "sheet",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "TU_ID_DE_PLANILLA",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Hoja 1",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "4d000000-0000-4000-8000-000000000004",
+      "name": "Agregar filas en Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [960, 320]
+    }
+  ],
+  "connections": {
+    "Cada día 18:30": {
+      "main": [[{ "node": "Consultar API FIN·LAB", "type": "main", "index": 0 }]]
+    },
+    "Consultar API FIN·LAB": {
+      "main": [[{ "node": "Aplanar activos", "type": "main", "index": 0 }]]
+    },
+    "Aplanar activos": {
+      "main": [[{ "node": "Agregar filas en Sheets", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "pinData": {},
+  "tags": []
+}
