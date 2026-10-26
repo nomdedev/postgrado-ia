@@ -156,6 +156,20 @@ test('las partes comunes del taller (encabezado, barra por clase, pie) están si
   }
 });
 
+test('cada carpeta de docs/ con index.html redirige a su versión con barra final (rutas relativas)', () => {
+  // Con cleanUrls, Vercel sirve /docs/taller sin barra y entonces taller.css o paso-0.html se resuelven contra /docs/: todo da 404.
+  const vercel = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'vercel.json'), 'utf8'));
+  const DOCS = path.join(__dirname, '..', 'docs');
+  const carpetas = fs.readdirSync(DOCS, { withFileTypes: true })
+    .filter((d) => d.isDirectory() && fs.existsSync(path.join(DOCS, d.name, 'index.html')))
+    .map((d) => d.name);
+  assert.ok(carpetas.includes('taller'));
+  for (const carpeta of carpetas) {
+    const regla = (vercel.redirects || []).find((r) => r.source === `/docs/${carpeta}`);
+    assert.ok(regla && regla.destination === `/docs/${carpeta}/`, `vercel.json: falta redirigir /docs/${carpeta} a /docs/${carpeta}/`);
+  }
+});
+
 test('cada fuente de diagrama tiene su HTML generado y al revés', () => {
   const DIAG = path.join(__dirname, '..', 'docs', 'taller', 'diagramas');
   const fuentes = fs.readdirSync(path.join(DIAG, 'src')).filter((f) => f.endsWith('.workflow.json')).map((f) => f.replace('.workflow.json', '')).sort();
