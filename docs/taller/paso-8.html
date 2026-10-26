@@ -35,10 +35,10 @@
     <span class="num">01</span>
     <h2 id="logro">Qué van a lograr</h2>
     <p>Un workflow importado en n8n que, al ejecutarlo, muestra qué activos tienen señal de VENTA o un RSI fuera del rango 30–70, con el motivo de cada aviso:</p>
-    <div class="panel"><div class="panel-h"><span class="panel-t">RESULTADO ESPERADO · SALIDA DEL NODO “ARMAR AVISO”</span></div><div class="panel-b"><pre>Asunto: FIN·LAB · 2 activos para mirar
+    <div class="panel"><div class="panel-h"><span class="panel-t">RESULTADO ESPERADO · SALIDA DEL NODO “ARMAR AVISO”</span><span class="panel-t" style="color:var(--dim)">CON LA MUESTRA FIJA DE LA API</span></div><div class="panel-b"><pre>Asunto: FIN·LAB · 2 activos para mirar
 
-- YPF: 26.33 USD · RSI 41.7 · señal VENTA → motivo: señal de venta
-- GGAL: 28.75 USD · RSI 72.4 · señal NEUTRAL → motivo: RSI mayor a 70
+- JNJ: 117.88 USD · RSI 28.1 · señal VENTA → motivo: señal de venta y RSI menor a 30
+- KO: 66.09 USD · RSI 70.7 · señal COMPRA → motivo: RSI mayor a 70
 
 Muestra educativa fija de FIN·LAB. No es una recomendación de inversión.</pre></div></div>
     <div class="note warn"><b>Importante:</b> n8n <b>no puede</b> consultar la API que armaron en el paso 6, porque esa vive dentro de su navegador. Usa la API publicada del proyecto (<span class="code-inline c">https://postgrado-ia.vercel.app/api/market/summary</span>), que devuelve los mismos campos.</div>
@@ -87,7 +87,7 @@ Muestra educativa fija de FIN·LAB. No es una recomendación de inversión.</pre
       <li><b>Guarden la respuesta</b> como <span class="code-inline">aviso-rsi.json</span> e impórtenla igual que el anterior.</li>
       <li><b>Doble clic en el nodo HTTP Request</b> y confirmen que la URL sea la del curso: <span class="code-inline c">https://postgrado-ia.vercel.app/api/market/summary</span>. Si la IA la cambió, péguenla de nuevo.</li>
       <li><b>Toquen <em>Execute workflow</em></b> (abajo, al centro). Cada nodo que funciona se pone verde; hagan clic en cada uno para ver qué recibió y qué entregó.</li>
-      <li><b>El correo, al final:</b> si quieren que llegue de verdad, abran el nodo de email → <em>Credential</em> → <em>Create new</em> y sigan los pasos. Si no, alcanza con ver la salida del nodo anterior.</li>
+      <li><b>El correo, al final:</b> si quieren que llegue de verdad, abran el nodo de email → <em>Credential</em> → <em>Create new</em> y sigan los pasos. Si no, alcanza con ver la salida del nodo anterior. Si crean una credencial en una computadora o cuenta compartida, bórrenla al terminar (<em>Credentials → ⋯ → Delete</em>).</li>
     </ol>
     <p style="margin-top:16px"><a class="btn btn-primary" href="../automatizaciones/workflows/aviso-senal.json" download>DESCARGAR AVISO-SENAL.JSON</a> &nbsp; <a class="btn" href="../automatizaciones/aviso-senal.html">VER LA EXPLICACIÓN COMPLETA DEL EJEMPLO</a></p>
   </section>
@@ -121,7 +121,7 @@ Devolveme el JSON completo listo para importar y una tabla con cada nodo: nombre
     <h2 id="comprobar">Cómo comprobar</h2>
     <ul class="check">
       <li><b>Importa sin errores</b> y todas las cajas están conectadas.</li>
-      <li><b>Cuenta a mano:</b> abran la URL de la API en el navegador y cuenten cuántos activos tienen señal VENTA o RSI fuera de 30–70. Tiene que coincidir con la cantidad de avisos.</li>
+      <li><b>Cuenta a mano:</b> abran la URL de la API en el navegador y cuenten cuántos activos tienen señal VENTA o RSI fuera de 30–70. Tiene que coincidir con la cantidad de avisos <em>y</em> con los activos (con la muestra fija del curso: JNJ y KO).</li>
       <li><b>Caso vacío:</b> cambien en el nodo Code el umbral de 70 a 99 y el de 30 a 1, y quiten la condición de VENTA. Al ejecutar, tiene que salir por la rama <em>no</em> y no enviar nada.</li>
       <li><b>Sin claves a la vista:</b> ningún nodo tiene contraseñas escritas.</li>
     </ul>

@@ -11,6 +11,8 @@
 
 ## Done
 
+- AUDITORIA-TOP5 (2026-10-26): aplicados H1–H5, H6 y H16 de docs/auditorias/2026-10-26-docente-didactico.md. Pendientes: H7–H15, H17.
+
 - TALLER-RESCATE (2026-10-26): versiones de rescate v1–v7 + CSV de respaldo generados por `docs/taller/rescate/build.js`, enlazados desde los pasos 1–7; comprobaciones de cada paso verificadas en Chrome.
 
 - TALLER-PASO-A-PASO (2026-10-26): `docs/taller/` con índice, glosario, pasos 0–9 y 11 diagramas Archify (showcase 9/9, visual-check pass); reemplaza `docs/automatizaciones/construir-finlab.html`. Test en `test/automatizaciones.test.js`.

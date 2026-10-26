@@ -1753,7 +1753,7 @@ function GuidedAutomation({notify}){
                 <option value="VENTA">Señal de venta</option><option value="COMPRA">Señal de compra</option><option value="NEUTRAL">Señal neutral</option>
               </select>
             </div>
-            <div className="guide-result"><b>En esta prueba:</b> el archivo trae AAPL (COMPRA), GGAL (NEUTRAL) e YPF (VENTA). Al elegir “{signal}”, el resultado esperado es {signal==='VENTA'?'YPF':signal==='COMPRA'?'AAPL':'GGAL'}.</div>
+            <div className="guide-result"><b>En esta prueba:</b> el archivo trae tres activos de ejemplo: AAPL, GGAL e YPF. ¿Cuál va a coincidir con “{signal}”? Predíganlo en grupo antes de ejecutar: lo comprueban en el ejercicio 02 de abajo.</div>
             <div className="guide-actions">
               <button className="btn btn-primary" onClick={download}><Icon n="download" s={13}/>DESCARGAR PARA N8N</button>
               <button className="btn" onClick={copy}><Icon n="copy" s={13}/>COPIAR JSON</button>
@@ -1815,7 +1815,7 @@ function GroupExercises({signal}){
           return (
             <article className="exercise" key={ex.id}>
               <div className="exercise-title"><span className="exercise-n">0{index+1}</span><div>
-                <h4>{ex.title}</h4><p>{ex.time} · {ex.explain}</p>
+                <h4>{ex.title}</h4><p>{ex.time}</p>
               </div></div>
               <div className="exercise-task">
                 <label htmlFor={'exercise-'+ex.id}>{ex.prompt}</label>

@@ -15,7 +15,7 @@
 .copy.mini{font-size:11px;padding:3px 9px;margin-left:6px;vertical-align:middle}
 .peek{background:transparent;border:1px solid var(--line2);color:var(--mut);border-radius:6px;padding:7px 12px;font:600 12px var(--sans);cursor:pointer}
 .peek:hover{border-color:var(--amb);color:var(--amb)}
-.code-inline.c{white-space:nowrap}
+.code-inline.c{overflow-wrap:anywhere}
 
 /* Misión del paso: tres tarjetas numeradas arriba de todo */
 .mission{list-style:none;counter-reset:m;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:20px}

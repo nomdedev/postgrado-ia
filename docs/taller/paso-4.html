@@ -96,7 +96,7 @@
       <div class="prompt-b"><pre id="p4">Paso 4. Agregá indicadores técnicos, cada uno en su propia función con la fórmula comentada:
 - sma(precios, n): media móvil simple
 - ema(precios, n): media móvil exponencial con alfa = 2/(n+1)
-- rsi(precios, 14): RSI de Wilder (suavizado con alfa = 1/14), entre 0 y 100
+- rsi(precios, 14): RSI de Wilder. Arranque: promedio simple de las primeras 14 subas y de las primeras 14 bajas. Después, cada día: promedio = (promedio anterior × 13 + valor de hoy) / 14. Resultado entre 0 y 100
 - signalOf(): COMPRA si SMA20 > SMA50 y EMA12 > EMA26; VENTA si ambas son menores; si no, NEUTRAL
 
 Mostralos así:

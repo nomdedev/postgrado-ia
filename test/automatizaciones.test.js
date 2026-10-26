@@ -40,7 +40,13 @@ test('el taller: 10 pasos encadenados, cada uno con diagrama Archify, glosario, 
   const TALLER = path.join(__dirname, '..', 'docs', 'taller');
   const page = (file) => fs.readFileSync(path.join(TALLER, file), 'utf8');
   assert.match(read('index.html'), /href="\.\.\/taller\/index\.html"/, 'el índice de automatizaciones no enlaza el taller');
-  assert.match(fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8'), /href="docs\/taller\/index\.html"/, 'la terminal (#/guiado) no enlaza el taller');
+  const terminal = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(terminal, /href="docs\/taller\/index\.html"/, 'la terminal (#/guiado) no enlaza el taller');
+  // Auditoría 2026-10-26: la pestaña EMPEZAR no debe revelar respuestas antes de COMPROBAR (H3).
+  assert.doesNotMatch(terminal, /el resultado esperado es|\{ex\.time\} · \{ex\.explain\}/, 'EMPEZAR vuelve a mostrar las respuestas antes de discutir');
+  // H2 y H5: los prompts fijan el arranque del RSI de Wilder y piden la volatilidad individual.
+  assert.match(fs.readFileSync(path.join(TALLER, 'paso-4.html'), 'utf8'), /promedio simple de las primeras 14 subas/, 'el prompt del paso 4 no fija el arranque del RSI');
+  assert.match(fs.readFileSync(path.join(TALLER, 'paso-5.html'), 'utf8'), /volatilidad anualizada individual/, 'el prompt del paso 5 no pide la volatilidad individual');
 
   for (let n = 0; n <= 9; n++) {
     const file = `paso-${n}.html`;
