@@ -1,6 +1,6 @@
 # Auditoría didáctica FIN·LAB — 2026-10-26
 
-> **Nota posterior (2026-10-26):** después de esta auditoría el proyecto se publicó en https://postgrado-ia.vercel.app y los materiales ya apuntan a esa API, así que el riesgo "URL de Vercel desplegada" quedó resuelto. Los hallazgos H1–H17 siguen pendientes. Informe generado por el agente `docente-didactico` (`.claude/agents/docente-didactico.md`).
+> **Nota posterior (2026-10-26):** después de esta auditoría el proyecto se publicó en https://postgrado-ia.vercel.app y los materiales ya apuntan a esa API, así que el riesgo "URL de Vercel desplegada" quedó resuelto. Los hallazgos H1–H17 se resolvieron el mismo día (commits 9062683, 43cdc95 y 2a89690). Informe generado por el agente `docente-didactico` (`.claude/agents/docente-didactico.md`).
 
 ## Veredicto
 **GO con ajustes.** El taller tiene una estructura consistente y excelente (10 pasos con la misma anatomía, rescate en cada paso 1–7, fórmulas correctas en la plantilla y en la terminal; `node --test` 9/9 OK), pero hay cuatro problemas que van a trabar a los grupos y conviene corregir antes de la clase: el resultado esperado del paso 8 contradice la API real, la comprobación del RSI en Colab puede dar ❌ con un Wilder correcto, la pestaña EMPEZAR revela las respuestas de los ejercicios antes de discutirlas, y la consola del navegador bloquea pegar en los pasos 2–3.

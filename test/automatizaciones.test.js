@@ -125,6 +125,14 @@ test('las versiones de rescate del taller están generadas, sin marcas de planti
   assert.equal(csv.length, 253, 'el CSV de respaldo debe tener 252 ruedas');
 });
 
+test('cada fuente de diagrama tiene su HTML generado y al revés', () => {
+  const DIAG = path.join(__dirname, '..', 'docs', 'taller', 'diagramas');
+  const fuentes = fs.readdirSync(path.join(DIAG, 'src')).filter((f) => f.endsWith('.workflow.json')).map((f) => f.replace('.workflow.json', '')).sort();
+  const html = fs.readdirSync(DIAG).filter((f) => f.endsWith('.html')).map((f) => f.replace('.html', '')).sort();
+  assert.deepEqual(html, fuentes, 'diagramas/*.html y diagramas/src/*.workflow.json no coinciden: regenerá con fuentes.js y archify');
+  assert.ok(fs.existsSync(path.join(DIAG, 'fuentes.js')), 'falta el generador de fuentes (diagramas/fuentes.js)');
+});
+
 test('los workflows de n8n son válidos y sus conexiones apuntan a nodos que existen', () => {
   const files = fs.readdirSync(WORKFLOWS).filter((file) => file.endsWith('.json'));
   assert.equal(files.length, 4, 'se esperan cuatro workflows');

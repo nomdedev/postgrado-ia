@@ -1,6 +1,6 @@
 # Plan unificado: reestructura del taller FIN·LAB
 
-**Fecha:** 2026-10-26 · **Estado:** propuesta, a la espera de las decisiones de la sección 5.
+**Fecha:** 2026-10-26 · **Estado:** decisiones tomadas el 2026-10-26 (sección 5); en implementación por etapas.
 
 **Fuentes:** el consejo de cuatro agentes (diseño visual y UX, docente didáctico, arquitectura de la información, arquitectura técnica), más la auditoría `docs/auditorias/2026-10-26-docente-didactico.md`. Los agentes solo leyeron y propusieron. Este plan combina sus propuestas, marca dónde no coinciden y dice qué se recomienda.
 
@@ -69,7 +69,11 @@ Hoy `https://postgrado-ia.vercel.app/` abre directo la pestaña EMPEZAR, que en 
 | Guía del docente pública | El repo y el sitio son públicos: si la guía tiene las respuestas, contradice "no revelarlas antes de comprobar" | **Publicarla sin enlazarla desde la vista del alumno**, o dejarla fuera del sitio con `.vercelignore` y repartirla como PDF. → **Decisión 2** |
 | Botón "COPIAR PROMPT + MI ARCHIVO" (lee el `finlab.html` con un selector de archivo) | Propuesta del docente: elimina el Bloc de notas y la mitad de los gestos | Prototipo en una etapa posterior, con el camino manual siempre visible como plan B. |
 
-## 5. Decisiones que necesito del profesor
+## 5. Decisiones del profesor (tomadas el 2026-10-26)
+
+Se aprobaron las cuatro recomendaciones: **2 clases (P0–P5 / P6–P9)**, **guía del docente publicada sin enlazar desde la vista del alumno**, **pestaña INICIO en la raíz con EMPEZAR renombrada a AUTOMATIZAR** y **la pestaña Python del paso 7 como parte opcional, sin renumerar**.
+
+Las preguntas originales:
 
 1. **Clases:** ¿2 clases (P0–P5 / P6–P9, unas 2 h 15 a 2 h 30 cada una)? ¿O preferís 3?
 2. **Guía del docente:** ¿publicada pero sin enlazar desde la vista del alumno? ¿O fuera del sitio, como PDF?

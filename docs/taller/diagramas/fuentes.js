@@ -1,0 +1,98 @@
+// Fuente de los diagramas del taller: genera las especificaciones Archify (workflow v2) en diagramas/src/.
+// Uso: node docs/taller/diagramas/fuentes.js   y después, por cada archivo cambiado, desde la carpeta de la skill archify:
+//   node bin/archify.mjs deliver workflow <src/x.workflow.json> <diagramas/x.html> --quality showcase --json
+// Los HTML se generaron con archify 2.17.0-dev.1 (ver la cabecera de cada diagrama).
+const fs = require('fs'), path = require('path');
+const out = process.argv[2] || path.join(__dirname, 'src');
+const legend = { entries: {
+  frontend: { label: 'Pantalla' }, backend: { label: 'Cálculo / lógica' }, database: { label: 'Datos' },
+  cloud: { label: 'Herramienta externa' }, security: { label: 'Control / decisión' },
+  messagebus: { label: 'Intercambio (archivo, JSON, HTTP)' }, external: { label: 'Personas / IA' } } };
+const N = (id, lane, col, type, label, sublabel) => ({ id, lane, col, type, label, sublabel, width: 160 });
+const E = (from, to, label, extra = {}) => ({ from, to, ...(label ? { label } : {}), ...extra });
+const H = { fromSide: 'right', toSide: 'left' };
+const specs = {
+  '00-mapa': ['Mapa del taller: de la hoja en blanco a #/guiado',
+    [['pagina', 'Construir la página (navegador)'], ['conectar', 'Conectar con otras herramientas']],
+    [N('contexto','pagina',0,'external','P0 · Preparar','prompt de contexto'), N('esqueleto','pagina',1,'frontend','P1 · Esqueleto','encabezado + pestañas'),
+     N('datos','pagina',2,'database','P2 · Datos','año simulado'), N('mercado','pagina',3,'frontend','P3 · Mercado','tabla + gráficos'),
+     N('indicadores','pagina',4,'backend','P4 · Indicadores','SMA · EMA · RSI'), N('carteras','pagina',5,'backend','P5 · Carteras','riesgo + Sharpe'),
+     N('api','conectar',2,'messagebus','P6 · API JSON','datos para otros'), N('colab','conectar',3,'cloud','P7 · Colab','verificar en Python'),
+     N('n8n','conectar',4,'cloud','P8 · n8n','avisos automáticos'), N('guiado','conectar',5,'security','P9 · #/guiado','la terminal final')],
+    [E('contexto','esqueleto'), E('esqueleto','datos'), E('datos','mercado'), E('mercado','indicadores'), E('indicadores','carteras',null,H),
+     E('carteras','api','publicar datos',{variant:'emphasis'}), E('api','colab','CSV / JSON',H), E('colab','n8n'), E('n8n','guiado',null,{variant:'emphasis'})]],
+  'p0-preparar': ['P0 · Preparar el equipo y el chat',
+    [['grupo','Ustedes (grupo)'], ['ia','Chat de IA'], ['pc','Computadora']],
+    [N('roles','grupo',0,'external','Repartir 4 roles','rotan en cada paso'), N('constructor','grupo',1,'frontend','Constructor','nombre, activos, estilo'),
+     N('contexto','ia',2,'messagebus','Prompt de contexto','reglas del proyecto'), N('entendido','ia',3,'external','IA responde','“Entendido”'),
+     N('carpeta','pc',4,'database','Carpeta finlab','donde guardan versiones'), N('listo','pc',5,'security','Listos para P1','chat + carpeta')],
+    [E('roles','constructor'), E('constructor','contexto','copiar y pegar'), E('contexto','entendido'), E('entendido','carpeta'), E('carpeta','listo')]],
+  'p1-esqueleto': ['P1 · El ciclo de trabajo de cada paso',
+    [['grupo','Ustedes (grupo + navegador)'], ['control','Verificación'], ['ia','Chat de IA']],
+    [N('prompt','grupo',0,'external','Copiar prompt','+ archivo actual'), N('respuesta','ia',1,'external','IA responde','archivo completo'),
+     N('guardar','grupo',2,'database','Guardar finlab.html','reemplazar todo'), N('abrir','grupo',3,'frontend','Abrir con doble clic','mirar la consola'),
+     N('verificar','control',4,'security','Comprobar','lista “lo lograron si”'), N('version','control',5,'database','Guardar versión','finlab-v1.html'),
+     N('rescate','ia',4,'external','Prompt de rescate','pegar el error')],
+    [E('prompt','respuesta',null,{fromSide:'bottom',toSide:'left'}), E('respuesta','guardar','archivo nuevo',{fromSide:'top',toSide:'bottom'}), E('guardar','abrir'), E('abrir','verificar'), E('verificar','version','salió bien',{variant:'emphasis'}),
+     E('verificar','rescate','algo falla',{variant:'security',role:'error'}), E('rescate','respuesta','volver a pedir',{variant:'dashed',role:'return'})]],
+  'p2-datos': ['P2 · Cómo se generan los datos simulados',
+    [['def','Definición'], ['gen','Generador'], ['res','Resultado']],
+    [N('tickers','def',0,'database','TICKERS','8 activos + volatilidad'), N('semilla','def',1,'security','Semilla','mulberry32 por símbolo'),
+     N('sim','gen',2,'backend','simulateSeries()','252 días hábiles'), N('formula','gen',3,'backend','Retorno diario','tendencia + vol · z'),
+     N('serie','res',4,'database','Serie { d, c, v }','fecha, cierre, volumen'), N('consola','res',5,'frontend','Consola (F12)','tabla de control')],
+    [E('tickers','semilla'), E('semilla','sim','mismos números'), E('sim','formula','cada día'), E('formula','serie'), E('serie','consola')]],
+  'p3-mercado': ['P3 · De la serie a la pantalla de Mercado',
+    [['datos','Datos'], ['calc','Cálculo'], ['pant','Pantalla']],
+    [N('serie','datos',0,'database','Serie del P2','252 cierres'), N('var','calc',1,'backend','Variación del día','hoy / ayer − 1'),
+     N('conteo','calc',2,'backend','Conteo','suben / bajan'), N('tarjetas','pant',3,'frontend','Tarjetas','resumen del día'),
+     N('tabla','pant',4,'frontend','Tabla + sparkline','precio, %, 30 días'), N('grafico','pant',5,'frontend','Gráfico Recharts','rango 1M a 1A')],
+    [E('serie','var'), E('var','conteo'), E('conteo','tarjetas'), E('tarjetas','tabla'), E('tabla','grafico','clic en una fila')]],
+  'p4-indicadores': ['P4 · De los cierres a la señal',
+    [['datos','Datos'], ['medias','Medias móviles'], ['senal','Señal y pantalla'], ['verif','Verificación']],
+    [N('cierres','datos',0,'database','Cierres','del activo elegido'), N('sma','medias',1,'backend','SMA 20 / 50','promedio simple'),
+     N('ema','medias',2,'backend','EMA 12 / 26','alfa = 2 / (n+1)'), N('rsi','datos',2,'backend','RSI 14','Wilder · 0 a 100'),
+     N('signal','senal',3,'security','signalOf()','COMPRA · VENTA · NEUTRAL'), N('ui','senal',4,'frontend','Tabla + gráfico','columnas RSI y Señal'),
+     N('csv','verif',4,'messagebus','Exportar CSV','fecha, cierre, medias'), N('sheets','verif',5,'cloud','Google Sheets','=PROMEDIO() de 20')],
+    [E('cierres','sma'), E('sma','ema'), E('cierres','rsi'), E('ema','signal','comparar medias'), E('signal','ui'), E('rsi','ui','resaltar extremos'),
+     E('ui','csv'), E('csv','sheets','recalcular a mano',{variant:'dashed'})]],
+  'p5-carteras': ['P5 · Cómo se mide una cartera',
+    [['entrada','Entrada'], ['calc','Cálculo'], ['res','Resultado']],
+    [N('preset','entrada',0,'external','Cartera elegida','3 perfiles o a mano'), N('pesos','entrada',1,'security','Normalizar pesos','que sumen 100%'),
+     N('retornos','calc',2,'backend','Retornos diarios','hoy / ayer − 1'), N('cov','calc',3,'backend','Media y covarianza','× 252 = anual'),
+     N('metricas','res',4,'frontend','Retorno · Vol · Sharpe','tasa libre 4,3%'), N('base100','res',5,'frontend','Gráfico base 100','vs equiponderada')],
+    [E('preset','pesos'), E('pesos','retornos'), E('retornos','cov'), E('cov','metricas'), E('metricas','base100','misma cartera')]],
+  'p6-api': ['P6 · Qué pasa cuando alguien consulta la API',
+    [['quien','Quien pregunta'], ['router','Router (dentro de la página)'], ['datos','Datos']],
+    [N('explorador','quien',0,'frontend','Explorador de API','elige una ruta'), N('get','quien',1,'messagebus','GET /api/...','pedido HTTP simulado'),
+     N('ruta','router',2,'security','¿Existe la ruta?','y el símbolo'), N('mercado','datos',3,'database','Mercado + indicadores','lo calculado en P3–P4'),
+     N('json','router',4,'messagebus','200 · JSON','symbol, last, rsi14…'), N('alertas','datos',5,'database','Alertas','guardadas en localStorage'),
+     N('e404','quien',3,'security','404 · error','mensaje en español')],
+    [E('explorador','get'), E('get','ruta'), E('ruta','mercado','sí'), E('mercado','json'), E('json','alertas','¿se dispara?'),
+     E('ruta','e404','no',{variant:'security',role:'error'})]],
+  'p7-colab': ['P7 · Del CSV a Google Colab',
+    [['term','Terminal FIN·LAB'], ['pc','Tu computadora'], ['colab','Google Colab']],
+    [N('export','term',0,'frontend','Exportar CSV','botón del P4'), N('archivo','pc',1,'messagebus','finlab.csv','carpeta Descargas'),
+     N('upload','colab',2,'cloud','files.upload()','subir el archivo'), N('pandas','colab',3,'backend','pandas.read_csv','tabla en memoria'),
+     N('codigo','term',3,'frontend','Bloques A · B · C','botón Copiar'), N('recalc','colab',4,'backend','Recalcular','rolling + Wilder'),
+     N('compara','colab',5,'security','Comparar','diferencia < 0,01')],
+    [E('export','archivo'), E('archivo','upload'), E('upload','pandas'), E('codigo','pandas','pegar en una celda',{variant:'dashed'}), E('pandas','recalc'), E('recalc','compara')]],
+  'p8-n8n': ['P8 · El workflow de n8n que avisa solo',
+    [['disp','Disparador'], ['pasos','Pasos'], ['salida','Salida']],
+    [N('trigger','disp',0,'external','Manual o Schedule','cuándo corre'), N('http','pasos',1,'messagebus','HTTP Request','GET /api/market/summary'),
+     N('code','pasos',2,'backend','Code','filtra señal y RSI'), N('if','pasos',3,'security','IF','¿hay algo para avisar?'),
+     N('aviso','salida',4,'cloud','Email o Telegram','aviso con el motivo'), N('nada','salida',5,'database','Registrar','sin coincidencias')],
+    [E('trigger','http'), E('http','code','JSON'), E('code','if'), E('if','aviso','sí',{variant:'emphasis'}), E('if','nada','no',{variant:'dashed',role:'branch'})]],
+  'p9-guiado': ['P9 · Llegar a 127.0.0.1:4173/#/guiado',
+    [['pc','Tu computadora'], ['term','Terminal FIN·LAB'], ['n8n','n8n']],
+    [N('server','pc',0,'backend','Servidor local','http.server 4173'), N('browser','pc',1,'frontend','Navegador','abrir /#/guiado'),
+     N('elegir','term',2,'frontend','Elegir señal','VENTA · COMPRA · NEUTRAL'), N('json','term',3,'messagebus','Descargar JSON','monitor-mercado-n8n'),
+     N('importar','n8n',4,'cloud','Importar archivo','Import from file'), N('ejecutar','n8n',5,'security','Ejecutar workflow','¿qué salida se activa?'),
+     N('ejercicios','term',5,'external','Ejercicios en grupo','3 preguntas')],
+    [E('server','browser'), E('browser','elegir'), E('elegir','json'), E('json','importar'), E('importar','ejecutar'), E('ejecutar','ejercicios','comparar predicción',{variant:'emphasis'})]],
+};
+for (const [id, [title, lanes, nodes, edges]] of Object.entries(specs)) {
+  const spec = { schema_version: 2, diagram_type: 'workflow', meta: { title, quality_profile: 'showcase', legend },
+    lanes: lanes.map(([id, label]) => ({ id, label, ...(id === 'err' ? { variant: 'exception' } : {}) })), nodes, edges };
+  fs.writeFileSync(path.join(out, id + '.workflow.json'), JSON.stringify(spec, null, 2) + '\n');
+}
+console.log(Object.keys(specs).join(' '));
