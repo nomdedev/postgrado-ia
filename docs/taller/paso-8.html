@@ -32,11 +32,9 @@
   <h1>Un workflow de n8n que avisa cuando hay algo para mirar</h1>
   <p class="lede">La última capa sale del navegador. Un <a class="w" href="glosario.html#workflow">workflow</a> de <a class="w" href="glosario.html#n8n">n8n</a> consulta la API todos los días, filtra los activos que cumplen una condición y avisa solo si encontró algo. No lo arman de cero: importan uno ya hecho y lo adaptan con IA.</p>
   <div class="meta"><span class="chip"><b>20 MIN</b></span><span class="chip">N8N</span><span class="chip">SALIDA: <b>WORKFLOW FUNCIONANDO</b></span></div>
-  <ol class="mission" aria-label="Tu misión en este paso"><li><b>Importen el workflow</b>un archivo que se descarga con un botón</li><li><b>Adáptenlo con IA</b>con el prompt listo para copiar</li><li><b>Ejecútenlo</b>y cuenten a mano los avisos</li></ol>
-  <p class="calm"><b>Tranquilos:</b> no hace falta entender el código. Todo lo que hay que llevar a otro lado tiene un botón <b>⧉ COPIAR</b>. Los textos largos están plegados y se abren con <b>VER EL TEXTO</b> solo si les da curiosidad.</p>
 
   <section class="block" aria-labelledby="logro">
-    <span class="num">01</span>
+    <span class="num"></span>
     <h2 id="logro">Qué van a lograr</h2>
     <p>Un workflow importado en n8n que, al ejecutarlo, muestra qué activos tienen señal de VENTA o un RSI fuera del rango 30–70, con el motivo de cada aviso:</p>
     <div class="panel"><div class="panel-h"><span class="panel-t">RESULTADO ESPERADO · SALIDA DEL NODO “ARMAR AVISO”</span><span class="panel-t" style="color:var(--dim)">CON LA MUESTRA FIJA DE LA API</span></div><div class="panel-b"><pre>Asunto: FIN·LAB · 2 activos para mirar
@@ -48,35 +46,8 @@ Muestra educativa fija de FIN·LAB. No es una recomendación de inversión.</pre
     <div class="note warn"><b>Importante:</b> n8n <b>no puede</b> consultar la API que armaron en el paso 6, porque esa vive dentro de su navegador. Usa la API publicada del proyecto (<span class="code-inline c">https://postgrado-ia.vercel.app/api/market/summary</span>), que devuelve el mismo formato que la API que armaron en el paso 6.</div>
   </section>
 
-  <section class="block" aria-labelledby="flujo">
-    <span class="num">02</span>
-    <h2 id="flujo">El flujo: los nodos del workflow</h2>
-    <div class="diagram">
-      <iframe src="diagramas/p8-n8n.html" title="Diagrama del workflow de n8n" loading="lazy"></iframe>
-      <div class="diagram-foot"><span>Disparador → pasos → una de dos salidas.</span><a href="diagramas/p8-n8n.html" target="_blank" rel="noopener">ABRIR EN PANTALLA COMPLETA ↗</a></div>
-    </div>
-    <ul class="legend-read">
-      <li><b>Manual o Schedule</b> · El <a class="w" href="glosario.html#trigger">disparador</a>. Para probar usan el botón <em>Execute workflow</em>; después se puede programar todos los días a las 18:00.</li>
-      <li><b>HTTP Request</b> · Hace un <a class="w" href="glosario.html#http">GET</a> a la API y recibe el JSON con los ocho activos.</li>
-      <li><b>Code</b> · Unas líneas de JavaScript (las escribe la IA) que se quedan con los activos que cumplen la condición y arman el texto.</li>
-      <li><b>IF</b> · ¿Quedó alguno? Si <em>sí</em> → <b>Email o Telegram</b> con el aviso. Si <em>no</em> → <b>Registrar</b> que no hubo novedades, sin mandar nada.</li>
-    </ul>
-  </section>
-
-  <section class="block" aria-labelledby="palabras">
-    <span class="num">03</span>
-    <h2 id="palabras">Palabras nuevas de este paso</h2>
-    <dl class="terms">
-      <div class="term-card"><dt>Workflow · nodo</dt><dd>La automatización y cada una de sus cajas. <a href="glosario.html#nodo">Más →</a></dd></div>
-      <div class="term-card"><dt>Disparador</dt><dd>Lo que arranca el flujo: un botón o un horario. <a href="glosario.html#trigger">Más →</a></dd></div>
-      <div class="term-card"><dt>Nodo IF</dt><dd>La bifurcación: sí o no. <a href="glosario.html#if-node">Más →</a></dd></div>
-      <div class="term-card"><dt>Credencial</dt><dd>El permiso para usar tu correo; nunca va dentro de un nodo. <a href="glosario.html#credencial">Más →</a></dd></div>
-      <div class="term-card"><dt>Importar</dt><dd>Cargar un flujo ya armado desde un JSON. <a href="glosario.html#importar">Más →</a></dd></div>
-    </dl>
-  </section>
-
   <section class="block" aria-labelledby="hacer">
-    <span class="num">04</span>
+    <span class="num"></span>
     <h2 id="hacer">Qué hacer, clic por clic</h2>
     <h3 style="margin-top:14px">A · Tener n8n abierto (elijan una opción)</h3>
     <ol class="do">
@@ -87,7 +58,7 @@ Muestra educativa fija de FIN·LAB. No es una recomendación de inversión.</pre
     <ol class="do">
       <li><b>Descarguen</b> <span class="code-inline">aviso-senal.json</span> con el botón de abajo.</li>
       <li><b>En n8n:</b> <em>Create workflow</em> → menú <em>⋯</em> (arriba a la derecha) → <em>Import from File…</em> → elijan el archivo. Aparecen las cajas conectadas.</li>
-      <li><b>Abran el JSON con el Bloc de notas,</b> cópienlo y péguenlo en el chat de IA debajo del prompt de la sección 05.</li>
+      <li><b>Abran el JSON con el Bloc de notas,</b> cópienlo y péguenlo en el chat de IA debajo del primer prompt de “Los prompts”, más abajo.</li>
       <li><b>Guarden la respuesta</b> como <span class="code-inline">aviso-rsi.json</span> e impórtenla igual que el anterior.</li>
       <li><b>Doble clic en el nodo HTTP Request</b> y confirmen que la URL sea la del curso: <span class="code-inline c">https://postgrado-ia.vercel.app/api/market/summary</span>. Si la IA la cambió, péguenla de nuevo.</li>
       <li><b>Toquen <em>Execute workflow</em></b> (abajo, al centro). Cada nodo que funciona se pone verde; hagan clic en cada uno para ver qué recibió y qué entregó.</li>
@@ -97,7 +68,7 @@ Muestra educativa fija de FIN·LAB. No es una recomendación de inversión.</pre
   </section>
 
   <section class="block" data-section="prompts" aria-labelledby="prompt">
-    <span class="num">05</span>
+    <span class="num"></span>
     <h2 id="prompt">Los prompts</h2>
     <div class="prompt">
       <div class="prompt-h"><div><span class="t">PROMPT · PASO 8 · ADAPTAR EL WORKFLOW</span><div class="d">Pegar debajo el contenido de aviso-senal.json.</div></div><button class="copy" data-copy="#p8" type="button">COPIAR</button></div>
@@ -122,7 +93,7 @@ Devolveme el JSON completo listo para importar y una tabla con cada nodo: nombre
   </section>
 
   <section class="block" aria-labelledby="comprobar">
-    <span class="num">06</span>
+    <span class="num"></span>
     <h2 id="comprobar">Cómo comprobar</h2>
     <ul class="check">
       <li><b>Importa sin errores</b> y todas las cajas están conectadas.</li>
@@ -133,7 +104,7 @@ Devolveme el JSON completo listo para importar y una tabla con cada nodo: nombre
   </section>
 
   <section class="block" aria-labelledby="falla">
-    <span class="num">07</span>
+    <span class="num"></span>
     <h2 id="falla">Si algo falla</h2>
     <div class="note tip"><b>¿Se trabaron después de tres intentos?</b> Este workflow ya cumple todo lo del paso: avisa por señal VENTA o RSI fuera de 30–70 y explica el motivo. Impórtenlo igual que el otro y toquen <em>Execute workflow</em>; tiene que avisar JNJ y KO. El nodo de correo viene <b>desactivado</b> para que funcione sin credenciales. <a class="btn btn-primary" href="rescate/aviso-rsi.json" download>⬇ BAJAR EL WORKFLOW DE RESCATE</a></div>
     <div class="note tip"><b>¿No hay internet o la URL no responde?</b> Usen la versión <em>sin internet</em>: en lugar de consultar la API trae adentro la misma muestra fija, así pueden practicar todo el recorrido igual. <a class="btn" href="rescate/aviso-rsi-sin-url.json" download>⬇ BAJAR LA VERSIÓN SIN INTERNET</a></div>
@@ -143,6 +114,34 @@ Devolveme el JSON completo listo para importar y una tabla con cada nodo: nombre
       <li><b>Funciona, pero manda un correo vacío:</b> el IF está mirando el campo equivocado. Abran el nodo Code, miren cómo se llama el campo que indica si hay avisos y usen ese en el IF.</li>
     </ul>
   </section>
+
+  <details class="more" id="entender">
+    <summary>Para entender más <small>· cómo funciona y palabras nuevas</small></summary>
+
+  <section class="block" aria-labelledby="flujo">
+    <span class="num"></span>
+    <h2 id="flujo">El flujo: los nodos del workflow</h2>
+    <div class="flow">
+      <div class="flow-row"><span class="n">1</span><div><h4>El disparador</h4><p>Un botón para probar o un horario fijo.</p></div></div>
+      <div class="flow-row"><span class="n">2</span><div><h4>Pide los datos</h4><p>A la API publicada del curso.</p></div></div>
+      <div class="flow-row"><span class="n">3</span><div><h4>Filtra</h4><p>Se queda con los activos con señal VENTA o RSI fuera de 30–70.</p></div></div>
+      <div class="flow-row"><span class="n">4</span><div><h4>Decide</h4><p>Si encontró algo, arma el aviso con el motivo; si no, no manda nada.</p></div></div>
+    </div>
+    <p style="margin-top:14px"><a class="btn" href="diagramas/p8-n8n.html" target="_blank" rel="noopener">VER EL DIAGRAMA COMPLETO ↗</a></p>
+  </section>
+
+  <section class="block" aria-labelledby="palabras">
+    <span class="num"></span>
+    <h2 id="palabras">Palabras nuevas de este paso</h2>
+    <dl class="terms">
+      <div class="term-card"><dt>Workflow · nodo</dt><dd>La automatización y cada una de sus cajas. <a href="glosario.html#nodo">Más →</a></dd></div>
+      <div class="term-card"><dt>Disparador</dt><dd>Lo que arranca el flujo: un botón o un horario. <a href="glosario.html#trigger">Más →</a></dd></div>
+      <div class="term-card"><dt>Nodo IF</dt><dd>La bifurcación: sí o no. <a href="glosario.html#if-node">Más →</a></dd></div>
+      <div class="term-card"><dt>Credencial</dt><dd>El permiso para usar tu correo; nunca va dentro de un nodo. <a href="glosario.html#credencial">Más →</a></dd></div>
+      <div class="term-card"><dt>Importar</dt><dd>Cargar un flujo ya armado desde un JSON. <a href="glosario.html#importar">Más →</a></dd></div>
+    </dl>
+  </section>
+  </details>
 
   <div class="pager">
     <a href="paso-7.html">← PASO 7 · COLAB</a>

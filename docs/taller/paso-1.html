@@ -32,11 +32,9 @@
   <h1>El esqueleto: encabezado y cuatro pestañas</h1>
   <p class="lede">Primero el armazón vacío, como los planos de una casa antes de los muebles. Pero lo más importante de este paso es aprender el <b>ciclo</b> que van a repetir en todos los demás: pedir → guardar → abrir → comprobar → guardar versión.</p>
   <div class="meta"><span class="chip"><b>15 MIN</b></span><span class="chip">NAVEGADOR</span><span class="chip">SALIDA: <b>finlab-v1.html</b></span></div>
-  <ol class="mission" aria-label="Tu misión en este paso"><li><b>Copien el prompt</b>con el botón <span class="hl">⧉ COPIAR</span> y péguenlo en el chat</li><li><b>Guarden la respuesta</b>en <span class="code-inline">finlab.html</span> y ábranla con doble clic</li><li><b>Comprueben</b>que las 4 pestañas funcionan</li></ol>
-  <p class="calm"><b>Tranquilos:</b> no hace falta entender el código. Todo lo que hay que llevar a otro lado tiene un botón <b>⧉ COPIAR</b>. Los textos largos están plegados y se abren con <b>VER EL TEXTO</b> solo si les da curiosidad.</p>
 
   <section class="block" aria-labelledby="logro">
-    <span class="num">01</span>
+    <span class="num"></span>
     <h2 id="logro">Qué van a lograr</h2>
     <p>Una página que abre con doble clic, con el nombre de su terminal arriba y cuatro <a class="w" href="glosario.html#pestana">pestañas</a>: <em>Mercado</em>, <em>Carteras</em>, <em>Python &amp; Colab</em> y <em>API &amp; Alertas</em>. Son las mismas que tiene la terminal final.</p>
     <div class="mock" aria-label="Maqueta de cómo se ve la página al terminar el paso 1">
@@ -47,49 +45,8 @@
     </div>
   </section>
 
-  <section class="block" aria-labelledby="flujo">
-    <span class="num">02</span>
-    <h2 id="flujo">El flujo de este paso (y de todos los que siguen)</h2>
-    <div class="diagram">
-      <iframe src="diagramas/p1-esqueleto.html" title="Diagrama del ciclo de trabajo" loading="lazy"></iframe>
-      <div class="diagram-foot"><span>Este ciclo se repite en los pasos 1 a 6.</span><a href="diagramas/p1-esqueleto.html" target="_blank" rel="noopener">ABRIR EN PANTALLA COMPLETA ↗</a></div>
-    </div>
-    <ul class="legend-read">
-      <li><b>Copiar prompt</b> · Pegan el prompt del paso. A partir del paso 2, <em>además</em> pegan el archivo actual completo.</li>
-      <li><b>IA responde → Guardar finlab.html</b> · La IA devuelve el archivo entero. Lo copian y reemplazan todo el contenido anterior.</li>
-      <li><b>Abrir con doble clic</b> · Se abre en el <a class="w" href="glosario.html#navegador">navegador</a>. Si queda en blanco, miran la <a class="w" href="glosario.html#consola">consola</a>.</li>
-      <li><b>Comprobar</b> · El auditor recorre la lista de la sección 06. Si sale bien → <b>Guardar versión</b>. Si algo falla → <b>Prompt de rescate</b>, que vuelve a la IA con el error.</li>
-    </ul>
-  </section>
-
-  <section class="block" aria-labelledby="palabras">
-    <span class="num">03</span>
-    <h2 id="palabras">Palabras nuevas de este paso</h2>
-    <dl class="terms">
-      <div class="term-card"><dt>HTML</dt><dd>El tipo de archivo de las páginas web. <a href="glosario.html#html">Más →</a></dd></div>
-      <div class="term-card"><dt>Consola (F12)</dt><dd>Donde el navegador muestra los errores en rojo. <a href="glosario.html#consola">Más →</a></dd></div>
-      <div class="term-card"><dt>React · Babel</dt><dd>Las herramientas con las que está hecha la terminal. <a href="glosario.html#react">Más →</a></dd></div>
-      <div class="term-card"><dt>Versión</dt><dd>Una copia guardada que funcionaba. <a href="glosario.html#version">Más →</a></dd></div>
-    </dl>
-  </section>
-
-  <section class="block" aria-labelledby="hacer">
-    <span class="num">04</span>
-    <h2 id="hacer">Qué hacer, clic por clic</h2>
-    <ol class="do">
-      <li><b>Copien el prompt</b> de la sección 05 y péguenlo en el mismo chat del paso 0.</li>
-      <li><b>Esperen la respuesta completa.</b> Tiene que empezar con <span class="code-inline">&lt;!DOCTYPE html&gt;</span> y terminar con <span class="code-inline">&lt;/html&gt;</span>. La mayoría de los chats muestran un botón <em>Copiar</em> arriba del bloque de código.</li>
-      <li><b>Creen el archivo:</b> en Windows, abran el Bloc de notas, peguen, y en <em>Archivo → Guardar como</em> elijan la carpeta <span class="code-inline">finlab</span>, pongan de nombre <span class="code-inline">finlab.html</span> y en <em>Tipo</em> elijan <em>Todos los archivos</em>. En Mac, usen TextEdit en <em>Formato → Convertir a texto sin formato</em>.</li>
-      <li><b>Hagan doble clic</b> en <span class="code-inline">finlab.html</span>. Se abre en el navegador.</li>
-      <li><b>Abran la consola</b> con <kbd>F12</kbd> → pestaña <em>Console</em>. No debería haber líneas en rojo.</li>
-      <li><b>El auditor comprueba</b> la lista de la sección 06.</li>
-      <li><b>Guarden una copia</b> del archivo como <span class="code-inline">finlab-v1.html</span>. A partir de ahora siempre trabajan sobre <span class="code-inline">finlab.html</span> y guardan copias numeradas.</li>
-    </ol>
-    <div class="note warn"><b>Ojo con el Bloc de notas:</b> si el archivo queda como <span class="code-inline">finlab.html.txt</span>, el navegador no lo abre como página. En el Explorador de archivos, activen <em>Ver → Extensiones de nombre de archivo</em> para verlo.</div>
-  </section>
-
   <section class="block" data-section="prompts" aria-labelledby="prompt">
-    <span class="num">05</span>
+    <span class="num"></span>
     <h2 id="prompt">El prompt</h2>
     <div class="prompt">
       <div class="prompt-h"><div><span class="t">PROMPT · PASO 1</span><div class="d">Arranca de cero: todavía no hay archivo para pegar.</div></div><button class="copy" data-copy="#p1" type="button">COPIAR</button></div>
@@ -104,8 +61,23 @@ Todavía no agregues datos ni gráficos.</pre></div>
     </div>
   </section>
 
+  <section class="block" aria-labelledby="hacer">
+    <span class="num"></span>
+    <h2 id="hacer">Qué hacer, clic por clic</h2>
+    <ol class="do">
+      <li><b>Copien el prompt</b> de arriba y péguenlo en el mismo chat del paso 0.</li>
+      <li><b>Esperen la respuesta completa.</b> Tiene que empezar con <span class="code-inline">&lt;!DOCTYPE html&gt;</span> y terminar con <span class="code-inline">&lt;/html&gt;</span>. La mayoría de los chats muestran un botón <em>Copiar</em> arriba del bloque de código.</li>
+      <li><b>Creen el archivo:</b> en Windows, abran el Bloc de notas, peguen, y en <em>Archivo → Guardar como</em> elijan la carpeta <span class="code-inline">finlab</span>, pongan de nombre <span class="code-inline">finlab.html</span> y en <em>Tipo</em> elijan <em>Todos los archivos</em>. En Mac, usen TextEdit en <em>Formato → Convertir a texto sin formato</em>.</li>
+      <li><b>Hagan doble clic</b> en <span class="code-inline">finlab.html</span>. Se abre en el navegador.</li>
+      <li><b>Abran la consola</b> con <kbd>F12</kbd> → pestaña <em>Console</em>. No debería haber líneas en rojo.</li>
+      <li><b>El auditor comprueba</b> la lista de “Cómo comprobar”.</li>
+      <li><b>Guarden una copia</b> del archivo como <span class="code-inline">finlab-v1.html</span>. A partir de ahora siempre trabajan sobre <span class="code-inline">finlab.html</span> y guardan copias numeradas.</li>
+    </ol>
+    <div class="note warn"><b>Ojo con el Bloc de notas:</b> si el archivo queda como <span class="code-inline">finlab.html.txt</span>, el navegador no lo abre como página. En el Explorador de archivos, activen <em>Ver → Extensiones de nombre de archivo</em> para verlo.</div>
+  </section>
+
   <section class="block" aria-labelledby="comprobar">
-    <span class="num">06</span>
+    <span class="num"></span>
     <h2 id="comprobar">Cómo comprobar</h2>
     <ul class="check">
       <li><b>Abre con doble clic</b> y la consola (F12) no muestra errores en rojo.</li>
@@ -116,7 +88,7 @@ Todavía no agregues datos ni gráficos.</pre></div>
   </section>
 
   <section class="block" aria-labelledby="falla">
-    <span class="num">07</span>
+    <span class="num"></span>
     <h2 id="falla">Si algo falla</h2>
     <div class="note tip"><b>¿Se trabaron después de tres intentos?</b> Esta es una versión que ya cumple todo lo de este paso. Pueden abrirla para comparar o bajarla y seguir con el próximo. <a class="btn" href="rescate/finlab-v1.html" target="_blank" rel="noopener">VER EL RESULTADO</a> <a class="btn btn-primary" href="rescate/finlab-v1.html" download="finlab.html">⬇ BAJAR LA VERSIÓN DE RESCATE</a></div>
     <div class="prompt">
@@ -135,6 +107,33 @@ Te paso el archivo completo. No agregues funciones nuevas: encontrá la causa, e
       <li><b>Nada funciona después de tres intentos:</b> vuelvan a la última versión guardada y pidan el cambio en partes más chicas.</li>
     </ul>
   </section>
+
+  <details class="more" id="entender">
+    <summary>Para entender más <small>· cómo funciona y palabras nuevas</small></summary>
+
+  <section class="block" aria-labelledby="flujo">
+    <span class="num"></span>
+    <h2 id="flujo">El flujo de este paso (y de todos los que siguen)</h2>
+    <div class="flow">
+      <div class="flow-row"><span class="n">1</span><div><h4>Pedir</h4><p>Copian el prompt (desde el paso 2, también su archivo) y lo pegan en el chat.</p></div></div>
+      <div class="flow-row"><span class="n">2</span><div><h4>Guardar</h4><p>Reemplazan todo el contenido de finlab.html por lo que devolvió la IA.</p></div></div>
+      <div class="flow-row"><span class="n">3</span><div><h4>Probar</h4><p>Lo abren con doble clic y miran que no haya errores.</p></div></div>
+      <div class="flow-row"><span class="n">4</span><div><h4>Comprobar</h4><p>El auditor recorre la lista. Si sale bien, guardan una versión; si falla, usan el prompt de rescate y vuelven a pedir.</p></div></div>
+    </div>
+    <p style="margin-top:14px"><a class="btn" href="diagramas/p1-esqueleto.html" target="_blank" rel="noopener">VER EL DIAGRAMA COMPLETO ↗</a></p>
+  </section>
+
+  <section class="block" aria-labelledby="palabras">
+    <span class="num"></span>
+    <h2 id="palabras">Palabras nuevas de este paso</h2>
+    <dl class="terms">
+      <div class="term-card"><dt>HTML</dt><dd>El tipo de archivo de las páginas web. <a href="glosario.html#html">Más →</a></dd></div>
+      <div class="term-card"><dt>Consola (F12)</dt><dd>Donde el navegador muestra los errores en rojo. <a href="glosario.html#consola">Más →</a></dd></div>
+      <div class="term-card"><dt>React · Babel</dt><dd>Las herramientas con las que está hecha la terminal. <a href="glosario.html#react">Más →</a></dd></div>
+      <div class="term-card"><dt>Versión</dt><dd>Una copia guardada que funcionaba. <a href="glosario.html#version">Más →</a></dd></div>
+    </dl>
+  </section>
+  </details>
 
   <div class="pager">
     <a href="paso-0.html">← PASO 0 · PREPARAR</a>

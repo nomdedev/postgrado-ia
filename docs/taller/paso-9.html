@@ -32,11 +32,9 @@
   <h1>La terminal terminada: <span class="code-inline">127.0.0.1:4173/#/guiado</span></h1>
   <p class="lede">Ya construyeron cada pieza. Ahora abren la terminal FIN·LAB completa en la pestaña <b>EMPEZAR</b> (<a class="w" href="glosario.html#hash">#/guiado</a>), recorren su automatización guiada, la prueban en n8n y comparan con lo que hicieron ustedes.</p>
   <div class="meta"><span class="chip">PARTE A · <b>25 MIN</b></span><span class="chip">PARTE B · <b>20 MIN</b></span><span class="chip">SIN INSTALAR NADA</span><span class="chip">N8N</span><span class="chip">SALIDA: <b>3/3 EJERCICIOS</b></span></div>
-  <ol class="mission" aria-label="Tu misión en este paso"><li><b>Abran la terminal</b>publicada, con doble clic o en 127.0.0.1:4173</li><li><b>Abran #/guiado</b>y elijan qué señal buscar</li><li><b>Pruébenlo en n8n</b>y resuelvan los 3 ejercicios en grupo</li></ol>
-  <p class="calm"><b>Tranquilos:</b> no hace falta entender el código. Todo lo que hay que llevar a otro lado tiene un botón <b>⧉ COPIAR</b>. Los textos largos están plegados y se abren con <b>VER EL TEXTO</b> solo si les da curiosidad.</p>
 
   <section class="block" aria-labelledby="logro">
-    <span class="num">01</span>
+    <span class="num"></span>
     <h2 id="logro">Qué van a lograr</h2>
     <p>Ver en el navegador la pantalla “Armá tu primera automatización”, descargar el workflow que genera, ejecutarlo en n8n y resolver los tres ejercicios en grupo del final de la página hasta que el contador diga <b>3/3 RESUELTOS</b>.</p>
     <div class="mock" aria-label="Maqueta de la pestaña EMPEZAR">
@@ -48,34 +46,8 @@
     </div>
   </section>
 
-  <section class="block" aria-labelledby="flujo">
-    <span class="num">02</span>
-    <h2 id="flujo">El flujo: de tu computadora a n8n y de vuelta</h2>
-    <div class="diagram">
-      <iframe src="diagramas/p9-guiado.html" title="Diagrama para llegar a la pestaña guiada" loading="lazy"></iframe>
-      <div class="diagram-foot"><span>Servidor local → terminal → n8n → ejercicios.</span><a href="diagramas/p9-guiado.html" target="_blank" rel="noopener">ABRIR EN PANTALLA COMPLETA ↗</a></div>
-    </div>
-    <ul class="legend-read">
-      <li><b>Servidor local → Navegador</b> · Un pequeño programa sirve la carpeta del proyecto en <a class="w" href="glosario.html#localhost">127.0.0.1</a>, <a class="w" href="glosario.html#puerto">puerto</a> 4173. Abren esa dirección con <span class="code-inline">/#/guiado</span> al final.</li>
-      <li><b>Elegir señal → Descargar JSON</b> · La página arma un workflow de n8n según la señal elegida: <span class="code-inline">monitor-mercado-n8n.json</span>.</li>
-      <li><b>Importar archivo → Ejecutar workflow</b> · Igual que en el paso 8. Este workflow usa una muestra incluida (AAPL, GGAL, YPF), así que no necesita URL ni credenciales.</li>
-      <li><b>Ejercicios en grupo</b> · Comparan lo que predijeron con la salida que se activó en n8n.</li>
-    </ul>
-  </section>
-
-  <section class="block" aria-labelledby="palabras">
-    <span class="num">03</span>
-    <h2 id="palabras">Palabras nuevas de este paso</h2>
-    <dl class="terms">
-      <div class="term-card"><dt>Servidor local</dt><dd>Tu computadora sirviendo una carpeta como sitio web. <a href="glosario.html#servidor-local">Más →</a></dd></div>
-      <div class="term-card"><dt>127.0.0.1 · puerto</dt><dd>La dirección de tu propia compu y el “departamento” 4173. <a href="glosario.html#localhost">Más →</a></dd></div>
-      <div class="term-card"><dt>Terminal</dt><dd>La ventana de texto para dar órdenes. <a href="glosario.html#terminal">Más →</a></dd></div>
-      <div class="term-card"><dt>#/guiado</dt><dd>La parte de la dirección que elige la pestaña. <a href="glosario.html#hash">Más →</a></dd></div>
-    </dl>
-  </section>
-
   <section class="block" aria-labelledby="hacer">
-    <span class="num">04</span>
+    <span class="num"></span>
     <h2 id="hacer">Qué hacer, clic por clic</h2>
     <h3 style="margin-top:14px">A · Abrir la terminal (elijan un camino)</h3>
     <p>Los tres caminos llevan a la misma pantalla. Empiecen por el primero; los otros dos son para cuando no hay internet o quieren verla en <span class="code-inline">127.0.0.1:4173</span>, como en clase.</p>
@@ -117,8 +89,20 @@
     </ol>
   </section>
 
+  <section class="block" aria-labelledby="comprobar">
+    <span class="num"></span>
+    <h2 id="comprobar">Cómo comprobar</h2>
+    <ul class="check">
+      <li><b>La dirección</b> del navegador termina en <span class="code-inline">/#/guiado</span> (o tocaron la pestaña EMPEZAR) y esa pestaña está marcada.</li>
+      <li><b>En n8n,</b> la salida que se activa coincide con la predicción que anotaron, o pueden explicar por qué no.</li>
+      <li><b>El contador</b> de ejercicios dice 3/3.</li>
+      <li><b>Cada grupo presenta</b> un hallazgo de la auditoría que confirmó a mano y uno que la IA reportó y resultó falso.</li>
+    </ul>
+    <div class="note tip"><b>Pregunta de cierre del taller:</b> ¿en qué paso la IA se equivocó más y cómo lo detectaron? Esa respuesta es el aprendizaje más importante: la IA escribe rápido, pero la verificación sigue siendo trabajo de ustedes.</div>
+  </section>
+
   <section class="block" data-section="prompts" aria-labelledby="prompt">
-    <span class="num">05</span>
+    <span class="num"></span>
     <h2 id="prompt">Parte B · El prompt de cierre: auditoría cruzada</h2>
     <div class="note tip"><b>Parte B · 20 minutos.</b> Si la clase no da para más, háganla al comienzo de la clase siguiente: solo necesitan su <span class="code-inline">finlab.html</span> y un chat nuevo.</div>
     <p>Cada grupo le pasa su <span class="code-inline">finlab.html</span> a otro. El grupo que lo recibe usa este prompt en un chat <b>nuevo</b> (la IA que escribió el código no debería corregirse a sí misma) y después verifica a mano dos de los hallazgos.</p>
@@ -137,20 +121,8 @@ Para cada hallazgo indicá: dónde está (nombre de la función o sección), qu�
     </div>
   </section>
 
-  <section class="block" aria-labelledby="comprobar">
-    <span class="num">06</span>
-    <h2 id="comprobar">Cómo comprobar</h2>
-    <ul class="check">
-      <li><b>La dirección</b> del navegador termina en <span class="code-inline">/#/guiado</span> (o tocaron la pestaña EMPEZAR) y esa pestaña está marcada.</li>
-      <li><b>En n8n,</b> la salida que se activa coincide con la predicción que anotaron, o pueden explicar por qué no.</li>
-      <li><b>El contador</b> de ejercicios dice 3/3.</li>
-      <li><b>Cada grupo presenta</b> un hallazgo de la auditoría que confirmó a mano y uno que la IA reportó y resultó falso.</li>
-    </ul>
-    <div class="note tip"><b>Pregunta de cierre del taller:</b> ¿en qué paso la IA se equivocó más y cómo lo detectaron? Esa respuesta es el aprendizaje más importante: la IA escribe rápido, pero la verificación sigue siendo trabajo de ustedes.</div>
-  </section>
-
   <section class="block" aria-labelledby="falla">
-    <span class="num">07</span>
+    <span class="num"></span>
     <h2 id="falla">Si algo falla</h2>
     <ul>
       <li><b>En Windows se abre la Microsoft Store, o dice que no se encontró Python o que <span class="code-inline">py</span> no se reconoce:</b> Python no está instalado. No hace falta: usen el camino 1 (versión publicada) o el 2 (doble clic).</li>
@@ -160,6 +132,33 @@ Para cada hallazgo indicá: dónde está (nombre de la función o sección), qu�
       <li><b>“No se puede acceder a este sitio”:</b> la terminal con el servidor se cerró. Vuelvan al punto A.3.</li>
     </ul>
   </section>
+
+  <details class="more" id="entender">
+    <summary>Para entender más <small>· cómo funciona y palabras nuevas</small></summary>
+
+  <section class="block" aria-labelledby="flujo">
+    <span class="num"></span>
+    <h2 id="flujo">El flujo: de tu computadora a n8n y de vuelta</h2>
+    <div class="flow">
+      <div class="flow-row"><span class="n">1</span><div><h4>Abren la terminal</h4><p>La versión publicada, con doble clic o en 127.0.0.1:4173.</p></div></div>
+      <div class="flow-row"><span class="n">2</span><div><h4>Eligen una señal</h4><p>Y bajan el workflow que arma la página.</p></div></div>
+      <div class="flow-row"><span class="n">3</span><div><h4>Lo ejecutan en n8n</h4><p>Y miran qué salida se activa.</p></div></div>
+      <div class="flow-row"><span class="n">4</span><div><h4>Comparan y discuten</h4><p>Contra lo que predijeron, con los tres ejercicios en grupo.</p></div></div>
+    </div>
+    <p style="margin-top:14px"><a class="btn" href="diagramas/p9-guiado.html" target="_blank" rel="noopener">VER EL DIAGRAMA COMPLETO ↗</a></p>
+  </section>
+
+  <section class="block" aria-labelledby="palabras">
+    <span class="num"></span>
+    <h2 id="palabras">Palabras nuevas de este paso</h2>
+    <dl class="terms">
+      <div class="term-card"><dt>Servidor local</dt><dd>Tu computadora sirviendo una carpeta como sitio web. <a href="glosario.html#servidor-local">Más →</a></dd></div>
+      <div class="term-card"><dt>127.0.0.1 · puerto</dt><dd>La dirección de tu propia compu y el “departamento” 4173. <a href="glosario.html#localhost">Más →</a></dd></div>
+      <div class="term-card"><dt>Terminal</dt><dd>La ventana de texto para dar órdenes. <a href="glosario.html#terminal">Más →</a></dd></div>
+      <div class="term-card"><dt>#/guiado</dt><dd>La parte de la dirección que elige la pestaña. <a href="glosario.html#hash">Más →</a></dd></div>
+    </dl>
+  </section>
+  </details>
 
   <div class="pager">
     <a href="paso-8.html">← PASO 8 · N8N</a>

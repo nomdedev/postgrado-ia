@@ -32,11 +32,10 @@
   <h1>Preparar el equipo, el chat y las reglas del proyecto</h1>
   <p class="lede">La IA trabaja mejor cuando sabe desde el principio qué están construyendo y con qué reglas. En este paso reparten roles, crean la carpeta de trabajo y le dan a la IA un <a class="w" href="glosario.html#prompt-contexto">prompt de contexto</a> que va a valer para todo el taller.</p>
   <div class="meta"><span class="chip"><b>10 MIN</b></span><span class="chip">SIN CÓDIGO</span><span class="chip">SALIDA: <b>CHAT LISTO</b></span></div>
-  <ol class="mission" aria-label="Tu misión en este paso"><li><b>Repartan los roles</b>piloto, redactor, auditor y presentador</li><li><b>Armen el prompt de contexto</b>completando 4 casilleros</li><li><b>Péguenlo en el chat</b>y esperen que la IA diga “Entendido”</li></ol>
   <p class="calm"><b>Tranquilos:</b> no hace falta entender el código. Todo lo que hay que llevar a otro lado tiene un botón <b>⧉ COPIAR</b>. Los textos largos están plegados y se abren con <b>VER EL TEXTO</b> solo si les da curiosidad.</p>
 
   <section class="block" aria-labelledby="logro">
-    <span class="num">01</span>
+    <span class="num"></span>
     <h2 id="logro">Qué van a lograr</h2>
     <p>Un chat de IA que ya “sabe” que van a construir una terminal financiera en un solo <a class="w" href="glosario.html#html">archivo HTML</a>, con datos simulados y en español, y una carpeta donde guardar cada versión.</p>
     <div class="panel"><div class="panel-h"><span class="panel-t">RESULTADO ESPERADO · RESPUESTA DE LA IA</span></div><div class="panel-b"><pre>Entendido. Vamos a construir “FIN·LAB Grupo 1” en un único archivo HTML,
@@ -44,48 +43,8 @@ con React y Recharts por CDN, datos simulados deterministas y textos en español
 Cuando me pases el primer paso, te devuelvo el archivo completo.</pre></div></div>
   </section>
 
-  <section class="block" aria-labelledby="flujo">
-    <span class="num">02</span>
-    <h2 id="flujo">El flujo de este paso</h2>
-    <div class="diagram">
-      <iframe src="diagramas/p0-preparar.html" title="Diagrama del paso 0" loading="lazy"></iframe>
-      <div class="diagram-foot"><span>Cada fila es un “quién”: ustedes, la IA o la computadora.</span><a href="diagramas/p0-preparar.html" target="_blank" rel="noopener">ABRIR EN PANTALLA COMPLETA ↗</a></div>
-    </div>
-    <ul class="legend-read">
-      <li><b>Repartir roles</b> · Cada paso tiene un <em>piloto</em> (maneja el chat y los archivos), un <em>redactor</em> (adapta el prompt), un <em>auditor</em> (comprueba los números) y un <em>presentador</em> (cuenta qué pasó). Rotan en cada paso.</li>
-      <li><b>Constructor</b> · Más abajo completan nombre, activos, público y estilo. El texto del prompt se arma solo.</li>
-      <li><b>Prompt de contexto → IA responde</b> · Lo pegan en un chat nuevo. La IA tiene que contestar “Entendido” y nada más.</li>
-      <li><b>Carpeta finlab → Listos para P1</b> · Ahí va a vivir el archivo y sus versiones.</li>
-    </ul>
-  </section>
-
-  <section class="block" aria-labelledby="palabras">
-    <span class="num">03</span>
-    <h2 id="palabras">Palabras nuevas de este paso</h2>
-    <dl class="terms">
-      <div class="term-card"><dt>Prompt</dt><dd>El texto con el que le pedís algo a la IA. <a href="glosario.html#prompt">Más →</a></dd></div>
-      <div class="term-card"><dt>Prompt de contexto</dt><dd>Las reglas generales, pegadas una sola vez al inicio. <a href="glosario.html#prompt-contexto">Más →</a></dd></div>
-      <div class="term-card"><dt>CDN</dt><dd>De donde la página descarga React y los gráficos, sin instalar nada. <a href="glosario.html#cdn">Más →</a></dd></div>
-      <div class="term-card"><dt>Datos simulados</dt><dd>Precios inventados por una fórmula, iguales para todos. <a href="glosario.html#simulacion">Más →</a></dd></div>
-    </dl>
-  </section>
-
-  <section class="block" aria-labelledby="hacer">
-    <span class="num">04</span>
-    <h2 id="hacer">Qué hacer, clic por clic</h2>
-    <ol class="do">
-      <li><b>Repartan los roles</b> y anoten en un papel quién hace qué en los pasos 1 a 3. Después rotan.</li>
-      <li><b>Creen la carpeta</b> <span class="code-inline">finlab</span> en el escritorio de la computadora del piloto.</li>
-      <li><b>Abran un chat nuevo</b> en ChatGPT, Claude o Gemini. Usen uno solo para todo el taller. Si se cierra, abran uno nuevo, vuelvan al punto 5 de esta lista (el constructor) y, desde el paso 2 del taller en adelante, peguen también su <span class="code-inline">finlab.html</span> actual.</li>
-      <li><b>Regla del grupo:</b> al chat de IA no se pega nada que no publicarían: ni datos de clientes, ni carteras reales, ni contraseñas. En este taller todo es simulado.</li>
-      <li><b>Completen el constructor</b> de abajo. Si no saben qué poner, dejen los valores que trae.</li>
-      <li><b>Toquen “COPIAR PROMPT”</b>, péguenlo en el chat y envíenlo.</li>
-      <li><b>Lean la respuesta.</b> Si la IA ya empezó a escribir código, respóndanle: “Todavía no. Esperá el paso 1.”</li>
-    </ol>
-  </section>
-
   <section class="block" data-section="prompts" aria-labelledby="prompt">
-    <span class="num">05</span>
+    <span class="num"></span>
     <h2 id="prompt">El prompt de contexto</h2>
     <div class="builder" data-builder>
       <div class="builder-h"><span class="t">ARMÁ EL CONTEXTO DE TU GRUPO</span><span class="t" style="color:var(--dim)">EDITÁ Y COPIÁ</span></div>
@@ -113,8 +72,22 @@ Si algo de lo que pido es ambiguo, preguntame antes de escribir código. Respond
     <div class="note tip"><b>Por qué cada regla:</b> la 1 y la 2 evitan instalar programas; la 3 evita que la IA diga que los datos son reales; la 5 evita que tengan que pegar pedazos de código a mano (la causa número uno de páginas en blanco); la 6 permite que el auditor encuentre cada fórmula; la 7 les deja la comprobación lista.</div>
   </section>
 
+  <section class="block" aria-labelledby="hacer">
+    <span class="num"></span>
+    <h2 id="hacer">Qué hacer, clic por clic</h2>
+    <ol class="do">
+      <li><b>Repartan los roles</b> y anoten en un papel quién hace qué en los pasos 1 a 3. Después rotan.</li>
+      <li><b>Creen la carpeta</b> <span class="code-inline">finlab</span> en el escritorio de la computadora del piloto.</li>
+      <li><b>Abran un chat nuevo</b> en ChatGPT, Claude o Gemini. Usen uno solo para todo el taller. Si se cierra, abran uno nuevo, vuelvan al punto 5 de esta lista (el constructor) y, desde el paso 2 del taller en adelante, peguen también su <span class="code-inline">finlab.html</span> actual.</li>
+      <li><b>Regla del grupo:</b> al chat de IA no se pega nada que no publicarían: ni datos de clientes, ni carteras reales, ni contraseñas. En este taller todo es simulado.</li>
+      <li><b>Completen el constructor</b> de arriba. Si no saben qué poner, dejen los valores que trae.</li>
+      <li><b>Toquen “COPIAR PROMPT”</b>, péguenlo en el chat y envíenlo.</li>
+      <li><b>Lean la respuesta.</b> Si la IA ya empezó a escribir código, respóndanle: “Todavía no. Esperá el paso 1.”</li>
+    </ol>
+  </section>
+
   <section class="block" aria-labelledby="comprobar">
-    <span class="num">06</span>
+    <span class="num"></span>
     <h2 id="comprobar">Cómo comprobar</h2>
     <ul class="check">
       <li><b>La IA respondió “Entendido”</b> (o algo equivalente) sin escribir código.</li>
@@ -124,13 +97,40 @@ Si algo de lo que pido es ambiguo, preguntame antes de escribir código. Respond
   </section>
 
   <section class="block" aria-labelledby="falla">
-    <span class="num">07</span>
+    <span class="num"></span>
     <h2 id="falla">Si algo falla</h2>
     <ul>
       <li><b>La IA escribió código igual:</b> no pasa nada. Respondan “Gracias, todavía no. Esperá el paso 1” y sigan.</li>
       <li><b>La IA se niega o dice que no puede crear archivos:</b> aclárenle “Solo escribí el contenido del archivo; yo lo guardo”.</li>
     </ul>
   </section>
+
+  <details class="more" id="entender">
+    <summary>Para entender más <small>· cómo funciona y palabras nuevas</small></summary>
+
+  <section class="block" aria-labelledby="flujo">
+    <span class="num"></span>
+    <h2 id="flujo">El flujo de este paso</h2>
+    <div class="flow">
+      <div class="flow-row"><span class="n">1</span><div><h4>Repartan los roles</h4><p>Piloto, redactor, auditor y presentador. Rotan en cada paso.</p></div></div>
+      <div class="flow-row"><span class="n">2</span><div><h4>Armen el prompt de contexto</h4><p>Completan cuatro casilleros y lo copian con un botón.</p></div></div>
+      <div class="flow-row"><span class="n">3</span><div><h4>Péguenlo en un chat nuevo</h4><p>La IA responde “Entendido” y queda lista para el paso 1.</p></div></div>
+      <div class="flow-row"><span class="n">4</span><div><h4>Creen la carpeta finlab</h4><p>Ahí van a guardar cada versión del archivo.</p></div></div>
+    </div>
+    <p style="margin-top:14px"><a class="btn" href="diagramas/p0-preparar.html" target="_blank" rel="noopener">VER EL DIAGRAMA COMPLETO ↗</a></p>
+  </section>
+
+  <section class="block" aria-labelledby="palabras">
+    <span class="num"></span>
+    <h2 id="palabras">Palabras nuevas de este paso</h2>
+    <dl class="terms">
+      <div class="term-card"><dt>Prompt</dt><dd>El texto con el que le pedís algo a la IA. <a href="glosario.html#prompt">Más →</a></dd></div>
+      <div class="term-card"><dt>Prompt de contexto</dt><dd>Las reglas generales, pegadas una sola vez al inicio. <a href="glosario.html#prompt-contexto">Más →</a></dd></div>
+      <div class="term-card"><dt>CDN</dt><dd>De donde la página descarga React y los gráficos, sin instalar nada. <a href="glosario.html#cdn">Más →</a></dd></div>
+      <div class="term-card"><dt>Datos simulados</dt><dd>Precios inventados por una fórmula, iguales para todos. <a href="glosario.html#simulacion">Más →</a></dd></div>
+    </dl>
+  </section>
+  </details>
 
   <div class="pager">
     <a href="index.html">← MAPA DEL TALLER</a>

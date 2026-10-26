@@ -59,21 +59,12 @@
       "width": 160
     },
     {
-      "id": "sma",
+      "id": "medias",
       "lane": "medias",
       "col": 1,
       "type": "backend",
-      "label": "SMA 20 / 50",
-      "sublabel": "promedio simple",
-      "width": 160
-    },
-    {
-      "id": "ema",
-      "lane": "medias",
-      "col": 2,
-      "type": "backend",
-      "label": "EMA 12 / 26",
-      "sublabel": "alfa = 2 / (n+1)",
+      "label": "Medias móviles",
+      "sublabel": "SMA 20/50 · EMA 12/26",
       "width": 160
     },
     {
@@ -125,20 +116,16 @@
   "edges": [
     {
       "from": "cierres",
-      "to": "sma"
-    },
-    {
-      "from": "sma",
-      "to": "ema"
+      "to": "medias"
     },
     {
       "from": "cierres",
       "to": "rsi"
     },
     {
-      "from": "ema",
+      "from": "medias",
       "to": "signal",
-      "label": "comparar medias"
+      "label": "cortas vs largas"
     },
     {
       "from": "signal",

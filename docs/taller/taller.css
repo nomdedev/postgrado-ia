@@ -118,3 +118,14 @@ body{font-size:16px}
 /* lab.css pone nowrap a .code-inline: en el taller las fórmulas largas tienen que poder cortarse */
 .page .code-inline{white-space:normal;overflow-wrap:anywhere}
 .mock{overflow-x:auto}
+
+/* ---------- Anatomía del paso: "Hacer" abierto + "Para entender más" plegado (etapa 3) ---------- */
+main.page{counter-reset:seccion}
+.block>.num{counter-increment:seccion}
+.block>.num::before{content:counter(seccion,decimal-leading-zero)}
+.more{margin-top:44px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+.more>summary{cursor:pointer;padding:16px 18px;font:600 17px var(--sans);list-style-position:inside}
+.more>summary small{font-weight:400;color:var(--mut)}
+.more>summary:hover{color:var(--amb)}
+.more[open]>summary{border-bottom:1px solid var(--line)}
+.more>.block{margin:0;padding:18px;border-top:0}

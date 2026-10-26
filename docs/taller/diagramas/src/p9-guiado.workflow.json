@@ -2,7 +2,7 @@
   "schema_version": 2,
   "diagram_type": "workflow",
   "meta": {
-    "title": "P9 · Llegar a 127.0.0.1:4173/#/guiado",
+    "title": "P9 · La terminal terminada en #/guiado",
     "quality_profile": "showcase",
     "legend": {
       "entries": {
@@ -46,21 +46,12 @@
   ],
   "nodes": [
     {
-      "id": "server",
-      "lane": "pc",
-      "col": 0,
-      "type": "backend",
-      "label": "Servidor local",
-      "sublabel": "http.server 4173",
-      "width": 160
-    },
-    {
-      "id": "browser",
+      "id": "abrir",
       "lane": "pc",
       "col": 1,
       "type": "frontend",
-      "label": "Navegador",
-      "sublabel": "abrir /#/guiado",
+      "label": "Abrir la terminal",
+      "sublabel": "publicada o 127.0.0.1:4173",
       "width": 160
     },
     {
@@ -111,11 +102,7 @@
   ],
   "edges": [
     {
-      "from": "server",
-      "to": "browser"
-    },
-    {
-      "from": "browser",
+      "from": "abrir",
       "to": "elegir"
     },
     {

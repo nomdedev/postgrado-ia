@@ -53,10 +53,21 @@ test('el taller: 10 pasos encadenados, cada uno con diagrama Archify, glosario, 
     const html = page(file);
     assert.match(html, /<html lang="es">/, `${file}: falta lang="es"`);
     assert.match(html, /src="taller\.js"/, `${file}: no carga taller.js`);
-    assert.match(html, /class="mission"/, `${file}: falta la misión del paso`);
     assert.match(html, /localStorage\.getItem\("finlab-tema"\)/, `${file}: no aplica el tema guardado antes de pintar`);
-    const diagram = html.match(/<iframe src="(diagramas\/[a-z0-9-]+\.html)"/);
-    assert.ok(diagram && fs.existsSync(path.join(TALLER, diagram[1])), `${file}: falta el diagrama Archify`);
+    // Anatomía (plan de reestructura, etapa 3): "Hacer" abierto y "Para entender más" plegado al final.
+    const entender = html.indexOf('<details class="more"');
+    assert.ok(entender > 0, `${file}: falta el bloque plegable "Para entender más"`);
+    for (const id of ['logro', 'prompt', 'hacer', 'comprobar', 'falla']) {
+      const pos = html.indexOf(`aria-labelledby="${id}"`);
+      assert.ok(pos > 0 && pos < entender, `${file}: la sección "${id}" tiene que estar en la zona Hacer`);
+    }
+    for (const id of ['flujo', 'palabras']) {
+      assert.ok(html.indexOf(`aria-labelledby="${id}"`) > entender, `${file}: "${id}" tiene que ir dentro de "Para entender más"`);
+    }
+    assert.doesNotMatch(html, /sección 0\d|class="mission"|<iframe/, `${file}: quedó una referencia "sección 0N", la misión repetida o un diagrama embebido`);
+    assert.match(html, /<div class="flow">/, `${file}: falta la tira del flujo`);
+    const diagram = html.match(/<a class="btn" href="(diagramas\/[a-z0-9-]+\.html)"/);
+    assert.ok(diagram && fs.existsSync(path.join(TALLER, diagram[1])), `${file}: falta el enlace al diagrama completo`);
     assert.match(html, /href="glosario\.html#/, `${file}: no enlaza el glosario`);
     assert.ok((html.match(/data-copy="#[a-zA-Z0-9-]+"/g) || []).length >= 1, `${file}: sin botones de copiar`);
     for (const [, id] of html.matchAll(/data-copy="#([a-zA-Z0-9-]+)"/g)) {

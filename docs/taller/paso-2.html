@@ -32,12 +32,10 @@
   <h1>Un año de precios simulados que no cambia</h1>
   <p class="lede">La terminal genera 252 <a class="w" href="glosario.html#rueda">ruedas</a> (un año hábil) para cada activo. Parecen aleatorias, pero salen <b>iguales en cada recarga</b> gracias a una <a class="w" href="glosario.html#semilla">semilla</a>. Ojo con lo que garantiza: <b>con el mismo código</b>, cualquiera obtiene los mismos números. Cada grupo tiene su propio código (lo escribió su IA), así que sus números no van a coincidir con los de otro grupo.</p>
   <div class="meta"><span class="chip"><b>15 MIN</b></span><span class="chip">CONSOLA</span><span class="chip">SALIDA: <b>finlab-v2.html</b></span></div>
-  <ol class="mission" aria-label="Tu misión en este paso"><li><b>Copien el prompt</b>con el botón <span class="hl">⧉ COPIAR</span> y péguenlo en el chat, junto con su archivo</li><li><b>Guarden la respuesta</b>en <span class="code-inline">finlab.html</span> y ábranla con doble clic</li><li><b>Comprueben</b>que al recargar salen los mismos números</li></ol>
-  <p class="calm"><b>Tranquilos:</b> no hace falta entender el código. Todo lo que hay que llevar a otro lado tiene un botón <b>⧉ COPIAR</b>. Los textos largos están plegados y se abren con <b>VER EL TEXTO</b> solo si les da curiosidad.</p>
   <div class="note tip"><b>¿Llegan tarde o se rompió el archivo?</b> Bajen la versión con la que termina el paso 1, guárdenla como <span class="code-inline">finlab.html</span> y arranquen este paso desde ahí. <a class="btn" href="rescate/finlab-v1.html" download="finlab.html">⬇ BAJAR EL PUNTO DE PARTIDA (PASO 1)</a></div>
 
   <section class="block" aria-labelledby="logro">
-    <span class="num">01</span>
+    <span class="num"></span>
     <h2 id="logro">Qué van a lograr</h2>
     <p>Todavía no se ve nada nuevo en la pantalla: los datos se generan “por detrás” y se muestran en la <a class="w" href="glosario.html#consola">consola</a> como una tabla de control.</p>
     <div class="mock" aria-label="Ejemplo de la tabla de control en la consola">
@@ -47,47 +45,8 @@
     </div>
   </section>
 
-  <section class="block" aria-labelledby="flujo">
-    <span class="num">02</span>
-    <h2 id="flujo">El flujo: cómo nace un precio simulado</h2>
-    <div class="diagram">
-      <iframe src="diagramas/p2-datos.html" title="Diagrama de la generación de datos" loading="lazy"></iframe>
-      <div class="diagram-foot"><span>De la definición de los activos a la tabla de control.</span><a href="diagramas/p2-datos.html" target="_blank" rel="noopener">ABRIR EN PANTALLA COMPLETA ↗</a></div>
-    </div>
-    <ul class="legend-read">
-      <li><b>TICKERS</b> · Una <a class="w" href="glosario.html#lista">lista</a> con los 8 activos: símbolo, nombre, precio inicial aproximado y volatilidad anual (cuánto se mueve).</li>
-      <li><b>Semilla</b> · Un número fijo por activo que hace que el “azar” sea siempre el mismo. Es lo que garantiza que todos vean los mismos datos.</li>
-      <li><b>simulateSeries() → Retorno diario</b> · Para cada uno de los 252 días hábiles calcula cuánto sube o baja: una tendencia más un movimiento al azar proporcional a la volatilidad.</li>
-      <li><b>Serie { d, c, v }</b> · El resultado: por día, la fecha (<em>d</em>), el cierre (<em>c</em>) y el volumen operado (<em>v</em>).</li>
-      <li><b>Consola</b> · Una tabla para verificar sin necesidad de pantalla.</li>
-    </ul>
-  </section>
-
-  <section class="block" aria-labelledby="palabras">
-    <span class="num">03</span>
-    <h2 id="palabras">Palabras nuevas de este paso</h2>
-    <dl class="terms">
-      <div class="term-card"><dt>Semilla</dt><dd>El número de arranque que hace repetible al azar. <a href="glosario.html#semilla">Más →</a></dd></div>
-      <div class="term-card"><dt>Rueda</dt><dd>Un día hábil de mercado; un año tiene ~252. <a href="glosario.html#rueda">Más →</a></dd></div>
-      <div class="term-card"><dt>Función</dt><dd>Un bloque de código con nombre, como una fórmula. <a href="glosario.html#funcion">Más →</a></dd></div>
-      <div class="term-card"><dt>Objeto { d, c, v }</dt><dd>Un día con fecha, cierre y volumen. <a href="glosario.html#objeto">Más →</a></dd></div>
-    </dl>
-  </section>
-
-  <section class="block" aria-labelledby="hacer">
-    <span class="num">04</span>
-    <h2 id="hacer">Qué hacer, clic por clic</h2>
-    <ol class="do">
-      <li><b>Abran <span class="code-inline">finlab.html</span> con el Bloc de notas</b> (clic derecho → <em>Abrir con</em>), seleccionen todo (<kbd>Ctrl</kbd> + <kbd>A</kbd>) y cópienlo.</li>
-      <li><b>En el chat,</b> peguen primero el prompt de la sección 05 y, debajo, el archivo completo. Envíen.</li>
-      <li><b>Reemplacen</b> todo el contenido de <span class="code-inline">finlab.html</span> por la respuesta y guarden.</li>
-      <li><b>Abran la página</b> y la consola (<kbd>F12</kbd> → <em>Console</em>). Tiene que aparecer la tabla.</li>
-      <li><b>El auditor</b> hace las comprobaciones de la sección 06 y, si todo está bien, guardan <span class="code-inline">finlab-v2.html</span>.</li>
-    </ol>
-  </section>
-
   <section class="block" data-section="prompts" aria-labelledby="prompt">
-    <span class="num">05</span>
+    <span class="num"></span>
     <h2 id="prompt">El prompt</h2>
     <div class="prompt">
       <div class="prompt-h"><div><span class="t">PROMPT · PASO 2</span><div class="d">Pegar debajo el archivo del paso 1.</div></div><button class="copy" data-copy="#p2" type="button">COPIAR</button></div>
@@ -104,8 +63,20 @@ Explicame en 3 líneas, para alguien que no programa, qué es una semilla y por 
     </div>
   </section>
 
+  <section class="block" aria-labelledby="hacer">
+    <span class="num"></span>
+    <h2 id="hacer">Qué hacer, clic por clic</h2>
+    <ol class="do">
+      <li><b>Abran <span class="code-inline">finlab.html</span> con el Bloc de notas</b> (clic derecho → <em>Abrir con</em>), seleccionen todo (<kbd>Ctrl</kbd> + <kbd>A</kbd>) y cópienlo.</li>
+      <li><b>En el chat,</b> peguen primero el prompt de arriba y, debajo, el archivo completo. Envíen.</li>
+      <li><b>Reemplacen</b> todo el contenido de <span class="code-inline">finlab.html</span> por la respuesta y guarden.</li>
+      <li><b>Abran la página</b> y la consola (<kbd>F12</kbd> → <em>Console</em>). Tiene que aparecer la tabla.</li>
+      <li><b>El auditor</b> hace las comprobaciones de “Cómo comprobar” y, si todo está bien, guardan <span class="code-inline">finlab-v2.html</span>.</li>
+    </ol>
+  </section>
+
   <section class="block" aria-labelledby="comprobar">
-    <span class="num">06</span>
+    <span class="num"></span>
     <h2 id="comprobar">Cómo comprobar</h2>
     <div class="note warn"><b>Si la consola no deja pegar:</b> la primera vez, Chrome y Firefox muestran un aviso de seguridad y no pegan nada. Escriban a mano la frase que pide el aviso (en Chrome suele ser <span class="code-inline">allow pasting</span>), presionen <kbd>Enter</kbd> y vuelvan a pegar. Es una protección normal del navegador: peguen solo código de este taller.</div>
     <ul class="check">
@@ -118,7 +89,7 @@ Explicame en 3 líneas, para alguien que no programa, qué es una semilla y por 
   </section>
 
   <section class="block" aria-labelledby="falla">
-    <span class="num">07</span>
+    <span class="num"></span>
     <h2 id="falla">Si algo falla</h2>
     <div class="note tip"><b>¿Se trabaron después de tres intentos?</b> Esta es una versión que ya cumple todo lo de este paso. Pueden abrirla para comparar o bajarla y seguir con el próximo. <a class="btn" href="rescate/finlab-v2.html" target="_blank" rel="noopener">VER EL RESULTADO</a> <a class="btn btn-primary" href="rescate/finlab-v2.html" download="finlab.html">⬇ BAJAR LA VERSIÓN DE RESCATE</a></div>
     <ul>
@@ -127,6 +98,33 @@ Explicame en 3 líneas, para alguien que no programa, qué es una semilla y por 
       <li><b>La página quedó en blanco:</b> usen el <a href="paso-1.html#falla">prompt de rescate del paso 1</a>.</li>
     </ul>
   </section>
+
+  <details class="more" id="entender">
+    <summary>Para entender más <small>· cómo funciona y palabras nuevas</small></summary>
+
+  <section class="block" aria-labelledby="flujo">
+    <span class="num"></span>
+    <h2 id="flujo">El flujo: cómo nace un precio simulado</h2>
+    <div class="flow">
+      <div class="flow-row"><span class="n">1</span><div><h4>Una lista de activos</h4><p>Ocho acciones, cada una con su precio inicial y cuánto suele moverse.</p></div></div>
+      <div class="flow-row"><span class="n">2</span><div><h4>Una semilla</h4><p>Un número fijo que hace que el “azar” salga siempre igual con el mismo código.</p></div></div>
+      <div class="flow-row"><span class="n">3</span><div><h4>Un año de precios</h4><p>252 días hábiles de cierres por activo, sin fines de semana.</p></div></div>
+      <div class="flow-row"><span class="n">4</span><div><h4>Una tabla de control</h4><p>En la consola del navegador, para verificar antes de que haya pantalla.</p></div></div>
+    </div>
+    <p style="margin-top:14px"><a class="btn" href="diagramas/p2-datos.html" target="_blank" rel="noopener">VER EL DIAGRAMA COMPLETO ↗</a></p>
+  </section>
+
+  <section class="block" aria-labelledby="palabras">
+    <span class="num"></span>
+    <h2 id="palabras">Palabras nuevas de este paso</h2>
+    <dl class="terms">
+      <div class="term-card"><dt>Semilla</dt><dd>El número de arranque que hace repetible al azar. <a href="glosario.html#semilla">Más →</a></dd></div>
+      <div class="term-card"><dt>Rueda</dt><dd>Un día hábil de mercado; un año tiene ~252. <a href="glosario.html#rueda">Más →</a></dd></div>
+      <div class="term-card"><dt>Función</dt><dd>Un bloque de código con nombre, como una fórmula. <a href="glosario.html#funcion">Más →</a></dd></div>
+      <div class="term-card"><dt>Objeto { d, c, v }</dt><dd>Un día con fecha, cierre y volumen. <a href="glosario.html#objeto">Más →</a></dd></div>
+    </dl>
+  </section>
+  </details>
 
   <div class="pager">
     <a href="paso-1.html">← PASO 1 · ESQUELETO</a>
