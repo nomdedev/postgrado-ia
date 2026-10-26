@@ -94,7 +94,7 @@ pre{background:var(--bg2);border:1px solid var(--line);border-radius:5px;padding
 .prompt{background:var(--panel);border:1px solid var(--line);border-left:2px solid var(--amb);border-radius:5px;margin-top:14px;overflow:hidden}
 .prompt-h{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:var(--panel3);border-bottom:1px solid var(--line)}
 .prompt-h .t{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--amb)}
-.prompt-h .d{font-size:12px;color:var(--dim);margin-top:2px}
+.prompt-h .d{font-size:12px;color:var(--mut);margin-top:2px}
 .prompt-b{padding:14px}
 .prompt-b pre{background:transparent;border:0;padding:0;font-family:var(--mono);font-size:12.5px;color:var(--txt)}
 .copy{background:transparent;border:1px solid var(--line2);color:var(--mut);border-radius:3px;padding:5px 10px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;cursor:pointer;white-space:nowrap;transition:.15s}
@@ -108,7 +108,7 @@ pre{background:var(--bg2);border:1px solid var(--line);border-radius:5px;padding
 .fields{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:16px 14px 6px}
 @media (max-width:640px){.fields{grid-template-columns:1fr}}
 .field{display:flex;flex-direction:column;gap:5px}
-.field label{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;color:var(--dim)}
+.field label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--mut)}
 .field input,.field select{background:var(--bg2);border:1px solid var(--line2);border-radius:4px;padding:8px 10px;color:var(--txt);font-size:12.5px}
 .builder pre{margin:8px 14px 0;background:var(--bg2);border-color:var(--line)}
 .builder-foot{padding:12px 14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}

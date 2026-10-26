@@ -255,7 +255,7 @@ function Carteras() {
           <div className="card"><small>SHARPE (RF 4,3 %)</small><b>{fmt(r.sharpe)}</b></div>
           <div className="card"><small>MÁXIMA CAÍDA</small><b className="dn">{fmt(r.maxCaida * 100)} %</b></div>
         </div>
-        <p className="note">Por cada unidad de riesgo, esta cartera rinde {fmt(r.sharpe)} por encima de la tasa libre de riesgo.</p>
+        <p className="note">Por cada punto de volatilidad que asume, esta cartera rinde {fmt(r.sharpe)} puntos de retorno anual por encima de la tasa libre de riesgo (4,3 %).</p>
         <div className="row" style={{ alignItems: 'stretch' }}>
           <div style={{ width: 260, height: 240 }}><ResponsiveContainer><PieChart>
             <Pie data={torta} dataKey="value" nameKey="name" outerRadius={90} isAnimationActive={false} label={x => x.name}>

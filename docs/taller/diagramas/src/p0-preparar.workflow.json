@@ -50,8 +50,8 @@
       "lane": "grupo",
       "col": 0,
       "type": "external",
-      "label": "Repartir roles",
-      "sublabel": "piloto · redactor · auditor",
+      "label": "Repartir 4 roles",
+      "sublabel": "rotan en cada paso",
       "width": 160
     },
     {

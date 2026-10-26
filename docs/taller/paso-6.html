@@ -38,20 +38,23 @@
     <p>Un “explorador” donde eligen qué pedir, tocan <em>Enviar</em> y ven la respuesta tal como la recibiría otro programa. Leída por una persona, la respuesta dice esto:</p>
     <div class="mock" aria-label="La respuesta de la API, leída como tabla">
       <table><thead><tr><th>ACTIVO</th><th>PRECIO</th><th>HOY</th><th>RSI</th><th>SEÑAL</th></tr></thead>
-      <tbody><tr><td>AAPL</td><td>229,15</td><td class="dn">−0,74 %</td><td>58,2</td><td><span class="tag buy">COMPRA</span></td></tr><tr><td>YPF</td><td>26,33</td><td class="up">+2,29 %</td><td>41,7</td><td><span class="tag sell">VENTA</span></td></tr></tbody></table>
-      <div class="mock-foot">Respuesta “200 · todo bien” del 26/10/2026.</div>
+      <tbody><tr><td>AAPL</td><td>308,43</td><td class="dn">−0,74 %</td><td>53,5</td><td><span class="tag buy">COMPRA</span></td></tr><tr><td>JNJ</td><td>117,88</td><td class="up">+0,25 %</td><td>28,1</td><td><span class="tag sell">VENTA</span></td></tr></tbody></table>
+      <div class="mock-foot">Respuesta “200 · todo bien”. Valores de la muestra fija de la API del curso (26/10/2026); los de su página van a ser otros.</div>
     </div>
     <p style="margin-top:12px">Y así la ve un programa (en <a class="w" href="glosario.html#json">JSON</a>). No tienen que escribirla: la arma la página.</p>
     <div class="prompt code">
       <div class="prompt-h"><div><span class="t">LA MISMA RESPUESTA, EN JSON</span><div class="d">GET /api/market/summary · 200 OK</div></div><button class="copy" data-copy="#json6" type="button">COPIAR</button></div>
       <div class="prompt-b"><pre id="json6">{
-  "session": "2026-10-26",
-  "tickers": [
-    { "symbol": "AAPL", "last": 229.15, "changePct": -0.74, "rsi14": 58.2,
-      "sma20": 226.4, "sma50": 219.8, "signal": "COMPRA" },
-    { "symbol": "YPF",  "last": 26.33,  "changePct": 2.29,  "rsi14": 41.7,
-      "sma20": 27.1,  "sma50": 28.0,  "signal": "VENTA" }
-  ]
+  "ok": true,
+  "data": {
+    "session": "2026-10-26",
+    "tickers": [
+      { "symbol": "AAPL", "last": 308.43, "change_pct": -0.74, "rsi14": 53.5,
+        "sma20": 310.71, "sma50": 292.33, "signal": "COMPRA" },
+      { "symbol": "JNJ",  "last": 117.88, "change_pct": 0.25,  "rsi14": 28.1,
+        "sma20": 119.96, "sma50": 128.19, "signal": "VENTA" }
+    ]
+  }
 }</pre></div>
     </div>
   </section>
@@ -101,8 +104,8 @@
       <div class="prompt-h"><div><span class="t">PROMPT · PASO 6</span><div class="d">Pegar debajo el archivo del paso 5.</div></div><button class="copy" data-copy="#p6" type="button">COPIAR</button></div>
       <div class="prompt-b"><pre id="p6">Paso 6. En la pestaña "04 · API & Alertas":
 - un "explorador de API": un selector con las rutas GET /api/market/summary y GET /api/tickers/{símbolo}, un botón "Enviar" y la respuesta JSON formateada, con el código de estado (200 o 404)
-- /api/market/summary devuelve: fecha de la sesión y, por activo, symbol, last, changePct, rsi14, sma20, sma50 y signal
-- un símbolo inexistente devuelve 404 con {"error": "..."} en español
+- /api/market/summary devuelve el mismo formato que la API publicada del curso: {"ok": true, "data": {"session": fecha, "tickers": [...]}} y, por activo, symbol, last, change_pct, rsi14, sma20, sma50 y signal
+- un símbolo inexistente devuelve 404 con {"ok": false, "error": "..."} en español
 - un formulario de alertas: activo + condición (precio mayor que, precio menor que, RSI mayor que, RSI menor que) + umbral
 - una lista de alertas creadas que muestre si hoy se dispararía (sí/no) y con qué valor actual
 - las alertas se guardan en localStorage y sobreviven a la recarga

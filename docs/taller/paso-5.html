@@ -39,7 +39,7 @@
       <div class="mock-btns" style="margin:0 0 12px"><span>Conservadora</span><span class="ghost">Moderada</span><span class="ghost">Agresiva</span></div>
       <div class="mock-cards"><div><small>RETORNO ANUAL</small><b>8,1 %</b></div><div><small>VOLATILIDAD</small><b>9,4 %</b></div><div><small>SHARPE</small><b>0,40</b></div><div><small>MÁXIMA CAÍDA</small><b class="dn">−7,2 %</b></div></div>
       <table><tbody><tr><td>JNJ</td><td>30 %</td></tr><tr><td>KO</td><td>25 %</td></tr><tr><td>PG</td><td>25 %</td></tr><tr><td>MSFT</td><td>20 %</td></tr></tbody></table>
-      <div class="mock-foot">“Por cada unidad de riesgo, esta cartera rinde 0,40 por encima de la tasa libre de riesgo.” · Valores ilustrativos. Abajo van la torta de pesos y el gráfico base 100.</div>
+      <div class="mock-foot">“Por cada punto de volatilidad que asume, esta cartera rinde 0,40 puntos de retorno anual por encima de la tasa libre de riesgo (4,3 %).” · Valores ilustrativos. Abajo van la torta de pesos y el gráfico base 100.</div>
     </div>
   </section>
 
@@ -100,7 +100,7 @@
 - un gráfico de torta con los pesos
 - un gráfico de línea base 100 de la cartera contra una cartera equiponderada de todos los activos
 
-Debajo de las tarjetas, una línea en lenguaje simple que interprete el Sharpe (por ejemplo: "por cada unidad de riesgo, esta cartera rinde X por encima de la tasa libre de riesgo").
+Debajo de las tarjetas, una línea en lenguaje simple que interprete el Sharpe (por ejemplo: "por cada punto de volatilidad que asume, esta cartera rinde X puntos de retorno anual por encima de la tasa libre de riesgo (4,3 %)").
 
 [pegar el archivo completo]</pre></div>
     </div>
@@ -116,6 +116,8 @@ Debajo de las tarjetas, una línea en lenguaje simple que interprete el Sharpe (
       <li><b>Orden esperado:</b> la Agresiva tiene más volatilidad que la Conservadora.</li>
       <li><b>Sharpe a mano:</b> con los números de las tarjetas, calculen (retorno − 4,3%) ÷ volatilidad. Tiene que dar lo mismo.</li>
     </ul>
+    <div class="note tip"><b>Para discutir en grupo:</b> en estos datos simulados cada activo se mueve por su cuenta (no hay correlación), así que diversificar baja mucho el riesgo y el Sharpe puede salir muy alto (2 o más). En la realidad las acciones suelen moverse juntas, la diversificación ayuda menos y un Sharpe mayor a 1 ya es muy bueno. ¿Qué Sharpe esperarían para estas mismas carteras con datos reales?</div>
+    <div class="note tip"><b>Si comparan con la terminal del curso:</b> ahí la cartera se compara contra una equiponderada <em>de los activos de la propia cartera</em>; en este paso, contra una equiponderada de <em>todos</em> los activos. Por eso las dos curvas base 100 no van a coincidir.</div>
   </section>
 
   <section class="block" aria-labelledby="falla">

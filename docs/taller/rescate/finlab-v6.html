@@ -255,7 +255,7 @@ function Carteras() {
           <div className="card"><small>SHARPE (RF 4,3 %)</small><b>{fmt(r.sharpe)}</b></div>
           <div className="card"><small>MÁXIMA CAÍDA</small><b className="dn">{fmt(r.maxCaida * 100)} %</b></div>
         </div>
-        <p className="note">Por cada unidad de riesgo, esta cartera rinde {fmt(r.sharpe)} por encima de la tasa libre de riesgo.</p>
+        <p className="note">Por cada punto de volatilidad que asume, esta cartera rinde {fmt(r.sharpe)} puntos de retorno anual por encima de la tasa libre de riesgo (4,3 %).</p>
         <div className="row" style={{ alignItems: 'stretch' }}>
           <div style={{ width: 260, height: 240 }}><ResponsiveContainer><PieChart>
             <Pie data={torta} dataKey="value" nameKey="name" outerRadius={90} isAnimationActive={false} label={x => x.name}>
@@ -278,14 +278,14 @@ const ALERTAS_KEY = 'finlab-alertas';
 const CONDICIONES = [['PRECIO_MAYOR', 'precio mayor que'], ['PRECIO_MENOR', 'precio menor que'], ['RSI_MAYOR', 'RSI mayor que'], ['RSI_MENOR', 'RSI menor que']];
 // Router de la API simulada: mismas rutas que tendría un servidor real.
 function api(ruta) {
-  const fila = m => ({ symbol: m.symbol, last: m.last, changePct: +m.changePct.toFixed(2), rsi14: +m.rsi14.at(-1).toFixed(2), sma20: +m.sma20.at(-1).toFixed(2), sma50: +m.sma50.at(-1).toFixed(2), signal: m.signal });
-  if (ruta === '/api/market/summary') return { status: 200, body: { session: MARKET[0].serie.at(-1).d, tickers: MARKET.map(fila) } };
+  const fila = m => ({ symbol: m.symbol, last: m.last, change_pct: +m.changePct.toFixed(2), rsi14: +m.rsi14.at(-1).toFixed(2), sma20: +m.sma20.at(-1).toFixed(2), sma50: +m.sma50.at(-1).toFixed(2), signal: m.signal });
+  if (ruta === '/api/market/summary') return { status: 200, body: { ok: true, data: { session: MARKET[0].serie.at(-1).d, tickers: MARKET.map(fila) } } };
   const t = ruta.match(/^\/api\/tickers\/([A-Za-z]+)$/);
   if (t) {
     const m = MARKET.find(x => x.symbol === t[1].toUpperCase());
-    return m ? { status: 200, body: { name: m.name, ...fila(m) } } : { status: 404, body: { error: `No existe el símbolo ${t[1].toUpperCase()}` } };
+    return m ? { status: 200, body: { ok: true, data: { name: m.name, ...fila(m) } } } : { status: 404, body: { ok: false, error: `No existe el símbolo ${t[1].toUpperCase()}` } };
   }
-  return { status: 404, body: { error: `No existe la ruta ${ruta}` } };
+  return { status: 404, body: { ok: false, error: `No existe la ruta ${ruta}` } };
 }
 function leerAlertas() { try { return JSON.parse(localStorage.getItem(ALERTAS_KEY)) || []; } catch (_) { return []; } }
 function ApiAlertas() {

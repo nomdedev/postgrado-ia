@@ -26,7 +26,7 @@
 
   <p class="eyebrow">PASO 2 · SIN DATOS NO HAY ANÁLISIS</p>
   <h1>Un año de precios simulados que no cambia</h1>
-  <p class="lede">La terminal genera 252 <a class="w" href="glosario.html#rueda">ruedas</a> (un año hábil) para cada activo. Parecen aleatorias, pero salen <b>iguales en cada recarga</b> gracias a una <a class="w" href="glosario.html#semilla">semilla</a>. Así todo el curso puede comparar los mismos números.</p>
+  <p class="lede">La terminal genera 252 <a class="w" href="glosario.html#rueda">ruedas</a> (un año hábil) para cada activo. Parecen aleatorias, pero salen <b>iguales en cada recarga</b> gracias a una <a class="w" href="glosario.html#semilla">semilla</a>. Ojo con lo que garantiza: <b>con el mismo código</b>, cualquiera obtiene los mismos números. Cada grupo tiene su propio código (lo escribió su IA), así que sus números no van a coincidir con los de otro grupo.</p>
   <div class="meta"><span class="chip"><b>15 MIN</b></span><span class="chip">CONSOLA</span><span class="chip">SALIDA: <b>finlab-v2.html</b></span></div>
   <ol class="mission" aria-label="Tu misión en este paso"><li><b>Copien el prompt</b>con el botón <span class="hl">⧉ COPIAR</span> y péguenlo en el chat, junto con su archivo</li><li><b>Guarden la respuesta</b>en <span class="code-inline">finlab.html</span> y ábranla con doble clic</li><li><b>Comprueben</b>que al recargar salen los mismos números</li></ol>
   <p class="calm"><b>Tranquilos:</b> no hace falta entender el código. Todo lo que hay que llevar a otro lado tiene un botón <b>⧉ COPIAR</b>. Los textos largos están plegados y se abren con <b>VER EL TEXTO</b> solo si les da curiosidad.</p>
@@ -37,9 +37,9 @@
     <h2 id="logro">Qué van a lograr</h2>
     <p>Todavía no se ve nada nuevo en la pantalla: los datos se generan “por detrás” y se muestran en la <a class="w" href="glosario.html#consola">consola</a> como una tabla de control.</p>
     <div class="mock" aria-label="Ejemplo de la tabla de control en la consola">
-      <b>Tabla de control en la consola</b> <span style="color:var(--dim)">· sus números van a ser otros</span>
+      <b>Tabla de control en la consola</b> <span style="color:var(--mut)">· ejemplo: lo que mostró la versión de rescate el 26/10/2026; sus números van a ser otros</span>
       <table style="margin-top:8px"><thead><tr><th>SÍMBOLO</th><th>PRIMER CIERRE</th><th>ÚLTIMO CIERRE</th><th>VARIACIÓN DEL AÑO</th></tr></thead>
-      <tbody><tr><td>AAPL</td><td>171,62</td><td>229,15</td><td class="up">+33,5 %</td></tr><tr><td>KO</td><td>58,40</td><td>62,07</td><td class="up">+6,3 %</td></tr><tr><td>YPF</td><td>28,11</td><td>34,90</td><td class="up">+24,2 %</td></tr><tr><td colspan="4" style="color:var(--dim)">… y los otros cinco activos</td></tr></tbody></table>
+      <tbody><tr><td>AAPL</td><td>171,23</td><td>347,89</td><td class="up">+103,2 %</td></tr><tr><td>KO</td><td>57,60</td><td>62,49</td><td class="up">+8,5 %</td></tr><tr><td>YPF</td><td>29,69</td><td>20,33</td><td class="dn">−31,5 %</td></tr><tr><td colspan="4" style="color:var(--mut)">… y los otros cinco activos</td></tr></tbody></table>
     </div>
   </section>
 
@@ -110,7 +110,7 @@ Explicame en 3 líneas, para alguien que no programa, qué es una semilla y por 
       <li><b>Sin fines de semana:</b> escriban <span class="code-inline c">simulateSeries(TICKERS[0]).slice(-7)</span> y miren las fechas. No puede aparecer ningún sábado ni domingo.</li>
       <li><b>Sentido común:</b> los activos más volátiles (GGAL, YPF) tienen que moverse más en el año que KO o JNJ.</li>
     </ul>
-    <div class="note tip"><b>Para discutir en grupo:</b> ¿por qué un dato simulado sirve más que uno real para aprender? (Pista: todos pueden verificar el mismo número, y nadie confunde el ejercicio con una recomendación.)</div>
+    <div class="note tip"><b>Para discutir en grupo:</b> ¿por qué un dato simulado sirve más que uno real para aprender? (Pista: dentro del grupo todos pueden verificar el mismo número, y nadie confunde el ejercicio con una recomendación.)</div>
   </section>
 
   <section class="block" aria-labelledby="falla">

@@ -112,6 +112,13 @@ test('las versiones de rescate del taller están generadas, sin marcas de planti
     assert.match(salida.texto, /- JNJ: .*motivo: señal de venta y RSI menor a 30\n- KO: .*motivo: RSI mayor a 70/, `${file}: el aviso no coincide con el ejemplo del paso 8`);
   }
   assert.match(fs.readFileSync(path.join(TALLER, 'paso-8.html'), 'utf8'), /href="rescate\/aviso-rsi\.json"/, 'paso-8: no enlaza su workflow de rescate');
+  // H11: la API simulada del paso 6 (prompt, ejemplo y rescate) usa el formato de la API publicada.
+  const paso6 = fs.readFileSync(path.join(TALLER, 'paso-6.html'), 'utf8');
+  assert.match(paso6, /"change_pct"/, 'paso-6: el ejemplo JSON no usa change_pct como la API publicada');
+  assert.doesNotMatch(paso6, /changePct/, 'paso-6: quedó changePct en el prompt o el ejemplo');
+  const v6 = fs.readFileSync(path.join(RESCATE, 'finlab-v6.html'), 'utf8');
+  assert.match(v6, /change_pct:/, 'finlab-v6: la API simulada no usa change_pct');
+  assert.match(v6, /body: \{ ok: true, data: \{ session/, 'finlab-v6: la API simulada no usa el envoltorio {ok, data}');
 
   const csv = fs.readFileSync(path.join(RESCATE, 'finlab-AAPL.csv'), 'utf8').trim().split('\n');
   assert.equal(csv[0], 'fecha,cierre,sma20,sma50,rsi14');
