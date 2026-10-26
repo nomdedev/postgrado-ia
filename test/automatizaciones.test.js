@@ -156,6 +156,21 @@ test('las partes comunes del taller (encabezado, barra por clase, pie) están si
   }
 });
 
+test('el tema elegido es el mismo en todo el sitio (una sola clave, aplicada antes de pintar)', () => {
+  const ROOT = path.join(__dirname, '..');
+  const paginas = ['index.html',
+    ...fs.readdirSync(path.join(ROOT, 'docs', 'taller')).filter((f) => f.endsWith('.html')).map((f) => `docs/taller/${f}`),
+    ...fs.readdirSync(path.join(ROOT, 'docs', 'automatizaciones')).filter((f) => f.endsWith('.html')).map((f) => `docs/automatizaciones/${f}`)];
+  for (const pagina of paginas) {
+    const head = fs.readFileSync(path.join(ROOT, pagina), 'utf8').split('</head>')[0];
+    assert.match(head, /<script>try\{var t=localStorage\.getItem\("finlab-tema"\)/, `${pagina}: no aplica el tema guardado (finlab-tema) antes de pintar`);
+  }
+  const lab = fs.readFileSync(path.join(ROOT, 'docs', 'automatizaciones', 'lab.js'), 'utf8');
+  assert.match(lab, /setItem\(KEY, root\.dataset\.theme\)[\s\S]*setItem\('archify-theme'/, 'lab.js: el selector tiene que guardar finlab-tema y archify-theme');
+  const terminal = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+  assert.doesNotMatch(terminal, /setItem\('finlab_theme'/, 'la terminal no puede guardar el tema con la clave vieja');
+});
+
 test('cada carpeta de docs/ con index.html redirige a su versión con barra final (rutas relativas)', () => {
   // Con cleanUrls, Vercel sirve /docs/taller sin barra y entonces taller.css o paso-0.html se resuelven contra /docs/: todo da 404.
   const vercel = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'vercel.json'), 'utf8'));

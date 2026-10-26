@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<script>try{var t=localStorage.getItem("finlab-tema")||localStorage.getItem("finlab_theme");document.documentElement.dataset.theme=(t==="light"||t==="dark")?t:(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark")}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FIN·LAB — Terminal de Análisis · IA aplicada a Finanzas · UNLP</title>
 
@@ -2101,12 +2102,19 @@ function App(){
   // router mínimo por hash (#/mercado, #/docs, …)
   const [page,setPage]=useState(()=>(location.hash.replace('#/','')||'inicio'));
   const [theme,setTheme]=useState(()=>{
-    try{return localStorage.getItem('finlab_theme')==='light'?'light':'dark';}catch(e){return 'dark';}
+    // misma clave que el taller y las automatizaciones (finlab_theme era la clave vieja de la terminal)
+    try{const t=localStorage.getItem('finlab-tema')||localStorage.getItem('finlab_theme');if(t==='light'||t==='dark')return t;}catch(e){}
+    return matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';
   });
   useEffect(()=>{
     document.documentElement.dataset.theme=theme;
-    try{localStorage.setItem('finlab_theme',theme);}catch(e){}
   },[theme]);
+  // Se guarda solo cuando lo eligen; archify-theme hace que los diagramas abran con el mismo tema.
+  const toggleTheme=()=>{
+    const next=theme==='dark'?'light':'dark';
+    setTheme(next);
+    try{localStorage.setItem('finlab-tema',next);localStorage.setItem('archify-theme',next);}catch(e){}
+  };
   useEffect(()=>{
     const h=()=>{ setPage(location.hash.replace('#/','')||'inicio'); window.scrollTo(0,0); };
     addEventListener('hashchange',h);
@@ -2163,7 +2171,7 @@ function App(){
             </div>
           </div>
           <div className="hd-right">
-            <button className="theme-btn" onClick={()=>setTheme(t=>t==='dark'?'light':'dark')}
+            <button className="theme-btn" onClick={toggleTheme}
               aria-label={theme==='dark'?'Cambiar a tema claro':'Cambiar a tema oscuro'}
               title={theme==='dark'?'Cambiar a tema claro':'Cambiar a tema oscuro'}>
               <Icon n={theme==='dark'?'sun':'moon'} s={13}/>{theme==='dark'?'TEMA CLARO':'TEMA OSCURO'}

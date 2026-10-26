@@ -52,3 +52,46 @@
     render();
   });
 })();
+
+/* Selector claro / oscuro, compartido por el taller y las automatizaciones (la terminal usa la misma clave).
+   Se recuerda en este navegador con la clave finlab-tema; sin elección guardada, sigue al sistema.
+   También guarda archify-theme para que los diagramas Archify abran con el mismo tema. */
+(function () {
+  'use strict';
+  var KEY = 'finlab-tema';
+  var root = document.documentElement;
+  var bar = document.querySelector('.top-in');
+  if (!bar) return;
+  var dark = function () {
+    return root.dataset.theme ? root.dataset.theme === 'dark' : !matchMedia('(prefers-color-scheme: light)').matches;
+  };
+  var button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'theme-toggle';
+  var paint = function () {
+    button.textContent = dark() ? '☀ Tema claro' : '☾ Tema oscuro';
+    button.setAttribute('aria-label', dark() ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro');
+  };
+  // Los diagramas Archify aceptan ?theme=light|dark: así acompañan el tema de la página.
+  var syncDiagrams = function () {
+    if (!root.dataset.theme) return;
+    var query = '?theme=' + root.dataset.theme;
+    document.querySelectorAll('iframe[src^="diagramas/"], a[href^="diagramas/"]').forEach(function (el) {
+      var attr = el.tagName === 'IFRAME' ? 'src' : 'href';
+      var next = el.getAttribute(attr).split('?')[0] + query;
+      if (el.getAttribute(attr) !== next) el.setAttribute(attr, next);
+    });
+  };
+  button.addEventListener('click', function () {
+    root.dataset.theme = dark() ? 'light' : 'dark';
+    try {
+      localStorage.setItem(KEY, root.dataset.theme);
+      localStorage.setItem('archify-theme', root.dataset.theme);
+    } catch (_) { /* sin almacenamiento: vale solo para esta página */ }
+    paint();
+    syncDiagrams();
+  });
+  bar.insertBefore(button, bar.querySelector('.crumb'));
+  paint();
+  syncDiagrams();
+})();

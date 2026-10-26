@@ -84,27 +84,6 @@ kbd{border:1px solid var(--line2);border-bottom-width:2px;border-radius:4px;padd
 .gloss dd em{color:var(--txt);font-style:normal}
 .hl{font-weight:600;color:var(--amb)}
 
-/* ---------- Selector de tema: data-theme en <html> gana sobre el tema del sistema ---------- */
-:root[data-theme="light"]{
-  --bg:#F2F5F2; --bg2:#E8EDE9; --panel:#FFFFFF; --panel2:#F6F8F6; --panel3:#EDF1EE;
-  --line:#CDD7D1; --line2:#AEBDB5;
-  --txt:#1B2924; --mut:#52645C; --dim:#697B73;
-  --amb:#A95D00; --amb-soft:rgba(169,93,0,.09);
-  --up:#147454; --dn:#C23B4B; --teal:#087A82;
-}
-:root[data-theme="dark"]{
-  --bg:#0B0F13; --bg2:#0A0E13; --panel:#0F151D; --panel2:#121A23; --panel3:#0D131A;
-  --line:#1D2A36; --line2:#28394A;
-  --txt:#D8E1E9; --mut:#7E8FA0; --dim:#54677A;
-  --amb:#FFB020; --amb-soft:rgba(255,176,32,.09);
-  --up:#2EBD85; --dn:#F6465D; --teal:#4DC5B6;
-}
-:root[data-theme="light"] body{background-image:linear-gradient(rgba(60,87,74,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(60,87,74,.045) 1px,transparent 1px)}
-:root[data-theme="dark"] body{background-image:linear-gradient(rgba(126,143,160,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(126,143,160,.03) 1px,transparent 1px)}
-:root[data-theme="light"] .top{background:rgba(242,245,242,.94)}
-:root[data-theme="dark"] .top{background:rgba(11,15,19,.93)}
-.theme-toggle{margin-left:auto;background:transparent;border:1px solid var(--line2);color:var(--txt);border-radius:999px;padding:5px 12px;font:600 12px var(--sans);cursor:pointer}
-.theme-toggle:hover{border-color:var(--amb);color:var(--amb)}
 
 /* Barra de pasos agrupada por clase (la genera build.js) */
 .steps .sep{align-self:center;margin:0 2px 0 8px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--mut)}
