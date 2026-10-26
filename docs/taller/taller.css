@@ -108,3 +108,4 @@ main.page{counter-reset:seccion}
 .more>summary:hover{color:var(--amb)}
 .more[open]>summary{border-bottom:1px solid var(--line)}
 .more>.block{margin:0;padding:18px;border-top:0}
+.tbl th{font-size:12px;letter-spacing:.06em;color:var(--mut)}

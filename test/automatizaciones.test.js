@@ -142,6 +142,12 @@ test('las versiones de rescate del taller están generadas, sin marcas de planti
   assert.match(v6, /change_pct:/, 'finlab-v6: la API simulada no usa change_pct');
   assert.match(v6, /body: \{ ok: true, data: \{ session/, 'finlab-v6: la API simulada no usa el envoltorio {ok, data}');
 
+  // El kit del grupo enlaza cada archivo de rescate: si se agrega uno nuevo y no se enlaza, falla.
+  const kit = fs.readFileSync(path.join(TALLER, 'kit.html'), 'utf8');
+  for (const archivo of fs.readdirSync(RESCATE).filter((f) => !['build.js', 'finlab.template.html'].includes(f))) {
+    assert.ok(kit.includes(`href="rescate/${archivo}"`), `kit.html: falta enlazar rescate/${archivo}`);
+  }
+
   const csv = fs.readFileSync(path.join(RESCATE, 'finlab-AAPL.csv'), 'utf8').trim().split('\n');
   assert.equal(csv[0], 'fecha,cierre,sma20,sma50,rsi14');
   assert.equal(csv.length, 253, 'el CSV de respaldo debe tener 252 ruedas');
@@ -160,7 +166,8 @@ test('el tema elegido es el mismo en todo el sitio (una sola clave, aplicada ant
   const ROOT = path.join(__dirname, '..');
   const paginas = ['index.html',
     ...fs.readdirSync(path.join(ROOT, 'docs', 'taller')).filter((f) => f.endsWith('.html')).map((f) => `docs/taller/${f}`),
-    ...fs.readdirSync(path.join(ROOT, 'docs', 'automatizaciones')).filter((f) => f.endsWith('.html')).map((f) => `docs/automatizaciones/${f}`)];
+    ...fs.readdirSync(path.join(ROOT, 'docs', 'automatizaciones')).filter((f) => f.endsWith('.html')).map((f) => `docs/automatizaciones/${f}`),
+    'docs/docente/index.html'];
   for (const pagina of paginas) {
     const head = fs.readFileSync(path.join(ROOT, pagina), 'utf8').split('</head>')[0];
     assert.match(head, /<script>try\{var t=localStorage\.getItem\("finlab-tema"\)/, `${pagina}: no aplica el tema guardado (finlab-tema) antes de pintar`);

@@ -1,7 +1,20 @@
 {
   "cleanUrls": true,
   "redirects": [
-    { "source": "/docs/taller", "destination": "/docs/taller/", "permanent": false },
-    { "source": "/docs/automatizaciones", "destination": "/docs/automatizaciones/", "permanent": false }
+    {
+      "source": "/docs/taller",
+      "destination": "/docs/taller/",
+      "permanent": false
+    },
+    {
+      "source": "/docs/automatizaciones",
+      "destination": "/docs/automatizaciones/",
+      "permanent": false
+    },
+    {
+      "source": "/docs/docente",
+      "destination": "/docs/docente/",
+      "permanent": false
+    }
   ]
 }

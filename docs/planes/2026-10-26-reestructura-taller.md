@@ -1,6 +1,6 @@
 # Plan unificado: reestructura del taller FIN·LAB
 
-**Fecha:** 2026-10-26 · **Estado:** decisiones tomadas el 2026-10-26 (sección 5); en implementación por etapas.
+**Fecha:** 2026-10-26 · **Estado:** etapas 0 a 5 implementadas el 2026-10-26; queda la 6 (opcionales). Pendiente de diseño: achicar la maqueta de cada paso para que el prompt entre en la primera pantalla.
 
 **Fuentes:** el consejo de cuatro agentes (diseño visual y UX, docente didáctico, arquitectura de la información, arquitectura técnica), más la auditoría `docs/auditorias/2026-10-26-docente-didactico.md`. Los agentes solo leyeron y propusieron. Este plan combina sus propuestas, marca dónde no coinciden y dice qué se recomienda.
 

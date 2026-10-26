@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Guía del docente · Taller FIN·LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../automatizaciones/lab.css">
+<script>try{var t=localStorage.getItem("finlab-tema");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="../taller/taller.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="../taller/index.html"><span class="brand-dot"></span><b>FIN·LAB</b> DOCENTE</a>
+    <span class="crumb">GUÍA DEL DOCENTE</span>
+  </div>
+</header>
+
+<main class="page">
+  <p class="eyebrow">SOLO PARA DOCENTES · NO ESTÁ ENLAZADA DESDE LA VISTA DEL ALUMNO</p>
+  <h1>Guía del docente</h1>
+  <p class="lede">Cómo conducir el taller en dos clases: cronograma, qué preparar antes, qué tipo de ejercicio hace cada parte, qué mirar al recorrer los grupos y las respuestas esperadas.</p>
+  <div class="note warn"><b>Ojo:</b> el sitio es público, así que esta página también. No aparece en ningún menú ni enlace de los alumnos y los buscadores no la indexan, pero no compartan la dirección con el curso: tiene las respuestas.</div>
+
+  <section class="block" aria-labelledby="cronograma">
+    <span class="num"></span>
+    <h2 id="cronograma">Cronograma</h2>
+    <p>Los tiempos son los <b>reales estimados</b> por la auditoría didáctica, no los que figuran en cada paso. Todavía no se midieron en el aula: ajústenlos después de la primera cohorte.</p>
+    <table class="tbl">
+      <thead><tr><th>CLASE 1 · VER EL MERCADO Y MEDIRLO</th><th>TIEMPO REAL</th><th>CIERRA CON</th></tr></thead>
+      <tbody>
+        <tr><td>P0 · Preparar</td><td>10–15 min</td><td>Chat con el prompt de contexto y carpeta creada</td></tr>
+        <tr><td>P1 · Esqueleto</td><td>25–30 min</td><td><span class="code-inline">finlab-v1.html</span> y el ciclo aprendido</td></tr>
+        <tr><td>P2 · Datos</td><td>20 min</td><td>Tabla de control en la consola</td></tr>
+        <tr><td>P3 · Mercado</td><td>20 min</td><td>Primer dashboard</td></tr>
+        <tr><td>P4 · Indicadores</td><td>30 min</td><td>Verificación en Google Sheets</td></tr>
+        <tr><td>P5 · Carteras</td><td>25 min</td><td>Comparar el Sharpe entre grupos</td></tr>
+        <tr><td>Puesta en común</td><td>10 min</td><td>¿Dónde se equivocó la IA y cómo lo notaron?</td></tr>
+      </tbody>
+    </table>
+    <table class="tbl" style="margin-top:22px">
+      <thead><tr><th>CLASE 2 · SACARLO AFUERA</th><th>TIEMPO REAL</th><th>CIERRA CON</th></tr></thead>
+      <tbody>
+        <tr><td>Arranque</td><td>5 min</td><td>Los grupos sin <span class="code-inline">finlab-v5</span> bajan el rescate desde el mapa</td></tr>
+        <tr><td>P6 · API</td><td>20 min</td><td>El mismo dato en la tabla y en el JSON</td></tr>
+        <tr><td>P7 · Colab</td><td>30–35 min</td><td>✅ en el bloque B (la pestaña Python es opcional)</td></tr>
+        <tr><td>P8 · n8n</td><td>30–40 min</td><td>Aviso de JNJ y KO</td></tr>
+        <tr><td>P9 · Parte A</td><td>25 min</td><td>3/3 en los ejercicios de AUTOMATIZAR</td></tr>
+        <tr><td>P9 · Parte B</td><td>20 min</td><td>Auditoría cruzada (si no alcanza, al empezar la clase siguiente)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="block" aria-labelledby="antes">
+    <span class="num"></span>
+    <h2 id="antes">Antes de la clase</h2>
+    <ul class="check">
+      <li><b>Prueba en seco de los prompts 3 a 6</b> con un chat de IA gratuito: es el riesgo principal (las respuestas largas se cortan). Si se cortan, planifiquen arrancar la clase 2 con el rescate v5 para todos.</li>
+      <li><b>El sitio y la API responden:</b> abran <span class="code-inline">https://postgrado-ia.vercel.app/</span> y <span class="code-inline">/api/market/summary</span> (tiene que decir <span class="code-inline">"ok": true</span> y traer 8 activos).</li>
+      <li><b>En las computadoras del aula:</b> que la consola de Chrome deje pegar (aviso <span class="code-inline">allow pasting</span>), que Google Sheets importe el CSV con punto decimal y que Colab permita subir archivos.</li>
+      <li><b>n8n para el paso 8:</b> una cuenta de prueba por grupo, o una compartida para el docente y los grupos miran. El workflow de rescate sin internet sirve si falla la red.</li>
+      <li><b>Proyector:</b> zoom del navegador al 150 % (<kbd>Ctrl</kbd> + <kbd>+</kbd>). La bienvenida está pensada para leerse sola a 1280×720.</li>
+      <li><b>El kit del grupo</b> (<a href="../taller/kit.html">taller/kit.html</a>) junta todos los descargables por si un grupo pierde algo.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="ejercicios">
+    <span class="num"></span>
+    <h2 id="ejercicios">Mapa de ejercicios</h2>
+    <p>El taller no es una sola actividad repetida: combina ocho tipos de ejercicio. El que más pesa es <b>verificar</b>, porque es lo que el alumno se lleva al trabajo: la IA escribe rápido, pero la responsabilidad por el número sigue siendo suya.</p>
+    <table class="tbl">
+      <thead><tr><th>TIPO DE EJERCICIO</th><th>DÓNDE</th><th>QUÉ EJERCITA</th></tr></thead>
+      <tbody>
+        <tr><td>Construir con IA</td><td>P1–P6 (y P7 opcional)</td><td>Pedir con precisión, pegar el contexto completo, guardar versiones.</td></tr>
+        <tr><td>Personalizar un prompt</td><td>P0 (constructor), P3 (otras tarjetas), P5 (perfiles propios), automatización 03 (audiencia y tono)</td><td>Ver cómo cambia el resultado cuando cambia el pedido.</td></tr>
+        <tr><td>Verificar a mano</td><td>P3 calculadora · P4 Google Sheets · P5 Sharpe y “100 % en KO” · P6 API contra tabla · P8 contar avisos en la API</td><td>Desconfiar del número hasta comprobarlo.</td></tr>
+        <tr><td>Verificar con otra herramienta</td><td>P7 (Python en Colab recalcula las medias y el RSI)</td><td>Validación cruzada: dos herramientas, un mismo resultado.</td></tr>
+        <tr><td>Diagnosticar y pedir correcciones</td><td>Prompts de rescate (P1 página en blanco, P4 número que no coincide)</td><td>Describir el error con evidencia en lugar de “no anda”.</td></tr>
+        <tr><td>Predecir y comprobar</td><td>Pestaña AUTOMATIZAR (#/guiado): 3 ejercicios con COMPROBAR</td><td>Razonar el flujo antes de ejecutarlo.</td></tr>
+        <tr><td>Discutir en grupo</td><td>P2 (qué garantiza la semilla) · P5 (correlación y Sharpe) · cierre de cada clase</td><td>Interpretar, no solo calcular.</td></tr>
+        <tr><td>Auditar el trabajo de otro grupo</td><td>P9 parte B (auditoría cruzada con un chat nuevo)</td><td>Revisar con criterio y separar hallazgos reales de inventados.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="block" aria-labelledby="integraciones">
+    <span class="num"></span>
+    <h2 id="integraciones">Cómo se muestran las automatizaciones y las integraciones</h2>
+    <p>Todas las herramientas se conectan a través de <b>una sola fuente de datos</b>: la API publicada <span class="code-inline">/api/market/summary</span> (muestra fija, solo lectura). Eso permite mostrar que una automatización es siempre lo mismo: <b>algo la dispara → consulta datos → decide → deja un resultado en otro lado</b>.</p>
+    <table class="tbl">
+      <thead><tr><th>HERRAMIENTA</th><th>PARA QUÉ SE USA</th><th>DÓNDE APARECE</th></tr></thead>
+      <tbody>
+        <tr><td>Chat de IA</td><td>Escribe el código que el grupo pide y verifica</td><td>P0–P8 y la auditoría cruzada (ChatGPT, Claude o Gemini)</td></tr>
+        <tr><td>API publicada (Vercel)</td><td>Fuente común de datos para n8n y Colab</td><td>P6 (la simulan dentro de la página), P8, notebook, automatizaciones</td></tr>
+        <tr><td>n8n</td><td>Automatizar: disparador → HTTP → Code → IF → salida</td><td>P8 (aviso por señal y RSI, con rescates), P9 / AUTOMATIZAR (workflow generado por la terminal) y las 4 automatizaciones</td></tr>
+        <tr><td>Google Sheets</td><td>Verificar una fórmula y guardar un histórico</td><td>P4 (verificación de la SMA) y automatización 04 (una fila por activo por día)</td></tr>
+        <tr><td>Google Colab y Python</td><td>Recalcular con otra herramienta y consultar la API</td><td>P7 (CSV + pandas), <span class="code-inline">notebooks/finlab-api.ipynb</span> y la pestaña Python de la terminal (4 bloques: yfinance, pandas, Sharpe, requests)</td></tr>
+        <tr><td>Correo</td><td>La salida de un aviso o informe</td><td>Automatizaciones 01–03 y P8 (en los rescates viene desactivado para correr sin credenciales)</td></tr>
+        <tr><td>Un modelo de IA dentro del flujo</td><td>Redactar un informe a partir de datos, con reglas para que no invente</td><td>Automatización 03</td></tr>
+      </tbody>
+    </table>
+    <h3 style="margin-top:22px">Las cuatro automatizaciones de <a href="../automatizaciones/index.html">docs/automatizaciones</a></h3>
+    <table class="tbl">
+      <thead><tr><th>AUTOMATIZACIÓN</th><th>RECORRIDO EN N8N</th><th>QUÉ ENSEÑA</th></tr></thead>
+      <tbody>
+        <tr><td>01 · Aviso de señal</td><td>Cada día 18:00 → API → filtrar señales → ¿hay? → email</td><td>La estructura básica y la salida condicional (si no hay nada, no avisa).</td></tr>
+        <tr><td>02 · Resumen de cartera</td><td>Cada día 08:00 → mi cartera → API → calcular valor → email</td><td>Cruzar datos propios con datos externos, sin IA.</td></tr>
+        <tr><td>03 · Informe semanal con IA</td><td>Viernes 17:00 → API → preparar hechos → pedir informe al modelo → armar → email</td><td>IA como un paso más del flujo y cómo auditar que no invente.</td></tr>
+        <tr><td>04 · Precios a Google Sheets</td><td>Cada día 18:30 → API → aplanar activos → agregar filas</td><td>Guardar histórico para analizar después; el problema de los duplicados.</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:14px">Cada una trae: qué resuelve, el recorrido nodo por nodo, cómo armarla paso a paso, prompts para copiar (con un constructor), cómo verificarla, sus límites y el workflow <span class="code-inline">.json</span> para importar.</p>
+    <div class="note tip"><b>Dónde ubicarlas:</b> las dos clases del taller solo usan n8n en P8 y P9; las cuatro automatizaciones quedan como profundización. Propuesta: 01 y 02 como tarea en grupo después de la clase 2 (reusan lo del P8), 03 como demostración del docente (pide una clave de API) y 04 si el curso trabaja con planillas.</div>
+  </section>
+
+  <section class="block" aria-labelledby="pasos">
+    <span class="num"></span>
+    <h2 id="pasos">Qué mirar en cada paso</h2>
+    <p><b>Criterio de rescate:</b> si un grupo lleva más de 10 minutos trabado o tres intentos fallidos con la IA, que baje la versión de rescate del paso y siga. Lo importante es que haga la comprobación.</p>
+    <table class="tbl">
+      <thead><tr><th>PASO</th><th>SEÑALES AL RECORRER LOS GRUPOS</th><th>RESPUESTA ESPERADA</th></tr></thead>
+      <tbody>
+        <tr><td>P0</td><td>La IA ya escribió código; nadie anotó los roles.</td><td>La IA responde “Entendido” y espera.</td></tr>
+        <tr><td>P1</td><td>El archivo quedó como <span class="code-inline">finlab.html.txt</span>; la consola tiene líneas rojas.</td><td>4 pestañas que cambian; sin scroll horizontal en celular.</td></tr>
+        <tr><td>P2</td><td>La consola no deja pegar; “simulateSeries is not defined”.</td><td>252 ruedas, sin fines de semana, mismos números al recargar.</td></tr>
+        <tr><td>P3</td><td>Nadie hizo la cuenta con la calculadora.</td><td>La variación de la tabla coincide con (hoy ÷ ayer − 1) × 100.</td></tr>
+        <tr><td>P4</td><td>Sheets con coma decimal; el promedio tomado sobre otras filas.</td><td>SMA20 de la planilla igual a la del CSV; las primeras 49 filas sin SMA50.</td></tr>
+        <tr><td>P5</td><td>Sharpe mayor a 5 (mezcló diario con anual).</td><td>100 % en KO: volatilidad de la cartera = la de KO; la Agresiva, más volátil que la Conservadora.</td></tr>
+        <tr><td>P6</td><td>La API muestra números distintos a la tabla.</td><td>Mismos números; 404 con mensaje para un símbolo inventado; la alerta “precio &gt; 0” se dispara.</td></tr>
+        <tr><td>P7</td><td>Colab pide Drive; ❌ en el RSI solo en las primeras filas.</td><td>Diferencias menores a 0,01 y ✅ en el bloque B.</td></tr>
+        <tr><td>P8</td><td>La URL quedó mal; el nodo IF mira otro campo.</td><td>2 avisos: JNJ (señal de venta y RSI menor a 30) y KO (RSI mayor a 70).</td></tr>
+        <tr><td>P9</td><td>Tocan COMPROBAR sin discutir.</td><td>3/3 en AUTOMATIZAR; en la auditoría, un hallazgo confirmado a mano y uno falso.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="block" aria-labelledby="respuestas">
+    <span class="num"></span>
+    <h2 id="respuestas">Respuestas de los ejercicios de AUTOMATIZAR</h2>
+    <table class="tbl">
+      <thead><tr><th>EJERCICIO</th><th>RESPUESTA</th><th>POR QUÉ</th></tr></thead>
+      <tbody>
+        <tr><td>01 · Ordenen el recorrido</td><td>Revisa la muestra de activos incluida</td><td>El workflow de prueba trae los datos adentro; todavía no consulta cotizaciones ni manda nada.</td></tr>
+        <tr><td>02 · Predigan el activo</td><td>VENTA → YPF · COMPRA → AAPL · NEUTRAL → GGAL</td><td>La condición se compara con cada fila de la muestra.</td></tr>
+        <tr><td>03 · Qué falta para datos reales</td><td>Publicar una API accesible desde n8n</td><td>La API de la página vive en el navegador; n8n necesita una URL pública.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="block" aria-labelledby="plan-b">
+    <span class="num"></span>
+    <h2 id="plan-b">Si la clase sale mal o un grupo va rápido</h2>
+    <ul>
+      <li><b>Mínimo viable:</b> P0, P1, P4 (desde el rescate v3), P5 y la auditoría cruzada de P9 sobre el rescate v5 o v7. Mantiene el hilo <em>pedir → comprobar → desconfiar de la IA</em>.</li>
+      <li><b>Se pueden saltar con rescates:</b> P2, P3 y P6. P8 se puede reemplazar por la parte A de P9, que no necesita URL ni credenciales.</li>
+      <li><b>Para el grupo rápido:</b> la pestaña Python del P7, el notebook “en vivo”, cambiar los umbrales del P8 o armar la automatización 01 o 02.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="registro">
+    <span class="num"></span>
+    <h2 id="registro">Registro del material</h2>
+    <ul>
+      <li><a href="https://github.com/nomdedev/postgrado-ia/blob/main/docs/auditorias/2026-10-26-docente-didactico.md" target="_blank" rel="noopener">Auditoría didáctica del 26/10/2026</a> (17 hallazgos, todos resueltos).</li>
+      <li><a href="https://github.com/nomdedev/postgrado-ia/blob/main/docs/planes/2026-10-26-reestructura-taller.md" target="_blank" rel="noopener">Plan de reestructura del taller</a> (consejo de agentes y decisiones tomadas).</li>
+      <li>Para una auditoría nueva, en Claude Code dentro del proyecto: <em>“usá el agente docente-didactico para auditar el taller”</em>.</li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  FIN·LAB · material didáctico del posgrado de IA aplicada a Finanzas (UNLP) — guía del docente.<br>
+  Datos simulados con fines educativos. No es asesoramiento financiero.
+</footer>
+
+<script src="../automatizaciones/lab.js"></script>
+</body>
+</html>

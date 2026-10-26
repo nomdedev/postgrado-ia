@@ -72,6 +72,10 @@ https://colab.research.google.com/github/USUARIO/REPOSITORIO/blob/main/notebooks
 
 `GET /api/market/summary` no requiere autenticación ni parámetros. Permite CORS para facilitar el uso desde notebooks; solo expone una muestra fija y rechaza métodos de escritura. No se deben enviar credenciales, datos personales ni órdenes de trading a esta demo.
 
+## Material para el docente
+
+La guía del docente está en `docs/docente/` (publicada en `/docs/docente/`): cronograma de las dos clases, checklist previa, mapa de ejercicios e integraciones, qué mirar en cada paso y respuestas. No está enlazada desde las páginas de los alumnos y lleva `noindex`, pero el sitio es público: no compartan esa dirección con el curso. El kit del grupo (`docs/taller/kit.html`) junta los prompts y todos los descargables.
+
 ## Auditoría didáctica del material
 
 El proyecto trae un agente de Claude Code, `docente-didactico` (`.claude/agents/docente-didactico.md`), que audita todo el material de clase desde la mirada de un alumno de finanzas que no programa. Devuelve un informe con veredicto GO/NO-GO, puntaje por dimensión (claridad, progresión, exactitud financiera, verificabilidad, robustez en el aula, trabajo en grupo, consistencia, accesibilidad y advertencias) y hallazgos priorizados con `archivo:línea` y cómo mejorarlos. Solo lee: no modifica archivos.

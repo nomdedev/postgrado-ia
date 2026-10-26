@@ -11,6 +11,8 @@
 
 ## Done
 
+- REESTRUCTURA-TALLER (2026-10-26): etapas 0–5 del plan (docs/planes/2026-10-26-reestructura-taller.md): generador de diagramas en el repo, partes comunes con build.js y barra por clase, legibilidad, anatomía Hacer/Entender, bienvenida INICIO en la raíz, guía del docente (docs/docente, noindex, sin enlazar) y kit del grupo. Extras: redirecciones con barra final en vercel.json y tema unificado (finlab-tema). Pendiente: etapa 6 (opcionales).
+
 - EVALS-REALES (2026-10-26): el runner no ejecutaba ningún eval (faltaba evals/ y los marcaba SKIPPED como aprobados; git diff no veía archivos nuevos). Ahora: evals/test-unit.js, typecheck.js y verify-only.js; un eval sin script falla; detección con git status. Verificado: frena con un test roto y con un error de sintaxis.
 
 - AUDITORIA-H9-H15 (2026-10-26): maquetas con la muestra fija de la API, alcance de la semilla, API simulada con el formato publicado (change_pct + {ok,data}), Sharpe con unidades, discusión de correlación y benchmark, 4 roles en el diagrama P0 y contraste ≥ 5,5:1. Auditoría 2026-10-26 completa.
