@@ -50,6 +50,11 @@ test('el taller: 10 pasos encadenados, cada uno con diagrama Archify, glosario, 
   assert.match(terminal, /className="btn btn-primary wl-go" href="docs\/taller\/paso-0\.html"/, 'el botón de la bienvenida tiene que llevar al paso 0');
   const preview = terminal.match(/<img src="(docs\/img\/[a-z-]+\.webp)"/);
   assert.ok(preview && fs.existsSync(path.join(__dirname, '..', preview[1])), 'falta la captura de la vista previa');
+  // Agentes (etapa A): pestaña simulada con herramientas reales de la API interna, auditor y aviso visible.
+  assert.match(terminal, /\['agentes','06 · AGENTES'\]/, 'falta la pestaña 06 · AGENTES');
+  assert.match(terminal, /async function runAgent[\s\S]*api\.request\('GET','\/api\/market\/summary'\)[\s\S]*api\.request\('GET','\/api\/portfolio\/analyze/, 'el agente simulado tiene que usar la API interna como herramienta');
+  assert.match(terminal, /IA SIMULADA · DATOS REALES DE ESTA TERMINAL/, 'la pestaña de agentes tiene que avisar que la IA está simulada');
+  assert.match(terminal, /const ESCALERA=\[[\s\S]*'Prompt'[\s\S]*'Automatización'[\s\S]*'Agente'[\s\S]*'Consejo de agentes'/, 'la bienvenida tiene que mostrar la escalera de 4 escalones');
   const mapa = fs.readFileSync(path.join(TALLER, 'index.html'), 'utf8');
   assert.match(mapa, /id="clase1"[\s\S]*href="paso-5\.html"[\s\S]*id="clase2"[\s\S]*href="paso-9\.html"/, 'el mapa tiene que mostrar la clase 1 (P0–P5) y la clase 2 (P6–P9)');
   assert.match(mapa, /id="corto"[\s\S]*href="rescate\/finlab-v5\.html"/, 'el mapa tiene que ofrecer el camino corto con los rescates');

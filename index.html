@@ -280,6 +280,37 @@ tbody tr{transition:background .12s}
 /* ---------- Docs ---------- */
 .doc-body{max-width:940px}
 .guide-wrap{max-width:1080px}
+/* ---------- #/agentes y escalera de la bienvenida ---------- */
+.agents{max-width:1100px;margin:0 auto}
+.ag-intro{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center;padding:12px 0 22px;border-bottom:1px solid var(--line);margin-bottom:20px}
+.ag-intro h2{font-size:25px;margin-bottom:7px}
+.ag-intro p{color:var(--mut);font-size:15px;line-height:1.6;max-width:720px}
+.ag-intro p b{color:var(--txt)}
+.ag-controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:18px}
+.ag-controls label{font:600 12px var(--mono);letter-spacing:.06em;color:var(--mut)}
+.ag-controls select{min-width:min(100%,420px);padding:9px 10px;background:var(--panel);color:var(--txt);border:1px solid var(--line2);border-radius:6px;font:inherit;font-size:14px}
+.ag-controls .btn{font-size:13px;padding:9px 16px}
+.ag-steps{list-style:none;display:grid;gap:10px;margin-bottom:16px}
+.ag-step{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;align-items:start;padding:12px 14px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--line2);border-radius:6px;animation:agIn .35s ease}
+.ag-step b{font-size:13px;letter-spacing:.03em}
+.ag-step p{margin-top:3px;font-size:15px;line-height:1.55;color:var(--txt)}
+.ag-step details{margin-top:6px}
+.ag-step summary{cursor:pointer;font-size:12px;color:var(--mut)}
+.ag-step pre{margin-top:6px;max-height:220px;overflow:auto;padding:10px;background:var(--bg2);border:1px solid var(--line);border-radius:4px;font:12px var(--mono);color:var(--mut);white-space:pre-wrap}
+.ag-ico{font-size:22px;line-height:1.2;text-align:center}
+.ag-piensa{border-left-color:var(--amb)} .ag-herramienta{border-left-color:var(--teal)} .ag-observa{border-left-color:var(--mut)}
+.ag-borrador{border-left-color:var(--line2);border-style:dashed} .ag-audita{border-left-color:var(--dn);background:var(--dn-soft)} .ag-respuesta{border-left-color:var(--up);background:var(--up-soft)}
+@keyframes agIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.ag-step{animation:none}}
+.wl-escalera{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-items:end;margin-top:4px}
+.wl-escalera li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;padding:14px;background:var(--panel);border:1px solid var(--line);border-radius:8px;margin-top:calc((4 - var(--i)) * 26px)}
+.wl-escalera li:nth-child(n+3){border-color:var(--amb)}
+.wl-escalera b{display:block;font-size:16px}
+.wl-escalera span:not(.wl-n){display:block;color:var(--mut);font-size:14px;line-height:1.5;margin-top:3px}
+.wl-escalera small{display:block;margin-top:6px;font:12px var(--mono);color:var(--amb)}
+.wl-escalera-nota{margin-top:14px;color:var(--mut);font-size:14px;line-height:1.6;max-width:900px}
+.wl-escalera-nota b{color:var(--txt)}
+@media(max-width:900px){.ag-intro{grid-template-columns:1fr}.wl-escalera{grid-template-columns:1fr}.wl-escalera li{margin-top:0}}
 /* ---------- INICIO: bienvenida al taller ---------- */
 .welcome{max-width:1180px;margin:0 auto}
 .wl-hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:36px;align-items:center;padding:18px 0 30px;border-bottom:1px solid var(--line)}
@@ -304,7 +335,7 @@ tbody tr{transition:background .12s}
 .wl-bar i{width:9px;height:9px;border-radius:50%;background:var(--line2)}
 .wl-shot img{display:block;width:100%;height:auto}
 .wl-h{font-size:19px;margin:28px 0 14px}
-.wl-etapas{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.wl-etapas{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
 .wl-etapas li{position:relative;display:grid;gap:6px;padding:16px 16px 14px;background:var(--panel);border:1px solid var(--line);border-radius:8px}
 .wl-etapas b{font-size:16px}
 .wl-etapas span:not(.wl-n){color:var(--mut);font-size:14px;line-height:1.5}
@@ -2044,7 +2075,7 @@ function DocsPage({notify}){
 /* ================================================================
    8) APP PRINCIPAL — router por hash + estado global
    ================================================================ */
-const PAGES=[['inicio','INICIO'],['mercado','01 · MERCADO'],['carteras','02 · CARTERAS'],['python','03 · PYTHON & COLAB'],['api','04 · API & ALERTAS'],['guiado','05 · AUTOMATIZAR'],['docs','DOCS']];
+const PAGES=[['inicio','INICIO'],['mercado','01 · MERCADO'],['carteras','02 · CARTERAS'],['python','03 · PYTHON & COLAB'],['api','04 · API & ALERTAS'],['guiado','05 · AUTOMATIZAR'],['agentes','06 · AGENTES'],['docs','DOCS']];
 // Franja que conecta cada pestaña con el paso del taller donde se construye.
 const BUILD_HINTS={mercado:['3 y 4','paso-3'],carteras:['5','paso-5'],api:['6','paso-6'],python:['7','paso-7'],guiado:['8 y 9','paso-8']};
 function BuildHint({page}){
@@ -2054,7 +2085,125 @@ function BuildHint({page}){
 const ETAPAS=[
   {n:'1',t:'Ver el mercado',d:'La página, un año de precios simulados y el primer dashboard.',p:'Pasos 0–3',c:'Clase 1'},
   {n:'2',t:'Medirlo',d:'Medias móviles, RSI, señales y el riesgo de una cartera (Sharpe).',p:'Pasos 4–5',c:'Clase 1'},
-  {n:'3',t:'Sacarlo afuera',d:'Una API, la verificación en Google Colab y una alerta automática en n8n.',p:'Pasos 6–9',c:'Clase 2'}];
+  {n:'3',t:'Sacarlo afuera',d:'Una API, la verificación en Google Colab y una alerta automática en n8n.',p:'Pasos 6–9',c:'Clase 2'},
+  {n:'4',t:'Delegar en agentes',d:'Claves de API, modelos en n8n, agentes y el MCP de n8n para crear flujos desde un asistente.',p:'Pasos 10 en adelante',c:'Clase 3 (opcional)'}];
+const ESCALERA=[
+  {n:'1',t:'Prompt',d:'Le piden algo a la IA y verifican lo que devuelve.',d2:'Pasos 0–7'},
+  {n:'2',t:'Automatización',d:'Un flujo fijo que corre solo: algo lo dispara, consulta datos, decide y avisa.',d2:'Pasos 8–9 · n8n'},
+  {n:'3',t:'Agente',d:'La IA decide qué herramientas usar y en qué orden para responder.',d2:'Pestaña 06 · Agentes · Clase 3'},
+  {n:'4',t:'Consejo de agentes',d:'Varios agentes con roles: uno analiza, otro audita, otro redacta.',d2:'Clase 3'}];
+
+/* ---------- PÁGINA #/agentes · UN AGENTE SIMULADO, PASO A PASO ----------
+   La IA está guionada (no hay modelo ni clave de API), pero cada herramienta llama de verdad
+   a la API interna de la terminal: los números son los mismos que muestran las otras pestañas. */
+const fmt1=x=>x.toLocaleString('es-AR',{minimumFractionDigits:1,maximumFractionDigits:1});
+const fmt2=x=>x.toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const AVISO='Es un ejercicio con datos simulados: no es una recomendación de inversión.';
+const AGENT_QUESTIONS=[
+  {id:'mirar',q:'¿Qué activo conviene mirar hoy y por qué?'},
+  {id:'carteras',q:'¿Cuál de las tres carteras tiene mejor relación entre riesgo y retorno?'},
+  {id:'alertas',q:'¿Se disparó alguna de mis alertas?'}
+];
+async function runAgent(id){
+  const pasos=[], add=(tipo,titulo,texto,detalle)=>pasos.push({tipo,titulo,texto,detalle});
+  if(id==='mirar'){
+    add('piensa','Piensa','Para saber qué mirar necesito el RSI y la señal de cada activo. No los sé de memoria: los tengo que pedir.');
+    const r=await api.request('GET','/api/market/summary');
+    const ts=r.json.data.tickers;
+    add('herramienta','Usa una herramienta','GET /api/market/summary · '+r.status+' · '+ts.length+' activos en '+r.latency+' ms',JSON.stringify(ts.map(t=>({symbol:t.symbol,rsi14:t.rsi14,signal:t.signal})),null,1));
+    const raros=ts.map(t=>({...t,dist:t.rsi14<30?30-t.rsi14:t.rsi14>70?t.rsi14-70:0})).filter(t=>t.dist>0||t.signal==='VENTA');
+    add('observa','Observa',raros.length?raros.map(t=>t.symbol+': RSI '+fmt1(t.rsi14)+' · señal '+t.signal).join(' — '):'Ningún activo tiene RSI fuera de 30–70 ni señal de venta.');
+    if(!raros.length){
+      add('respuesta','Responde','Hoy no hay nada fuera de lo común: todos los RSI están entre 30 y 70 y ninguno tiene señal de venta. '+AVISO);
+      return pasos;
+    }
+    add('herramienta','Usa una herramienta','Calculadora: qué tan lejos está cada RSI del rango 30–70',raros.map(t=>t.symbol+': '+(t.dist>0?fmt1(t.dist)+' puntos afuera':'dentro del rango')).join('\n'));
+    const top=[...raros].sort((a,b)=>b.dist-a.dist||(b.signal==='VENTA')-(a.signal==='VENTA'))[0];
+    const motivo=top.rsi14<30?'su RSI ('+fmt1(top.rsi14)+') está por debajo de 30, zona de sobreventa':top.rsi14>70?'su RSI ('+fmt1(top.rsi14)+') está por encima de 70, zona de sobrecompra':'tiene señal de venta';
+    const borrador='Conviene mirar '+top.symbol+' ('+top.name+'), que cotiza a '+fmt2(top.last)+': '+motivo+(top.signal==='VENTA'&&top.rsi14<30?' y además tiene señal de venta':'')+'.';
+    add('borrador','Escribe un borrador',borrador);
+    add('audita','Agente auditor','✓ El precio y el RSI coinciden con lo que devolvió la API. ⚠ Falta aclarar que no es una recomendación: el borrador vuelve con una corrección.');
+    add('respuesta','Responde',borrador+' '+AVISO);
+  }
+  if(id==='carteras'){
+    add('piensa','Piensa','Tengo que medir las tres carteras con la misma herramienta y comparar el Sharpe, que relaciona retorno y riesgo.');
+    const filas=[];
+    for(const k of Object.keys(PRESETS)){
+      const w=PRESETS[k].w, ts=Object.keys(w);
+      const r=await api.request('GET','/api/portfolio/analyze?tickers='+ts.join(',')+'&weights='+ts.map(s=>w[s]).join(','));
+      const d=r.json.data;
+      filas.push({k,ret:d.expected_return,vol:d.volatility,sharpe:d.sharpe_ratio});
+      add('herramienta','Usa una herramienta','GET /api/portfolio/analyze · cartera '+k+' · '+r.status+' en '+r.latency+' ms','retorno '+fmt1(d.expected_return*100)+' % · volatilidad '+fmt1(d.volatility*100)+' % · Sharpe '+fmt2(d.sharpe_ratio));
+    }
+    const mejor=[...filas].sort((a,b)=>b.sharpe-a.sharpe)[0], menosRiesgo=[...filas].sort((a,b)=>a.vol-b.vol)[0];
+    add('observa','Observa',filas.map(f=>f.k+': Sharpe '+fmt2(f.sharpe)).join(' — '));
+    const borrador='La cartera '+mejor.k+' tiene el mejor Sharpe ('+fmt2(mejor.sharpe)+') y además es la de menor riesgo.';
+    add('borrador','Escribe un borrador',borrador);
+    const ok=mejor.k===menosRiesgo.k;
+    add('audita','Agente auditor','✓ El Sharpe de '+mejor.k+' coincide con la herramienta. '+(ok?'✓ También es la de menor volatilidad.':'✗ “Es la de menor riesgo” no está respaldado: la de menor volatilidad es '+menosRiesgo.k+' ('+fmt1(menosRiesgo.vol*100)+' %). Se corrige.')+' ⚠ Falta el aviso de que no es una recomendación.');
+    add('respuesta','Responde','La cartera '+mejor.k+' tiene el mejor Sharpe ('+fmt2(mejor.sharpe)+'): rinde más por cada punto de riesgo que asume. '+(ok?'También es la de menor volatilidad. ':'La de menor riesgo es '+menosRiesgo.k+', con volatilidad de '+fmt1(menosRiesgo.vol*100)+' %. ')+AVISO);
+  }
+  if(id==='alertas'){
+    add('piensa','Piensa','Las alertas las guardó la persona en la terminal. Tengo que consultarlas y ver cuáles se cumplen con los datos de hoy.');
+    const r=await api.request('GET','/api/alerts');
+    const al=r.json.data.alerts, disp=al.filter(a=>a.triggered);
+    add('herramienta','Usa una herramienta','GET /api/alerts · '+r.status+' · '+al.length+' alerta(s) en '+r.latency+' ms',JSON.stringify(al.map(a=>({ticker:a.ticker,condition:a.condition,threshold:a.threshold,current:a.current_value,triggered:a.triggered})),null,1));
+    add('observa','Observa',al.length?disp.length+' de '+al.length+' alerta(s) se cumplen hoy.':'No hay ninguna alerta guardada.');
+    const resp=!al.length?'No tienen alertas guardadas. Pueden crear una en la pestaña 04 · API & Alertas y volver a preguntarme.':disp.length?'Sí: '+disp.map(a=>a.ticker+' ('+a.condition.replace(/_/g,' ').toLowerCase()+' '+a.threshold+'; hoy vale '+fmt2(a.current_value)+')').join(', ')+'.':'No: ninguna de sus '+al.length+' alertas se cumple con los datos de hoy.';
+    add('audita','Agente auditor','✓ La cantidad de alertas y los valores coinciden con la herramienta.');
+    add('respuesta','Responde',resp);
+  }
+  return pasos;
+}
+const PASO_ICON={piensa:'🧠',herramienta:'🔧',observa:'👀',borrador:'📝',audita:'🛡️',respuesta:'💬'};
+function AgentLab(){
+  const [q,setQ]=useState('mirar');
+  const [pasos,setPasos]=useState([]);
+  const [visibles,setVisibles]=useState(0);
+  const [modo,setModo]=useState(null);
+  const timer=useRef(null);
+  const parar=()=>{if(timer.current){clearInterval(timer.current);timer.current=null;}};
+  useEffect(()=>parar,[]);
+  const ejecutar=async(paso)=>{
+    parar(); setPasos([]); setVisibles(0); setModo('cargando');
+    const ps=await runAgent(q);
+    setPasos(ps); setModo(paso?'paso':'auto');
+    if(paso){ setVisibles(1); return; }
+    let n=0; timer.current=setInterval(()=>{ n++; setVisibles(n); if(n>=ps.length) parar(); },900);
+  };
+  return (
+    <div className="agents">
+      <div className="ag-intro">
+        <div>
+          <h2>Un agente, paso a paso</h2>
+          <p>Un <b>agente</b> es una IA que, para responder, <b>decide qué herramientas usar y en qué orden</b>: consultar una API, hacer una cuenta, leer una planilla. Acá ven cada decisión. Después, un segundo agente, el <b>auditor</b>, revisa la respuesta antes de entregarla: quien hace no se controla a sí mismo.</p>
+        </div>
+        <span className="guide-flag">IA SIMULADA · DATOS REALES DE ESTA TERMINAL</span>
+      </div>
+      <div className="ag-controls">
+        <label htmlFor="ag-q">Pregunta</label>
+        <select id="ag-q" value={q} onChange={e=>{parar();setQ(e.target.value);setPasos([]);setVisibles(0);setModo(null);}}>
+          {AGENT_QUESTIONS.map(x=><option key={x.id} value={x.id}>{x.q}</option>)}
+        </select>
+        <button className="btn btn-primary" onClick={()=>ejecutar(false)} disabled={modo==='cargando'}>▶ EJECUTAR</button>
+        <button className="btn" onClick={()=>ejecutar(true)} disabled={modo==='cargando'}>PASO A PASO</button>
+      </div>
+      <ol className="ag-steps" aria-live="polite">
+        {pasos.slice(0,visibles).map((p,i)=>(
+          <li key={i} className={'ag-step ag-'+p.tipo}>
+            <span className="ag-ico" aria-hidden="true">{PASO_ICON[p.tipo]}</span>
+            <div><b>{p.titulo}</b><p>{p.texto}</p>{p.detalle&&<details><summary>ver lo que devolvió</summary><pre>{p.detalle}</pre></details>}</div>
+          </li>
+        ))}
+      </ol>
+      {modo==='paso'&&visibles<pasos.length&&<button className="btn btn-primary" onClick={()=>setVisibles(v=>v+1)}>SIGUIENTE PASO →</button>}
+      {modo==='cargando'&&<p className="hint">El agente está consultando sus herramientas…</p>}
+      {!pasos.length&&modo!=='cargando'&&<p className="hint">Elijan una pregunta y toquen EJECUTAR (o PASO A PASO, para discutir cada decisión en grupo).</p>}
+      <div className="guide-caveat"><b>Importante:</b> acá la IA está simulada: los pasos están guionados para mostrar cómo decide un agente. Las consultas a la API sí son reales, así que pueden verificar cada número en las otras pestañas. Un agente de verdad necesita un modelo de IA conectado con una <b>clave de API</b>: eso se ve en la clase 3, en n8n.</div>
+    </div>
+  );
+}
+
 /* ---------- PÁGINA #/ (INICIO) · BIENVENIDA AL TALLER ---------- */
 function Welcome(){
   return (
@@ -2080,7 +2229,14 @@ function Welcome(){
           <figcaption><span>ASÍ TERMINAN</span>esta misma terminal · <a href="#/mercado">explorala →</a></figcaption>
         </figure>
       </div>
-      <h3 className="wl-h">El recorrido en 3 etapas</h3>
+      <h3 className="wl-h">La escalera del curso: de pedirle algo a la IA a delegar en agentes</h3>
+      <ol className="wl-escalera">
+        {ESCALERA.map(e=>(
+          <li key={e.n} style={{"--i":e.n}}><span className="wl-n">{e.n}</span><div><b>{e.t}</b><span>{e.d}</span><small>{e.d2}</small></div></li>
+        ))}
+      </ol>
+      <p className="wl-escalera-nota">En una <b>automatización</b> ustedes dibujan el camino. En un <b>agente</b>, la IA elige el camino dentro de los límites que le ponen. En un <b>consejo</b>, un agente controla a otro: quien hace no se califica a sí mismo.</p>
+      <h3 className="wl-h">El recorrido en 4 etapas</h3>
       <ol className="wl-etapas">
         {ETAPAS.map(e=>(
           <li key={e.n}><span className="wl-n">{e.n}</span><b>{e.t}</b><span>{e.d}</span><small>{e.p} · {e.c}</small></li>
@@ -2200,6 +2356,7 @@ function App(){
         {page==='inicio'&&<Welcome/>}
         <BuildHint page={page}/>
         {page==='guiado'&&<GuidedAutomation notify={notify}/>}
+        {page==='agentes'&&<AgentLab/>}
         {page==='mercado'&&(
           <React.Fragment>
             <SectionHead n="01" t="Análisis de mercado"
