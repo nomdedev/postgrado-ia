@@ -92,6 +92,27 @@ test('las versiones de rescate del taller están generadas, sin marcas de planti
     assert.equal(/function rsi\(/.test(html), v >= 4, `finlab-v${v}: los indicadores aparecen recién en la v4`);
   }
   assert.ok(fs.readFileSync(path.join(RESCATE, 'finlab-v7.html'), 'utf8').includes(JSON.stringify(bloqueB).slice(1, -1)), 'finlab-v7: el bloque B no coincide con paso-7.html (correr build.js)');
+  // Rescate del paso 8: las dos variantes avisan JNJ (VENTA, RSI < 30) y KO (RSI > 70) con la muestra de la API.
+  const tickers = new Function(fs.readFileSync(path.join(__dirname, '..', 'api', 'market', 'summary.js'), 'utf8').match(/const tickers = \[[\s\S]*?\];/)[0] + 'return tickers;')();
+  const correr = (codigo, entrada) => new Function('$input', codigo)({ first: () => ({ json: entrada }) })[0].json;
+  for (const file of ['aviso-rsi.json', 'aviso-rsi-sin-url.json']) {
+    const workflow = JSON.parse(fs.readFileSync(path.join(RESCATE, file), 'utf8'));
+    const nodo = (nombre) => workflow.nodes.find((n) => n.name === nombre);
+    const nombres = new Set(workflow.nodes.map((n) => n.name));
+    for (const [from, c] of Object.entries(workflow.connections)) {
+      assert.ok(nombres.has(from), `${file}: conexión desde un nodo inexistente (${from})`);
+      c.main.flat().forEach((link) => assert.ok(nombres.has(link.node), `${file}: conexión hacia ${link.node}, que no existe`));
+    }
+    assert.equal(nodo('Enviar aviso por email').disabled, true, `${file}: el correo debe venir desactivado para correr sin credenciales`);
+    const entrada = file.includes('sin-url')
+      ? correr(nodo('Muestra fija (sin internet)').parameters.jsCode, {})
+      : { ok: true, data: { session: '2026-10-26', tickers } };
+    const salida = correr(nodo('Filtrar avisos').parameters.jsCode, entrada);
+    assert.equal(salida.cantidad, 2, `${file}: tendría que avisar 2 activos`);
+    assert.match(salida.texto, /- JNJ: .*motivo: señal de venta y RSI menor a 30\n- KO: .*motivo: RSI mayor a 70/, `${file}: el aviso no coincide con el ejemplo del paso 8`);
+  }
+  assert.match(fs.readFileSync(path.join(TALLER, 'paso-8.html'), 'utf8'), /href="rescate\/aviso-rsi\.json"/, 'paso-8: no enlaza su workflow de rescate');
+
   const csv = fs.readFileSync(path.join(RESCATE, 'finlab-AAPL.csv'), 'utf8').trim().split('\n');
   assert.equal(csv[0], 'fecha,cierre,sma20,sma50,rsi14');
   assert.equal(csv.length, 253, 'el CSV de respaldo debe tener 252 ruedas');

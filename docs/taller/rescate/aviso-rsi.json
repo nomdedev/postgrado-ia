@@ -1,0 +1,169 @@
+{
+  "name": "FINLAB - Rescate paso 8 · aviso por señal y RSI",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "8a000000-0000-4000-8000-000000000001",
+      "name": "Ejecutar a mano",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        240,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://postgrado-ia.vercel.app/api/market/summary",
+        "options": {
+          "timeout": 10000
+        }
+      },
+      "id": "8a000000-0000-4000-8000-000000000002",
+      "name": "Consultar API FIN·LAB",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "// Para probar el caso vacío: RSI_ALTO = 99, RSI_BAJO = 1 y SENAL = 'NINGUNA'.\nconst RSI_ALTO = 70;\nconst RSI_BAJO = 30;\nconst SENAL = 'VENTA';\n\nconst response = $input.first().json;\nif (!response.ok || !response.data || !Array.isArray(response.data.tickers)) {\n  throw new Error('La API no devolvió una lista de activos válida.');\n}\n\nconst avisos = [];\nfor (const t of response.data.tickers) {\n  const motivos = [];\n  if (t.signal === SENAL) motivos.push('señal de ' + SENAL.toLowerCase());\n  if (t.rsi14 > RSI_ALTO) motivos.push('RSI mayor a ' + RSI_ALTO);\n  if (t.rsi14 < RSI_BAJO) motivos.push('RSI menor a ' + RSI_BAJO);\n  if (motivos.length) {\n    avisos.push('- ' + t.symbol + ': ' + t.last + ' USD · RSI ' + t.rsi14 + ' · señal ' + t.signal + ' → motivo: ' + motivos.join(' y '));\n  }\n}\n\nreturn [{\n  json: {\n    session: response.data.session,\n    hayAvisos: avisos.length > 0,\n    cantidad: avisos.length,\n    asunto: 'FIN·LAB · ' + avisos.length + ' activos para mirar',\n    texto: avisos.length\n      ? avisos.join('\\n') + '\\n\\nMuestra educativa fija de FIN·LAB. No es una recomendación de inversión.'\n      : 'Sin activos para mirar en la sesión ' + response.data.session + '.'\n  }\n}];"
+      },
+      "id": "8a000000-0000-4000-8000-000000000003",
+      "name": "Filtrar avisos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8a000000-0000-4000-8000-00000000000a",
+              "leftValue": "={{ $json.hayAvisos }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "8a000000-0000-4000-8000-000000000004",
+      "name": "¿Hay algo para avisar?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        960,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "tu-correo@ejemplo.com",
+        "toEmail": "destinatario@ejemplo.com",
+        "subject": "={{ $json.asunto }}",
+        "text": "={{ $json.texto }}",
+        "options": {}
+      },
+      "id": "8a000000-0000-4000-8000-000000000005",
+      "name": "Enviar aviso por email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1200,
+        220
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "id": "8a000000-0000-4000-8000-000000000006",
+      "name": "Sin novedades",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        420
+      ]
+    }
+  ],
+  "connections": {
+    "Ejecutar a mano": {
+      "main": [
+        [
+          {
+            "node": "Consultar API FIN·LAB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consultar API FIN·LAB": {
+      "main": [
+        [
+          {
+            "node": "Filtrar avisos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filtrar avisos": {
+      "main": [
+        [
+          {
+            "node": "¿Hay algo para avisar?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Hay algo para avisar?": {
+      "main": [
+        [
+          {
+            "node": "Enviar aviso por email",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Sin novedades",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "tags": []
+}

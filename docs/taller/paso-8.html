@@ -103,6 +103,7 @@ Quiero adaptarlo así:
 - que avise también cuando el RSI 14 de un activo sea mayor a 70 o menor a 30
 - que el mensaje diga, por activo: símbolo, precio, RSI, señal y el motivo del aviso
 - que si no hay nada para avisar, no mande nada
+- que los umbrales y la señal queden en constantes al principio del nodo Code (const RSI_ALTO = 70, const RSI_BAJO = 30, const SENAL = 'VENTA'), para poder cambiarlos sin tocar el resto
 
 Devolveme el JSON completo listo para importar y una tabla con cada nodo: nombre, qué recibe y qué entrega. No inventes nodos que no existan en n8n y no pongas contraseñas ni claves dentro de los nodos.
 
@@ -122,7 +123,7 @@ Devolveme el JSON completo listo para importar y una tabla con cada nodo: nombre
     <ul class="check">
       <li><b>Importa sin errores</b> y todas las cajas están conectadas.</li>
       <li><b>Cuenta a mano:</b> abran la URL de la API en el navegador y cuenten cuántos activos tienen señal VENTA o RSI fuera de 30–70. Tiene que coincidir con la cantidad de avisos <em>y</em> con los activos (con la muestra fija del curso: JNJ y KO).</li>
-      <li><b>Caso vacío:</b> cambien en el nodo Code el umbral de 70 a 99 y el de 30 a 1, y quiten la condición de VENTA. Al ejecutar, tiene que salir por la rama <em>no</em> y no enviar nada.</li>
+      <li><b>Caso vacío:</b> abran el nodo Code y, en las primeras líneas, cambien <span class="code-inline">RSI_ALTO</span> a 99, <span class="code-inline">RSI_BAJO</span> a 1 y <span class="code-inline">SENAL</span> a <span class="code-inline">'NINGUNA'</span>. Al ejecutar, tiene que salir por la rama <em>no</em> y no enviar nada.</li>
       <li><b>Sin claves a la vista:</b> ningún nodo tiene contraseñas escritas.</li>
     </ul>
   </section>
@@ -130,6 +131,8 @@ Devolveme el JSON completo listo para importar y una tabla con cada nodo: nombre
   <section class="block" aria-labelledby="falla">
     <span class="num">07</span>
     <h2 id="falla">Si algo falla</h2>
+    <div class="note tip"><b>¿Se trabaron después de tres intentos?</b> Este workflow ya cumple todo lo del paso: avisa por señal VENTA o RSI fuera de 30–70 y explica el motivo. Impórtenlo igual que el otro y toquen <em>Execute workflow</em>; tiene que avisar JNJ y KO. El nodo de correo viene <b>desactivado</b> para que funcione sin credenciales. <a class="btn btn-primary" href="rescate/aviso-rsi.json" download>⬇ BAJAR EL WORKFLOW DE RESCATE</a></div>
+    <div class="note tip"><b>¿No hay internet o la URL no responde?</b> Usen la versión <em>sin internet</em>: en lugar de consultar la API trae adentro la misma muestra fija, así pueden practicar todo el recorrido igual. <a class="btn" href="rescate/aviso-rsi-sin-url.json" download>⬇ BAJAR LA VERSIÓN SIN INTERNET</a></div>
     <ul>
       <li><b>“Could not find property option” o un nodo en rojo al importar:</b> la IA usó una versión de nodo distinta. Copien el mensaje de error y pídanle: “n8n muestra este error al importar: [error]. Corregí solo ese nodo.”</li>
       <li><b>El nodo HTTP falla con ENOTFOUND o 404:</b> la URL está mal escrita o le falta <span class="code-inline">/api/market/summary</span>.</li>
