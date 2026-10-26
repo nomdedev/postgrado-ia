@@ -4,7 +4,8 @@
  * Uso:
  *   node scripts/loops/agent-graph-runner.js --phase pre  [--files "a.ts,b.ts"]
  *   node scripts/loops/agent-graph-runner.js --phase post [--files "..."] [--dry-run]
- * Sin --files, detecta archivos vía `git diff --name-only`.
+ * Sin --files, detecta archivos vía `git status` (incluye nuevos sin trackear y cambios ya agregados).
+ * Cada eval del grafo se ejecuta como evals/<nombre>.js; si el script falta, el eval falla.
  * Emite el bloque ═══ EVAL REPORT ═══. exit 1 = hard stop (eval fallido).
  * Solo Node stdlib (child_process, fs, path). Sin dependencias npm.
  */
@@ -36,10 +37,14 @@ function parseArgs(argv) {
   return args;
 }
 
+// git status (no git diff): incluye archivos nuevos sin trackear y cambios ya agregados con git add.
 function detectFiles() {
   try {
-    const out = execSync('git diff --name-only', { cwd: ROOT, encoding: 'utf8' });
-    return out.split('\n').map((s) => s.trim()).filter(Boolean);
+    const out = execSync('git status --porcelain --untracked-files=all', { cwd: ROOT, encoding: 'utf8' });
+    return out
+      .split('\n')
+      .filter(Boolean)
+      .map((line) => line.slice(3).split(' -> ').pop().replace(/^"|"$/g, ''));
   } catch {
     return [];
   }
@@ -59,18 +64,21 @@ function classifyFile(file, classify) {
 }
 
 function runEval(name) {
-  // Eval genérico: mapea nombres del grafo a comandos reales si existen scripts/evals/<name>.js
+  // Cada eval del grafo se ejecuta como evals/<name>.js; si el script falta, el eval falla (nunca pasa en silencio).
   const script = path.join(ROOT, 'evals', `${name.replace(/\s+/g, '-')}.js`);
-  if (fs.existsSync(script)) {
-    try {
-      execSync(`node "${script}"`, { cwd: ROOT, stdio: 'pipe', encoding: 'utf8' });
-      return { name, ok: true };
-    } catch (e) {
-      return { name, ok: false, detail: String(e.message).slice(0, 200) };
-    }
+  if (!fs.existsSync(script)) {
+    return { name, ok: false, detail: `falta ${path.relative(ROOT, script)}: el eval no se puede verificar` };
   }
-  // Sin script instalado: eval declarativo (solo lectura) — se marca SKIPPED, no bloquea.
-  return { name, ok: true, skipped: true };
+  try {
+    execSync(`node "${script}"`, { cwd: ROOT, stdio: 'pipe', encoding: 'utf8' });
+    return { name, ok: true };
+  } catch (e) {
+    const lineas = `${e.stdout || ''}\n${e.stderr || ''}`.trim().split('\n');
+    // node --test marca con ✖ cada test que falla: si hay, son el mejor resumen; si no, las últimas líneas.
+    const fallidos = [...new Set(lineas.filter((l) => /^\s*✖ /.test(l)).map((l) => l.trim()))];
+    const salida = (fallidos.length ? fallidos : lineas.slice(-12)).join('\n');
+    return { name, ok: false, detail: salida || String(e.message).slice(0, 300) };
+  }
 }
 
 function main() {
@@ -99,6 +107,12 @@ function main() {
     const spec = gate.matrix[type] || { pre: [], post: [] };
     const evals = args.phase === 'pre' ? spec.pre : spec.post;
     for (const ev of evals) {
+      // Varios tipos pueden pedir el mismo eval (p. ej. test-unit): se corre una sola vez por fase.
+      const previo = results.find((r) => r.name === ev && !r.dryRun);
+      if (previo) {
+        results.push({ ...previo, type, repeated: true });
+        continue;
+      }
       if (args.dryRun) {
         results.push({ type, name: ev, ok: true, dryRun: true });
         continue;
@@ -118,7 +132,8 @@ function main() {
   console.log(`Phase: ${args.phase} · Files: ${files.length}${args.dryRun ? ' (dry-run)' : ''}`);
   for (const r of results) {
     const mark = r.dryRun ? '🔍' : r.skipped ? '⏭️' : r.ok ? '✅' : '❌';
-    console.log(`${mark} [${r.type}] ${r.name}${r.detail ? ' — ' + r.detail : ''}`);
+    const nota = r.repeated ? ' (mismo resultado que arriba)' : r.detail ? ' — ' + r.detail : '';
+    console.log(`${mark} [${r.type}] ${r.name}${nota}`);
   }
   console.log(`Files touched: ${Object.entries(byType).map(([t, f]) => `${f.length} ${t}`).join(', ') || 'ninguno'}`);
   console.log(`Veredict: ${hardStop ? '❌ HARD STOP — eval fallido' : '✅ All evals passed'}`);

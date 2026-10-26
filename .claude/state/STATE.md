@@ -11,6 +11,8 @@
 
 ## Done
 
+- EVALS-REALES (2026-10-26): el runner no ejecutaba ningún eval (faltaba evals/ y los marcaba SKIPPED como aprobados; git diff no veía archivos nuevos). Ahora: evals/test-unit.js, typecheck.js y verify-only.js; un eval sin script falla; detección con git status. Verificado: frena con un test roto y con un error de sintaxis.
+
 - AUDITORIA-H9-H15 (2026-10-26): maquetas con la muestra fija de la API, alcance de la semilla, API simulada con el formato publicado (change_pct + {ok,data}), Sharpe con unidades, discusión de correlación y benchmark, 4 roles en el diagrama P0 y contraste ≥ 5,5:1. Auditoría 2026-10-26 completa.
 
 - AUDITORIA-H7-H8 (2026-10-26): rescate del paso 8 (aviso-rsi.json + versión sin internet, generados por build.js) y paso 9 con tres caminos (publicada, doble clic, 127.0.0.1:4173), tiempos 25+20 min y comandos de Mac/Windows corregidos. También H17 (constantes en el nodo Code).

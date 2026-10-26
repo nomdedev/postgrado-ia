@@ -34,7 +34,7 @@
       },
       "classify": {
         "backend": ["api/"],
-        "eval": ["test/", "scripts/loops/"],
+        "eval": ["test/", "scripts/loops/", "evals/"],
         "docs": ["*.md", "docs/", "n8n/", "notebooks/", "index.html"]
       }
     },
