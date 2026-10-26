@@ -1,0 +1,130 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Un consejo de agentes para una decisión de inversión",
+    "quality_profile": "showcase",
+    "legend": {
+      "entries": {
+        "frontend": {
+          "label": "Pantalla"
+        },
+        "backend": {
+          "label": "Cálculo / lógica"
+        },
+        "database": {
+          "label": "Datos"
+        },
+        "cloud": {
+          "label": "Herramienta externa"
+        },
+        "security": {
+          "label": "Control / decisión"
+        },
+        "messagebus": {
+          "label": "Intercambio (archivo, JSON, HTTP)"
+        },
+        "external": {
+          "label": "Personas / IA"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "ustedes",
+      "label": "Ustedes"
+    },
+    {
+      "id": "analistas",
+      "label": "Analistas (cada uno con su rol)"
+    },
+    {
+      "id": "control",
+      "label": "Control"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "pregunta",
+      "lane": "ustedes",
+      "col": 0,
+      "type": "external",
+      "label": "La pregunta",
+      "sublabel": "¿armamos esta cartera?",
+      "width": 160
+    },
+    {
+      "id": "tecnico",
+      "lane": "analistas",
+      "col": 1,
+      "type": "backend",
+      "label": "Analista técnico",
+      "sublabel": "medias y RSI",
+      "width": 160
+    },
+    {
+      "id": "riesgo",
+      "lane": "analistas",
+      "col": 2,
+      "type": "backend",
+      "label": "Analista de riesgo",
+      "sublabel": "volatilidad y Sharpe",
+      "width": 160
+    },
+    {
+      "id": "diablo",
+      "lane": "analistas",
+      "col": 3,
+      "type": "backend",
+      "label": "Abogado del diablo",
+      "sublabel": "busca lo que falla",
+      "width": 160
+    },
+    {
+      "id": "auditor",
+      "lane": "control",
+      "col": 4,
+      "type": "security",
+      "label": "Agente auditor",
+      "sublabel": "¿cada número tiene fuente?",
+      "width": 160
+    },
+    {
+      "id": "informe",
+      "lane": "ustedes",
+      "col": 5,
+      "type": "frontend",
+      "label": "Informe",
+      "sublabel": "con aviso y fuentes",
+      "width": 160
+    }
+  ],
+  "edges": [
+    {
+      "from": "pregunta",
+      "to": "tecnico"
+    },
+    {
+      "from": "tecnico",
+      "to": "riesgo",
+      "label": "pasa su análisis"
+    },
+    {
+      "from": "riesgo",
+      "to": "diablo",
+      "label": "pasa su análisis"
+    },
+    {
+      "from": "diablo",
+      "to": "auditor",
+      "label": "objeciones"
+    },
+    {
+      "from": "auditor",
+      "to": "informe",
+      "label": "aprobado",
+      "variant": "emphasis"
+    }
+  ]
+}

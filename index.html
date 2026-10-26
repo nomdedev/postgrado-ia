@@ -2199,6 +2199,7 @@ function AgentLab(){
       {modo==='paso'&&visibles<pasos.length&&<button className="btn btn-primary" onClick={()=>setVisibles(v=>v+1)}>SIGUIENTE PASO →</button>}
       {modo==='cargando'&&<p className="hint">El agente está consultando sus herramientas…</p>}
       {!pasos.length&&modo!=='cargando'&&<p className="hint">Elijan una pregunta y toquen EJECUTAR (o PASO A PASO, para discutir cada decisión en grupo).</p>}
+      <p style={{margin:"4px 0 16px"}}><a className="btn" href="docs/taller/diagramas/a1-ciclo-agente.html" target="_blank" rel="noreferrer">VER EL CICLO DE UN AGENTE EN UN DIAGRAMA ↗</a></p>
       <div className="guide-caveat"><b>Importante:</b> acá la IA está simulada: los pasos están guionados para mostrar cómo decide un agente. Las consultas a la API sí son reales, así que pueden verificar cada número en las otras pestañas. Un agente de verdad necesita un modelo de IA conectado con una <b>clave de API</b>: eso se ve en la clase 3, en n8n.</div>
     </div>
   );

@@ -1,0 +1,143 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Así se hizo este taller: agentes que planifican y controlan",
+    "quality_profile": "showcase",
+    "legend": {
+      "entries": {
+        "frontend": {
+          "label": "Pantalla"
+        },
+        "backend": {
+          "label": "Cálculo / lógica"
+        },
+        "database": {
+          "label": "Datos"
+        },
+        "cloud": {
+          "label": "Herramienta externa"
+        },
+        "security": {
+          "label": "Control / decisión"
+        },
+        "messagebus": {
+          "label": "Intercambio (archivo, JSON, HTTP)"
+        },
+        "external": {
+          "label": "Personas / IA"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "profe",
+      "label": "El profesor"
+    },
+    {
+      "id": "agentes",
+      "label": "Agentes"
+    },
+    {
+      "id": "control",
+      "label": "Controles"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "pedido",
+      "lane": "profe",
+      "col": 0,
+      "type": "external",
+      "label": "Pedido",
+      "sublabel": "reestructurar el taller",
+      "width": 160
+    },
+    {
+      "id": "consejo",
+      "lane": "agentes",
+      "col": 1,
+      "type": "backend",
+      "label": "Consejo de 4 agentes",
+      "sublabel": "miran y proponen",
+      "width": 160
+    },
+    {
+      "id": "plan",
+      "lane": "agentes",
+      "col": 2,
+      "type": "database",
+      "label": "Plan unificado",
+      "sublabel": "coincidencias y choques",
+      "width": 160
+    },
+    {
+      "id": "decide",
+      "lane": "profe",
+      "col": 3,
+      "type": "security",
+      "label": "El profesor decide",
+      "sublabel": "4 decisiones",
+      "width": 160
+    },
+    {
+      "id": "etapas",
+      "lane": "agentes",
+      "col": 4,
+      "type": "backend",
+      "label": "Implementación",
+      "sublabel": "6 etapas chicas",
+      "width": 160
+    },
+    {
+      "id": "evals",
+      "lane": "control",
+      "col": 5,
+      "type": "security",
+      "label": "Evals y tests",
+      "sublabel": "frenan si algo falla",
+      "width": 160
+    },
+    {
+      "id": "docente",
+      "lane": "control",
+      "col": 2,
+      "type": "security",
+      "label": "Agente docente",
+      "sublabel": "audita sin editar",
+      "width": 160
+    }
+  ],
+  "edges": [
+    {
+      "from": "pedido",
+      "to": "consejo"
+    },
+    {
+      "from": "consejo",
+      "to": "plan"
+    },
+    {
+      "from": "plan",
+      "to": "decide",
+      "label": "para decidir",
+      "variant": "emphasis"
+    },
+    {
+      "from": "decide",
+      "to": "etapas"
+    },
+    {
+      "from": "etapas",
+      "to": "evals",
+      "label": "cada etapa"
+    },
+    {
+      "from": "docente",
+      "to": "plan",
+      "label": "hallazgos",
+      "variant": "dashed"
+    }
+  ]
+}

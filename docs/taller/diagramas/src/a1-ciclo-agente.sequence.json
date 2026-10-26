@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "El ciclo de un agente: pregunta, herramientas y control",
+    "quality_profile": "showcase",
+    "column_fit": "spread",
+    "viewBox": [
+      1080,
+      540
+    ]
+  },
+  "participants": [
+    {
+      "id": "persona",
+      "type": "external",
+      "label": "Ustedes",
+      "sublabel": "hacen la pregunta"
+    },
+    {
+      "id": "agente",
+      "type": "backend",
+      "label": "Agente",
+      "sublabel": "una IA con herramientas"
+    },
+    {
+      "id": "api",
+      "type": "messagebus",
+      "label": "API de mercado",
+      "sublabel": "herramienta"
+    },
+    {
+      "id": "calc",
+      "type": "backend",
+      "label": "Calculadora",
+      "sublabel": "herramienta"
+    },
+    {
+      "id": "auditor",
+      "type": "security",
+      "label": "Agente auditor",
+      "sublabel": "revisa antes de entregar"
+    }
+  ],
+  "segments": [
+    {
+      "from": 150,
+      "to": 196,
+      "label": "Pregunta"
+    },
+    {
+      "from": 204,
+      "to": 336,
+      "label": "Usa herramientas"
+    },
+    {
+      "from": 342,
+      "to": 440,
+      "label": "Control y respuesta"
+    }
+  ],
+  "messages": [
+    {
+      "id": "preguntar",
+      "from": "persona",
+      "to": "agente",
+      "y": 172,
+      "label": "¿qué activo mirar?",
+      "variant": "emphasis"
+    },
+    {
+      "id": "pedir-datos",
+      "from": "agente",
+      "to": "api",
+      "y": 222,
+      "label": "pide RSI y señales"
+    },
+    {
+      "id": "datos",
+      "from": "api",
+      "to": "agente",
+      "y": 254,
+      "label": "8 activos",
+      "variant": "return"
+    },
+    {
+      "id": "calcular",
+      "from": "agente",
+      "to": "calc",
+      "y": 286,
+      "label": "distancia a 30 y 70"
+    },
+    {
+      "id": "resultado",
+      "from": "calc",
+      "to": "agente",
+      "y": 316,
+      "label": "JNJ, la más lejos",
+      "variant": "return"
+    },
+    {
+      "id": "borrador",
+      "from": "agente",
+      "to": "auditor",
+      "y": 358,
+      "label": "borrador"
+    },
+    {
+      "id": "correccion",
+      "from": "auditor",
+      "to": "agente",
+      "y": 390,
+      "label": "falta el aviso",
+      "variant": "security"
+    },
+    {
+      "id": "responder",
+      "from": "agente",
+      "to": "persona",
+      "y": 422,
+      "label": "respuesta con aviso",
+      "variant": "emphasis"
+    }
+  ]
+}

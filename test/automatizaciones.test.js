@@ -199,7 +199,7 @@ test('cada carpeta de docs/ con index.html redirige a su versión con barra fina
 
 test('cada fuente de diagrama tiene su HTML generado y al revés', () => {
   const DIAG = path.join(__dirname, '..', 'docs', 'taller', 'diagramas');
-  const fuentes = fs.readdirSync(path.join(DIAG, 'src')).filter((f) => f.endsWith('.workflow.json')).map((f) => f.replace('.workflow.json', '')).sort();
+  const fuentes = fs.readdirSync(path.join(DIAG, 'src')).filter((f) => /.(workflow|sequence).json$/.test(f)).map((f) => f.replace(/.(workflow|sequence).json$/, '')).sort();
   const html = fs.readdirSync(DIAG).filter((f) => f.endsWith('.html')).map((f) => f.replace('.html', '')).sort();
   assert.deepEqual(html, fuentes, 'diagramas/*.html y diagramas/src/*.workflow.json no coinciden: regenerá con fuentes.js y archify');
   assert.ok(fs.existsSync(path.join(DIAG, 'fuentes.js')), 'falta el generador de fuentes (diagramas/fuentes.js)');

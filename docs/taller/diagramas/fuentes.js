@@ -89,10 +89,58 @@ const specs = {
      N('importar','n8n',4,'cloud','Importar archivo','Import from file'), N('ejecutar','n8n',5,'security','Ejecutar workflow','¿qué salida se activa?'),
      N('ejercicios','term',5,'external','Ejercicios en grupo','3 preguntas')],
     [E('abrir','elegir'), E('elegir','json'), E('json','importar'), E('importar','ejecutar'), E('ejecutar','ejercicios','comparar predicción',{variant:'emphasis'})]],
+  // ---------- Agentes (clase 3) ----------
+  'a2-consejo': ['Un consejo de agentes para una decisión de inversión',
+    [['ustedes','Ustedes'], ['analistas','Analistas (cada uno con su rol)'], ['control','Control']],
+    [N('pregunta','ustedes',0,'external','La pregunta','¿armamos esta cartera?'), N('tecnico','analistas',1,'backend','Analista técnico','medias y RSI'),
+     N('riesgo','analistas',2,'backend','Analista de riesgo','volatilidad y Sharpe'), N('diablo','analistas',3,'backend','Abogado del diablo','busca lo que falla'),
+     N('auditor','control',4,'security','Agente auditor','¿cada número tiene fuente?'), N('informe','ustedes',5,'frontend','Informe','con aviso y fuentes')],
+    [E('pregunta','tecnico'), E('tecnico','riesgo','pasa su análisis'), E('riesgo','diablo','pasa su análisis'), E('diablo','auditor','objeciones'),
+     E('auditor','informe','aprobado',{variant:'emphasis'})]],
+  'a3-este-taller': ['Así se hizo este taller: agentes que planifican y controlan',
+    [['profe','El profesor'], ['agentes','Agentes'], ['control','Controles']],
+    [N('pedido','profe',0,'external','Pedido','reestructurar el taller'), N('consejo','agentes',1,'backend','Consejo de 4 agentes','miran y proponen'),
+     N('plan','agentes',2,'database','Plan unificado','coincidencias y choques'), N('decide','profe',3,'security','El profesor decide','4 decisiones'),
+     N('etapas','agentes',4,'backend','Implementación','6 etapas chicas'), N('evals','control',5,'security','Evals y tests','frenan si algo falla'),
+     N('docente','control',2,'security','Agente docente','audita sin editar')],
+    [E('pedido','consejo'), E('consejo','plan'), E('plan','decide','para decidir',{variant:'emphasis'}), E('decide','etapas'), E('etapas','evals','cada etapa'),
+     E('docente','plan','hallazgos',{variant:'dashed'})]],
 };
+// Diagramas de secuencia: se escriben tal cual (el formato es otro que el de los workflows).
+const secuencias = {
+  'a1-ciclo-agente': {
+    schema_version: 1, diagram_type: 'sequence',
+    meta: { title: 'El ciclo de un agente: pregunta, herramientas y control', quality_profile: 'showcase', column_fit: 'spread', viewBox: [1080, 540] },
+    participants: [
+      { id: 'persona', type: 'external', label: 'Ustedes', sublabel: 'hacen la pregunta' },
+      { id: 'agente', type: 'backend', label: 'Agente', sublabel: 'una IA con herramientas' },
+      { id: 'api', type: 'messagebus', label: 'API de mercado', sublabel: 'herramienta' },
+      { id: 'calc', type: 'backend', label: 'Calculadora', sublabel: 'herramienta' },
+      { id: 'auditor', type: 'security', label: 'Agente auditor', sublabel: 'revisa antes de entregar' }
+    ],
+    segments: [
+      { from: 150, to: 196, label: 'Pregunta' },
+      { from: 204, to: 336, label: 'Usa herramientas' },
+      { from: 342, to: 440, label: 'Control y respuesta' }
+    ],
+    messages: [
+      { id: 'preguntar', from: 'persona', to: 'agente', y: 172, label: '¿qué activo mirar?', variant: 'emphasis' },
+      { id: 'pedir-datos', from: 'agente', to: 'api', y: 222, label: 'pide RSI y señales' },
+      { id: 'datos', from: 'api', to: 'agente', y: 254, label: '8 activos', variant: 'return' },
+      { id: 'calcular', from: 'agente', to: 'calc', y: 286, label: 'distancia a 30 y 70' },
+      { id: 'resultado', from: 'calc', to: 'agente', y: 316, label: 'JNJ, la más lejos', variant: 'return' },
+      { id: 'borrador', from: 'agente', to: 'auditor', y: 358, label: 'borrador' },
+      { id: 'correccion', from: 'auditor', to: 'agente', y: 390, label: 'falta el aviso', variant: 'security' },
+      { id: 'responder', from: 'agente', to: 'persona', y: 422, label: 'respuesta con aviso', variant: 'emphasis' }
+    ]
+  }
+};
+for (const [id, spec] of Object.entries(secuencias)) {
+  fs.writeFileSync(path.join(out, id + '.sequence.json'), JSON.stringify(spec, null, 2) + '\n');
+}
 for (const [id, [title, lanes, nodes, edges]] of Object.entries(specs)) {
   const spec = { schema_version: 2, diagram_type: 'workflow', meta: { title, quality_profile: 'showcase', legend },
     lanes: lanes.map(([id, label]) => ({ id, label, ...(id === 'err' ? { variant: 'exception' } : {}) })), nodes, edges };
   fs.writeFileSync(path.join(out, id + '.workflow.json'), JSON.stringify(spec, null, 2) + '\n');
 }
-console.log(Object.keys(specs).join(' '));
+console.log([...Object.keys(specs), ...Object.keys(secuencias)].join(' '));
