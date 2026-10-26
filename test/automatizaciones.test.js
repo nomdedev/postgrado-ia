@@ -125,6 +125,15 @@ test('las versiones de rescate del taller están generadas, sin marcas de planti
   assert.equal(csv.length, 253, 'el CSV de respaldo debe tener 252 ruedas');
 });
 
+test('las partes comunes del taller (encabezado, barra por clase, pie) están sincronizadas con build.js', () => {
+  const { execFileSync } = require('node:child_process');
+  try {
+    execFileSync(process.execPath, [path.join(__dirname, '..', 'docs', 'taller', 'build.js'), '--check'], { stdio: 'pipe' });
+  } catch (e) {
+    assert.fail(String(e.stderr || e.message).trim());
+  }
+});
+
 test('cada fuente de diagrama tiene su HTML generado y al revés', () => {
   const DIAG = path.join(__dirname, '..', 'docs', 'taller', 'diagramas');
   const fuentes = fs.readdirSync(path.join(DIAG, 'src')).filter((f) => f.endsWith('.workflow.json')).map((f) => f.replace('.workflow.json', '')).sort();
