@@ -32,7 +32,7 @@
     },
     {
       "parameters": {
-        "url": "https://TU-PROYECTO.vercel.app/api/market/summary",
+        "url": "https://postgrado-ia.vercel.app/api/market/summary",
         "options": {
           "timeout": 10000
         }

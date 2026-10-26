@@ -4,6 +4,8 @@ Demo didáctica para explicar análisis de mercado, automatizaciones con n8n y c
 
 > **Datos educativos:** los precios y señales del endpoint son una muestra fija. No son cotizaciones en tiempo real, recomendaciones de inversión ni datos persistentes.
 
+**Publicado en:** https://postgrado-ia.vercel.app · taller: https://postgrado-ia.vercel.app/docs/taller/ · API: https://postgrado-ia.vercel.app/api/market/summary
+
 ## Contenido
 
 - `index.html`: aplicación y modo guiado para estudiantes.
@@ -21,7 +23,7 @@ El playground de la aplicación conserva una simulación local con `localStorage
 
 Abrí `docs/automatizaciones/index.html` (o `/docs/automatizaciones` en Vercel). Cada ejemplo tiene la misma estructura: qué resuelve, cómo funciona, cómo armarlo en n8n, qué pedirle a la IA y cómo verificarlo. Al final de cada página hay un botón para descargar el workflow `.json` y bloques de prompt con botón de copiar.
 
-Los workflows traen marcadores (`TU-PROYECTO`, `tu-correo@ejemplo.com`, `TU_ID_DE_PLANILLA`): hay que completarlos y conectar las credenciales en n8n. No incluyen claves ni tokens. Las páginas comparten `docs/automatizaciones/lab.css` y `lab.js`, así que hay que servirlas desde esa carpeta (no alcanza con bajar un HTML suelto).
+Los workflows ya apuntan a la API del curso (`https://postgrado-ia.vercel.app`) y traen marcadores (`tu-correo@ejemplo.com`, `TU_ID_DE_PLANILLA`): hay que completarlos y conectar las credenciales en n8n. No incluyen claves ni tokens. Las páginas comparten `docs/automatizaciones/lab.css` y `lab.js`, así que hay que servirlas desde esa carpeta (no alcanza con bajar un HTML suelto).
 
 ## Probar localmente
 
@@ -48,7 +50,7 @@ No puedo publicar el proyecto en una cuenta de GitHub o Vercel desde este espaci
 
 1. Descargá `n8n/monitor-mercado-vercel.json` desde el repositorio.
 2. En n8n, importá el archivo como workflow.
-3. Abrí el nodo **Consultar API FIN·LAB** y reemplazá `https://TU-PROYECTO.vercel.app/api/market/summary` por la URL de tu despliegue.
+3. El nodo **Consultar API FIN·LAB** ya apunta a `https://postgrado-ia.vercel.app/api/market/summary`. Si publicaste tu propio despliegue, cambiá esa URL.
 4. Ejecutá manualmente el workflow. La muestra incluye una señal `VENTA` para que se pueda observar la rama positiva.
 5. El workflow solo prepara un resultado de demostración; no envía emails ni mensajes.
 
@@ -57,7 +59,7 @@ Para usar un horario, agregá o sustituí el disparador manual por **Schedule Tr
 ## Usar el notebook en Colab
 
 1. Abrí `notebooks/finlab-api.ipynb` en GitHub y elegí **Open in Colab**, o descargalo y subilo desde Google Colab.
-2. Reemplazá `TU-PROYECTO` por el dominio de Vercel.
+2. La celda de configuración ya apunta a la API del curso; cambiala solo si usás tu propio despliegue.
 3. Ejecutá las celdas en orden para consultar y filtrar la misma respuesta usada por n8n.
 
 Cuando el repositorio ya tenga dueño y nombre, el acceso directo se puede formar así:

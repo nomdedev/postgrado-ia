@@ -67,7 +67,7 @@ Muestra educativa fija de FIN·LAB. No es una recomendación de inversión.</pre
     <p style="margin-top:16px"><a class="btn btn-primary" href="workflows/aviso-senal.json" download>DESCARGAR WORKFLOW (.JSON)</a> <a class="btn" href="index.html">VOLVER AL ÍNDICE</a></p>
     <ol>
       <li><b>Importá el archivo</b> en n8n: menú de workflows → <em>Import from File</em> → elegí <span class="code-inline">aviso-senal.json</span>.</li>
-      <li><b>Reemplazá la URL.</b> En el nodo <em>Consultar API FIN·LAB</em>, cambiá <span class="code-inline">TU-PROYECTO</span> por el dominio real del despliegue.</li>
+      <li><b>Revisá la URL.</b> El nodo <em>Consultar API FIN·LAB</em> ya apunta a la API del curso (<span class="code-inline">postgrado-ia.vercel.app</span>). Cambiala solo si publicaste tu propio despliegue.</li>
       <li><b>Conectá el correo.</b> Abrí el nodo <em>Enviar aviso por email</em> y creá la credencial SMTP. Poné tu dirección en <em>from</em> y <em>to</em>: la primera prueba te la mandás a vos.</li>
       <li><b>Ejecutá a mano.</b> Botón <em>Execute workflow</em>. Mirá la salida del nodo <em>Filtrar señales</em>: tiene que decir <span class="code-inline">hasSignal: true</span> y el símbolo JNJ.</li>
       <li><b>Ajustá la señal.</b> En el código del nodo <em>Filtrar señales</em>, la primera línea es <span class="code-inline">const SENAL = 'VENTA'</span>. Cambiala por <span class="code-inline">'COMPRA'</span> o <span class="code-inline">'NEUTRAL'</span> y volvé a ejecutar.</li>
@@ -78,7 +78,7 @@ Muestra educativa fija de FIN·LAB. No es una recomendación de inversión.</pre
     <table class="tbl">
       <thead><tr><th>NODO</th><th>CAMPO</th><th>QUÉ PONER</th></tr></thead>
       <tbody>
-        <tr><td>Consultar API</td><td>url</td><td>La URL de tu despliegue, sin <span class="code-inline">TU-PROYECTO</span>.</td></tr>
+        <tr><td>Consultar API</td><td>url</td><td>La API del curso o la de tu propio despliegue.</td></tr>
         <tr><td>Enviar aviso</td><td>fromEmail / toEmail</td><td>Tu correo. En la prueba, el mismo en los dos campos.</td></tr>
         <tr><td>Enviar aviso</td><td>credencial SMTP</td><td>Se crea en n8n, no se escribe en el workflow.</td></tr>
         <tr><td>Cada día 18:00</td><td>cronExpression</td><td><span class="code-inline">0 18 * * 1-5</span> = 18:00 de lunes a viernes.</td></tr>
@@ -94,7 +94,7 @@ Muestra educativa fija de FIN·LAB. No es una recomendación de inversión.</pre
 
     <div class="prompt">
       <div class="prompt-h"><div><span class="t">PROMPT 1 · QUE TE EXPLIQUE EL PLAN</span><div class="d">Antes de escribir código. Sirve para no aceptar un workflow a ciegas.</div></div><button class="copy" data-copy="#p1" type="button">COPIAR</button></div>
-      <div class="prompt-b"><pre id="p1">Quiero armar en n8n un flujo que todos los días a las 18:00 consulte https://TU-PROYECTO.vercel.app/api/market/summary y me mande un email solo si hay al menos un activo con signal === 'VENTA'.
+      <div class="prompt-b"><pre id="p1">Quiero armar en n8n un flujo que todos los días a las 18:00 consulte https://postgrado-ia.vercel.app/api/market/summary y me mande un email solo si hay al menos un activo con signal === 'VENTA'.
 
 Los datos vienen en data.tickers[], y cada activo tiene symbol, name, last, change_pct y rsi14.
 

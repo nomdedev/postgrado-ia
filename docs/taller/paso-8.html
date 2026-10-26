@@ -41,7 +41,7 @@
 - GGAL: 28.75 USD · RSI 72.4 · señal NEUTRAL → motivo: RSI mayor a 70
 
 Muestra educativa fija de FIN·LAB. No es una recomendación de inversión.</pre></div></div>
-    <div class="note warn"><b>Importante:</b> n8n <b>no puede</b> consultar la API que armaron en el paso 6, porque esa vive dentro de su navegador. Usa la API publicada del proyecto (<span class="code-inline">https://…vercel.app/api/market/summary</span>), que devuelve los mismos campos. El docente les pasa la URL.</div>
+    <div class="note warn"><b>Importante:</b> n8n <b>no puede</b> consultar la API que armaron en el paso 6, porque esa vive dentro de su navegador. Usa la API publicada del proyecto (<span class="code-inline c">https://postgrado-ia.vercel.app/api/market/summary</span>), que devuelve los mismos campos.</div>
   </section>
 
   <section class="block" aria-labelledby="flujo">
@@ -85,7 +85,7 @@ Muestra educativa fija de FIN·LAB. No es una recomendación de inversión.</pre
       <li><b>En n8n:</b> <em>Create workflow</em> → menú <em>⋯</em> (arriba a la derecha) → <em>Import from File…</em> → elijan el archivo. Aparecen las cajas conectadas.</li>
       <li><b>Abran el JSON con el Bloc de notas,</b> cópienlo y péguenlo en el chat de IA debajo del prompt de la sección 05.</li>
       <li><b>Guarden la respuesta</b> como <span class="code-inline">aviso-rsi.json</span> e impórtenla igual que el anterior.</li>
-      <li><b>Doble clic en el nodo HTTP Request</b> y reemplacen <span class="code-inline">https://TU-PROYECTO.vercel.app</span> por la URL del curso.</li>
+      <li><b>Doble clic en el nodo HTTP Request</b> y confirmen que la URL sea la del curso: <span class="code-inline c">https://postgrado-ia.vercel.app/api/market/summary</span>. Si la IA la cambió, péguenla de nuevo.</li>
       <li><b>Toquen <em>Execute workflow</em></b> (abajo, al centro). Cada nodo que funciona se pone verde; hagan clic en cada uno para ver qué recibió y qué entregó.</li>
       <li><b>El correo, al final:</b> si quieren que llegue de verdad, abran el nodo de email → <em>Credential</em> → <em>Create new</em> y sigan los pasos. Si no, alcanza con ver la salida del nodo anterior.</li>
     </ol>
@@ -132,7 +132,7 @@ Devolveme el JSON completo listo para importar y una tabla con cada nodo: nombre
     <h2 id="falla">Si algo falla</h2>
     <ul>
       <li><b>“Could not find property option” o un nodo en rojo al importar:</b> la IA usó una versión de nodo distinta. Copien el mensaje de error y pídanle: “n8n muestra este error al importar: [error]. Corregí solo ese nodo.”</li>
-      <li><b>El nodo HTTP falla con ENOTFOUND o 404:</b> la URL quedó con <span class="code-inline">TU-PROYECTO</span> o le falta <span class="code-inline">/api/market/summary</span>.</li>
+      <li><b>El nodo HTTP falla con ENOTFOUND o 404:</b> la URL está mal escrita o le falta <span class="code-inline">/api/market/summary</span>.</li>
       <li><b>Funciona, pero manda un correo vacío:</b> el IF está mirando el campo equivocado. Abran el nodo Code, miren cómo se llama el campo que indica si hay avisos y usen ese en el IF.</li>
     </ul>
   </section>
