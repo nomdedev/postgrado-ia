@@ -1,0 +1,136 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "P11 · Elegir el modelo con evidencia",
+    "quality_profile": "showcase",
+    "legend": {
+      "entries": {
+        "frontend": {
+          "label": "Pantalla"
+        },
+        "backend": {
+          "label": "Cálculo / lógica"
+        },
+        "database": {
+          "label": "Datos"
+        },
+        "cloud": {
+          "label": "Herramienta externa"
+        },
+        "security": {
+          "label": "Control / decisión"
+        },
+        "messagebus": {
+          "label": "Intercambio (archivo, JSON, HTTP)"
+        },
+        "external": {
+          "label": "Personas / IA"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "tarea",
+      "label": "Tarea"
+    },
+    {
+      "id": "prueba",
+      "label": "Prueba"
+    },
+    {
+      "id": "decision",
+      "label": "Decisión"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "tarea",
+      "lane": "tarea",
+      "col": 0,
+      "type": "external",
+      "label": "Una tarea concreta",
+      "sublabel": "misma pregunta siempre",
+      "width": 160
+    },
+    {
+      "id": "chico",
+      "lane": "prueba",
+      "col": 1,
+      "type": "backend",
+      "label": "Modelo chico",
+      "sublabel": "rápido y barato",
+      "width": 160
+    },
+    {
+      "id": "alcanza",
+      "lane": "decision",
+      "col": 2,
+      "type": "security",
+      "label": "¿Alcanza?",
+      "sublabel": "correcto · completo",
+      "width": 160
+    },
+    {
+      "id": "usar",
+      "lane": "decision",
+      "col": 3,
+      "type": "frontend",
+      "label": "Usar el chico",
+      "sublabel": "no pagar de más",
+      "width": 160
+    },
+    {
+      "id": "grande",
+      "lane": "prueba",
+      "col": 3,
+      "type": "backend",
+      "label": "Subir un escalón",
+      "sublabel": "modelo más grande",
+      "width": 160
+    },
+    {
+      "id": "anotar",
+      "lane": "decision",
+      "col": 4,
+      "type": "database",
+      "label": "Anotar en el kit",
+      "sublabel": "modelo + razón",
+      "width": 160
+    }
+  ],
+  "edges": [
+    {
+      "from": "tarea",
+      "to": "chico"
+    },
+    {
+      "from": "chico",
+      "to": "alcanza",
+      "label": "respuesta"
+    },
+    {
+      "from": "alcanza",
+      "to": "usar",
+      "label": "sí",
+      "variant": "emphasis"
+    },
+    {
+      "from": "alcanza",
+      "to": "grande",
+      "label": "no",
+      "variant": "dashed",
+      "role": "branch"
+    },
+    {
+      "from": "usar",
+      "to": "anotar"
+    },
+    {
+      "from": "grande",
+      "to": "anotar",
+      "label": "si ahora alcanza"
+    }
+  ]
+}

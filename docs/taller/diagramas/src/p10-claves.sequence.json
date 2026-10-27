@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "P10 · La clave se guarda una vez y nunca se muestra",
+    "quality_profile": "showcase",
+    "column_fit": "spread",
+    "viewBox": [
+      1080,
+      540
+    ]
+  },
+  "participants": [
+    {
+      "id": "grupo",
+      "type": "external",
+      "label": "Ustedes",
+      "sublabel": "crean y prueban"
+    },
+    {
+      "id": "panel",
+      "type": "cloud",
+      "label": "Panel del proveedor",
+      "sublabel": "OpenAI · Anthropic · Google"
+    },
+    {
+      "id": "cred",
+      "type": "security",
+      "label": "Credenciales de n8n",
+      "sublabel": "guarda la clave cifrada"
+    },
+    {
+      "id": "flujo",
+      "type": "backend",
+      "label": "Workflow",
+      "sublabel": "usa la credencial por nombre"
+    },
+    {
+      "id": "modelo",
+      "type": "external",
+      "label": "Modelo de IA",
+      "sublabel": "cobra por uso"
+    }
+  ],
+  "segments": [
+    {
+      "from": 150,
+      "to": 236,
+      "label": "Crear"
+    },
+    {
+      "from": 244,
+      "to": 300,
+      "label": "Guardar"
+    },
+    {
+      "from": 308,
+      "to": 440,
+      "label": "Usar"
+    }
+  ],
+  "messages": [
+    {
+      "id": "crear",
+      "from": "grupo",
+      "to": "panel",
+      "y": 172,
+      "label": "clave nueva, permiso mínimo",
+      "variant": "emphasis"
+    },
+    {
+      "id": "mostrar",
+      "from": "panel",
+      "to": "grupo",
+      "y": 210,
+      "label": "se ve una sola vez",
+      "variant": "return"
+    },
+    {
+      "id": "guardar",
+      "from": "grupo",
+      "to": "cred",
+      "y": 272,
+      "label": "pegar y guardar",
+      "variant": "security"
+    },
+    {
+      "id": "pedir",
+      "from": "flujo",
+      "to": "cred",
+      "y": 330,
+      "label": "pide la credencial"
+    },
+    {
+      "id": "llamar",
+      "from": "cred",
+      "to": "modelo",
+      "y": 364,
+      "label": "llama con la clave"
+    },
+    {
+      "id": "respuesta",
+      "from": "modelo",
+      "to": "flujo",
+      "y": 398,
+      "label": "respuesta",
+      "variant": "return"
+    },
+    {
+      "id": "exportar",
+      "from": "flujo",
+      "to": "grupo",
+      "y": 428,
+      "label": "el JSON lleva solo el id",
+      "variant": "return"
+    }
+  ]
+}

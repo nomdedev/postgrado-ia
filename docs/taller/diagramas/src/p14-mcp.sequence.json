@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "P14 · El MCP de n8n: el asistente crea, ustedes deciden",
+    "quality_profile": "showcase",
+    "column_fit": "spread",
+    "viewBox": [
+      1080,
+      540
+    ]
+  },
+  "participants": [
+    {
+      "id": "grupo",
+      "type": "external",
+      "label": "Ustedes",
+      "sublabel": "piden y revisan"
+    },
+    {
+      "id": "asistente",
+      "type": "external",
+      "label": "Asistente",
+      "sublabel": "Claude, ChatGPT…"
+    },
+    {
+      "id": "mcp",
+      "type": "messagebus",
+      "label": "MCP de n8n",
+      "sublabel": "/mcp-server/http"
+    },
+    {
+      "id": "n8n",
+      "type": "cloud",
+      "label": "n8n",
+      "sublabel": "sus workflows"
+    }
+  ],
+  "segments": [
+    {
+      "from": 150,
+      "to": 246,
+      "label": "Pedir"
+    },
+    {
+      "from": 254,
+      "to": 350,
+      "label": "Crear"
+    },
+    {
+      "from": 358,
+      "to": 440,
+      "label": "Decidir"
+    }
+  ],
+  "messages": [
+    {
+      "id": "pedido",
+      "from": "grupo",
+      "to": "asistente",
+      "y": 172,
+      "label": "copiá el aviso RSI, umbral 25",
+      "variant": "emphasis"
+    },
+    {
+      "id": "buscar",
+      "from": "asistente",
+      "to": "mcp",
+      "y": 204,
+      "label": "buscar workflows"
+    },
+    {
+      "id": "lista",
+      "from": "mcp",
+      "to": "asistente",
+      "y": 234,
+      "label": "aviso-rsi",
+      "variant": "return"
+    },
+    {
+      "id": "crear",
+      "from": "asistente",
+      "to": "mcp",
+      "y": 276,
+      "label": "crear copia"
+    },
+    {
+      "id": "nuevo",
+      "from": "mcp",
+      "to": "n8n",
+      "y": 306,
+      "label": "workflow nuevo, desactivado"
+    },
+    {
+      "id": "revisar",
+      "from": "asistente",
+      "to": "grupo",
+      "y": 338,
+      "label": "JSON para revisar",
+      "variant": "return"
+    },
+    {
+      "id": "confirmar",
+      "from": "grupo",
+      "to": "asistente",
+      "y": 380,
+      "label": "confirmo la prueba",
+      "variant": "security"
+    },
+    {
+      "id": "activar",
+      "from": "grupo",
+      "to": "n8n",
+      "y": 422,
+      "label": "activar: decisión humana",
+      "variant": "emphasis"
+    }
+  ]
+}

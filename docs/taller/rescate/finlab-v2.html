@@ -115,7 +115,8 @@ const pct = x => (x > 0 ? '+' : '') + fmt(x) + ' %';
 const PESTANAS = [['mercado', '01 · Mercado'], ['carteras', '02 · Carteras'], ['python', '03 · Python & Colab'], ['api', '04 · API & Alertas']];
 function EnConstruccion({ titulo }) { return <section><h2>{titulo}</h2><p className="note">En construcción</p></section>; }
 function App() {
-  const [tab, setTab] = useState('mercado');
+  // #carteras, #api…: abre directo en esa pestaña (lo usan las capturas de "Así va quedando")
+  const [tab, setTab] = useState(() => PESTANAS.some(([k]) => '#' + k === location.hash) ? location.hash.slice(1) : 'mercado');
   const hoy = new Date().toLocaleDateString('es-AR', { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' });
   const vista = {
     mercado: <EnConstruccion titulo="Mercado" />,

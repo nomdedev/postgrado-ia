@@ -89,6 +89,13 @@ const specs = {
      N('importar','n8n',4,'cloud','Importar archivo','Import from file'), N('ejecutar','n8n',5,'security','Ejecutar workflow','¿qué salida se activa?'),
      N('ejercicios','term',5,'external','Ejercicios en grupo','3 preguntas')],
     [E('abrir','elegir'), E('elegir','json'), E('json','importar'), E('importar','ejecutar'), E('ejecutar','ejercicios','comparar predicción',{variant:'emphasis'})]],
+  'p11-modelos': ['P11 · Elegir el modelo con evidencia',
+    [['tarea','Tarea'], ['prueba','Prueba'], ['decision','Decisión']],
+    [N('tarea','tarea',0,'external','Una tarea concreta','misma pregunta siempre'), N('chico','prueba',1,'backend','Modelo chico','rápido y barato'),
+     N('alcanza','decision',2,'security','¿Alcanza?','correcto · completo'), N('usar','decision',3,'frontend','Usar el chico','no pagar de más'),
+     N('grande','prueba',3,'backend','Subir un escalón','modelo más grande'), N('anotar','decision',4,'database','Anotar en el kit','modelo + razón')],
+    [E('tarea','chico'), E('chico','alcanza','respuesta'), E('alcanza','usar','sí',{variant:'emphasis'}), E('alcanza','grande','no',{variant:'dashed',role:'branch'}),
+     E('usar','anotar'), E('grande','anotar','si ahora alcanza')]],
   // ---------- Agentes (clase 3) ----------
   'a2-consejo': ['Un consejo de agentes para una decisión de inversión',
     [['ustedes','Ustedes'], ['analistas','Analistas (cada uno con su rol)'], ['control','Control']],
@@ -108,6 +115,56 @@ const specs = {
 };
 // Diagramas de secuencia: se escriben tal cual (el formato es otro que el de los workflows).
 const secuencias = {
+  'p10-claves': {
+    schema_version: 1, diagram_type: 'sequence',
+    meta: { title: 'P10 · La clave se guarda una vez y nunca se muestra', quality_profile: 'showcase', column_fit: 'spread', viewBox: [1080, 540] },
+    participants: [
+      { id: 'grupo', type: 'external', label: 'Ustedes', sublabel: 'crean y prueban' },
+      { id: 'panel', type: 'cloud', label: 'Panel del proveedor', sublabel: 'OpenAI · Anthropic · Google' },
+      { id: 'cred', type: 'security', label: 'Credenciales de n8n', sublabel: 'guarda la clave cifrada' },
+      { id: 'flujo', type: 'backend', label: 'Workflow', sublabel: 'usa la credencial por nombre' },
+      { id: 'modelo', type: 'external', label: 'Modelo de IA', sublabel: 'cobra por uso' }
+    ],
+    segments: [
+      { from: 150, to: 236, label: 'Crear' },
+      { from: 244, to: 300, label: 'Guardar' },
+      { from: 308, to: 440, label: 'Usar' }
+    ],
+    messages: [
+      { id: 'crear', from: 'grupo', to: 'panel', y: 172, label: 'clave nueva, permiso mínimo', variant: 'emphasis' },
+      { id: 'mostrar', from: 'panel', to: 'grupo', y: 210, label: 'se ve una sola vez', variant: 'return' },
+      { id: 'guardar', from: 'grupo', to: 'cred', y: 272, label: 'pegar y guardar', variant: 'security' },
+      { id: 'pedir', from: 'flujo', to: 'cred', y: 330, label: 'pide la credencial' },
+      { id: 'llamar', from: 'cred', to: 'modelo', y: 364, label: 'llama con la clave' },
+      { id: 'respuesta', from: 'modelo', to: 'flujo', y: 398, label: 'respuesta', variant: 'return' },
+      { id: 'exportar', from: 'flujo', to: 'grupo', y: 428, label: 'el JSON lleva solo el id', variant: 'return' }
+    ]
+  },
+  'p14-mcp': {
+    schema_version: 1, diagram_type: 'sequence',
+    meta: { title: 'P14 · El MCP de n8n: el asistente crea, ustedes deciden', quality_profile: 'showcase', column_fit: 'spread', viewBox: [1080, 540] },
+    participants: [
+      { id: 'grupo', type: 'external', label: 'Ustedes', sublabel: 'piden y revisan' },
+      { id: 'asistente', type: 'external', label: 'Asistente', sublabel: 'Claude, ChatGPT…' },
+      { id: 'mcp', type: 'messagebus', label: 'MCP de n8n', sublabel: '/mcp-server/http' },
+      { id: 'n8n', type: 'cloud', label: 'n8n', sublabel: 'sus workflows' }
+    ],
+    segments: [
+      { from: 150, to: 246, label: 'Pedir' },
+      { from: 254, to: 350, label: 'Crear' },
+      { from: 358, to: 440, label: 'Decidir' }
+    ],
+    messages: [
+      { id: 'pedido', from: 'grupo', to: 'asistente', y: 172, label: 'copiá el aviso RSI, umbral 25', variant: 'emphasis' },
+      { id: 'buscar', from: 'asistente', to: 'mcp', y: 204, label: 'buscar workflows' },
+      { id: 'lista', from: 'mcp', to: 'asistente', y: 234, label: 'aviso-rsi', variant: 'return' },
+      { id: 'crear', from: 'asistente', to: 'mcp', y: 276, label: 'crear copia' },
+      { id: 'nuevo', from: 'mcp', to: 'n8n', y: 306, label: 'workflow nuevo, desactivado' },
+      { id: 'revisar', from: 'asistente', to: 'grupo', y: 338, label: 'JSON para revisar', variant: 'return' },
+      { id: 'confirmar', from: 'grupo', to: 'asistente', y: 380, label: 'confirmo la prueba', variant: 'security' },
+      { id: 'activar', from: 'grupo', to: 'n8n', y: 422, label: 'activar: decisión humana', variant: 'emphasis' }
+    ]
+  },
   'a1-ciclo-agente': {
     schema_version: 1, diagram_type: 'sequence',
     meta: { title: 'El ciclo de un agente: pregunta, herramientas y control', quality_profile: 'showcase', column_fit: 'spread', viewBox: [1080, 540] },

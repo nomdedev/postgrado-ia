@@ -167,3 +167,16 @@ main.page{counter-reset:seccion}
 .pres-open{animation:presIn 200ms cubic-bezier(.215,.61,.355,1)}
 @keyframes presIn{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion: reduce){.pres-open{animation:none}}
+
+/* "Así va quedando": partes de la terminal ya construidas + captura con datos de ejemplo + diagrama del paso */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.piezas{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px;padding:0}
+.piezas li{font-family:var(--mono);font-size:12px;letter-spacing:.04em;padding:4px 9px;border-radius:999px;border:1px dashed var(--line2);color:var(--dim)}
+.piezas li.hecho{border-style:solid;color:var(--txt);background:var(--panel2)}
+.piezas li.hecho span[aria-hidden]{color:var(--up)}
+.piezas li.ahora{border:1px solid var(--amb);color:var(--amb);font-weight:600}
+.viz-grafico img{display:block;width:100%;height:auto;border-radius:6px;border:1px solid var(--line)}
+.viz-grafico a:focus-visible img{outline:2px solid var(--amb);outline-offset:2px}
+.pres-visual .viz-grafico img{max-height:56vh;width:auto;max-width:100%;margin:0 auto}
+.pres-visual .piezas{justify-content:center}
+.pres-visual .piezas ~ a img{max-height:46vh}

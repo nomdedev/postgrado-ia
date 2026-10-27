@@ -211,13 +211,20 @@ test('gráficos del taller al día y modo presentación disponible en cada paso'
   const esperados = { 2: 1, 3: 1, 4: 2, 5: 1, 6: 1, 7: 1, 8: 1, 9: 1, 10: 1, 11: 1, 12: 1, 13: 1, 14: 1 };
   for (const [n, cuantos] of Object.entries(esperados)) {
     const html = fs.readFileSync(path.join(TALLER, `paso-${n}.html`), 'utf8');
-    const figuras = html.match(/<figure class="viz"[\s\S]*?<\/figure>/g) || [];
+    const figuras = html.match(/<figure class="viz" id="viz-[\s\S]*?<\/figure>/g) || [];
     assert.equal(figuras.length, cuantos, `paso-${n}: se esperaban ${cuantos} gráfico(s)`);
     for (const f of figuras) {
       assert.match(f, /<svg class="viz-svg" viewBox="[^"]+" role="img" aria-labelledby="[^"]+"><title id=/, `paso-${n}: cada gráfico necesita role="img" con título y descripción`);
       assert.match(f, /<figcaption><b>[^<]+\.<\/b>/, `paso-${n}: cada gráfico necesita su idea en el figcaption`);
       assert.doesNotMatch(f, /#[0-9a-fA-F]{6}/, `paso-${n}: los gráficos usan variables de tema, no colores fijos`);
     }
+  }
+  // "Así va quedando": cada paso muestra el diagrama Archify del paso como imagen y lo enlaza interactivo.
+  for (let n = 0; n <= 14; n++) {
+    const html = fs.readFileSync(path.join(TALLER, `paso-${n}.html`), 'utf8');
+    const diag = html.match(/<a href="diagramas\/([a-z0-9-]+)\.html"[^>]*><img src="\.\.\/img\/diagramas\/\1\.webp"/);
+    assert.ok(diag, `paso-${n}: falta el diagrama en "Así va quedando"`);
+    assert.ok(fs.existsSync(path.join(TALLER, '..', 'img', 'diagramas', diag[1] + '.webp')), `paso-${n}: falta la imagen del diagrama`);
   }
   const js = fs.readFileSync(path.join(TALLER, 'taller.js'), 'utf8');
   for (const pieza of [/Modo presentación/, /querySelectorAll\('figure\.viz'\)/, /querySelector\('\.flow'\)/, /'aria-modal', 'true'/, /\[\?&\]presentar/]) {
