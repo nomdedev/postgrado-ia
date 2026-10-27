@@ -109,3 +109,62 @@ main.page{counter-reset:seccion}
 .more[open]>summary{border-bottom:1px solid var(--line)}
 .more>.block{margin:0;padding:18px;border-top:0}
 .tbl th{font-size:12px;letter-spacing:.06em;color:var(--mut)}
+
+/* ---------- Gráficos SVG (graficos.js) · paleta validada contra daltonismo en ambos temas ---------- */
+:root{--s1:#BF800F;--s2:#2E9E8F}
+@media (prefers-color-scheme: light){:root{--s1:#A95D00;--s2:#008C84}}
+:root[data-theme="light"]{--s1:#A95D00;--s2:#008C84}
+:root[data-theme="dark"]{--s1:#BF800F;--s2:#2E9E8F}
+.viz{margin:18px 0 0;border:1px solid var(--line);border-radius:10px;background:var(--panel);overflow:hidden}
+.viz-grafico{padding:14px 14px 4px}
+.viz-svg{display:block;width:100%;height:auto;font-family:var(--sans)}
+.viz figcaption{padding:12px 16px 14px;border-top:1px solid var(--line);font-size:15px;line-height:1.6;color:var(--mut)}
+.viz figcaption b{color:var(--txt)}
+.viz figcaption small{display:block;margin-top:6px;font-size:12px;color:var(--dim)}
+.viz-svg text{font-size:15px;fill:var(--txt)}
+.viz-svg .v-sm{font-size:13px}
+.viz-svg .v-b{font-weight:600}
+.viz-svg .v-mut{fill:var(--mut)}
+.viz-svg .v-up{fill:var(--up)} .viz-svg .v-dn{fill:var(--dn)}
+.viz-svg .v-card{fill:var(--panel2);stroke:var(--line)}
+.viz-svg .v-grid{stroke:var(--line);stroke-width:1}
+.viz-svg .v-axis{stroke:var(--line2);stroke-width:1.5}
+.viz-svg .v-line{fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.viz-svg .v-s1{stroke:var(--s1)} .viz-svg .v-s2{stroke:var(--s2)}
+.viz-svg .v-ink-line{fill:none;stroke:var(--mut);stroke-width:1.5}
+.viz-svg .v-dash{stroke-dasharray:6 6}
+.viz-svg .v-s1-fill{fill:var(--s1)} .viz-svg .v-s2-fill{fill:var(--s2)} .viz-svg .v-neutral-fill{fill:var(--mut)}
+.viz-svg .v-up-fill{fill:var(--up)} .viz-svg .v-dn-fill{fill:var(--dn)}
+.viz-svg .v-dot{stroke:var(--panel);stroke-width:2}
+.viz-svg .v-ring{fill:none;stroke:var(--txt);stroke-width:2}
+.viz-svg .v-mark{stroke:var(--line2);stroke-dasharray:3 5}
+.viz-svg .v-zone-dn{fill:var(--dn);opacity:.12} .viz-svg .v-zone-up{fill:var(--up);opacity:.12}
+.viz-svg [class*="-fill"]:hover,.viz-svg path.v-line:hover{opacity:.8}
+
+/* ---------- Modo presentación (taller.js) ---------- */
+.present-btn{background:var(--amb);border:1px solid var(--amb);color:#0B0F13;border-radius:999px;padding:5px 12px;font:600 12px var(--sans);cursor:pointer}
+.present-btn:hover{filter:brightness(1.08)}
+.pres{position:fixed;inset:0;z-index:1000;display:grid;grid-template-rows:1fr auto;background:var(--bg);color:var(--txt)}
+.pres:focus{outline:none}
+.pres-slide{display:grid;align-content:center;justify-items:center;gap:2.2vh;padding:4vh 6vw;text-align:center;overflow:hidden}
+.pres-eyebrow{font:600 clamp(12px,1.3vw,18px) var(--mono);letter-spacing:.08em;color:var(--amb)}
+.pres-titulo{font:600 clamp(28px,4.6vw,68px)/1.08 var(--sans);letter-spacing:-.02em;max-width:22ch}
+.pres-sub{font-size:clamp(18px,2.1vw,30px);line-height:1.45;color:var(--mut);max-width:42ch}
+.pres-sub b{color:var(--txt)}
+.pres-h{font:600 clamp(22px,3vw,44px)/1.15 var(--sans);letter-spacing:-.015em}
+.pres-visual{width:min(100%,1180px);max-height:64vh}
+.pres-visual .viz-svg{width:100%;height:auto;max-height:60vh}
+.pres-visual .viz-grafico{padding:0}
+.pres-visual .flow{width:min(100%,900px);margin:0 auto;text-align:left}
+.pres-visual .flow-row h4{font-size:clamp(16px,1.7vw,24px)}
+.pres-visual .flow-row p{font-size:clamp(14px,1.35vw,19px)}
+.pres-idea{font-size:clamp(16px,1.7vw,26px);line-height:1.5;color:var(--mut);max-width:60ch}
+.pres-idea b{color:var(--txt)}
+.pres-bar{display:flex;align-items:center;gap:14px;padding:10px 18px;border-top:1px solid var(--line);font:13px var(--mono);color:var(--mut)}
+.pres-bar button{background:transparent;border:1px solid var(--line2);color:var(--txt);border-radius:6px;padding:6px 12px;font:600 13px var(--sans);cursor:pointer}
+.pres-bar button:hover{border-color:var(--amb);color:var(--amb)}
+.pres-prog{flex:1;height:3px;background:var(--line);border-radius:2px;overflow:hidden}
+.pres-prog i{display:block;height:100%;background:var(--amb)}
+.pres-open{animation:presIn 200ms cubic-bezier(.215,.61,.355,1)}
+@keyframes presIn{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.pres-open{animation:none}}

@@ -197,6 +197,31 @@ test('cada carpeta de docs/ con index.html redirige a su versión con barra fina
   }
 });
 
+test('gráficos del taller al día y modo presentación disponible en cada paso', () => {
+  const { execFileSync } = require('node:child_process');
+  const TALLER = path.join(__dirname, '..', 'docs', 'taller');
+  try {
+    execFileSync(process.execPath, [path.join(TALLER, 'graficos.js'), '--check'], { stdio: 'pipe' });
+  } catch (e) {
+    assert.fail(String(e.stderr || e.message).trim());
+  }
+  const esperados = { 2: 1, 3: 1, 4: 2, 5: 1 };
+  for (const [n, cuantos] of Object.entries(esperados)) {
+    const html = fs.readFileSync(path.join(TALLER, `paso-${n}.html`), 'utf8');
+    const figuras = html.match(/<figure class="viz"[\s\S]*?<\/figure>/g) || [];
+    assert.equal(figuras.length, cuantos, `paso-${n}: se esperaban ${cuantos} gráfico(s)`);
+    for (const f of figuras) {
+      assert.match(f, /<svg class="viz-svg" viewBox="[^"]+" role="img" aria-labelledby="[^"]+"><title id=/, `paso-${n}: cada gráfico necesita role="img" con título y descripción`);
+      assert.match(f, /<figcaption><b>[^<]+\.<\/b>/, `paso-${n}: cada gráfico necesita su idea en el figcaption`);
+      assert.doesNotMatch(f, /#[0-9a-fA-F]{6}/, `paso-${n}: los gráficos usan variables de tema, no colores fijos`);
+    }
+  }
+  const js = fs.readFileSync(path.join(TALLER, 'taller.js'), 'utf8');
+  for (const pieza of [/Modo presentación/, /querySelectorAll\('figure\.viz'\)/, /querySelector\('\.flow'\)/, /'aria-modal', 'true'/, /\[\?&\]presentar/]) {
+    assert.match(js, pieza, `taller.js: al modo presentación le falta ${pieza}`);
+  }
+});
+
 test('cada fuente de diagrama tiene su HTML generado y al revés', () => {
   const DIAG = path.join(__dirname, '..', 'docs', 'taller', 'diagramas');
   const fuentes = fs.readdirSync(path.join(DIAG, 'src')).filter((f) => /.(workflow|sequence).json$/.test(f)).map((f) => f.replace(/.(workflow|sequence).json$/, '')).sort();
