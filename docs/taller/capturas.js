@@ -45,6 +45,8 @@ async function main() {
     const cdp = (method, params = {}) => new Promise((r) => { const id = ++n; pendientes.set(id, r); ws.send(JSON.stringify({ id, method, params })); });
     for (const [id, [destino, acciones = [], espera = 1500, recorte, ancho = 1280, alto = 800]] of Object.entries(CAPTURAS)) {
       await cdp('Emulation.setDeviceMetricsOverride', { width: ancho, height: alto, deviceScaleFactor: 1, mobile: false });
+      // todo en tema claro: es lo que mejor se lee proyectado y con la página del taller en cualquiera de los dos temas
+      await cdp('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-color-scheme', value: 'light' }] });
       await cdp('Page.navigate', { url: 'about:blank' });
       await cdp('Page.navigate', { url: destino });
       await esperar(3500); // React + Babel compilan en el navegador

@@ -151,7 +151,7 @@ main.page{counter-reset:seccion}
 .pres-sub{font-size:clamp(18px,2.1vw,30px);line-height:1.45;color:var(--mut);max-width:42ch}
 .pres-sub b{color:var(--txt)}
 .pres-h{font:600 clamp(22px,3vw,44px)/1.15 var(--sans);letter-spacing:-.015em}
-.pres-visual{width:min(100%,1180px);max-height:64vh}
+.pres-visual{width:min(100%,1400px);max-height:76vh}
 .pres-visual .viz-svg{width:100%;height:auto;max-height:60vh}
 .pres-visual .viz-grafico{padding:0}
 .pres-visual .flow{width:min(100%,900px);margin:0 auto;text-align:left}
@@ -177,6 +177,10 @@ main.page{counter-reset:seccion}
 .piezas li.ahora{border:1px solid var(--amb);color:var(--amb);font-weight:600}
 .viz-grafico img{display:block;width:100%;height:auto;border-radius:6px;border:1px solid var(--line)}
 .viz-grafico a:focus-visible img{outline:2px solid var(--amb);outline-offset:2px}
-.pres-visual .viz-grafico img{max-height:56vh;width:auto;max-width:100%;margin:0 auto}
+.pres-visual .viz-grafico img{max-height:68vh;width:auto;max-width:100%;margin:0 auto}
 .pres-visual .piezas{justify-content:center}
-.pres-visual .piezas ~ a img{max-height:46vh}
+.pres-visual .piezas ~ a img{max-height:60vh}
+.pres-visual .piezas{gap:4px;margin-bottom:8px}
+.pres-visual .piezas li{font-size:11px;padding:2px 7px}
+.pres-titulo .code-inline{font-size:.55em;vertical-align:middle;white-space:nowrap}
+.pres-slide:has(.pres-visual){gap:1.4vh;padding:2.4vh 3vw}

@@ -6,6 +6,7 @@
 <title>FIN·LAB · versión de rescate del paso 3</title>
 <style>
 :root{--bg:#0B0F13;--panel:#111821;--line:#223040;--txt:#D8E1E9;--mut:#8394A5;--amb:#FFB020;--up:#2EBD85;--dn:#F6465D;--mono:ui-monospace,'JetBrains Mono',Consolas,monospace}
+@media (prefers-color-scheme: light){:root{--bg:#F2F5F2;--panel:#FFFFFF;--line:#D3DCD6;--txt:#1B2924;--mut:#52645C;--amb:#A95D00;--up:#147454;--dn:#C23B4B;--campo:#FFFFFF}}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--txt);font-family:var(--mono);font-size:14px;line-height:1.5}
 header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding:14px 20px;border-bottom:1px solid var(--line)}
@@ -32,13 +33,13 @@ tbody tr:hover,tbody tr.sel{background:var(--panel)}
 .tag{padding:1px 8px;border-radius:999px;font-size:11px;font-weight:700}
 .COMPRA{background:rgba(46,189,133,.15);color:var(--up)}.VENTA{background:rgba(246,70,93,.15);color:var(--dn)}.NEUTRAL{background:rgba(255,176,32,.12);color:var(--amb)}
 .btn{background:transparent;color:var(--txt);border:1px solid var(--line);border-radius:6px;padding:6px 12px;font:inherit;cursor:pointer}
-.btn.on,.btn.primary{background:var(--amb);color:#0B0F13;border-color:var(--amb)}
+.btn.on,.btn.primary{background:var(--amb);color:var(--bg);border-color:var(--amb)}
 .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px;margin-top:12px}
 .note{color:var(--mut);font-size:12px;margin-top:8px}
 .warn{color:var(--amb)}
-pre{background:#0A0E13;border:1px solid var(--line);border-radius:6px;padding:12px;overflow-x:auto;font-size:12.5px;white-space:pre-wrap}
-input,select{background:#0A0E13;color:var(--txt);border:1px solid var(--line);border-radius:6px;padding:6px 8px;font:inherit}
+pre{background:var(--campo,#0A0E13);border:1px solid var(--line);border-radius:6px;padding:12px;overflow-x:auto;font-size:12.5px;white-space:pre-wrap}
+input,select{background:var(--campo,#0A0E13);color:var(--txt);border:1px solid var(--line);border-radius:6px;padding:6px 8px;font:inherit}
 input[type=range]{padding:0;width:160px;accent-color:var(--amb)}
 </style>
 </head>
@@ -104,6 +105,10 @@ if (typeof window !== 'undefined') {
 <script type="text/babel" data-presets="react">
 const { useState, useMemo } = React;
 const { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend, PieChart, Pie, Cell } = Recharts;
+// Recharts pone los colores como atributos SVG (no aceptan var(--x)): se eligen según el tema del sistema.
+const K = matchMedia('(prefers-color-scheme: light)').matches
+  ? { mut: '#52645C', amb: '#A95D00', teal: '#087A82', violeta: '#6D4AC9', up: '#147454', dn: '#C23B4B' }
+  : { mut: '#8394A5', amb: '#FFB020', teal: '#4DC5B6', violeta: '#A78BFA', up: '#2EBD85', dn: '#F6465D' };
 const NOMBRE = 'FIN·LAB · rescate paso 3';
 const fmt = (x, d = 2) => x == null ? '—' : x.toLocaleString('es-AR', { minimumFractionDigits: d, maximumFractionDigits: d });
 const pct = x => (x > 0 ? '+' : '') + fmt(x) + ' %';
@@ -142,7 +147,7 @@ function Mercado() {
           <tr key={m.symbol} className={m.symbol === sel ? 'sel' : ''} onClick={() => setSel(m.symbol)}>
             <td><b>{m.symbol}</b></td><td>{m.name}</td><td>{fmt(m.last)}</td>
             <td className={m.changePct >= 0 ? 'up' : 'dn'}>{pct(m.changePct)}</td>
-            <td><LineChart width={110} height={30} data={m.serie.slice(-30)}><Line type="monotone" dataKey="c" dot={false} stroke={m.changePct >= 0 ? '#2EBD85' : '#F6465D'} strokeWidth={1.5} isAnimationActive={false} /><YAxis hide domain={['dataMin', 'dataMax']} /></LineChart></td>
+            <td><LineChart width={110} height={30} data={m.serie.slice(-30)}><Line type="monotone" dataKey="c" dot={false} stroke={m.changePct >= 0 ? K.up : K.dn} strokeWidth={1.5} isAnimationActive={false} /><YAxis hide domain={['dataMin', 'dataMax']} /></LineChart></td>
           </tr>))}</tbody>
       </table></div>
       <h3>{act.symbol} · {act.name}</h3>
@@ -151,10 +156,10 @@ function Mercado() {
       </div>
       <div style={{ height: 320 }}><ResponsiveContainer>
         <LineChart data={datos}>
-          <XAxis dataKey="d" minTickGap={40} stroke="#8394A5" fontSize={11} />
-          <YAxis domain={['auto', 'auto']} stroke="#8394A5" fontSize={11} width={60} />
-          <Tooltip formatter={v => fmt(v)} contentStyle={{ background: '#111821', border: '1px solid #223040' }} />
-          <Line type="monotone" dataKey="c" name="Precio" dot={false} stroke="#FFB020" isAnimationActive={false} />
+          <XAxis dataKey="d" minTickGap={40} stroke={K.mut} fontSize={11} />
+          <YAxis domain={['auto', 'auto']} stroke={K.mut} fontSize={11} width={60} />
+          <Tooltip formatter={v => fmt(v)} contentStyle={{ background: 'var(--panel)', border: '1px solid var(--line)' }} />
+          <Line type="monotone" dataKey="c" name="Precio" dot={false} stroke={K.amb} isAnimationActive={false} />
         </LineChart>
       </ResponsiveContainer></div>
     </section>

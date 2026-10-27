@@ -94,7 +94,7 @@ const avance = (p) => {
     <h2 id="avance">${n === 0 ? 'A dónde vamos' : 'Así va quedando'}</h2>${captura}
     <figure class="viz" data-titulo="El diagrama del paso">
       <div class="viz-grafico"><a href="diagramas/${diag}.html" target="_blank" rel="noopener">${img(`diagramas/${diag}.webp`, 'Diagrama: ' + titulo)}</a></div>
-      <figcaption><b>El diagrama.</b> ${titulo}: cada caja es una parte y las flechas, el orden en que se usan.<small>Diagrama hecho con Archify. Clic para abrir la versión interactiva (zoom, búsqueda, modo presentación).</small></figcaption>
+      <figcaption><b>El diagrama.</b> ${titulo}. Cada caja es una parte; las flechas marcan el orden.<small>Diagrama hecho con Archify. Clic para abrir la versión interactiva (zoom, búsqueda, modo presentación).</small></figcaption>
     </figure>
   </section>`;
 };
