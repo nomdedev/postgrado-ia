@@ -86,7 +86,7 @@
     <h2 id="prompt">El prompt</h2>
     <div class="prompt">
       <div class="prompt-h"><div><span class="t">PROMPT · PASO 6</span><div class="d">Pegar debajo el archivo del paso 5.</div></div><button class="copy" data-copy="#p6" type="button">COPIAR</button></div>
-      <div class="prompt-b"><pre id="p6">Paso 6. En la pestaña "04 · API & Alertas":
+      <div class="prompt-b"><pre id="p6">Paso 6. En la pestaña "03 · API & Alertas":
 - un "explorador de API": un selector con las rutas GET /api/market/summary y GET /api/tickers/{símbolo}, un botón "Enviar" y la respuesta JSON formateada, con el código de estado (200 o 404)
 - /api/market/summary devuelve el mismo formato que la API publicada del curso: {"ok": true, "data": {"session": fecha, "tickers": [...]}} y, por activo, symbol, last, change_pct, rsi14, sma20, sma50 y signal
 - un símbolo inexistente devuelve 404 con {"ok": false, "error": "..."} en español
@@ -105,7 +105,7 @@ Explicame en 3 líneas qué le faltaría a esto para ser una API real accesible 
     <span class="num"></span>
     <h2 id="hacer">Qué hacer, clic por clic</h2>
     <ol class="do">
-      <li><b>Peguen el prompt y el archivo actual,</b> guarden la respuesta y abran la pestaña <em>04 · API &amp; Alertas</em>.</li>
+      <li><b>Peguen el prompt y el archivo actual,</b> guarden la respuesta y abran la pestaña <em>03 · API &amp; Alertas</em>.</li>
       <li><b>Prueben las dos rutas</b> con un símbolo que exista y con uno inventado (<span class="code-inline">XXXX</span>).</li>
       <li><b>Creen dos alertas:</b> una que seguro se dispare (“precio mayor que 0”) y una que no (“precio mayor que 100000”).</li>
       <li><b>Recarguen la página</b> (<kbd>F5</kbd>): las alertas tienen que seguir ahí.</li>

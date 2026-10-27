@@ -2144,7 +2144,7 @@ function DocsPage({notify}){
 /* ================================================================
    8) APP PRINCIPAL — router por hash + estado global
    ================================================================ */
-const PAGES=[['inicio','INICIO'],['mercado','01 · MERCADO'],['carteras','02 · CARTERAS'],['python','03 · PYTHON & COLAB'],['api','04 · API & ALERTAS'],['guiado','05 · AUTOMATIZAR'],['agentes','06 · AGENTES'],['docs','DOCS']];
+const PAGES=[['inicio','INICIO'],['mercado','01 · MERCADO'],['carteras','02 · CARTERAS'],['api','03 · API & ALERTAS'],['python','04 · PYTHON & COLAB'],['guiado','05 · AUTOMATIZAR'],['agentes','06 · AGENTES'],['docs','DOCS']];
 // Franja que conecta cada pestaña con el paso del taller donde se construye.
 const BUILD_HINTS={mercado:['3 y 4','paso-3'],carteras:['5','paso-5'],api:['6','paso-6'],python:['7','paso-7'],guiado:['8 y 9','paso-8']};
 function BuildHint({page}){
@@ -2218,7 +2218,7 @@ async function runAgent(id){
     const al=r.json.data.alerts, disp=al.filter(a=>a.triggered);
     add('herramienta','Usa una herramienta','GET /api/alerts · '+r.status+' · '+al.length+' alerta(s) en '+r.latency+' ms',JSON.stringify(al.map(a=>({ticker:a.ticker,condition:a.condition,threshold:a.threshold,current:a.current_value,triggered:a.triggered})),null,1));
     add('observa','Observa',al.length?disp.length+' de '+al.length+' alerta(s) se cumplen hoy.':'No hay ninguna alerta guardada.');
-    const resp=!al.length?'No tienen alertas guardadas. Pueden crear una en la pestaña 04 · API & Alertas y volver a preguntarme.':disp.length?'Sí: '+disp.map(a=>a.ticker+' ('+a.condition.replace(/_/g,' ').toLowerCase()+' '+a.threshold+'; hoy vale '+fmt2(a.current_value)+')').join(', ')+'.':'No: ninguna de sus '+al.length+' alertas se cumple con los datos de hoy.';
+    const resp=!al.length?'No tienen alertas guardadas. Pueden crear una en la pestaña 03 · API & Alertas y volver a preguntarme.':disp.length?'Sí: '+disp.map(a=>a.ticker+' ('+a.condition.replace(/_/g,' ').toLowerCase()+' '+a.threshold+'; hoy vale '+fmt2(a.current_value)+')').join(', ')+'.':'No: ninguna de sus '+al.length+' alertas se cumple con los datos de hoy.';
     add('audita','Agente auditor','✓ La cantidad de alertas y los valores coinciden con la herramienta.');
     add('respuesta','Responde',resp);
   }
@@ -2533,14 +2533,14 @@ function App(){
         )}
         {page==='python'&&(
           <React.Fragment>
-            <SectionHead n="03" t="Intro a Python y Colab"
+            <SectionHead n="04" t="Intro a Python y Colab"
               d="Los cuatro bloques que reconstruyen todo lo que hace esta terminal, pero con código real: yfinance, pandas, matemática de carteras y llamadas a APIs. Cada bloque se copia con un clic y se ejecuta en Google Colab sin instalar nada."/>
             <PythonSection notify={notify}/>
           </React.Fragment>
         )}
         {page==='api'&&(
           <React.Fragment>
-            <SectionHead n="04" t="API para automatización"
+            <SectionHead n="03" t="API para automatización"
               d="Los mismos endpoints REST que consumiría un flujo de n8n (nodo HTTP Request), documentados y ejecutables desde esta consola. Incluye el gestor de reglas de alerta persistidas en base de datos, evaluadas en vivo contra la última sesión."/>
             <ApiSection db={db} mkt={mkt} notify={notify} onDbChange={reloadDb}/>
           </React.Fragment>
