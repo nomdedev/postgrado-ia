@@ -57,11 +57,11 @@ Muestra educativa fija de FIN·LAB. No es una recomendación de inversión.</pre
     <span class="num">02</span>
     <h2 id="como">Cómo funciona</h2>
     <div class="flow">
-      <div class="flow-row"><span class="n">1</span><div><h4>Cada día 08:00</h4><p><b>Schedule Trigger</b>. Antes de la apertura, para que el resumen esté listo cuando lo busques.</p><div class="io">SALE: una ejecución</div></div></div>
-      <div class="flow-row"><span class="n">2</span><div><h4>Mi cartera</h4><p>Un nodo <b>Code</b> que solo devuelve la lista de tenencias: símbolo y cantidad.</p><div class="io">SALE: cartera = [{ symbol, cantidad }]</div></div></div>
-      <div class="flow-row"><span class="n">3</span><div><h4>Consultar API FIN·LAB</h4><p>HTTP GET. Devuelve los ocho activos con último precio y variación.</p><div class="io">SALE: data.tickers[]</div></div></div>
-      <div class="flow-row"><span class="n">4</span><div><h4>Calcular valor</h4><p>El nodo <b>Code</b> más importante: cruza las dos listas por símbolo, multiplica cantidad por precio y suma. Si un símbolo no existe, falla con un mensaje claro.</p><div class="io">SALE: total, filas, texto</div></div></div>
-      <div class="flow-row"><span class="n">5</span><div><h4>Enviar resumen</h4><p><b>Email</b>. El asunto incluye el total, el cuerpo es el texto armado en el paso anterior.</p><div class="io">SALE: un correo por día</div></div></div>
+      <div class="flow-row"><span class="n">1</span><div><h3>Cada día 08:00</h3><p><b>Schedule Trigger</b>. Antes de la apertura, para que el resumen esté listo cuando lo busques.</p><div class="io">SALE: una ejecución</div></div></div>
+      <div class="flow-row"><span class="n">2</span><div><h3>Mi cartera</h3><p>Un nodo <b>Code</b> que solo devuelve la lista de tenencias: símbolo y cantidad.</p><div class="io">SALE: cartera = [{ symbol, cantidad }]</div></div></div>
+      <div class="flow-row"><span class="n">3</span><div><h3>Consultar API FIN·LAB</h3><p>HTTP GET. Devuelve los ocho activos con último precio y variación.</p><div class="io">SALE: data.tickers[]</div></div></div>
+      <div class="flow-row"><span class="n">4</span><div><h3>Calcular valor</h3><p>El nodo <b>Code</b> más importante: cruza las dos listas por símbolo, multiplica cantidad por precio y suma. Si un símbolo no existe, falla con un mensaje claro.</p><div class="io">SALE: total, filas, texto</div></div></div>
+      <div class="flow-row"><span class="n">5</span><div><h3>Enviar resumen</h3><p><b>Email</b>. El asunto incluye el total, el cuerpo es el texto armado en el paso anterior.</p><div class="io">SALE: un correo por día</div></div></div>
     </div>
     <p style="margin-top:14px">Fijate que <b>no hay ningún nodo de IA</b>. Es a propósito: sumar multiplicaciones no necesita un modelo de lenguaje. Usar IA donde alcanza una multiplicación es la forma más cara de complicar algo.</p>
   </section>

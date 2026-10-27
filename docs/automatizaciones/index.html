@@ -35,9 +35,9 @@
     <h2 id="que-es">Qué es una automatización (en una servilleta)</h2>
     <p>Es una receta que se ejecuta sola: <b>algo la dispara</b>, <b>hace una o dos tareas</b> y <b>deja un resultado</b> en algún lugar. Nada más. La herramienta cambia, la idea no.</p>
     <div class="flow">
-      <div class="flow-row"><span class="n">1</span><div><h4>Disparador</h4><p>El “cuándo”. Una hora fija, un botón, un formulario, un correo que llega.</p><div class="io">EJ.: todos los días a las 18:00</div></div></div>
-      <div class="flow-row"><span class="n">2</span><div><h4>Pasos</h4><p>El “qué hace”. Consultar una API, filtrar datos, calcular un total, redactar un texto.</p><div class="io">EJ.: pedir precios → quedarse con las señales de venta</div></div></div>
-      <div class="flow-row"><span class="n">3</span><div><h4>Salida</h4><p>El “para quién”. Un correo, un mensaje, una fila en una planilla, un archivo.</p><div class="io">EJ.: enviar un email solo si hay señales</div></div></div>
+      <div class="flow-row"><span class="n">1</span><div><h3>Disparador</h3><p>El “cuándo”. Una hora fija, un botón, un formulario, un correo que llega.</p><div class="io">EJ.: todos los días a las 18:00</div></div></div>
+      <div class="flow-row"><span class="n">2</span><div><h3>Pasos</h3><p>El “qué hace”. Consultar una API, filtrar datos, calcular un total, redactar un texto.</p><div class="io">EJ.: pedir precios → quedarse con las señales de venta</div></div></div>
+      <div class="flow-row"><span class="n">3</span><div><h3>Salida</h3><p>El “para quién”. Un correo, un mensaje, una fila en una planilla, un archivo.</p><div class="io">EJ.: enviar un email solo si hay señales</div></div></div>
     </div>
     <div class="note tip"><b>La regla que evita el 80% de los problemas:</b> si no podés contar la receta en voz alta en tres frases, todavía no está lista para automatizar. Primero escribila en papel.</div>
   </section>
@@ -101,12 +101,12 @@
 
     <div class="duo">
       <div class="bad">
-        <h4>PEDIDO DÉBIL</h4>
+        <h3>PEDIDO DÉBIL</h3>
         <p>“Haceme un workflow de n8n para invertir mejor.”</p>
         <small>No dice datos, ni disparador, ni salida. Cualquier respuesta va a ser un ejemplo de juguete.</small>
       </div>
       <div class="good">
-        <h4>PEDIDO FUERTE</h4>
+        <h3>PEDIDO FUERTE</h3>
         <p>“Quiero un flujo en n8n que todos los días a las 18:00 consulte <span class="code-inline">/api/market/summary</span>, filtre los activos con <span class="code-inline">signal === 'VENTA'</span> y me mande un email solo si hay al menos uno. Si no hay, que no envíe nada.”</p>
         <small>Tiene los cinco ingredientes. La respuesta se puede probar hoy.</small>
       </div>
@@ -158,10 +158,10 @@ Todavía no me escribas el workflow. Primero:
     <span class="num">04</span>
     <h2 id="ruta">Ruta sugerida</h2>
     <div class="flow">
-      <div class="flow-row"><span class="n">01</span><div><h4>Aviso de señal</h4><p>Aprendés lo básico: disparador, HTTP, filtro y una salida condicional.</p><div class="io">SI NUNCA AUTOMATIZASTE NADA, EMPEZÁ ACÁ</div></div></div>
-      <div class="flow-row"><span class="n">02</span><div><h4>Resumen de cartera</h4><p>Sumás tu propia lista de datos y cálculos entre dos nodos.</p><div class="io">CRUZAR DATOS PROPIOS CON DATOS EXTERNOS</div></div></div>
-      <div class="flow-row"><span class="n">03</span><div><h4>Informe con IA</h4><p>Usás un modelo de lenguaje como un paso más del flujo, con reglas para que no invente.</p><div class="io">IA DENTRO DE UNA AUTOMATIZACIÓN</div></div></div>
-      <div class="flow-row"><span class="n">04</span><div><h4>Precios a Sheets</h4><p>Guardás histórico para analizar después. Acá aparece el problema de los duplicados.</p><div class="io">DATOS QUE QUEDAN PARA OTRA HERRAMIENTA</div></div></div>
+      <div class="flow-row"><span class="n">01</span><div><h3>Aviso de señal</h3><p>Aprendés lo básico: disparador, HTTP, filtro y una salida condicional.</p><div class="io">SI NUNCA AUTOMATIZASTE NADA, EMPEZÁ ACÁ</div></div></div>
+      <div class="flow-row"><span class="n">02</span><div><h3>Resumen de cartera</h3><p>Sumás tu propia lista de datos y cálculos entre dos nodos.</p><div class="io">CRUZAR DATOS PROPIOS CON DATOS EXTERNOS</div></div></div>
+      <div class="flow-row"><span class="n">03</span><div><h3>Informe con IA</h3><p>Usás un modelo de lenguaje como un paso más del flujo, con reglas para que no invente.</p><div class="io">IA DENTRO DE UNA AUTOMATIZACIÓN</div></div></div>
+      <div class="flow-row"><span class="n">04</span><div><h3>Precios a Sheets</h3><p>Guardás histórico para analizar después. Acá aparece el problema de los duplicados.</p><div class="io">DATOS QUE QUEDAN PARA OTRA HERRAMIENTA</div></div></div>
     </div>
   </section>
 

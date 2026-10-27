@@ -53,12 +53,12 @@ encabezan las subas de la sesión.</pre>
     <span class="num">02</span>
     <h2 id="como">Cómo funciona</h2>
     <div class="flow">
-      <div class="flow-row"><span class="n">1</span><div><h4>Cada viernes 17:00</h4><p><b>Schedule Trigger</b> con expresión <span class="code-inline">0 17 * * 5</span>.</p><div class="io">SALE: una ejecución por semana</div></div></div>
-      <div class="flow-row"><span class="n">2</span><div><h4>Consultar API FIN·LAB</h4><p>HTTP GET. Trae los ocho activos, el índice y la amplitud.</p><div class="io">SALE: data.tickers[] + data.index + data.breadth</div></div></div>
-      <div class="flow-row"><span class="n">3</span><div><h4>Preparar hechos</h4><p>Un nodo <b>Code</b> convierte el JSON en un texto plano, ordenado, con todos los números que el modelo va a poder usar. Ni uno más.</p><div class="io">SALE: hechos (texto)</div></div></div>
-      <div class="flow-row"><span class="n">4</span><div><h4>Pedir informe al modelo</h4><p><b>HTTP Request</b> POST al proveedor. El cuerpo lleva dos mensajes: las reglas (system) y los hechos (user).</p><div class="io">ENTRA: hechos · SALE: choices[0].message.content</div></div></div>
-      <div class="flow-row"><span class="n">5</span><div><h4>Armar informe</h4><p>Se queda solo con el texto y <b>falla fuerte</b> si vino vacío, en lugar de mandar un correo en blanco.</p><div class="io">SALE: texto limpio</div></div></div>
-      <div class="flow-row"><span class="n">6</span><div><h4>Enviar informe</h4><p><b>Email</b> con el texto del modelo.</p><div class="io">SALE: un correo por semana</div></div></div>
+      <div class="flow-row"><span class="n">1</span><div><h3>Cada viernes 17:00</h3><p><b>Schedule Trigger</b> con expresión <span class="code-inline">0 17 * * 5</span>.</p><div class="io">SALE: una ejecución por semana</div></div></div>
+      <div class="flow-row"><span class="n">2</span><div><h3>Consultar API FIN·LAB</h3><p>HTTP GET. Trae los ocho activos, el índice y la amplitud.</p><div class="io">SALE: data.tickers[] + data.index + data.breadth</div></div></div>
+      <div class="flow-row"><span class="n">3</span><div><h3>Preparar hechos</h3><p>Un nodo <b>Code</b> convierte el JSON en un texto plano, ordenado, con todos los números que el modelo va a poder usar. Ni uno más.</p><div class="io">SALE: hechos (texto)</div></div></div>
+      <div class="flow-row"><span class="n">4</span><div><h3>Pedir informe al modelo</h3><p><b>HTTP Request</b> POST al proveedor. El cuerpo lleva dos mensajes: las reglas (system) y los hechos (user).</p><div class="io">ENTRA: hechos · SALE: choices[0].message.content</div></div></div>
+      <div class="flow-row"><span class="n">5</span><div><h3>Armar informe</h3><p>Se queda solo con el texto y <b>falla fuerte</b> si vino vacío, en lugar de mandar un correo en blanco.</p><div class="io">SALE: texto limpio</div></div></div>
+      <div class="flow-row"><span class="n">6</span><div><h3>Enviar informe</h3><p><b>Email</b> con el texto del modelo.</p><div class="io">SALE: un correo por semana</div></div></div>
     </div>
     <div class="note"><b>El mismo nodo sirve para cualquier proveedor.</b> OpenAI, Anthropic, Gemini o un modelo local con Ollama: cambia la URL, el header de autenticación y la forma del cuerpo. El resto del flujo no se toca. Por eso conviene tener el paso 4 separado del paso 3.</div>
   </section>

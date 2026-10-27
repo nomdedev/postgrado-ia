@@ -10,6 +10,8 @@
 
 <!-- Tipografías: Space Grotesk (titulares) + JetBrains Mono (datos, estilo terminal) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -75,7 +77,7 @@ a{color:var(--amb);text-decoration:none}
 a:hover{text-decoration:underline}
 button{font-family:var(--mono);cursor:pointer}
 input,select,textarea{font-family:var(--mono);color:var(--txt)}
-:focus-visible{outline:1px solid var(--amb);outline-offset:2px}
+:focus-visible{outline:2px solid var(--amb);outline-offset:2px}
 
 /* ---------- Cabecera ---------- */
 .hd{position:sticky;top:0;z-index:50;background:rgba(11,15,19,.93);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
@@ -201,7 +203,8 @@ tbody tr{transition:background .12s}
 .chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:4px 9px;border:1px solid var(--line2);border-radius:3px;background:transparent;color:var(--mut);transition:.12s}
 .chip .dot{width:8px;height:2px;border-radius:1px}
 .chip.on{color:var(--txt);border-color:var(--line2);background:var(--panel2)}
-.chip.off{opacity:.38}
+.chip.off{color:var(--dim);border-style:dashed}
+.chip.off .dot{opacity:.4}
 .chip:disabled{opacity:.8;cursor:default}
 .chart-lbl{font-family:var(--mono);font-size:11px;letter-spacing:.15em;color:var(--dim);padding:8px 14px 0}
 
@@ -445,7 +448,7 @@ footer{max-width:1440px;margin:50px auto 0;border-top:1px solid var(--line);padd
 </style>
 </head>
 <body>
-<div id="root"></div>
+<div id="root"><noscript><p style="padding:24px;font-family:sans-serif">La terminal FIN·LAB necesita JavaScript. Actívenlo o abran el <a href="docs/taller/">taller</a>, que funciona sin él.</p></noscript></div>
 
 <!-- React 18 + Babel (JSX sin build, ideal para clase) + Recharts -->
 <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
@@ -1218,7 +1221,7 @@ function MarketSection({mkt,onRefresh,refreshing}){
   const [sel,setSel]=useState('GGAL');
   const p=mkt.per[sel];
   // toggles de indicadores sobre el gráfico principal
-  const [vis,setVis]=useState({sma20:true,sma50:true,ema12:false,ema26:false});
+  const [vis,setVis]=useState({px:true,sma20:true,sma50:true,ema12:false,ema26:false});
   const c=useChart();
   const LINES={
     px:  {name:'Precio', stroke:c.px, width:1.8, dash:null},

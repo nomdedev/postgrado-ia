@@ -53,11 +53,11 @@ Muestra educativa fija de FIN·LAB. No es una recomendación de inversión.</pre
     <span class="num">02</span>
     <h2 id="como">Cómo funciona</h2>
     <div class="flow">
-      <div class="flow-row"><span class="n">1</span><div><h4>Cada día 18:00</h4><p>Un disparador por horario. En n8n es el nodo <b>Schedule Trigger</b>.</p><div class="io">ENTRA: la hora · SALE: una ejecución</div></div></div>
-      <div class="flow-row"><span class="n">2</span><div><h4>Consultar API FIN·LAB</h4><p>Un pedido HTTP GET a la URL pública. Devuelve ocho activos de ejemplo.</p><div class="io">ENTRA: URL · SALE: JSON con data.tickers[]</div></div></div>
-      <div class="flow-row"><span class="n">3</span><div><h4>Filtrar señales</h4><p>Un nodo <b>Code</b> recorre los activos y deja solo los que tienen la señal buscada. También arma el texto del correo.</p><div class="io">SALE: hasSignal, symbols, texto</div></div></div>
-      <div class="flow-row"><span class="n">4</span><div><h4>¿Hay señales?</h4><p>Un nodo <b>If</b> con dos salidas: verdadero y falso.</p><div class="io">VERDADERO: sigue · FALSO: termina</div></div></div>
-      <div class="flow-row"><span class="n">5</span><div><h4>Enviar aviso por email</h4><p>Solo por la salida verdadera. La salida falsa va a <b>Sin novedades</b>, que no hace nada.</p><div class="io">ENTRA: texto · SALE: un correo</div></div></div>
+      <div class="flow-row"><span class="n">1</span><div><h3>Cada día 18:00</h3><p>Un disparador por horario. En n8n es el nodo <b>Schedule Trigger</b>.</p><div class="io">ENTRA: la hora · SALE: una ejecución</div></div></div>
+      <div class="flow-row"><span class="n">2</span><div><h3>Consultar API FIN·LAB</h3><p>Un pedido HTTP GET a la URL pública. Devuelve ocho activos de ejemplo.</p><div class="io">ENTRA: URL · SALE: JSON con data.tickers[]</div></div></div>
+      <div class="flow-row"><span class="n">3</span><div><h3>Filtrar señales</h3><p>Un nodo <b>Code</b> recorre los activos y deja solo los que tienen la señal buscada. También arma el texto del correo.</p><div class="io">SALE: hasSignal, symbols, texto</div></div></div>
+      <div class="flow-row"><span class="n">4</span><div><h3>¿Hay señales?</h3><p>Un nodo <b>If</b> con dos salidas: verdadero y falso.</p><div class="io">VERDADERO: sigue · FALSO: termina</div></div></div>
+      <div class="flow-row"><span class="n">5</span><div><h3>Enviar aviso por email</h3><p>Solo por la salida verdadera. La salida falsa va a <b>Sin novedades</b>, que no hace nada.</p><div class="io">ENTRA: texto · SALE: un correo</div></div></div>
     </div>
   </section>
 

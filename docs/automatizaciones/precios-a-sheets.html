@@ -55,10 +55,10 @@
     <span class="num">02</span>
     <h2 id="como">Cómo funciona</h2>
     <div class="flow">
-      <div class="flow-row"><span class="n">1</span><div><h4>Cada día 18:30</h4><p><b>Schedule Trigger</b>. Después del cierre, cuando ya te interesa guardar.</p><div class="io">SALE: una ejecución</div></div></div>
-      <div class="flow-row"><span class="n">2</span><div><h4>Consultar API FIN·LAB</h4><p>HTTP GET. Un solo item con los ocho activos adentro de <span class="code-inline">data.tickers[]</span>.</p><div class="io">SALE: 1 item</div></div></div>
-      <div class="flow-row"><span class="n">3</span><div><h4>Aplanar activos</h4><p>El nodo <b>Code</b> recorre el arreglo y devuelve <b>un item por activo</b>, con la fecha de sesión incluida.</p><div class="io">SALE: 8 items</div></div></div>
-      <div class="flow-row"><span class="n">4</span><div><h4>Agregar filas en Sheets</h4><p><b>Google Sheets → Append</b>. Escribe ocho filas nuevas debajo de las que ya había.</p><div class="io">SALE: 8 filas en la planilla</div></div></div>
+      <div class="flow-row"><span class="n">1</span><div><h3>Cada día 18:30</h3><p><b>Schedule Trigger</b>. Después del cierre, cuando ya te interesa guardar.</p><div class="io">SALE: una ejecución</div></div></div>
+      <div class="flow-row"><span class="n">2</span><div><h3>Consultar API FIN·LAB</h3><p>HTTP GET. Un solo item con los ocho activos adentro de <span class="code-inline">data.tickers[]</span>.</p><div class="io">SALE: 1 item</div></div></div>
+      <div class="flow-row"><span class="n">3</span><div><h3>Aplanar activos</h3><p>El nodo <b>Code</b> recorre el arreglo y devuelve <b>un item por activo</b>, con la fecha de sesión incluida.</p><div class="io">SALE: 8 items</div></div></div>
+      <div class="flow-row"><span class="n">4</span><div><h3>Agregar filas en Sheets</h3><p><b>Google Sheets → Append</b>. Escribe ocho filas nuevas debajo de las que ya había.</p><div class="io">SALE: 8 filas en la planilla</div></div></div>
     </div>
     <p style="margin-top:14px">El paso 3 es el que hay que mirar con atención: no “sube la respuesta”, la <b>desarma</b>. Esa es toda la técnica.</p>
   </section>

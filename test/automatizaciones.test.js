@@ -45,7 +45,8 @@ test('el taller: 15 pasos en tres clases, cada uno con glosario, prompt copiable
   // Plan de reestructura, etapa 4: la raíz abre INICIO (bienvenida) y EMPEZAR pasó a AUTOMATIZAR.
   assert.match(terminal, /const PAGES=\[\['inicio','INICIO'\]/, 'INICIO tiene que ser la primera pestaña');
   assert.equal((terminal.match(/\|\|'inicio'/g) || []).length, 2, 'la ruta por defecto (inicial y al cambiar el #) tiene que ser INICIO');
-  assert.match(terminal, /\['guiado','05 · AUTOMATIZAR'\]/, 'la pestaña de n8n tiene que llamarse AUTOMATIZAR');
+  assert.match(terminal, /const \[vis,setVis\]=useState\(\{px:true,/, 'la línea del precio tiene que verse al abrir Mercado');
+  assert.match(terminal, /\['guiado','05 · AUTOMATIZAR'\]/,'la pestaña de n8n tiene que llamarse AUTOMATIZAR');
   assert.equal((terminal.match(/className="btn btn-primary wl-go"/g) || []).length, 1, 'la bienvenida tiene que tener un solo botón primario');
   assert.match(terminal, /className="btn btn-primary wl-go" href="docs\/taller\/paso-0\.html"/, 'el botón de la bienvenida tiene que llevar al paso 0');
   const preview = terminal.match(/<img src="(docs\/img\/[a-z-]+\.webp)"/);
