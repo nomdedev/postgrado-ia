@@ -298,3 +298,15 @@ test('los enlaces y recursos relativos de las páginas existen en disco', () => 
     }
   }
 });
+
+test('el menú de retos tiene 10 ejercicios con prompt para copiar y tres comprobaciones', () => {
+  const html = fs.readFileSync(path.join(__dirname, '..', 'docs', 'taller', 'retos.html'), 'utf8');
+  const retos = html.match(/<section class="block reto"[\s\S]*?<\/section>/g) || [];
+  assert.equal(retos.length, 10, 'tienen que ser 10 retos');
+  for (const r of retos) {
+    const id = r.match(/aria-labelledby="([^"]+)"/)[1];
+    assert.match(r, /<button class="copy" data-copy="#p-[a-z-]+"/, `${id}: falta el botón COPIAR`);
+    assert.equal((r.match(/<li>/g) || []).length, 3, `${id}: tiene que tener 3 comprobaciones`);
+    assert.ok(html.includes(`href="#${id}"`), `${id}: no está en el menú`);
+  }
+});

@@ -184,3 +184,13 @@ main.page{counter-reset:seccion}
 .pres-visual .piezas li{font-size:11px;padding:2px 7px}
 .pres-titulo .code-inline{font-size:.55em;vertical-align:middle;white-space:nowrap}
 .pres-slide:has(.pres-visual){gap:1.4vh;padding:2.4vh 3vw}
+
+/* Menú de retos */
+.reto-menu{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
+.reto-grupo{border:1px solid var(--line);border-radius:8px;padding:14px 16px;background:var(--panel)}
+.reto-grupo h3{font-size:16px}
+.reto-grupo ul{margin:8px 0 0;padding-left:18px}
+.reto-grupo li{margin:4px 0}
+.reto > p{color:var(--mut);max-width:68ch}
+.reto h3{margin-top:18px}
+@media (max-width:720px){.reto-menu{grid-template-columns:1fr}}

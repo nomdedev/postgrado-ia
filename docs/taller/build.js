@@ -17,6 +17,7 @@ const PAGINAS = {
   'index.html': { crumb: 'MAPA DEL RECORRIDO', actual: 'index' },
   'glosario.html': { crumb: 'GLOSARIO', actual: 'glosario' },
   'kit.html': { crumb: 'KIT DEL GRUPO', actual: 'kit' },
+  'retos.html': { crumb: 'MENÚ DE RETOS', actual: 'retos' },
   ...Object.fromEntries(TITULOS.map((t, n) => [`paso-${n}.html`, { crumb: `${clase(n)} · PASO ${n} / ${ULTIMO} · ${t}`, actual: n }]))
 };
 
@@ -33,7 +34,7 @@ const nav = (p) => {
   const grupos = CLASES.map((c) => `<li class="sep">${c.nombre}</li>` +
     c.pasos.map((n) => item(`paso-${n}.html`, `P${n}`, p.actual === n)).join('')).join('');
   return `<nav class="steps" aria-label="Pasos del taller">
-    ${item('index.html', 'MAPA', p.actual === 'index')}${grupos}${item('kit.html', 'KIT', p.actual === 'kit')}${item('glosario.html', 'GLOSARIO', p.actual === 'glosario')}
+    ${item('index.html', 'MAPA', p.actual === 'index')}${grupos}${item('retos.html', 'RETOS', p.actual === 'retos')}${item('kit.html', 'KIT', p.actual === 'kit')}${item('glosario.html', 'GLOSARIO', p.actual === 'glosario')}
   </nav>`;
 };
 
