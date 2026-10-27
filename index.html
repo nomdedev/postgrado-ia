@@ -2,6 +2,8 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="theme-color" content="#0B0F13" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F2F5F2" media="(prefers-color-scheme: light)">
 <script>try{var t=localStorage.getItem("finlab-tema")||localStorage.getItem("finlab_theme");document.documentElement.dataset.theme=(t==="light"||t==="dark")?t:(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark")}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FIN·LAB — Terminal de Análisis · IA aplicada a Finanzas · UNLP</title>
@@ -16,9 +18,10 @@
    Paleta: carbón + ámbar de terminal + verde/rojo semánticos
    ============================================================ */
 :root{
+  color-scheme:dark;
   --bg:#0B0F13; --bg2:#0A0E13; --panel:#0F151D; --panel2:#121A23; --panel3:#0D131A;
   --line:#1D2A36; --line2:#28394A;
-  --txt:#D8E1E9; --mut:#7E8FA0; --dim:#54677A;
+  --txt:#D8E1E9; --mut:#7E8FA0; --dim:#6E8194;
   --amb:#FFB020; --amb-soft:rgba(255,176,32,.09);
   --up:#2EBD85; --up-soft:rgba(46,189,133,.10);
   --dn:#F6465D; --dn-soft:rgba(246,70,93,.10);
@@ -30,14 +33,14 @@ html[data-theme="light"]{
   color-scheme:light;
   --bg:#F2F5F2; --bg2:#E8EDE9; --panel:#FFFFFF; --panel2:#F6F8F6; --panel3:#EDF1EE;
   --line:#CDD7D1; --line2:#AEBDB5;
-  --txt:#1B2924; --mut:#52645C; --dim:#697B73;
+  --txt:#1B2924; --mut:#52645C; --dim:#5A6A63;
   --amb:#A95D00; --amb-soft:rgba(169,93,0,.09);
   --up:#147454; --up-soft:rgba(20,116,84,.09);
   --dn:#C23B4B; --dn-soft:rgba(194,59,75,.08);
   --teal:#087A82;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:150px}
 body{
   background-color:var(--bg);
   /* grilla técnica de fondo, casi imperceptible: da textura de terminal */
@@ -80,12 +83,12 @@ input,select,textarea{font-family:var(--mono);color:var(--txt)}
 .brand{display:flex;align-items:center;gap:12px}
 .brand-mark{width:38px;height:38px;border:1px solid var(--line2);border-radius:6px;background:var(--panel3);display:flex;align-items:center;justify-content:center;color:var(--amb)}
 .brand-name{font-family:var(--sans);font-weight:700;font-size:19px;letter-spacing:.04em;line-height:1.1}
-.brand-sub{font-family:var(--mono);font-size:9px;letter-spacing:.18em;color:var(--mut);margin-top:3px}
+.brand-sub{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--mut);margin-top:3px}
 .hd-right{display:flex;align-items:center;gap:14px}
-.db-pill{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--mut);border:1px solid var(--line);border-radius:4px;padding:6px 10px;background:var(--panel3)}
+.db-pill{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--mut);border:1px solid var(--line);border-radius:4px;padding:6px 10px;background:var(--panel3)}
 .db-dot{width:7px;height:7px;border-radius:50%;background:var(--up);animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-.hd-btn{display:flex;align-items:center;gap:6px;background:transparent;border:1px solid var(--line2);color:var(--mut);border-radius:4px;padding:6px 11px;font-size:10px;letter-spacing:.08em;transition:.15s}
+.hd-btn{display:flex;align-items:center;gap:6px;background:transparent;border:1px solid var(--line2);color:var(--mut);border-radius:4px;padding:6px 11px;font-size:11px;letter-spacing:.08em;transition:.15s}
 .hd-btn:hover{border-color:var(--amb);color:var(--amb)}
 .hd-btn.confirm{border-color:var(--dn);color:var(--dn)}
 .theme-btn{display:inline-flex;align-items:center;gap:7px;background:var(--panel);border:1px solid var(--line2);color:var(--txt);border-radius:4px;padding:7px 10px;font:10px var(--mono);letter-spacing:.06em;white-space:nowrap}
@@ -94,10 +97,14 @@ input,select,textarea{font-family:var(--mono);color:var(--txt)}
 .clock b{color:var(--txt);font-weight:600}
 
 /* ---------- Cinta de precios (marquee) ---------- */
-.tape{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2);overflow:hidden;height:34px;display:flex;align-items:center}
+.tape{position:relative;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2);overflow:hidden;height:34px;display:flex;align-items:center}
 .tape-track{display:flex;width:max-content;animation:tape 55s linear infinite;will-change:transform}
 .tape:hover .tape-track{animation-play-state:paused}
 @keyframes tape{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tape.paused .tape-track{animation-play-state:paused}
+.tape-pause{position:absolute;right:6px;top:50%;transform:translateY(-50%);z-index:2;background:var(--panel);border:1px solid var(--line2);color:var(--mut);border-radius:4px;font:600 11px var(--mono);padding:3px 8px;cursor:pointer}
+.tape-pause:hover{color:var(--amb);border-color:var(--amb)}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.tape-track{animation:none}}
 .tape-item{display:inline-flex;gap:8px;align-items:baseline;font-family:var(--mono);font-size:11px;padding:0 22px;border-right:1px solid var(--line);white-space:nowrap}
 .tape-item .ti-sym{color:var(--dim);font-weight:600;letter-spacing:.08em}
 .tape-item .ti-px{color:var(--txt)}
@@ -111,19 +118,24 @@ input,select,textarea{font-family:var(--mono);color:var(--txt)}
 .nav a:hover{color:var(--txt);text-decoration:none}
 .nav a.on{color:var(--amb);border-bottom-color:var(--amb)}
 .nav-dot{position:absolute;top:10px;right:4px;width:7px;height:7px;border-radius:50%;background:var(--dn);animation:pulse 1.4s infinite}
+.nav a:focus-visible{outline-offset:-2px}
 
 /* ---------- Estructura general ---------- */
 .wrap{max-width:1440px;margin:0 auto;padding:30px 28px 70px}
 .sec-head{display:flex;gap:18px;align-items:flex-start;padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:24px}
 .sec-num{font-family:var(--mono);font-size:34px;font-weight:700;color:transparent;-webkit-text-stroke:1px var(--amb);line-height:.9}
-.sec-head h2{font-size:23px;font-weight:700;letter-spacing:.01em}
+.sec-head h1{font-size:23px;font-weight:700;letter-spacing:.01em;text-wrap:balance}
 .sec-head p{color:var(--mut);font-size:13px;margin-top:5px;max-width:720px;line-height:1.55}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:hidden}
 .panel-h{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--panel3)}
-.panel-t{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.16em;color:var(--mut);display:flex;align-items:center;gap:8px}
+.panel-t{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.16em;color:var(--mut);display:flex;align-items:center;gap:8px}
 .panel-b{padding:16px 14px}
 .hint{font-family:var(--mono);font-size:11px;color:var(--dim);line-height:1.6}
 .mono{font-family:var(--mono)}
+.dim{color:var(--dim)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:12px;top:-60px;z-index:300;background:var(--amb);color:#0B0F13;font:600 12px var(--mono);padding:10px 14px;border-radius:4px;transition:top .15s}
+.skip:focus{top:12px}
 
 /* ---------- Botones ---------- */
 .btn{display:inline-flex;align-items:center;gap:7px;background:transparent;border:1px solid var(--line2);color:var(--txt);border-radius:4px;padding:7px 13px;font-size:11px;letter-spacing:.06em;transition:.15s}
@@ -131,12 +143,12 @@ input,select,textarea{font-family:var(--mono);color:var(--txt)}
 .btn-primary{background:var(--amb);border-color:var(--amb);color:#0B0F13;font-weight:700}
 .btn-primary:hover{background:#FFC24D;color:#0B0F13}
 .btn-danger:hover{border-color:var(--dn);color:var(--dn)}
-.btn-sm{padding:5px 9px;font-size:10px}
+.btn-sm{padding:5px 9px;font-size:11px}
 .btn.on{border-color:var(--amb);color:var(--amb);background:var(--amb-soft)}
 
 /* ---------- Tablas ---------- */
 table{width:100%;border-collapse:collapse}
-th{font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--dim);text-align:right;padding:8px 10px;border-bottom:1px solid var(--line);font-weight:600;white-space:nowrap}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--dim);text-align:right;padding:8px 10px;border-bottom:1px solid var(--line);font-weight:600;white-space:nowrap}
 td{font-family:var(--mono);font-size:12.5px;text-align:right;padding:9px 10px;border-bottom:1px solid rgba(29,42,54,.55);white-space:nowrap;font-variant-numeric:tabular-nums}
 th:first-child,td:first-child{text-align:left}
 tr:last-child td{border-bottom:none}
@@ -146,10 +158,12 @@ tbody tr{transition:background .12s}
 .row-click.sel{background:var(--amb-soft);box-shadow:inset 2px 0 0 var(--amb)}
 .sym-cell{display:flex;flex-direction:column;gap:1px}
 .sym-cell b{font-size:12.5px;font-weight:700;letter-spacing:.05em}
-.sym-cell span{font-family:var(--sans);font-size:9.5px;color:var(--dim);letter-spacing:.02em}
+.sym-cell span{font-family:var(--sans);font-size:11px;color:var(--dim);letter-spacing:.02em}
+.sym-btn{background:none;border:0;padding:0;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.sym-btn:focus-visible{outline:2px solid var(--amb);outline-offset:3px;border-radius:3px}
 
 /* ---------- Badges de señal ---------- */
-.sig{display:inline-block;font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.12em;padding:3px 8px;border-radius:3px;border:1px solid}
+.sig{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.12em;padding:3px 8px;border-radius:3px;border:1px solid}
 .sig-COMPRA{color:var(--up);border-color:rgba(46,189,133,.55);background:var(--up-soft)}
 .sig-VENTA{color:var(--dn);border-color:rgba(246,70,93,.55);background:var(--dn-soft)}
 .sig-NEUTRAL{color:var(--mut);border-color:var(--line2);background:rgba(126,143,160,.06)}
@@ -158,15 +172,15 @@ tbody tr{transition:background .12s}
 .statband{display:flex;border:1px solid var(--line);border-radius:6px;background:var(--panel);overflow-x:auto}
 .stat{flex:1;min-width:130px;padding:14px 18px;border-right:1px solid var(--line)}
 .stat:last-child{border-right:none}
-.stat-l{font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:var(--dim);margin-bottom:7px}
+.stat-l{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--dim);margin-bottom:7px}
 .stat-v{font-family:var(--mono);font-size:23px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1}
-.stat-s{font-family:var(--mono);font-size:10px;color:var(--mut);margin-top:6px}
+.stat-s{font-family:var(--mono);font-size:11px;color:var(--mut);margin-top:6px}
 
 /* ---------- Layout de mercado ---------- */
 .mkt-band{display:flex;align-items:stretch;gap:0;border:1px solid var(--line);border-radius:6px;background:var(--panel);margin-bottom:18px;overflow-x:auto}
 .mkt-band .mb{padding:13px 20px;border-right:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;gap:5px}
 .mkt-band .mb:last-child{border-right:none;margin-left:auto}
-.mb-l{font-family:var(--mono);font-size:9px;letter-spacing:.15em;color:var(--dim)}
+.mb-l{font-family:var(--mono);font-size:11px;letter-spacing:.15em;color:var(--dim)}
 .mb-v{font-family:var(--mono);font-size:17px;font-weight:600}
 .mkt-grid{display:grid;grid-template-columns:1fr 400px;gap:18px;align-items:start}
 @media(max-width:1080px){.mkt-grid{grid-template-columns:1fr}}
@@ -181,18 +195,19 @@ tbody tr{transition:background .12s}
 .tk-px .chg{font-family:var(--mono);font-size:13px;font-weight:600;margin-top:4px}
 .mini-stats{display:flex;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow-x:auto}
 .mini-stats .ms{padding:9px 16px;border-right:1px solid var(--line);text-align:right;min-width:88px}
-.mini-stats .ms-l{font-family:var(--mono);font-size:8.5px;letter-spacing:.13em;color:var(--dim)}
+.mini-stats .ms-l{font-family:var(--mono);font-size:11px;letter-spacing:.13em;color:var(--dim)}
 .mini-stats .ms-v{font-family:var(--mono);font-size:12.5px;font-weight:600;margin-top:3px}
 .chips{display:flex;gap:6px;padding:10px 14px 0;flex-wrap:wrap}
-.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;padding:4px 9px;border:1px solid var(--line2);border-radius:3px;background:transparent;color:var(--mut);transition:.12s}
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:4px 9px;border:1px solid var(--line2);border-radius:3px;background:transparent;color:var(--mut);transition:.12s}
 .chip .dot{width:8px;height:2px;border-radius:1px}
 .chip.on{color:var(--txt);border-color:var(--line2);background:var(--panel2)}
 .chip.off{opacity:.38}
-.chart-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.15em;color:var(--dim);padding:8px 14px 0}
+.chip:disabled{opacity:.8;cursor:default}
+.chart-lbl{font-family:var(--mono);font-size:11px;letter-spacing:.15em;color:var(--dim);padding:8px 14px 0}
 
 /* Tooltip de gráficos estilo terminal */
 .tt{background:#0C1218;border:1px solid var(--line2);border-radius:4px;padding:9px 11px;font-family:var(--mono);font-size:11px;box-shadow:0 6px 18px rgba(0,0,0,.45)}
-.tt-l{color:var(--dim);font-size:9.5px;letter-spacing:.1em;margin-bottom:6px}
+.tt-l{color:var(--dim);font-size:11px;letter-spacing:.1em;margin-bottom:6px}
 .tt-r{display:flex;justify-content:space-between;gap:18px;padding:1.5px 0}
 .tt-k{color:var(--mut)} .tt-v{font-weight:600;font-variant-numeric:tabular-nums}
 
@@ -203,13 +218,13 @@ tbody tr{transition:background .12s}
 .wrow{display:flex;align-items:center;gap:10px;padding:7px 4px;border-bottom:1px solid rgba(29,42,54,.5)}
 .wrow:last-child{border-bottom:none}
 .wrow .wr-sym{font-family:var(--mono);font-size:12px;font-weight:700;width:52px}
-.wrow .wr-name{font-size:10px;color:var(--dim);flex:1}
+.wrow .wr-name{font-size:11px;color:var(--dim);flex:1}
 .wrow input[type=checkbox]{accent-color:var(--amb);width:14px;height:14px;cursor:pointer}
 .wrow input[type=number]{width:66px;background:var(--bg2);border:1px solid var(--line2);border-radius:3px;padding:4px 6px;font-size:11.5px;text-align:right}
 .wsum{font-family:var(--mono);font-size:11px;padding:10px 4px 0;color:var(--mut)}
 .wsum.warn{color:var(--amb)}
 .corr-cell{text-align:center;font-size:11px;padding:7px 6px;font-variant-numeric:tabular-nums;border:1px solid rgba(29,42,54,.4)}
-.corr-th{font-size:10px;color:var(--mut);padding:7px 6px;text-align:center}
+.corr-th{font-size:11px;color:var(--mut);padding:7px 6px;text-align:center}
 .rcbar{height:5px;background:var(--line);border-radius:2px;overflow:hidden;min-width:70px}
 .rcbar i{display:block;height:100%;background:var(--amb);border-radius:2px}
 
@@ -229,7 +244,7 @@ tbody tr{transition:background .12s}
 .tk-jb{color:#FF9E64}
 .tk-jo{color:var(--mut)}
 .expl{border:1px solid var(--line);border-radius:6px;background:var(--panel);padding:14px 16px}
-.expl h4{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--amb);margin-bottom:12px}
+.expl h4{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--amb);margin-bottom:12px}
 .expl-row{display:flex;gap:12px;padding:7px 0;border-bottom:1px solid rgba(29,42,54,.5);align-items:baseline}
 .expl-row:last-child{border-bottom:none}
 .expl-code{font-family:var(--mono);font-size:11px;color:var(--teal);flex:none;min-width:0;max-width:46%;overflow-wrap:break-word}
@@ -246,7 +261,7 @@ tbody tr{transition:background .12s}
 @media(max-width:1000px){.api-grid{grid-template-columns:1fr}}
 .ep{border:1px solid var(--line);border-radius:6px;background:var(--panel);overflow:hidden;margin-bottom:12px}
 .ep-h{display:flex;align-items:center;gap:10px;padding:10px 13px;border-bottom:1px solid var(--line);flex-wrap:wrap}
-.ep-m{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.1em;padding:3px 8px;border-radius:3px}
+.ep-m{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.1em;padding:3px 8px;border-radius:3px}
 .ep-m.GET{color:var(--teal);border:1px solid rgba(77,197,182,.5);background:rgba(77,197,182,.08)}
 .ep-m.POST{color:var(--amb);border:1px solid rgba(255,176,32,.5);background:var(--amb-soft)}
 .ep-m.DELETE{color:var(--dn);border:1px solid rgba(246,70,93,.5);background:var(--dn-soft)}
@@ -262,10 +277,10 @@ tbody tr{transition:background .12s}
 .resp-body pre{font-family:var(--mono);font-size:11.5px;line-height:1.65}
 .form-row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin-bottom:12px}
 .field{display:flex;flex-direction:column;gap:5px}
-.field label{font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--dim)}
+.field label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--dim)}
 .field select,.field input,.field textarea{background:var(--bg2);border:1px solid var(--line2);border-radius:4px;padding:7px 9px;font-size:12px;min-width:120px}
 .field textarea{width:100%;min-height:110px;resize:vertical;line-height:1.6;font-size:11.5px}
-.alert-badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.12em;padding:3px 8px;border-radius:3px;border:1px solid}
+.alert-badge{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.12em;padding:3px 8px;border-radius:3px;border:1px solid}
 .alert-on{color:var(--dn);border-color:rgba(246,70,93,.6);background:var(--dn-soft);animation:blink 1.3s ease-in-out infinite}
 .alert-off{color:var(--mut);border-color:var(--line2);background:rgba(126,143,160,.05)}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
@@ -283,7 +298,7 @@ tbody tr{transition:background .12s}
 /* ---------- #/agentes y escalera de la bienvenida ---------- */
 .agents{max-width:1100px;margin:0 auto}
 .ag-intro{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center;padding:12px 0 22px;border-bottom:1px solid var(--line);margin-bottom:20px}
-.ag-intro h2{font-size:25px;margin-bottom:7px}
+.ag-intro h1{font-size:25px;margin-bottom:7px;text-wrap:balance}
 .ag-intro p{color:var(--mut);font-size:15px;line-height:1.6;max-width:720px}
 .ag-intro p b{color:var(--txt)}
 .ag-controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:18px}
@@ -345,14 +360,31 @@ tbody tr{transition:background .12s}
 .wl-need b{color:var(--txt)}
 .wl-need code{font-family:var(--mono);color:var(--amb)}
 .wl-legal{margin-top:16px;font-size:12px;color:var(--dim)}
+/* Modo presentación de la bienvenida (Presentacion, abajo): 4 diapositivas con los mismos datos de la página. */
+.pres-open{display:inline-flex;align-items:center;gap:6px;background:var(--amb);border:1px solid var(--amb);color:#0B0F13;border-radius:999px;padding:5px 12px;font:600 12px var(--sans);cursor:pointer}
+.pres-wl{position:fixed;inset:0;z-index:200;background:var(--bg);display:grid;grid-template-rows:1fr auto;gap:18px;padding:clamp(18px,3vw,44px);animation:pres-wl-in .18s ease-out}
+@keyframes pres-wl-in{from{opacity:0}to{opacity:1}}
+.pres-wl-slide{display:flex;flex-direction:column;justify-content:center;gap:20px;width:100%;max-width:1100px;margin:0 auto;overflow:auto}
+.pres-wl-eyebrow{font:600 12px var(--mono);letter-spacing:.1em;color:var(--amb);margin:0}
+.pres-wl-titulo{font-size:clamp(26px,4.6vw,52px);line-height:1.1;margin:0;text-wrap:balance}
+.pres-wl-sub{color:var(--mut);font-size:clamp(15px,1.7vw,21px);line-height:1.55;max-width:62ch;margin:0}
+.pres-wl-sub b{color:var(--txt)}
+.pres-wl-slide .wl-escalera,.pres-wl-slide .wl-etapas{font-size:clamp(13px,1.2vw,16px)}
+.pres-wl-bar{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;color:var(--dim);font:600 12px var(--mono)}
+.pres-wl-bar button{background:var(--panel2);border:1px solid var(--line2);color:var(--txt);border-radius:6px;padding:8px 12px;font:600 12px var(--mono);cursor:pointer}
+.pres-wl-bar button:disabled{opacity:.4;cursor:default}
+.pres-wl-num{min-width:52px;text-align:center}
+.pres-wl-prog{flex:0 1 240px;height:3px;background:var(--line);border-radius:2px;overflow:hidden}
+.pres-wl-prog i{display:block;height:100%;background:var(--amb);transition:width .2s ease}
+@media(prefers-reduced-motion:reduce){.pres-wl{animation:none}.pres-wl-prog i{transition:none}}
 .build-hint{display:block;margin:-6px 0 18px;padding:9px 14px;border:1px dashed var(--line2);border-radius:6px;font-size:13px;color:var(--mut)}
 .build-hint b{color:var(--amb)}
 .build-hint:hover{border-color:var(--amb);color:var(--txt);text-decoration:none}
 @media(max-width:900px){.wl-hero{grid-template-columns:1fr;gap:22px}.wl-etapas{grid-template-columns:1fr}.wl-go{width:100%;justify-content:center}}
 .guide-intro{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center;padding:20px 0 24px;border-bottom:1px solid var(--line);margin-bottom:22px}
-.guide-intro h2{font-size:25px;margin-bottom:7px}
+.guide-intro h1{font-size:25px;margin-bottom:7px;text-wrap:balance}
 .guide-intro p{color:var(--mut);font-size:14px;line-height:1.6;max-width:680px}
-.guide-flag{font-family:var(--mono);font-size:10px;letter-spacing:.1em;border:1px solid rgba(255,176,32,.45);color:var(--amb);background:var(--amb-soft);padding:8px 10px;border-radius:4px;white-space:nowrap}
+.guide-flag{font-family:var(--mono);font-size:11px;letter-spacing:.1em;border:1px solid rgba(255,176,32,.45);color:var(--amb);background:var(--amb-soft);padding:8px 10px;border-radius:4px;white-space:nowrap}
 .guide-flow{display:grid;grid-template-columns:repeat(5,minmax(130px,1fr));gap:22px;align-items:stretch;margin:18px 0 22px}
 .guide-step{position:relative;min-height:112px;padding:14px 12px;background:var(--panel);border:1px solid var(--line);border-radius:5px}
 .guide-step:not(:last-child):after{content:'›';position:absolute;right:-16px;top:38px;color:var(--amb);font:24px var(--mono)}
@@ -398,16 +430,17 @@ html[data-theme="light"] .exercise-feedback{background:rgba(8,122,130,.06)}
 html[data-theme="light"] .exercise-feedback.good{background:var(--up-soft)}
 html[data-theme="light"] .exercise-feedback.retry{background:var(--amb-soft)}
 @media(max-width:1080px){.guide-flow{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.guide-step{min-height:100px}.guide-step:after{display:none}.guide-grid{grid-template-columns:1fr}.guide-intro{grid-template-columns:1fr}.guide-flag{justify-self:start}.wrap{padding-left:20px;padding-right:20px}}
-@media(max-width:850px){.guide-flow{grid-template-columns:1fr}.guide-step{min-height:0}.guide-step:not(:last-child):after{display:block;content:'↓';right:14px;top:auto;bottom:-19px;z-index:1}.group-roles{grid-template-columns:repeat(2,minmax(0,1fr))}.exercise{grid-template-columns:1fr;gap:12px}.hd-in{padding:10px 16px;flex-wrap:wrap}.hd-right{width:100%;flex-wrap:wrap;gap:8px}.db-pill{flex:1 1 auto}.clock{margin-left:auto}.nav{padding:0 14px}.nav a{flex:none;white-space:nowrap}}
-@media(max-width:600px){.wrap{padding:20px 14px 48px}.guide-intro{padding-top:8px}.guide-intro h2{font-size:22px}.guide-flag{white-space:normal;line-height:1.5}.guide-actions{display:grid;grid-template-columns:1fr}.guide-actions .btn{justify-content:center;min-height:44px}.guide-json pre{font-size:10px}.group-lab-head{display:block}.group-lab-head h3{font-size:18px}.group-time{display:inline-block;margin-top:10px}.group-roles{grid-template-columns:1fr 1fr}.group-role{padding:10px}.exercise{padding:13px}.exercise-controls{align-items:stretch;flex-direction:column}.exercise-controls select,.exercise-controls .btn{width:100%;min-height:44px}.hd-right{display:grid;grid-template-columns:1fr auto auto}.db-pill{grid-column:1/-1}.hd-btn{justify-content:center;min-height:40px}.theme-btn{min-height:40px}.clock{margin-left:0;padding-left:8px;font-size:10px}.nav{padding:0 10px}.nav a{padding:12px 11px;font-size:10px}}
+@media(max-width:850px){.guide-flow{grid-template-columns:1fr}.guide-step{min-height:0}.guide-step:not(:last-child):after{display:block;content:'↓';right:14px;top:auto;bottom:-19px;z-index:1}.group-roles{grid-template-columns:repeat(2,minmax(0,1fr))}.exercise{grid-template-columns:1fr;gap:12px}.hd-in{padding:10px 16px;flex-wrap:wrap}.hd-right{width:100%;flex-wrap:wrap;gap:8px}.db-pill{flex:1 1 auto}.clock{margin-left:auto}.nav{padding:0 14px}.nav a{flex:none;white-space:nowrap}.pres-open{display:none}}
+@media(max-width:600px){.wrap{padding:20px 14px 48px}.guide-intro{padding-top:8px}.guide-intro h1{font-size:22px}.guide-flag{white-space:normal;line-height:1.5}.guide-actions{display:grid;grid-template-columns:1fr}.guide-actions .btn{justify-content:center;min-height:44px}.guide-json pre{font-size:11px}.group-lab-head{display:block}.group-lab-head h3{font-size:18px}.group-time{display:inline-block;margin-top:10px}.group-roles{grid-template-columns:1fr 1fr}.group-role{padding:10px}.exercise{padding:13px}.exercise-controls{align-items:stretch;flex-direction:column}.exercise-controls select,.exercise-controls .btn{width:100%;min-height:44px}.hd-right{display:grid;grid-template-columns:1fr auto auto}.db-pill{grid-column:1/-1}.hd-btn{justify-content:center;min-height:40px}.theme-btn{min-height:40px}.clock{margin-left:0;padding-left:8px;font-size:11px}.nav{padding:0 10px}.nav a{padding:12px 11px;font-size:11px}}
 .doc-sec{margin-bottom:34px}
 .doc-sec h3{font-size:16px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
-.doc-sec h3 .k{font-family:var(--mono);font-size:10px;color:var(--amb);border:1px solid rgba(255,176,32,.4);border-radius:3px;padding:2px 7px;letter-spacing:.1em}
+.doc-sec h3 .k{font-family:var(--mono);font-size:11px;color:var(--amb);border:1px solid rgba(255,176,32,.4);border-radius:3px;padding:2px 7px;letter-spacing:.1em}
 .doc-sec p,.doc-sec li{color:var(--mut);font-size:13px;line-height:1.7}
 .doc-sec ul,.doc-sec ol{padding-left:20px;margin:8px 0}
 .doc-sec code{font-family:var(--mono);font-size:11.5px;background:var(--bg2);border:1px solid var(--line);border-radius:3px;padding:1px 6px;color:var(--teal)}
 .param-tbl td,.param-tbl th{text-align:left;font-size:11.5px}
-footer{border-top:1px solid var(--line);margin-top:50px;padding:22px 0 0;font-family:var(--mono);font-size:10.5px;color:var(--dim);letter-spacing:.04em;line-height:1.8}
+footer{max-width:1440px;margin:50px auto 0;border-top:1px solid var(--line);padding:22px 28px 60px;font-family:var(--mono);font-size:10.5px;color:var(--dim);letter-spacing:.04em;line-height:1.8}
+#contenido:focus{outline:0}
 .mono-num{font-variant-numeric:tabular-nums}
 </style>
 </head>
@@ -846,11 +879,12 @@ function evaluateAlerts(db){
 const nf2 = new Intl.NumberFormat('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2});
 const nf1 = new Intl.NumberFormat('es-AR',{minimumFractionDigits:1,maximumFractionDigits:1});
 const fmtP = v => nf2.format(v);                                   // precio
-const fmtPct = (v,s=true) => (s&&v>0?'+':'')+nf2.format(v)+' %';   // variación
-const fmtPct1 = v => (v>0?'+':'')+nf1.format(v)+' %';
-const fmtVol = v => v>=1e6 ? nf1.format(v/1e6)+' M' : v>=1e3 ? Math.round(v/1e3)+' K' : String(v);
+const fmtPct = (v,s=true) => (s&&v>0?'+':'')+nf2.format(v)+'\u00A0%';   // variación
+const fmtPct1 = v => (v>0?'+':'')+nf1.format(v)+'\u00A0%';
+const fmtVol = v => v>=1e6 ? nf1.format(v/1e6)+'\u00A0M' : v>=1e3 ? Math.round(v/1e3)+'\u00A0K' : String(v);
 const fmtDate = d => new Date(d+'T12:00:00').toLocaleDateString('es-AR',{day:'2-digit',month:'short',year:'2-digit'});
 const fmtDateL = d => new Date(d+'T12:00:00').toLocaleDateString('es-AR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+const fmtNum = v => Number.isInteger(v) ? String(v) : nf1.format(v);   // umbrales de alerta
 const clsChg = v => v>0.005?'up':v<-0.005?'dn':'flat';
 
 async function copyText(txt){
@@ -911,7 +945,7 @@ const ICONS={
   book:<g><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></g>,
 };
 const Icon=({n,s=14,style})=>(
-  <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor"
+  <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" focusable="false"
        strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" style={style}>{ICONS[n]}</svg>
 );
 // Marca: dos velas japonesas mínimas en ámbar
@@ -1107,7 +1141,7 @@ def crear_alerta(alerta: dict):              # el body llega ya parseado
 
 /* --- Toasts (notificaciones no intrusivas) --- */
 function Toasts({list}){
-  return <div className="toasts">
+  return <div className="toasts" role="status" aria-live="polite" aria-atomic="false">
     {list.map(t=>(
       <div key={t.id} className={`toast ${t.type}`}>
         <Icon n={t.type==='err'?'alert':'check'} s={14}/>
@@ -1119,12 +1153,13 @@ function Toasts({list}){
 
 /* --- Cinta de precios del header --- */
 function TickerTape({mkt}){
+  const [paused,setPaused]=useState(false);
   const items = TICKERS.map(t=>{
     const p=mkt.per[t.symbol];
     return {s:t.symbol, p:p.last, c:p.chgPct};
   });
   const row = (k)=>(
-    <span key={k} style={{display:'flex'}}>
+    <span key={k} style={{display:'flex'}} aria-hidden={k===2?'true':undefined}>
       {items.map((it,i)=>(
         <span className="tape-item" key={i}>
           <span className="ti-sym">{it.s}</span>
@@ -1135,10 +1170,22 @@ function TickerTape({mkt}){
     </span>
   );
   // contenido duplicado → loop infinito sin cortes
-  return <div className="tape"><div className="tape-track">{row(1)}{row(2)}</div></div>;
+  return <div className={`tape ${paused?'paused':''}`}>
+    <button type="button" className="tape-pause" aria-pressed={paused}
+      aria-label={paused?'Reanudar la cinta de precios':'Pausar la cinta de precios'}
+      onClick={()=>setPaused(p=>!p)}><span aria-hidden="true">{paused?'▶':'❙❙'}</span></button>
+    <div className="tape-track">{row(1)}{row(2)}</div>
+  </div>;
 }
 
 /* --- Tooltip de Recharts con estética de terminal --- */
+/* Colores de los gráficos por tema. Series: ámbar y verde agua validados contra daltonismo en ambos temas. */
+const CHART_THEME={
+  dark:{px:'#EAF0F6',s1:'#BF800F',s2:'#2E9E8F',e12:'#8FD694',e26:'#E8756D',grid:'#17222D',tick:'#6E8194',axis:'#243242',cursor:'#2A3B4C',neutral:'#7E8FA0',up:'#2EBD85',dn:'#F6465D'},
+  light:{px:'#1B2924',s1:'#A95D00',s2:'#008C84',e12:'#147454',e26:'#C23B4B',grid:'#DCE4DF',tick:'#5A6A63',axis:'#AEBDB5',cursor:'#AEBDB5',neutral:'#52645C',up:'#147454',dn:'#C23B4B'}
+};
+const ThemeCtx=React.createContext('dark');
+const useChart=()=>CHART_THEME[React.useContext(ThemeCtx)]||CHART_THEME.dark;
 function TT({active,payload,label,dec=2}){
   if(!active||!payload||!payload.length)return null;
   const rows=payload.filter(p=>p.value!=null);
@@ -1156,11 +1203,13 @@ function TT({active,payload,label,dec=2}){
 /* --- Sparkline: mini gráfico de 40 ruedas sin ejes --- */
 const Sparkline=React.memo(function Sparkline({data,color}){
   return (
+    <div aria-hidden="true">
     <ResponsiveContainer width="100%" height={28}>
       <LineChart data={data} margin={{top:2,bottom:2,left:0,right:0}}>
         <Line dataKey="v" stroke={color} strokeWidth={1.3} dot={false} isAnimationActive={false}/>
       </LineChart>
     </ResponsiveContainer>
+    </div>
   );
 });
 
@@ -1170,12 +1219,13 @@ function MarketSection({mkt,onRefresh,refreshing}){
   const p=mkt.per[sel];
   // toggles de indicadores sobre el gráfico principal
   const [vis,setVis]=useState({sma20:true,sma50:true,ema12:false,ema26:false});
+  const c=useChart();
   const LINES={
-    px:  {name:'Precio', stroke:'#EAF0F6', width:1.8, dash:null},
-    sma20:{name:'SMA 20', stroke:'#FFB020', width:1.2, dash:null},
-    sma50:{name:'SMA 50', stroke:'#4DC5B6', width:1.2, dash:null},
-    ema12:{name:'EMA 12', stroke:'#8FD694', width:1,   dash:'4 3'},
-    ema26:{name:'EMA 26', stroke:'#E8756D', width:1,   dash:'4 3'},
+    px:  {name:'Precio', stroke:c.px, width:1.8, dash:null},
+    sma20:{name:'SMA 20', stroke:c.s1, width:1.4, dash:null},
+    sma50:{name:'SMA 50', stroke:c.s2, width:1.4, dash:null},
+    ema12:{name:'EMA 12', stroke:c.e12, width:1,   dash:'4 3'},
+    ema26:{name:'EMA 26', stroke:c.e26, width:1,   dash:'4 3'},
   };
   // datos del gráfico: desde la rueda 50 (SMA50 ya definida en todos los puntos)
   const chartData=useMemo(()=>p.dates.slice(50).map((d,i)=>{
@@ -1236,22 +1286,23 @@ function MarketSection({mkt,onRefresh,refreshing}){
         {/* toggles de indicadores */}
         <div className="chips">
           {Object.entries(LINES).map(([k,cfg])=>(
-            <button key={k} className={`chip ${vis[k]?'on':'off'}`} onClick={()=>k==='px'?null:setVis(v=>({...v,[k]:!v[k]}))}
-              style={k==='px'?{opacity:.75,cursor:'default'}:{}}>
-              <span className="dot" style={{background:cfg.stroke}}/>{cfg.name}
+            <button key={k} type="button" className={`chip ${vis[k]?'on':'off'}`} aria-pressed={vis[k]} disabled={k==='px'}
+              onClick={()=>setVis(v=>({...v,[k]:!v[k]}))}>
+              <span className="dot" style={{background:cfg.stroke}} aria-hidden="true"/>{cfg.name}
             </button>
           ))}
         </div>
         <div style={{padding:'6px 8px 10px'}}>
+          <div role="img" aria-label={`Precio de ${p.name} con medias móviles, último cierre ${fmtP(p.last)} US$.`}>
           <ResponsiveContainer width="100%" height={310}>
             <LineChart data={chartData} syncId="px" margin={{top:8,right:8,left:0,bottom:0}}>
-              <CartesianGrid stroke="#17222D" vertical={false}/>
-              <XAxis dataKey="d" tick={{fill:'#54677A',fontSize:10,fontFamily:'JetBrains Mono'}}
-                tickFormatter={fmtDate} minTickGap={70} axisLine={{stroke:'#243242'}} tickLine={false}/>
+              <CartesianGrid stroke={c.grid} vertical={false}/>
+              <XAxis dataKey="d" tick={{fill:c.tick,fontSize:11,fontFamily:'JetBrains Mono'}}
+                tickFormatter={fmtDate} minTickGap={70} axisLine={{stroke:c.axis}} tickLine={false}/>
               <YAxis domain={[(dm)=>Math.floor(dm*0.985),(dm)=>Math.ceil(dm*1.015)]} orientation="right" width={58}
-                tick={{fill:'#54677A',fontSize:10,fontFamily:'JetBrains Mono'}} tickFormatter={v=>v.toFixed(0)}
+                tick={{fill:c.tick,fontSize:11,fontFamily:'JetBrains Mono'}} tickFormatter={v=>v.toFixed(0)}
                 axisLine={false} tickLine={false}/>
-              <Tooltip content={<TT/>} cursor={{stroke:'#2A3B4C'}}/>
+              <Tooltip content={<TT/>} cursor={{stroke:c.cursor}}/>
               {Object.entries(LINES).map(([k,cfg])=>vis[k]?(
                 <Line key={k} dataKey={k} name={cfg.name} stroke={cfg.stroke} strokeWidth={cfg.width}
                   dot={false} isAnimationActive={false} connectNulls={false}
@@ -1259,19 +1310,22 @@ function MarketSection({mkt,onRefresh,refreshing}){
               ):null)}
             </LineChart>
           </ResponsiveContainer>
+          </div>
           <div className="chart-lbl">RSI 14 · SOBRECOMPRA ≥ 70 · SOBREVENTA ≤ 30</div>
+          <div role="img" aria-label={`RSI 14 de ${p.name}: ${fmtNum(p.rsiNow)} puntos.`}>
           <ResponsiveContainer width="100%" height={130}>
             <LineChart data={rsiData} syncId="px" margin={{top:6,right:8,left:0,bottom:0}}>
               <XAxis dataKey="d" hide/>
               <YAxis domain={[0,100]} ticks={[30,50,70]} width={58} orientation="right"
-                tick={{fill:'#54677A',fontSize:10,fontFamily:'JetBrains Mono'}} axisLine={false} tickLine={false}/>
-              <Tooltip content={<TT/>} cursor={{stroke:'#2A3B4C'}}/>
+                tick={{fill:c.tick,fontSize:11,fontFamily:'JetBrains Mono'}} axisLine={false} tickLine={false}/>
+              <Tooltip content={<TT/>} cursor={{stroke:c.cursor}}/>
               <ReferenceArea y1={30} y2={70} fill="rgba(126,143,160,0.045)" ifOverflow="extendDomain"/>
               <ReferenceLine y={70} stroke="rgba(246,70,93,.45)" strokeDasharray="3 3"/>
               <ReferenceLine y={30} stroke="rgba(46,189,133,.45)" strokeDasharray="3 3"/>
-              <Line dataKey="rsi" name="RSI 14" stroke="#FFB020" strokeWidth={1.4} dot={false} isAnimationActive={false}/>
+              <Line dataKey="rsi" name="RSI 14" stroke={c.s1} strokeWidth={1.4} dot={false} isAnimationActive={false}/>
             </LineChart>
           </ResponsiveContainer>
+          </div>
           <div className="hint" style={{padding:'4px 8px 8px'}}>
             Señal por doble cruce: COMPRA si SMA20 &gt; SMA50 y EMA12 &gt; EMA26 · VENTA si ambas invertidas · NEUTRAL en caso contrario.
           </div>
@@ -1295,12 +1349,17 @@ function MarketSection({mkt,onRefresh,refreshing}){
             const q=mkt.per[t.symbol];
             return (
               <tr key={t.symbol} className={`row-click ${sel===t.symbol?'sel':''}`} onClick={()=>setSel(t.symbol)}>
-                <td><div className="sym-cell"><b>{q.symbol}</b><span>{q.name}</span></div></td>
+                <td>
+                  <button type="button" className="sym-btn" aria-pressed={sel===t.symbol}
+                    aria-label={'Analizar '+q.symbol+' ('+q.name+')'} onClick={()=>setSel(t.symbol)}>
+                    <span className="sym-cell"><b>{q.symbol}</b><span>{q.name}</span></span>
+                  </button>
+                </td>
                 <td className="mono-num">{fmtP(q.last)}</td>
                 <td className={`mono-num ${clsChg(q.chgPct)}`}>{fmtPct(q.chgPct)}</td>
                 <td className="mono-num" style={{color:'var(--mut)'}}>{fmtVol(q.vLast)}</td>
-                <td><Sparkline data={q.spark} color={clsChg(q.chg40)==='up'?'#2EBD85':clsChg(q.chg40)==='dn'?'#F6465D':'#7E8FA0'}/></td>
-                <td><span className={`sig sig-${q.signal}`} style={{fontSize:8.5}}>{q.signal}</span></td>
+                <td><Sparkline data={q.spark} color={clsChg(q.chg40)==='up'?c.up:clsChg(q.chg40)==='dn'?c.dn:c.neutral}/></td>
+                <td><span className={`sig sig-${q.signal}`}>{q.signal}</span></td>
               </tr>
             );
           })}
@@ -1319,6 +1378,7 @@ const PRESETS={
   Agresiva:{label:'Agresiva',desc:'retorno máximo · alta volatilidad',w:{GGAL:.30,YPF:.25,PAM:.20,AAPL:.15,MSFT:.10}},
 };
 function PortfolioSection({db,goApi}){
+  const c=useChart();
   const [weights,setWeights]=useState({...PRESETS.Moderada.w});
   const [preset,setPreset]=useState('Moderada');
   const setW=(s,v)=>{ setPreset('Personalizada'); setWeights(w=>({...w,[s]:Math.max(0,v||0)})); };
@@ -1340,8 +1400,8 @@ function PortfolioSection({db,goApi}){
         <div className="panel-b">
           <div className="preset-row">
             {Object.entries(PRESETS).map(([k,p])=>(
-              <button key={k} className={`btn btn-sm ${preset===k?'on':''}`} onClick={()=>applyPreset(k)}
-                title={p.desc}>{p.label}</button>
+              <button key={k} type="button" className={`btn btn-sm ${preset===k?'on':''}`} aria-pressed={preset===k}
+                onClick={()=>applyPreset(k)} title={p.desc}>{p.label}</button>
             ))}
           </div>
           <div className="hint" style={{marginBottom:10}}>
@@ -1351,10 +1411,12 @@ function PortfolioSection({db,goApi}){
             const on=weights[t.symbol]>0;
             return (
               <div className="wrow" key={t.symbol}>
-                <input type="checkbox" checked={on} onChange={e=>toggle(t.symbol,e.target.checked)}/>
-                <span className="wr-sym">{t.symbol}</span>
+                <input type="checkbox" id={'w-on-'+t.symbol} name={'incluir-'+t.symbol} checked={on}
+                  aria-label={'Incluir '+t.symbol+' en la cartera'} onChange={e=>toggle(t.symbol,e.target.checked)}/>
+                <label className="wr-sym" htmlFor={'w-on-'+t.symbol}>{t.symbol}</label>
                 <span className="wr-name">{t.name}</span>
-                <input type="number" step="0.05" min="0" value={on?weights[t.symbol]:''} disabled={!on}
+                <input type="number" id={'w-'+t.symbol} name={'peso-'+t.symbol} inputMode="decimal"
+                  aria-label={'Peso de '+t.symbol+' en la cartera'} step="0.05" min="0" value={on?weights[t.symbol]:''} disabled={!on}
                   onChange={e=>setW(t.symbol,parseFloat(e.target.value))}/>
               </div>
             );
@@ -1399,23 +1461,25 @@ function PortfolioSection({db,goApi}){
             <div className="panel">
               <div className="panel-h"><span className="panel-t">EVOLUCIÓN · CARTERA vs BENCHMARK IGUAL-PONDERADO (BASE 100)</span></div>
               <div style={{padding:'12px 8px'}}>
+                <div role="img" aria-label={`Evolución base 100 de la cartera contra el benchmark: cartera ${fmtPct1(analysis.hist.at(-1).p-100)}, benchmark ${fmtPct1(analysis.hist.at(-1).b-100)}.`}>
                 <ResponsiveContainer width="100%" height={280}>
                   <LineChart data={analysis.hist} margin={{top:8,right:8,left:0,bottom:0}}>
-                    <CartesianGrid stroke="#17222D" vertical={false}/>
-                    <XAxis dataKey="d" tick={{fill:'#54677A',fontSize:10,fontFamily:'JetBrains Mono'}}
-                      tickFormatter={fmtDate} minTickGap={70} axisLine={{stroke:'#243242'}} tickLine={false}/>
+                    <CartesianGrid stroke={c.grid} vertical={false}/>
+                    <XAxis dataKey="d" tick={{fill:c.tick,fontSize:11,fontFamily:'JetBrains Mono'}}
+                      tickFormatter={fmtDate} minTickGap={70} axisLine={{stroke:c.axis}} tickLine={false}/>
                     <YAxis domain={['auto','auto']} width={54} orientation="right"
-                      tick={{fill:'#54677A',fontSize:10,fontFamily:'JetBrains Mono'}} axisLine={false} tickLine={false}/>
-                    <Tooltip content={<TT/>} cursor={{stroke:'#2A3B4C'}}/>
-                    <ReferenceLine y={100} stroke="#2A3B4C"/>
-                    <Line dataKey="b" name="Benchmark EW" stroke="#7E8FA0" strokeWidth={1.2} dot={false}
+                      tick={{fill:c.tick,fontSize:11,fontFamily:'JetBrains Mono'}} axisLine={false} tickLine={false}/>
+                    <Tooltip content={<TT/>} cursor={{stroke:c.cursor}}/>
+                    <ReferenceLine y={100} stroke={c.cursor}/>
+                    <Line dataKey="b" name="Benchmark EW" stroke={c.neutral} strokeWidth={1.2} dot={false}
                       strokeDasharray="4 3" isAnimationActive={false}/>
-                    <Line dataKey="p" name="Mi cartera" stroke="#FFB020" strokeWidth={1.8} dot={false} isAnimationActive={false}/>
+                    <Line dataKey="p" name="Mi cartera" stroke={c.s1} strokeWidth={1.8} dot={false} isAnimationActive={false}/>
                   </LineChart>
                 </ResponsiveContainer>
+                </div>
                 <div className="hint" style={{padding:'2px 8px 6px'}}>
-                  Cartera final: <b style={{color:'var(--amb)'}}>{nf1.format(analysis.hist.at(-1).p-100>0?'+':'')}{nf1.format(analysis.hist.at(-1).p-100)} %</b>
-                  {' '}· Benchmark final: <b>{nf1.format(analysis.hist.at(-1).b-100>0?'+':'')}{nf1.format(analysis.hist.at(-1).b-100)} %</b>
+                  Cartera final: <b style={{color:'var(--amb)'}}>{fmtPct1(analysis.hist.at(-1).p-100)}</b>
+                  {' '}· Benchmark final: <b>{fmtPct1(analysis.hist.at(-1).b-100)}</b>
                   {' '}· metodología: pesos constantes con rebalanceo diario
                 </div>
               </div>
@@ -1443,7 +1507,7 @@ function PortfolioSection({db,goApi}){
                   ))}
                   </tbody>
                 </table>
-                <div className="hint" style={{paddingadding:0,marginTop:6}}>
+                <div className="hint" style={{padding:0,marginTop:6}}>
                   Verde = se mueven juntos · Rojo = se mueven opuestos · Cerca de 0 = diversificación efectiva.
                 </div>
               </div>
@@ -1611,10 +1675,10 @@ function ApiSection({db,mkt,notify,onDbChange}){
             </div>
             <div className="ep-b">
               <div className="form-row">
-                <div className="field"><label>TICKERS</label>
-                  <input value={pfT} onChange={e=>setPfT(e.target.value)} style={{minWidth:170}}/></div>
-                <div className="field"><label>PESOS</label>
-                  <input value={pfW} onChange={e=>setPfW(e.target.value)} style={{minWidth:130}}/></div>
+                <div className="field"><label htmlFor="pf-tickers">TICKERS</label>
+                  <input id="pf-tickers" name="tickers" autoComplete="off" spellCheck={false} value={pfT} onChange={e=>setPfT(e.target.value)} style={{minWidth:170}}/></div>
+                <div className="field"><label htmlFor="pf-weights">PESOS</label>
+                  <input id="pf-weights" name="weights" inputMode="decimal" autoComplete="off" spellCheck={false} value={pfW} onChange={e=>setPfW(e.target.value)} style={{minWidth:130}}/></div>
               </div>
               <div className="curl">{curlBase}"{`?tickers=${pfT}&weights=${pfW}`.replace(/^\?/,'/api/portfolio/analyze?')}"</div>
             </div>
@@ -1644,7 +1708,8 @@ function ApiSection({db,mkt,notify,onDbChange}){
               <div className="ep-d">Guarda una regla de alerta en la base de datos (ticker + condición + umbral). Probalo también desde el formulario de abajo.</div>
             </div>
             <div className="ep-b">
-              <textarea value={alertBody} onChange={e=>setAlertBody(e.target.value)} spellCheck={false}/>
+              <label className="sr-only" htmlFor="alert-body">Cuerpo JSON de la alerta</label>
+              <textarea id="alert-body" name="alerta" autoComplete="off" spellCheck={false} value={alertBody} onChange={e=>setAlertBody(e.target.value)}/>
               <div className="curl" style={{marginTop:10}}>{`${curlBase} -X POST /api/alerts \\
   -H "Content-Type: application/json" \\
   -d '${alertBody.split('\n').join('')}'`}</div>
@@ -1669,7 +1734,7 @@ function ApiSection({db,mkt,notify,onDbChange}){
             <div className="panel-h">
               <span className="panel-t"><Icon n="terminal-dummy" s={0}/><Icon n="play" s={12}/>CONSOLA · RESPUESTA DEL BACKEND</span>
             </div>
-            {!resp?(
+            <div aria-live="polite">{!resp?(
               <div className="empty">Ejecutá cualquier endpoint de la izquierda.<br/>
               <span className="hint">la respuesta es el JSON puro que recibiría el nodo HTTP Request de n8n</span></div>
             ):(
@@ -1689,7 +1754,7 @@ function ApiSection({db,mkt,notify,onDbChange}){
                   ))}
                 </pre></div>
               </React.Fragment>
-            )}
+            )}</div>
           </div>
 
           {/* ---- Panel de alertas ---- */}
@@ -1700,16 +1765,16 @@ function ApiSection({db,mkt,notify,onDbChange}){
             </div>
             <div className="panel-b">
               <div className="form-row">
-                <div className="field"><label>TICKER</label>
-                  <select value={fT} onChange={e=>setFT(e.target.value)}>
+                <div className="field"><label htmlFor="al-ticker">TICKER</label>
+                  <select id="al-ticker" name="ticker" value={fT} onChange={e=>setFT(e.target.value)}>
                     {TICKERS.map(t=><option key={t.symbol} value={t.symbol}>{t.symbol}</option>)}
                   </select></div>
-                <div className="field"><label>CONDICIÓN</label>
-                  <select value={fC} onChange={e=>setFC(e.target.value)}>
+                <div className="field"><label htmlFor="al-cond">CONDICIÓN</label>
+                  <select id="al-cond" name="condicion" value={fC} onChange={e=>setFC(e.target.value)}>
                     {CONDS.map(([v,l])=><option key={v} value={v}>{l}</option>)}
                   </select></div>
-                <div className="field"><label>UMBRAL</label>
-                  <input type="number" step="0.5" value={fU} onChange={e=>setFU(e.target.value)} style={{width:90}}/></div>
+                <div className="field"><label htmlFor="al-umbral">UMBRAL</label>
+                  <input id="al-umbral" name="umbral" inputMode="decimal" autoComplete="off" type="number" step="0.5" value={fU} onChange={e=>setFU(e.target.value)} style={{width:90}}/></div>
                 <button className="btn btn-primary" onClick={saveAlert}><Icon n="bolt" s={12}/>GUARDAR ALERTA</button>
               </div>
               {alerts.length===0?(
@@ -1723,11 +1788,11 @@ function ApiSection({db,mkt,notify,onDbChange}){
                     <tr key={a.id}>
                       <td><b>{a.ticker}</b></td>
                       <td style={{fontSize:10.5,color:'var(--mut)'}}>{a.condition.replace(/_/g,' ').toLowerCase()}</td>
-                      <td className="mono-num">{a.threshold}</td>
-                      <td className="mono-num">{a.current_value}</td>
+                      <td className="mono-num">{fmtNum(a.threshold)}</td>
+                      <td className="mono-num">{fmtNum(a.current_value)}</td>
                       <td><span className={`alert-badge ${a.triggered?'alert-on':'alert-off'}`}>
                         {a.triggered?'● DISPARADA':'○ NORMAL'}</span></td>
-                      <td><button className="btn btn-sm btn-danger" onClick={()=>delAlert(a.id)} title="Eliminar regla">
+                      <td><button className="btn btn-sm btn-danger" onClick={()=>delAlert(a.id)} aria-label={'Eliminar la alerta de '+a.ticker}>
                         <Icon n="trash" s={12}/></button></td>
                     </tr>
                   ))}
@@ -1797,16 +1862,16 @@ function GuidedAutomation({notify}){
     setTimeout(()=>URL.revokeObjectURL(url),1000);
     notify('Workflow n8n descargado');
   };
-  const copy=async()=>notify(await copyText(workflowJson)?'JSON copiado':'No se pudo copiar el JSON','err');
+  const copy=async()=>{const ok=await copyText(workflowJson);notify(ok?'JSON copiado':'No se pudo copiar el JSON',ok?'ok':'err');};
   return (
     <div className="guide-wrap">
       <div className="guide-intro">
-        <div><h2>Armá tu primera automatización</h2>
+        <div><h1>Armá tu primera automatización</h1>
           <p>Elegí qué señal querés revisar. Te mostramos el recorrido y preparamos un archivo para importar en n8n. No hace falta escribir código.</p></div>
         <span className="guide-flag">MODO DE PRUEBA · SIN CUENTAS NI CREDENCIALES</span>
       </div>
 
-      <div className="guide-flow" aria-label="Pasos de la automatización">
+      <div className="guide-flow" role="group" aria-label="Pasos de la automatización">
         <div className="guide-step"><span className="step-n">PASO 1</span><b>Iniciar prueba</b><span>Vos apretás “Ejecutar workflow” en n8n.</span></div>
         <div className="guide-step"><span className="step-n">PASO 2</span><b>Revisar ejemplos</b><span>El flujo usa tres activos ficticios incluidos en el archivo.</span></div>
         <div className="guide-step"><span className="step-n">PASO 3</span><b>Buscar una señal</b><span>Compara cada activo con la condición que elegiste.</span></div>
@@ -1872,7 +1937,7 @@ function GroupExercises({signal}){
           <p>Armen grupos de 3 o 4. Antes de mirar las respuestas, conversen y acuerden una opción. Una persona puede manejar la página y otra explicar el porqué.</p></div>
         <span className="group-time">15 MIN · {score}/3 RESUELTOS</span>
       </div>
-      <div className="group-roles" aria-label="Roles sugeridos para el grupo">
+      <div className="group-roles" role="group" aria-label="Roles sugeridos para el grupo">
         <div className="group-role"><b>Coordina</b><span>Lee la consigna y reparte turnos para opinar.</span></div>
         <div className="group-role"><b>Sigue el flujo</b><span>Señala en qué paso se encuentra la automatización.</span></div>
         <div className="group-role"><b>Opera n8n</b><span>Prueba el JSON importado cuando el grupo acuerda.</span></div>
@@ -1977,6 +2042,7 @@ function DocsPage({notify}){
 }`;
   return (
     <div className="doc-body">
+      <h1 className="sr-only">Especificación de la API</h1>
       <div className="sec-head">
         <div className="sec-num">API</div>
         <div><h2>Especificación de la API</h2>
@@ -2086,12 +2152,12 @@ const ETAPAS=[
   {n:'1',t:'Ver el mercado',d:'La página, un año de precios simulados y el primer dashboard.',p:'Pasos 0–3',c:'Clase 1'},
   {n:'2',t:'Medirlo',d:'Medias móviles, RSI, señales y el riesgo de una cartera (Sharpe).',p:'Pasos 4–5',c:'Clase 1'},
   {n:'3',t:'Sacarlo afuera',d:'Una API, la verificación en Google Colab y una alerta automática en n8n.',p:'Pasos 6–9',c:'Clase 2'},
-  {n:'4',t:'Delegar en agentes',d:'Claves de API, modelos en n8n, agentes y el MCP de n8n para crear flujos desde un asistente.',p:'Pasos 10 en adelante',c:'Clase 3 (opcional)'}];
+  {n:'4',t:'Delegar en agentes',d:'Claves de API, modelos en n8n, agentes y el MCP de n8n para crear flujos desde un asistente.',p:'Pasos 10–14',c:'Clase 3 (opcional)'}];
 const ESCALERA=[
   {n:'1',t:'Prompt',d:'Le piden algo a la IA y verifican lo que devuelve.',d2:'Pasos 0–7'},
   {n:'2',t:'Automatización',d:'Un flujo fijo que corre solo: algo lo dispara, consulta datos, decide y avisa.',d2:'Pasos 8–9 · n8n'},
-  {n:'3',t:'Agente',d:'La IA decide qué herramientas usar y en qué orden para responder.',d2:'Pestaña 06 · Agentes · Clase 3'},
-  {n:'4',t:'Consejo de agentes',d:'Varios agentes con roles: uno analiza, otro audita, otro redacta.',d2:'Clase 3'}];
+  {n:'3',t:'Agente',d:'La IA decide qué herramientas usar y en qué orden para responder.',d2:'Pestaña 06 · Agentes · Pasos 12–13'},
+  {n:'4',t:'Consejo de agentes',d:'Varios agentes con roles: uno analiza, otro audita, otro redacta.',d2:'Paso 13 · Clase 3'}];
 
 /* ---------- PÁGINA #/agentes · UN AGENTE SIMULADO, PASO A PASO ----------
    La IA está guionada (no hay modelo ni clave de API), pero cada herramienta llama de verdad
@@ -2175,7 +2241,7 @@ function AgentLab(){
     <div className="agents">
       <div className="ag-intro">
         <div>
-          <h2>Un agente, paso a paso</h2>
+          <h1>Un agente, paso a paso</h1>
           <p>Un <b>agente</b> es una IA que, para responder, <b>decide qué herramientas usar y en qué orden</b>: consultar una API, hacer una cuenta, leer una planilla. Acá ven cada decisión. Después, un segundo agente, el <b>auditor</b>, revisa la respuesta antes de entregarla: quien hace no se controla a sí mismo.</p>
         </div>
         <span className="guide-flag">IA SIMULADA · DATOS REALES DE ESTA TERMINAL</span>
@@ -2230,14 +2296,14 @@ function Welcome(){
           <figcaption><span>ASÍ TERMINAN</span>esta misma terminal · <a href="#/mercado">explorala →</a></figcaption>
         </figure>
       </div>
-      <h3 className="wl-h">La escalera del curso: de pedirle algo a la IA a delegar en agentes</h3>
+      <h2 className="wl-h">La escalera del curso: de pedirle algo a la IA a delegar en agentes</h2>
       <ol className="wl-escalera">
         {ESCALERA.map(e=>(
           <li key={e.n} style={{"--i":e.n}}><span className="wl-n">{e.n}</span><div><b>{e.t}</b><span>{e.d}</span><small>{e.d2}</small></div></li>
         ))}
       </ol>
       <p className="wl-escalera-nota">En una <b>automatización</b> ustedes dibujan el camino. En un <b>agente</b>, la IA elige el camino dentro de los límites que le ponen. En un <b>consejo</b>, un agente controla a otro: quien hace no se califica a sí mismo.</p>
-      <h3 className="wl-h">El recorrido en 4 etapas</h3>
+      <h2 className="wl-h">El recorrido en 4 etapas</h2>
       <ol className="wl-etapas">
         {ETAPAS.map(e=>(
           <li key={e.n}><span className="wl-n">{e.n}</span><b>{e.t}</b><span>{e.d}</span><small>{e.p} · {e.c}</small></li>
@@ -2248,13 +2314,96 @@ function Welcome(){
     </div>
   );
 }
+/* ---------- MODO PRESENTACIÓN DE LA BIENVENIDA ----------
+   Cuatro diapositivas con los mismos datos de la página: título, escalera, etapas y qué necesita cada grupo.
+   Se abre con el botón de la cabecera o con ?presentar. Teclado: → ← espacio, Inicio/Fin, Esc. */
+function Presentacion({setAbierto}){
+  const [i,setI]=useState(0);
+  const capa=useRef(null), TOTAL=4;
+  const ir=n=>setI(Math.max(0,Math.min(TOTAL-1,n)));
+  useEffect(()=>{
+    const el=capa.current, previo=document.activeElement;
+    document.body.style.overflow='hidden';
+    el.focus();
+    // Pantalla completa si el navegador la permite (file:// o un iframe pueden negarla).
+    if(el.requestFullscreen) el.requestFullscreen().catch(()=>{});
+    const teclas=e=>{
+      const avanza=['ArrowRight','ArrowDown','PageDown',' ','Enter'], vuelve=['ArrowLeft','ArrowUp','PageUp','Backspace'];
+      if(avanza.includes(e.key)){e.preventDefault();setI(v=>Math.min(TOTAL-1,v+1));}
+      else if(vuelve.includes(e.key)){e.preventDefault();setI(v=>Math.max(0,v-1));}
+      else if(e.key==='Home'){e.preventDefault();setI(0);}
+      else if(e.key==='End'){e.preventDefault();setI(TOTAL-1);}
+      else if(e.key==='Escape'){e.preventDefault();setAbierto(false);}
+      else if(e.key==='Tab'){
+        const f=[...el.querySelectorAll('button:not([disabled])')], k=f.indexOf(document.activeElement);
+        if(e.shiftKey&&k<=0){e.preventDefault();f[f.length-1].focus();}
+        else if(!e.shiftKey&&k===f.length-1){e.preventDefault();f[0].focus();}
+      }
+    };
+    document.addEventListener('keydown',teclas,true);
+    return ()=>{
+      document.removeEventListener('keydown',teclas,true);
+      document.body.style.overflow='';
+      if(document.fullscreenElement&&document.exitFullscreen) document.exitFullscreen().catch(()=>{});
+      if(previo&&previo.focus) previo.focus();
+    };
+  },[setAbierto]);
+  const diapo=[
+    <React.Fragment key="t">
+      <p className="pres-wl-eyebrow">TALLER EN GRUPO · POSGRADO DE IA APLICADA A FINANZAS</p>
+      <h2 className="pres-wl-titulo">Construyan su propia terminal financiera, con IA</h2>
+      <p className="pres-wl-sub">Dos clases para pedirle el código a una IA, paso a paso, y <b>comprobar que los números estén bien</b>.</p>
+    </React.Fragment>,
+    <React.Fragment key="e">
+      <h2 className="pres-wl-titulo">La escalera del curso</h2>
+      <ol className="wl-escalera">
+        {ESCALERA.map(e=>(<li key={e.n} style={{"--i":e.n}}><span className="wl-n">{e.n}</span><div><b>{e.t}</b><span>{e.d}</span><small>{e.d2}</small></div></li>))}
+      </ol>
+      <p className="pres-wl-sub">En una <b>automatización</b> ustedes dibujan el camino; en un <b>agente</b>, la IA elige el camino; en un <b>consejo</b>, un agente controla a otro.</p>
+    </React.Fragment>,
+    <React.Fragment key="r">
+      <h2 className="pres-wl-titulo">El recorrido en 4 etapas</h2>
+      <ol className="wl-etapas">
+        {ETAPAS.map(e=>(<li key={e.n}><span className="wl-n">{e.n}</span><b>{e.t}</b><span>{e.d}</span><small>{e.p} · {e.c}</small></li>))}
+      </ol>
+    </React.Fragment>,
+    <React.Fragment key="n">
+      <h2 className="pres-wl-titulo">Qué necesita cada grupo</h2>
+      <p className="pres-wl-sub">Una computadora con navegador, un chat de IA (alcanza la versión gratis), una cuenta de Google y una carpeta <code>finlab</code> en el escritorio. <b>n8n</b> recién hace falta en el paso 8.</p>
+      <p className="pres-wl-sub">Si un grupo se atrasa, cada paso trae una versión de rescate: <b>nadie queda afuera</b>.</p>
+    </React.Fragment>
+  ][i];
+  return (
+    <div className="pres-wl" role="dialog" aria-modal="true" aria-label="Presentación de la bienvenida" tabIndex={-1} ref={capa}>
+      <div className="pres-wl-slide">{diapo}</div>
+      <div className="pres-wl-bar">
+        <button type="button" onClick={()=>ir(i-1)} disabled={i===0} aria-label="Diapositiva anterior">←</button>
+        <span className="pres-wl-num" aria-live="polite">{(i+1)+' / '+TOTAL}</span>
+        <button type="button" onClick={()=>ir(i+1)} disabled={i===TOTAL-1} aria-label="Diapositiva siguiente">→</button>
+        <div className="pres-wl-prog" aria-hidden="true"><i style={{width:((i+1)/TOTAL*100)+'%'}}/></div>
+        <span>← → para avanzar · Esc para salir</span>
+        <button type="button" onClick={()=>setAbierto(false)}>Salir</button>
+      </div>
+    </div>
+  );
+}
 function SectionHead({n,t,d}){return (
   <div className="sec-head">
     <div className="sec-num">{n}</div>
-    <div><h2>{t}</h2><p>{d}</p></div>
+    <div><h1>{t}</h1><p>{d}</p></div>
   </div>
 );}
 
+function Clock(){
+  const [t,setT]=useState('');
+  useEffect(()=>{
+    const tick=()=>setT(new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit',second:'2-digit'}));
+    tick(); const id=setInterval(tick,1000);
+    return ()=>clearInterval(id);
+  },[]);
+  // el reloj queda fuera de App: así el cambio de segundo no vuelve a dibujar toda la página
+  return <div className="clock" aria-hidden="true"><Icon n="clock" s={12} style={{verticalAlign:'-2px',marginRight:6,color:'var(--dim)'}}/><b>{t}</b></div>;
+}
 function App(){
   // router mínimo por hash (#/mercado, #/docs, …)
   const [page,setPage]=useState(()=>(location.hash.replace('#/','')||'inicio'));
@@ -2266,6 +2415,8 @@ function App(){
   useEffect(()=>{
     document.documentElement.dataset.theme=theme;
   },[theme]);
+  // La bienvenida se puede presentar como diapositivas (botón en la cabecera) o abrir directo con ?presentar.
+  const [presentar,setPresentar]=useState(()=>/[?&]presentar\b/.test(location.search));
   // Se guarda solo cuando lo eligen; archify-theme hace que los diagramas abran con el mismo tema.
   const toggleTheme=()=>{
     const next=theme==='dark'?'light':'dark';
@@ -2282,12 +2433,6 @@ function App(){
   const [toasts,setToasts]=useState([]);
   const [busy,setBusy]=useState(false);
   const [confirmReset,setConfirmReset]=useState(false);
-  const [clock,setClock]=useState('');
-  useEffect(()=>{
-    const tick=()=>setClock(new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit',second:'2-digit'}));
-    tick(); const id=setInterval(tick,1000);
-    return ()=>clearInterval(id);
-  },[]);
   const notify=useCallback((msg,type='ok')=>{
     const id=Date.now()+Math.random();
     setToasts(t=>[...t,{id,msg,type}]);
@@ -2315,8 +2460,18 @@ function App(){
     notify('Base de datos regenerada con la semilla #42 — estado inicial reproducible');
   };
 
+  const firstRender=useRef(true);
+  useEffect(()=>{
+    const l=(PAGES.find(([k])=>k===page)||[,'INICIO'])[1].replace(/^\d+ · /,'');
+    document.title=(page==='inicio'?'':l.charAt(0)+l.slice(1).toLowerCase()+' · ')+'FIN·LAB · Terminal de análisis de mercado';
+    // al cambiar de pestaña el foco pasa al contenido: quien navega con teclado o lector de pantalla no queda en el menú
+    if(firstRender.current){ firstRender.current=false; return; }
+    const main=document.getElementById('contenido');
+    if(main) main.focus();
+  },[page]);
   return (
-    <React.Fragment>
+    <ThemeCtx.Provider value={theme}><React.Fragment>
+      <button type="button" className="skip" onClick={()=>document.getElementById('contenido').focus()}>Saltar al contenido</button>
       {/* ===== Cabecera fija con cinta de precios ===== */}
       <header className="hd">
         <div className="hd-in">
@@ -2328,6 +2483,7 @@ function App(){
             </div>
           </div>
           <div className="hd-right">
+            {page==='inicio'&&<button className="pres-open" onClick={()=>setPresentar(true)} aria-label="Presentar la bienvenida como diapositivas">▶ Presentar</button>}
             <button className="theme-btn" onClick={toggleTheme}
               aria-label={theme==='dark'?'Cambiar a tema claro':'Cambiar a tema oscuro'}
               title={theme==='dark'?'Cambiar a tema claro':'Cambiar a tema oscuro'}>
@@ -2339,13 +2495,13 @@ function App(){
             <button className={`hd-btn ${confirmReset?'confirm':''}`} onClick={doReset}>
               <Icon n="rotate" s={12}/>{confirmReset?'¿CONFIRMAR?':'REINICIAR SEMILLA'}
             </button>
-            <div className="clock"><Icon n="clock" s={12} style={{verticalAlign:'-2px',marginRight:6,color:'var(--dim)'}}/><b>{clock}</b></div>
+            <Clock/>
           </div>
         </div>
         <TickerTape mkt={mkt}/>
         <nav className="nav">
           {PAGES.map(([k,l])=>(
-            <a key={k} href={'#/'+k} className={page===k?'on':''}>
+            <a key={k} href={'#/'+k} className={page===k?'on':''} aria-current={page===k?'page':undefined}>
               {l}
               {k==='api'&&alertsTriggered>0&&<span className="nav-dot" title={alertsTriggered+' alerta(s) disparada(s)'}/>}
             </a>
@@ -2353,7 +2509,7 @@ function App(){
         </nav>
       </header>
 
-      <main className="wrap">
+      <main className="wrap" id="contenido" tabIndex={-1}>
         {page==='inicio'&&<Welcome/>}
         <BuildHint page={page}/>
         {page==='guiado'&&<GuidedAutomation notify={notify}/>}
@@ -2387,16 +2543,22 @@ function App(){
           </React.Fragment>
         )}
         {page==='docs'&&<DocsPage notify={notify}/>}
-
-        <footer>
-          FIN·LAB · material didáctico del posgrado de IA aplicada a Finanzas (UNLP) — clase: automatizaciones para análisis
-          de mercado y carteras.<br/>
-          Datos SIMULADOS con fines educativos (no constituyen asesoramiento financiero) · generación determinista con semilla #42 ·
-          sin dependencias de API keys externas.
-        </footer>
+        {!PAGES.some(([k])=>k===page)&&(
+          <div className="empty" style={{paddingTop:70}}>
+            No existe la sección “{page}”.<br/>
+            <a className="btn" href="#/inicio" style={{marginTop:16}}>VOLVER A INICIO</a>
+          </div>
+        )}
       </main>
+      <footer>
+        FIN·LAB · material didáctico del posgrado de IA aplicada a Finanzas (UNLP) — clase: automatizaciones para análisis
+        de mercado y carteras.<br/>
+        Datos SIMULADOS con fines educativos (no constituyen asesoramiento financiero) · generación determinista con semilla #42 ·
+        sin dependencias de API keys externas.
+      </footer>
       <Toasts list={toasts}/>
-    </React.Fragment>
+      {presentar&&<Presentacion setAbierto={setPresentar}/>}
+    </React.Fragment></ThemeCtx.Provider>
   );
 }
 
