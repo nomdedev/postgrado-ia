@@ -175,7 +175,7 @@ test('el tema elegido es el mismo en todo el sitio (una sola clave, aplicada ant
   const paginas = ['index.html',
     ...fs.readdirSync(path.join(ROOT, 'docs', 'taller')).filter((f) => f.endsWith('.html')).map((f) => `docs/taller/${f}`),
     ...fs.readdirSync(path.join(ROOT, 'docs', 'automatizaciones')).filter((f) => f.endsWith('.html')).map((f) => `docs/automatizaciones/${f}`),
-    'docs/docente/index.html'];
+    'docs/docente/index.html', 'docs/docente/clase.html'];
   for (const pagina of paginas) {
     const head = fs.readFileSync(path.join(ROOT, pagina), 'utf8').split('</head>')[0];
     assert.match(head, /<script>try\{var t=localStorage\.getItem\("finlab-tema"\)/, `${pagina}: no aplica el tema guardado (finlab-tema) antes de pintar`);
