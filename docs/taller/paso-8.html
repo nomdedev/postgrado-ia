@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="theme-color" content="#0B0F13" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F2F5F2" media="(prefers-color-scheme: light)">
 <title>Paso 8 · Un workflow de n8n que avisa solo · Taller FIN·LAB</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -13,19 +16,20 @@
 <body>
 
 <!-- @top -->
+<a class="skip" href="#contenido">Saltar al contenido</a>
 <header class="top">
   <div class="top-in">
     <a class="brand" href="index.html"><span class="brand-dot"></span><b>FIN·LAB</b> TALLER</a>
-    <span class="crumb">CLASE 2 · PASO 8 / 9 · N8N</span>
+    <span class="crumb">CLASE 2 · PASO 8 / 14 · N8N</span>
   </div>
 </header>
 <!-- /@top -->
 
-<main class="page">
+<main id="contenido" class="page">
   <!-- @nav -->
-<ul class="steps" aria-label="Pasos del taller">
-    <li><a href="index.html">MAPA</a></li><li class="sep" aria-hidden="true">CLASE 1</li><li><a href="paso-0.html">P0</a></li><li><a href="paso-1.html">P1</a></li><li><a href="paso-2.html">P2</a></li><li><a href="paso-3.html">P3</a></li><li><a href="paso-4.html">P4</a></li><li><a href="paso-5.html">P5</a></li><li class="sep" aria-hidden="true">CLASE 2</li><li><a href="paso-6.html">P6</a></li><li><a href="paso-7.html">P7</a></li><li><a href="paso-8.html" aria-current="page">P8</a></li><li><a href="paso-9.html">P9</a></li><li><a href="kit.html">KIT</a></li><li><a href="glosario.html">GLOSARIO</a></li>
-  </ul>
+<nav class="steps" aria-label="Pasos del taller">
+    <li><a href="index.html">MAPA</a></li><li class="sep">CLASE 1</li><li><a href="paso-0.html">P0</a></li><li><a href="paso-1.html">P1</a></li><li><a href="paso-2.html">P2</a></li><li><a href="paso-3.html">P3</a></li><li><a href="paso-4.html">P4</a></li><li><a href="paso-5.html">P5</a></li><li class="sep">CLASE 2</li><li><a href="paso-6.html">P6</a></li><li><a href="paso-7.html">P7</a></li><li><a href="paso-8.html" aria-current="page">P8</a></li><li><a href="paso-9.html">P9</a></li><li class="sep">CLASE 3</li><li><a href="paso-10.html">P10</a></li><li><a href="paso-11.html">P11</a></li><li><a href="paso-12.html">P12</a></li><li><a href="paso-13.html">P13</a></li><li><a href="paso-14.html">P14</a></li><li><a href="kit.html">KIT</a></li><li><a href="glosario.html">GLOSARIO</a></li>
+  </nav>
 <!-- /@nav -->
 
   <p class="eyebrow">PASO 8 · EL ANÁLISIS SALE SOLO</p>
@@ -115,6 +119,17 @@ Devolveme el JSON completo listo para importar y una tabla con cada nodo: nombre
     </ul>
   </section>
 
+  <section class="block" aria-labelledby="grafico">
+    <span class="num"></span>
+    <h2 id="grafico">La idea, en un gráfico</h2>
+    <!-- @viz:p8 -->
+    <figure class="viz" id="viz-p8" data-titulo="El workflow que corre solo">
+      <div class="viz-grafico"><svg class="viz-svg" viewBox="0 0 960 300" role="img" aria-labelledby="viz-p8-t viz-p8-d"><title id="viz-p8-t">Workflow de n8n con cinco nodos encadenados</title><desc id="viz-p8-d">Disparador, pedido HTTP, filtro, condición y correo</desc><g><rect class="v-card " x="10" y="40" width="168" height="150" rx="10"/><text class="v-ink v-b" x="26" y="68">Cada día 9:00</text><text class="v-mut v-sm" x="26" y="90">Schedule Trigger</text><text class="v-mut v-sm" x="26" y="110">sin nadie mirando</text></g><line class="v-axis " x1="180" y1="115" x2="189" y2="115"/><path class="v-axis-fill" d="M198,115 L189,120 L189,110 Z"/><g><rect class="v-card " x="200" y="40" width="168" height="150" rx="10"/><text class="v-ink v-b" x="216" y="68">Pide la API</text><text class="v-mut v-sm" x="216" y="90">HTTP Request</text><text class="v-mut v-sm" x="216" y="110">la URL pública del paso 9</text></g><line class="v-axis " x1="370" y1="115" x2="379" y2="115"/><path class="v-axis-fill" d="M388,115 L379,120 L379,110 Z"/><g><rect class="v-card " x="390" y="40" width="168" height="150" rx="10"/><text class="v-ink v-b" x="406" y="68">Filtra señales</text><text class="v-mut v-sm" x="406" y="90">Code</text><text class="v-mut v-sm" x="406" y="110">quedan 2: JNJ y KO</text></g><line class="v-axis " x1="560" y1="115" x2="569" y2="115"/><path class="v-axis-fill" d="M578,115 L569,120 L569,110 Z"/><g><rect class="v-card " x="580" y="40" width="168" height="150" rx="10"/><text class="v-ink v-b" x="596" y="68">¿Hay avisos?</text><text class="v-mut v-sm" x="596" y="90">IF</text><text class="v-mut v-sm" x="596" y="110">sí → manda · no → corta</text></g><line class="v-axis " x1="750" y1="115" x2="759" y2="115"/><path class="v-axis-fill" d="M768,115 L759,120 L759,110 Z"/><g><rect class="v-card " x="770" y="40" width="168" height="150" rx="10"/><text class="v-ink v-b" x="786" y="68">Manda el mail</text><text class="v-mut v-sm" x="786" y="90">Email</text><text class="v-mut v-sm" x="786" y="110">JNJ · KO · 2 avisos</text></g><text class="v-mut v-sm" x="480" y="232" text-anchor="middle">cada nodo le pasa al siguiente un JSON; si el filtro no encuentra nada, el flujo termina sin mandar correo</text></svg></div>
+      <figcaption><b>El workflow que corre solo.</b> Cinco nodos encadenados: el disparador arranca sin que nadie toque nada, el HTTP pide los datos y el filtro decide si hay algo que avisar. Cambiar la regla del filtro es cambiar <b>una condición</b>, no todo el flujo.<small>Esquema del paso 8, con la muestra fija de la API del curso.</small></figcaption>
+    </figure>
+    <!-- /@viz:p8 -->
+  </section>
+
   <details class="more" id="entender">
     <summary>Para entender más <small>· cómo funciona y palabras nuevas</small></summary>
 
@@ -122,10 +137,10 @@ Devolveme el JSON completo listo para importar y una tabla con cada nodo: nombre
     <span class="num"></span>
     <h2 id="flujo">El flujo: los nodos del workflow</h2>
     <div class="flow">
-      <div class="flow-row"><span class="n">1</span><div><h4>El disparador</h4><p>Un botón para probar o un horario fijo.</p></div></div>
-      <div class="flow-row"><span class="n">2</span><div><h4>Pide los datos</h4><p>A la API publicada del curso.</p></div></div>
-      <div class="flow-row"><span class="n">3</span><div><h4>Filtra</h4><p>Se queda con los activos con señal VENTA o RSI fuera de 30–70.</p></div></div>
-      <div class="flow-row"><span class="n">4</span><div><h4>Decide</h4><p>Si encontró algo, arma el aviso con el motivo; si no, no manda nada.</p></div></div>
+      <div class="flow-row"><span class="n">1</span><div><h3>El disparador</h3><p>Un botón para probar o un horario fijo.</p></div></div>
+      <div class="flow-row"><span class="n">2</span><div><h3>Pide los datos</h3><p>A la API publicada del curso.</p></div></div>
+      <div class="flow-row"><span class="n">3</span><div><h3>Filtra</h3><p>Se queda con los activos con señal VENTA o RSI fuera de 30–70.</p></div></div>
+      <div class="flow-row"><span class="n">4</span><div><h3>Decide</h3><p>Si encontró algo, arma el aviso con el motivo; si no, no manda nada.</p></div></div>
     </div>
     <p style="margin-top:14px"><a class="btn" href="diagramas/p8-n8n.html" target="_blank" rel="noopener">VER EL DIAGRAMA COMPLETO ↗</a></p>
   </section>

@@ -10,8 +10,6 @@
 .copy{background:var(--amb);border-color:var(--amb);color:#0B0F13;font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.03em;padding:8px 16px;border-radius:6px}
 .copy:hover{filter:brightness(1.08);color:#0B0F13}
 .copy.done{background:var(--up);border-color:var(--up);color:#fff}
-.copy::before{content:"⧉  "}
-.copy.done::before{content:"✓  "}
 .copy.mini{font-size:11px;padding:3px 9px;margin-left:6px;vertical-align:middle}
 .peek{background:transparent;border:1px solid var(--line2);color:var(--mut);border-radius:6px;padding:7px 12px;font:600 12px var(--sans);cursor:pointer}
 .peek:hover{border-color:var(--amb);color:var(--amb)}
@@ -34,7 +32,7 @@
 .mock-cards small{display:block;color:var(--dim);font-size:11px}
 .mock-cards b{font-size:18px}
 .mock table{width:100%;border-collapse:collapse}
-.mock th,.mock td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line)}
+.mock th,.mock td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
 .mock th{color:var(--dim);font-weight:500;font-size:11px}
 .mock .up{color:var(--up)} .mock .dn{color:var(--dn)}
 .mock .tag{display:inline-block;padding:1px 8px;border-radius:999px;font-size:11px;font-weight:600}
@@ -65,7 +63,7 @@ a.w:hover{color:var(--teal)}
 
 /* Barra de progreso del taller */
 .steps{display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 6px;list-style:none}
-.steps a{display:inline-block;padding:4px 9px;border:1px solid var(--line);border-radius:999px;font-family:var(--mono);font-size:11px;color:var(--mut)}
+.steps a{display:inline-block;padding:8px 12px;border:1px solid var(--line);border-radius:999px;font-family:var(--mono);font-size:11px;color:var(--mut)}
 .steps a[aria-current="page"]{border-color:var(--amb);color:var(--amb);background:var(--amb-soft)}
 
 /* Pasos con clics concretos */
@@ -129,6 +127,7 @@ main.page{counter-reset:seccion}
 .viz-svg .v-card{fill:var(--panel2);stroke:var(--line)}
 .viz-svg .v-grid{stroke:var(--line);stroke-width:1}
 .viz-svg .v-axis{stroke:var(--line2);stroke-width:1.5}
+.viz-svg .v-axis-fill{fill:var(--line2)}
 .viz-svg .v-line{fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
 .viz-svg .v-s1{stroke:var(--s1)} .viz-svg .v-s2{stroke:var(--s2)}
 .viz-svg .v-ink-line{fill:none;stroke:var(--mut);stroke-width:1.5}
@@ -156,7 +155,7 @@ main.page{counter-reset:seccion}
 .pres-visual .viz-svg{width:100%;height:auto;max-height:60vh}
 .pres-visual .viz-grafico{padding:0}
 .pres-visual .flow{width:min(100%,900px);margin:0 auto;text-align:left}
-.pres-visual .flow-row h4{font-size:clamp(16px,1.7vw,24px)}
+.pres-visual .flow-row h3{font-size:clamp(16px,1.7vw,24px)}
 .pres-visual .flow-row p{font-size:clamp(14px,1.35vw,19px)}
 .pres-idea{font-size:clamp(16px,1.7vw,26px);line-height:1.5;color:var(--mut);max-width:60ch}
 .pres-idea b{color:var(--txt)}

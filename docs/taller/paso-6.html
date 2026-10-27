@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="theme-color" content="#0B0F13" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F2F5F2" media="(prefers-color-scheme: light)">
 <title>Paso 6 · API y alertas en JSON · Taller FIN·LAB</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -13,19 +16,20 @@
 <body>
 
 <!-- @top -->
+<a class="skip" href="#contenido">Saltar al contenido</a>
 <header class="top">
   <div class="top-in">
     <a class="brand" href="index.html"><span class="brand-dot"></span><b>FIN·LAB</b> TALLER</a>
-    <span class="crumb">CLASE 2 · PASO 6 / 9 · API</span>
+    <span class="crumb">CLASE 2 · PASO 6 / 14 · API</span>
   </div>
 </header>
 <!-- /@top -->
 
-<main class="page">
+<main id="contenido" class="page">
   <!-- @nav -->
-<ul class="steps" aria-label="Pasos del taller">
-    <li><a href="index.html">MAPA</a></li><li class="sep" aria-hidden="true">CLASE 1</li><li><a href="paso-0.html">P0</a></li><li><a href="paso-1.html">P1</a></li><li><a href="paso-2.html">P2</a></li><li><a href="paso-3.html">P3</a></li><li><a href="paso-4.html">P4</a></li><li><a href="paso-5.html">P5</a></li><li class="sep" aria-hidden="true">CLASE 2</li><li><a href="paso-6.html" aria-current="page">P6</a></li><li><a href="paso-7.html">P7</a></li><li><a href="paso-8.html">P8</a></li><li><a href="paso-9.html">P9</a></li><li><a href="kit.html">KIT</a></li><li><a href="glosario.html">GLOSARIO</a></li>
-  </ul>
+<nav class="steps" aria-label="Pasos del taller">
+    <li><a href="index.html">MAPA</a></li><li class="sep">CLASE 1</li><li><a href="paso-0.html">P0</a></li><li><a href="paso-1.html">P1</a></li><li><a href="paso-2.html">P2</a></li><li><a href="paso-3.html">P3</a></li><li><a href="paso-4.html">P4</a></li><li><a href="paso-5.html">P5</a></li><li class="sep">CLASE 2</li><li><a href="paso-6.html" aria-current="page">P6</a></li><li><a href="paso-7.html">P7</a></li><li><a href="paso-8.html">P8</a></li><li><a href="paso-9.html">P9</a></li><li class="sep">CLASE 3</li><li><a href="paso-10.html">P10</a></li><li><a href="paso-11.html">P11</a></li><li><a href="paso-12.html">P12</a></li><li><a href="paso-13.html">P13</a></li><li><a href="paso-14.html">P14</a></li><li><a href="kit.html">KIT</a></li><li><a href="glosario.html">GLOSARIO</a></li>
+  </nav>
 <!-- /@nav -->
 
   <p class="eyebrow">PASO 6 · QUE LOS DATOS SALGAN DE LA PÁGINA</p>
@@ -115,6 +119,17 @@ Explicame en 3 líneas qué le faltaría a esto para ser una API real accesible 
     </ul>
   </section>
 
+  <section class="block" aria-labelledby="grafico">
+    <span class="num"></span>
+    <h2 id="grafico">La idea, en un gráfico</h2>
+    <!-- @viz:p6 -->
+    <figure class="viz" id="viz-p6" data-titulo="El viaje de un pedido">
+      <div class="viz-grafico"><svg class="viz-svg" viewBox="0 0 960 260" role="img" aria-labelledby="viz-p6-t viz-p6-d"><title id="viz-p6-t">Un pedido a la API recorriendo cuatro etapas</title><desc id="viz-p6-d">Programa → revisión → JSON → alertas</desc><g><rect class="v-card " x="15" y="60" width="210" height="120" rx="10"/><text class="v-ink v-b" x="31" y="88">Un programa pregunta</text><text class="v-mut v-sm" x="31" y="110">GET /api/market/summary</text><text class="v-mut v-sm" x="31" y="130">sin pantalla, sin clics</text></g><line class="v-axis " x1="229" y1="120" x2="242" y2="120"/><path class="v-axis-fill" d="M251,120 L242,125 L242,115 Z"/><g><rect class="v-card " x="255" y="60" width="210" height="120" rx="10"/><text class="v-ink v-b" x="271" y="88">La página revisa</text><text class="v-mut v-sm" x="271" y="110">¿el activo existe?</text><text class="v-mut v-sm" x="271" y="130">¿la sesión es de hoy?</text></g><line class="v-axis " x1="469" y1="120" x2="482" y2="120"/><path class="v-axis-fill" d="M491,120 L482,125 L482,115 Z"/><g><rect class="v-card " x="495" y="60" width="210" height="120" rx="10"/><text class="v-ink v-b" x="511" y="88">Responde en JSON</text><text class="v-mut v-sm" x="511" y="110">{ ok: true, data: … }</text><text class="v-mut v-sm" x="511" y="130">los mismos números de la tabla</text></g><line class="v-axis " x1="709" y1="120" x2="722" y2="120"/><path class="v-axis-fill" d="M731,120 L722,125 L722,115 Z"/><g><rect class="v-card " x="735" y="60" width="210" height="120" rx="10"/><text class="v-ink v-b" x="751" y="88">Y las alertas</text><text class="v-mut v-sm" x="751" y="110">precio &gt; 0 → se dispara</text><text class="v-mut v-sm" x="751" y="130">RSI &lt; 30 → se dispara</text></g><text class="v-dn v-sm v-b" x="360" y="214" text-anchor="middle">si no existe: 404 y un mensaje claro</text></svg></div>
+      <figcaption><b>El viaje de un pedido.</b> Un programa pide, la página revisa y contesta en JSON. Las <b>alertas</b> son reglas guardadas que se comparan con esos mismos datos: todavía no avisan solas, eso llega con n8n en el paso 8.<small>Esquema del paso 6: no usa datos de mercado.</small></figcaption>
+    </figure>
+    <!-- /@viz:p6 -->
+  </section>
+
   <details class="more" id="entender">
     <summary>Para entender más <small>· cómo funciona y palabras nuevas</small></summary>
 
@@ -122,10 +137,10 @@ Explicame en 3 líneas qué le faltaría a esto para ser una API real accesible 
     <span class="num"></span>
     <h2 id="flujo">El flujo: qué pasa cuando alguien consulta la API</h2>
     <div class="flow">
-      <div class="flow-row"><span class="n">1</span><div><h4>Alguien pregunta</h4><p>Un programa (o ustedes, en el explorador) pide el resumen o un activo.</p></div></div>
-      <div class="flow-row"><span class="n">2</span><div><h4>La página revisa</h4><p>¿Existe lo que piden?</p></div></div>
-      <div class="flow-row"><span class="n">3</span><div><h4>Responde en JSON</h4><p>Con los mismos números de la tabla; si no existe, “404” y un mensaje.</p></div></div>
-      <div class="flow-row"><span class="n">4</span><div><h4>Las alertas</h4><p>Reglas guardadas que se comparan con los datos del día.</p></div></div>
+      <div class="flow-row"><span class="n">1</span><div><h3>Alguien pregunta</h3><p>Un programa (o ustedes, en el explorador) pide el resumen o un activo.</p></div></div>
+      <div class="flow-row"><span class="n">2</span><div><h3>La página revisa</h3><p>¿Existe lo que piden?</p></div></div>
+      <div class="flow-row"><span class="n">3</span><div><h3>Responde en JSON</h3><p>Con los mismos números de la tabla; si no existe, “404” y un mensaje.</p></div></div>
+      <div class="flow-row"><span class="n">4</span><div><h3>Las alertas</h3><p>Reglas guardadas que se comparan con los datos del día.</p></div></div>
     </div>
     <p style="margin-top:14px"><a class="btn" href="diagramas/p6-api.html" target="_blank" rel="noopener">VER EL DIAGRAMA COMPLETO ↗</a></p>
   </section>

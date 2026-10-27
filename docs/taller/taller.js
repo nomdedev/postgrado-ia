@@ -35,7 +35,7 @@
     button.type = 'button';
     button.className = 'copy mini';
     button.setAttribute('data-copy', '#' + snippet.id);
-    button.setAttribute('aria-label', 'Copiar ' + snippet.textContent);
+    button.title = 'Copiar ' + snippet.textContent.trim();
     button.textContent = 'COPIAR';
     snippet.insertAdjacentElement('afterend', button);
   });

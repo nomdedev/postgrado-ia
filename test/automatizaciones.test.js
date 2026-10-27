@@ -36,7 +36,7 @@ test('cada ejemplo trae prompts copiables, constructor y su workflow descargable
   }
 });
 
-test('el taller: 10 pasos encadenados, cada uno con diagrama Archify, glosario, prompt copiable y comprobación', () => {
+test('el taller: 15 pasos en tres clases, cada uno con glosario, prompt copiable, comprobación y presentación', () => {
   const TALLER = path.join(__dirname, '..', 'docs', 'taller');
   const page = (file) => fs.readFileSync(path.join(TALLER, file), 'utf8');
   assert.match(read('index.html'), /href="\.\.\/taller\/index\.html"/, 'el índice de automatizaciones no enlaza el taller');
@@ -56,7 +56,7 @@ test('el taller: 10 pasos encadenados, cada uno con diagrama Archify, glosario, 
   assert.match(terminal, /IA SIMULADA · DATOS REALES DE ESTA TERMINAL/, 'la pestaña de agentes tiene que avisar que la IA está simulada');
   assert.match(terminal, /const ESCALERA=\[[\s\S]*'Prompt'[\s\S]*'Automatización'[\s\S]*'Agente'[\s\S]*'Consejo de agentes'/, 'la bienvenida tiene que mostrar la escalera de 4 escalones');
   const mapa = fs.readFileSync(path.join(TALLER, 'index.html'), 'utf8');
-  assert.match(mapa, /id="clase1"[\s\S]*href="paso-5\.html"[\s\S]*id="clase2"[\s\S]*href="paso-9\.html"/, 'el mapa tiene que mostrar la clase 1 (P0–P5) y la clase 2 (P6–P9)');
+  assert.match(mapa, /id="clase1"[\s\S]*href="paso-5\.html"[\s\S]*id="clase2"[\s\S]*href="paso-9\.html"[\s\S]*id="clase3"[\s\S]*href="paso-14\.html"/, 'el mapa tiene que mostrar la clase 1 (P0–P5), la clase 2 (P6–P9) y la clase 3 (P10–P14)');
   assert.match(mapa, /id="corto"[\s\S]*href="rescate\/finlab-v5\.html"/, 'el mapa tiene que ofrecer el camino corto con los rescates');
   // Auditoría 2026-10-26: la pestaña EMPEZAR no debe revelar respuestas antes de COMPROBAR (H3).
   assert.doesNotMatch(terminal, /el resultado esperado es|\{ex\.time\} · \{ex\.explain\}/, 'EMPEZAR vuelve a mostrar las respuestas antes de discutir');
@@ -64,7 +64,7 @@ test('el taller: 10 pasos encadenados, cada uno con diagrama Archify, glosario, 
   assert.match(fs.readFileSync(path.join(TALLER, 'paso-4.html'), 'utf8'), /promedio simple de las primeras 14 subas/, 'el prompt del paso 4 no fija el arranque del RSI');
   assert.match(fs.readFileSync(path.join(TALLER, 'paso-5.html'), 'utf8'), /volatilidad anualizada individual/, 'el prompt del paso 5 no pide la volatilidad individual');
 
-  for (let n = 0; n <= 9; n++) {
+  for (let n = 0; n <= 14; n++) {
     const file = `paso-${n}.html`;
     const html = page(file);
     assert.match(html, /<html lang="es">/, `${file}: falta lang="es"`);
@@ -82,15 +82,17 @@ test('el taller: 10 pasos encadenados, cada uno con diagrama Archify, glosario, 
     }
     assert.doesNotMatch(html, /sección 0\d|class="mission"|<iframe/, `${file}: quedó una referencia "sección 0N", la misión repetida o un diagrama embebido`);
     assert.match(html, /<div class="flow">/, `${file}: falta la tira del flujo`);
-    const diagram = html.match(/<a class="btn" href="(diagramas\/[a-z0-9-]+\.html)"/);
-    assert.ok(diagram && fs.existsSync(path.join(TALLER, diagram[1])), `${file}: falta el enlace al diagrama completo`);
+    if (n <= 9) {
+      const diagram = html.match(/<a class="btn" href="(diagramas\/[a-z0-9-]+\.html)"/);
+      assert.ok(diagram && fs.existsSync(path.join(TALLER, diagram[1])), `${file}: falta el enlace al diagrama completo`);
+    }
     assert.match(html, /href="glosario\.html#/, `${file}: no enlaza el glosario`);
     assert.ok((html.match(/data-copy="#[a-zA-Z0-9-]+"/g) || []).length >= 1, `${file}: sin botones de copiar`);
     for (const [, id] of html.matchAll(/data-copy="#([a-zA-Z0-9-]+)"/g)) {
       assert.match(html, new RegExp(`id="${id}"`), `${file}: el botón copia #${id}, que no existe`);
     }
     assert.match(html, /<ul class="check">/, `${file}: falta la comprobación`);
-    if (n < 9) assert.match(html, new RegExp(`href="paso-${n + 1}\\.html"`), `${file}: no enlaza el paso siguiente`);
+    if (n < 14) assert.match(html, new RegExp(`href="paso-${n + 1}\\.html"`), `${file}: no enlaza el paso siguiente`);
   }
 
   const glosario = page('glosario.html');
@@ -205,7 +207,7 @@ test('gráficos del taller al día y modo presentación disponible en cada paso'
   } catch (e) {
     assert.fail(String(e.stderr || e.message).trim());
   }
-  const esperados = { 2: 1, 3: 1, 4: 2, 5: 1 };
+  const esperados = { 2: 1, 3: 1, 4: 2, 5: 1, 6: 1, 7: 1, 8: 1, 9: 1, 10: 1, 11: 1, 12: 1, 13: 1, 14: 1 };
   for (const [n, cuantos] of Object.entries(esperados)) {
     const html = fs.readFileSync(path.join(TALLER, `paso-${n}.html`), 'utf8');
     const figuras = html.match(/<figure class="viz"[\s\S]*?<\/figure>/g) || [];
@@ -219,6 +221,20 @@ test('gráficos del taller al día y modo presentación disponible en cada paso'
   const js = fs.readFileSync(path.join(TALLER, 'taller.js'), 'utf8');
   for (const pieza of [/Modo presentación/, /querySelectorAll\('figure\.viz'\)/, /querySelector\('\.flow'\)/, /'aria-modal', 'true'/, /\[\?&\]presentar/]) {
     assert.match(js, pieza, `taller.js: al modo presentación le falta ${pieza}`);
+  }
+});
+
+test('la bienvenida de la terminal tiene modo presentación, como las páginas del taller', () => {
+  const terminal = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  for (const pieza of [
+    /function Presentacion\(/,
+    /role="dialog" aria-modal="true" aria-label="Presentación de la bienvenida"/,
+    /\[\?&\]presentar/,
+    /className="pres-open"/,
+    /<Presentacion setAbierto=\{setPresentar\}/,
+    /@media\(prefers-reduced-motion:reduce\)\{\.pres-wl/
+  ]) {
+    assert.match(terminal, pieza, `index.html: al modo presentación de la bienvenida le falta ${pieza}`);
   }
 });
 

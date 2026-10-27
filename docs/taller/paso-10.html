@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="theme-color" content="#0B0F13" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F2F5F2" media="(prefers-color-scheme: light)">
+<title>Paso 10 · Claves de API · Taller FIN·LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../automatizaciones/lab.css">
+<link rel="stylesheet" href="taller.css">
+<script>try{var t=localStorage.getItem("finlab-tema");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+
+<!-- @top -->
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index.html"><span class="brand-dot"></span><b>FIN·LAB</b> TALLER</a>
+    <span class="crumb">CLASE 3 · PASO 10 / 14 · CLAVES</span>
+  </div>
+</header>
+<!-- /@top -->
+
+<main id="contenido" class="page">
+  <!-- @nav -->
+<nav class="steps" aria-label="Pasos del taller">
+    <li><a href="index.html">MAPA</a></li><li class="sep">CLASE 1</li><li><a href="paso-0.html">P0</a></li><li><a href="paso-1.html">P1</a></li><li><a href="paso-2.html">P2</a></li><li><a href="paso-3.html">P3</a></li><li><a href="paso-4.html">P4</a></li><li><a href="paso-5.html">P5</a></li><li class="sep">CLASE 2</li><li><a href="paso-6.html">P6</a></li><li><a href="paso-7.html">P7</a></li><li><a href="paso-8.html">P8</a></li><li><a href="paso-9.html">P9</a></li><li class="sep">CLASE 3</li><li><a href="paso-10.html" aria-current="page">P10</a></li><li><a href="paso-11.html">P11</a></li><li><a href="paso-12.html">P12</a></li><li><a href="paso-13.html">P13</a></li><li><a href="paso-14.html">P14</a></li><li><a href="kit.html">KIT</a></li><li><a href="glosario.html">GLOSARIO</a></li>
+  </nav>
+<!-- /@nav -->
+
+  <p class="eyebrow">PASO 10 · LA LLAVE QUE NO SE MUESTRA</p>
+  <h1>Claves de API: dónde se guardan y por qué</h1>
+  <p class="lede">Para que n8n pueda hablar con un modelo de IA hace falta una <a class="w" href="glosario.html#clave-api">clave de API</a>: una contraseña larga que identifica su cuenta y que se paga por uso. La clave <b>no va en la página</b>: va en una <a class="w" href="glosario.html#credencial">credencial</a> del servidor. En este paso la crean, la guardan y comprueban que no quedó a la vista.</p>
+  <div class="meta"><span class="chip"><b>20 MIN</b></span><span class="chip">N8N</span><span class="chip">SIN CÓDIGO EN PANTALLA</span><span class="chip">SALIDA: <b>UNA CREDENCIAL QUE FUNCIONA</b></span></div>
+  <div class="note tip"><b>¿Llegan sin cuenta de n8n?</b> La clase 3 se trabaja dentro de n8n, así que conviene tener el acceso del paso 8 a mano. Si no lo tienen, hagan el paso mirando a otro grupo y prueben las claves en el chat. <a class="btn" href="paso-8.html">VER EL PASO 8</a></div>
+
+  <section class="block" aria-labelledby="logro">
+    <span class="num"></span>
+    <h2 id="logro">Qué van a lograr</h2>
+    <p>Una clave creada en el panel del proveedor del modelo y guardada en las credenciales de n8n, más una prueba que demuestra que el flujo puede usar el modelo <b>sin que la clave se vea en ningún archivo</b>.</p>
+    <div class="mock" aria-label="Cómo se ve la credencial dentro de n8n">
+      <table><thead><tr><th>CREDENCIAL</th><th>DÓNDE VIVE</th><th>QUIÉN LA VE</th><th>SI SE FILTRA</th></tr></thead>
+      <tbody><tr><td>Modelo de IA</td><td>n8n · Credenciales</td><td>solo quien administra el flujo</td><td>se revoca y se genera otra</td></tr><tr><td>API del curso</td><td>pública, sin clave</td><td>cualquiera</td><td>no aplica</td></tr></tbody></table>
+      <div class="mock-foot">Una credencial guarda la clave cifrada y le entrega al workflow solo el resultado de usarla. El flujo nunca muestra el valor.</div>
+    </div>
+  </section>
+
+  <section class="block" data-section="prompts" aria-labelledby="prompt">
+    <span class="num"></span>
+    <h2 id="prompt">El prompt</h2>
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT · PASO 10</span><div class="d">Antes de crear la clave.</div></div><button class="copy" data-copy="#p10" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="p10">Paso 10 de un taller de finanzas con n8n. Voy a conectar un nodo de IA con un proveedor de modelos.
+
+Explicame, en 5 líneas y sin jerga:
+1. la diferencia entre pegar una clave dentro de un archivo HTML y guardarla como credencial en n8n
+2. qué permiso o alcance mínimo necesita esa clave para leer un modelo y nada más
+3. dónde se revoca si se filtra
+
+Después armame una lista de verificación de 5 puntos para comprobar que la clave no quedó en el HTML del proyecto, ni en un workflow exportado, ni en una captura de pantalla.</pre></div>
+    </div>
+    <div class="note tip"><b>Lo que debería responder:</b> que la página la mostraría a cualquiera que abra el archivo, que la credencial la guarda cifrada el servidor y que el permiso mínimo alcanza. Si contesta “guardala en una variable de entorno del navegador”, está mal: el navegador no tiene secretos.</div>
+  </section>
+
+  <section class="block" aria-labelledby="hacer">
+    <span class="num"></span>
+    <h2 id="hacer">Qué hacer, clic por clic</h2>
+    <ol class="do">
+      <li><b>Entren al panel del proveedor</b> que eligió el docente (OpenAI, Anthropic, Google o el que tenga el curso) y busquen <em>API keys</em>.</li>
+      <li><b>Generen una clave nueva</b> con un nombre que se entienda (“taller-finlab”) y el permiso más acotado que ofrezca el panel.</li>
+      <li><b>Cópienla una sola vez</b> y péguenla en n8n: <em>Credenciales → Nueva →</em> el tipo del proveedor. Guárdenla ahí, no en un archivo.</li>
+      <li><b>Prueben la credencial</b> con el botón de probar del panel de n8n, o con un nodo que pida una respuesta corta.</li>
+      <li><b>Revisen el proyecto:</b> busquen los primeros caracteres de la clave en el HTML, en los workflows exportados y en el chat. No tiene que aparecer en ninguno.</li>
+      <li><b>Anoten el nombre de la credencial</b> en el kit del grupo, sin la clave, y guárdenlo para los pasos 11 a 14.</li>
+    </ol>
+  </section>
+
+  <section class="block" aria-labelledby="comprobar">
+    <span class="num"></span>
+    <h2 id="comprobar">Cómo comprobar</h2>
+    <ul class="check">
+      <li><b>La prueba pasa:</b> el botón de probar la credencial responde “conectado” o devuelve una respuesta del modelo.</li>
+      <li><b>En el HTML no está:</b> buscar los primeros 6 caracteres de la clave en <span class="code-inline">finlab.html</span> no devuelve nada.</li>
+      <li><b>En el workflow exportado tampoco:</b> el JSON del flujo lleva el <em>id</em> de la credencial, nunca la clave.</li>
+      <li><b>El permiso es mínimo:</b> la clave sirve para el modelo y no para administrar la cuenta del proveedor.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="falla">
+    <span class="num"></span>
+    <h2 id="falla">Si algo falla</h2>
+    <div class="note tip"><b>¿Se trabaron después de tres intentos?</b> Pidan ayuda con la captura del error, sin mostrar la clave. Nunca peguen la clave en el chat del aula ni en el grupo: si ya lo hicieron, revóquenla y generen otra.</div>
+    <ul>
+      <li><b>La credencial dice 401 o 403:</b> la clave está incompleta, venció o no tiene permiso para ese modelo. Generen otra y prueben de nuevo.</li>
+      <li><b>“No tenés cuota”:</b> la cuenta gratuita se agotó. Sirve para entender el paso; para la prueba final usen el modelo que indique el docente.</li>
+      <li><b>La clave aparece en una captura:</b> tápenla antes de compartir y revóquenla al terminar la clase.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="grafico">
+    <span class="num"></span>
+    <h2 id="grafico">La idea, en un gráfico</h2>
+    <!-- @viz:p10 -->
+    <figure class="viz" id="viz-p10" data-titulo="Dónde vive la clave">
+      <div class="viz-grafico"><svg class="viz-svg" viewBox="0 0 960 310" role="img" aria-labelledby="viz-p10-t viz-p10-d"><title id="viz-p10-t">La clave va de la página a n8n y de n8n a la API del modelo</title><desc id="viz-p10-d">Página y n8n no comparten la clave; n8n la usa desde su gestor de credenciales</desc><g><rect class="v-card " x="20" y="110" width="260" height="130" rx="10"/><text class="v-ink v-b" x="36" y="138">La página HTML</text><text class="v-mut v-sm" x="36" y="160">la clave a la vista</text><text class="v-mut v-sm" x="36" y="180">la abre cualquiera con F12</text><text class="v-mut v-sm" x="36" y="200">y queda en el historial de git</text></g><g><rect class="v-card " x="350" y="110" width="260" height="130" rx="10"/><text class="v-ink v-b" x="366" y="138">n8n · Credenciales</text><text class="v-mut v-sm" x="366" y="160">guardada y cifrada aparte</text><text class="v-mut v-sm" x="366" y="180">el flujo la usa sin mostrarla</text><text class="v-mut v-sm" x="366" y="200">se cambia sin tocar el flujo</text></g><g><rect class="v-card " x="680" y="110" width="260" height="130" rx="10"/><text class="v-ink v-b" x="696" y="138">La API del modelo</text><text class="v-mut v-sm" x="696" y="160">verifica la clave</text><text class="v-mut v-sm" x="696" y="180">cobra por uso</text></g><line class="v-axis v-dash" x1="284" y1="175" x2="337" y2="175"/><path class="v-axis-fill" d="M346,175 L337,180 L337,170 Z"/><line class="v-axis " x1="614" y1="175" x2="667" y2="175"/><path class="v-axis-fill" d="M676,175 L667,180 L667,170 Z"/><text class="v-dn v-sm v-b" x="315" y="100" text-anchor="middle">✗ NO</text><text class="v-up v-sm v-b" x="645" y="100" text-anchor="middle">✓ SÍ</text><text class="v-mut v-sm" x="480" y="280" text-anchor="middle">una clave por servicio, con el menor permiso posible: si se filtra, se revoca y se genera otra</text></svg></div>
+      <figcaption><b>Dónde vive la clave.</b> La clave se crea en el panel del proveedor del modelo y se pega <b>una sola vez</b> en las credenciales de n8n. Nunca va en el HTML, ni en el prompt, ni en el workflow exportado: cualquiera que abra el archivo la vería.<small>Esquema del paso 10.</small></figcaption>
+    </figure>
+    <!-- /@viz:p10 -->
+  </section>
+
+  <details class="more" id="entender">
+    <summary>Para entender más <small>· cómo funciona y palabras nuevas</small></summary>
+
+  <section class="block" aria-labelledby="flujo">
+    <span class="num"></span>
+    <h2 id="flujo">El flujo: de la clave a la respuesta</h2>
+    <div class="flow">
+      <div class="flow-row"><span class="n">1</span><div><h3>Se crea en el proveedor</h3><p>Una clave por servicio, con el permiso más chico que alcance.</p></div></div>
+      <div class="flow-row"><span class="n">2</span><div><h3>Se guarda en n8n</h3><p>En Credenciales: cifrada, fuera del flujo y fuera del archivo.</p></div></div>
+      <div class="flow-row"><span class="n">3</span><div><h3>El nodo la usa</h3><p>n8n la adjunta al pedido; el workflow solo ve la respuesta.</p></div></div>
+      <div class="flow-row"><span class="n">4</span><div><h3>Se rota o se revoca</h3><p>Si se filtra, se invalida desde el panel y se genera otra.</p></div></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="palabras">
+    <span class="num"></span>
+    <h2 id="palabras">Palabras nuevas de este paso</h2>
+    <dl class="terms">
+      <div class="term-card"><dt>Clave de API</dt><dd>La contraseña larga que identifica su cuenta. <a href="glosario.html#clave-api">Más →</a></dd></div>
+      <div class="term-card"><dt>Credencial</dt><dd>El lugar donde el servidor guarda esa clave. <a href="glosario.html#credencial">Más →</a></dd></div>
+      <div class="term-card"><dt>Token</dt><dd>La unidad con la que se mide y se cobra el texto. <a href="glosario.html#token">Más →</a></dd></div>
+      <div class="term-card"><dt>Límite de uso</dt><dd>El tope de pedidos o de gasto por minuto. <a href="glosario.html#limite">Más →</a></dd></div>
+    </dl>
+  </section>
+  </details>
+
+  <div class="pager">
+    <a href="paso-9.html">← PASO 9 · #/GUIADO</a>
+    <a href="paso-11.html">PASO 11 · MODELOS →</a>
+  </div>
+</main>
+
+<!-- @pie -->
+<footer>
+  FIN·LAB · material didáctico del posgrado de IA aplicada a Finanzas (UNLP) — taller de construcción guiada.<br>
+  Datos simulados con fines educativos. No es asesoramiento financiero.
+</footer>
+
+<script src="../automatizaciones/lab.js"></script>
+<script src="taller.js"></script>
+<!-- /@pie -->
+</body>
+</html>

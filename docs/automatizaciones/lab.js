@@ -27,9 +27,21 @@
     var original = button.textContent;
     button.textContent = 'COPIADO';
     button.classList.add('done');
+    // región viva: el cambio a COPIADO se anuncia además de verse
+    var live = document.getElementById('lab-live');
+    if (!live) {
+      live = document.createElement('span');
+      live.id = 'lab-live';
+      live.className = 'sr';
+      live.setAttribute('role', 'status');
+      live.setAttribute('aria-live', 'polite');
+      document.body.appendChild(live);
+    }
+    live.textContent = 'Texto copiado al portapapeles';
     setTimeout(function () {
       button.textContent = original;
       button.classList.remove('done');
+      live.textContent = '';
     }, 1600);
   });
 

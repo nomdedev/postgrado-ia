@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="theme-color" content="#0B0F13" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F2F5F2" media="(prefers-color-scheme: light)">
+<title>Paso 11 · Modelos en n8n · Taller FIN·LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../automatizaciones/lab.css">
+<link rel="stylesheet" href="taller.css">
+<script>try{var t=localStorage.getItem("finlab-tema");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+
+<!-- @top -->
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index.html"><span class="brand-dot"></span><b>FIN·LAB</b> TALLER</a>
+    <span class="crumb">CLASE 3 · PASO 11 / 14 · MODELOS</span>
+  </div>
+</header>
+<!-- /@top -->
+
+<main id="contenido" class="page">
+  <!-- @nav -->
+<nav class="steps" aria-label="Pasos del taller">
+    <li><a href="index.html">MAPA</a></li><li class="sep">CLASE 1</li><li><a href="paso-0.html">P0</a></li><li><a href="paso-1.html">P1</a></li><li><a href="paso-2.html">P2</a></li><li><a href="paso-3.html">P3</a></li><li><a href="paso-4.html">P4</a></li><li><a href="paso-5.html">P5</a></li><li class="sep">CLASE 2</li><li><a href="paso-6.html">P6</a></li><li><a href="paso-7.html">P7</a></li><li><a href="paso-8.html">P8</a></li><li><a href="paso-9.html">P9</a></li><li class="sep">CLASE 3</li><li><a href="paso-10.html">P10</a></li><li><a href="paso-11.html" aria-current="page">P11</a></li><li><a href="paso-12.html">P12</a></li><li><a href="paso-13.html">P13</a></li><li><a href="paso-14.html">P14</a></li><li><a href="kit.html">KIT</a></li><li><a href="glosario.html">GLOSARIO</a></li>
+  </nav>
+<!-- /@nav -->
+
+  <p class="eyebrow">PASO 11 · ELEGIR CON CRITERIO, NO POR EL MÁS CARO</p>
+  <h1>Modelos en n8n: cuál usar y cómo decidirlo</h1>
+  <p class="lede">En n8n el modelo de un nodo se cambia sin rehacer el flujo. Por eso conviene empezar por el más chico y subir solo si no alcanza: cada consulta larga se paga por <a class="w" href="glosario.html#token">token</a>. En este paso prueban dos <a class="w" href="glosario.html#modelo">modelos</a> con la misma tarea y eligen con evidencia.</p>
+  <div class="meta"><span class="chip"><b>20 MIN</b></span><span class="chip">N8N</span><span class="chip">UN NODO DE IA</span><span class="chip">SALIDA: <b>UNA DECISIÓN ANOTADA</b></span></div>
+  <div class="note tip"><b>¿Les falta la credencial?</b> El paso 10 deja una clave guardada en n8n. Sin ella, el nodo de IA no arranca. <a class="btn" href="paso-10.html">VOLVER AL PASO 10</a></div>
+
+  <section class="block" aria-labelledby="logro">
+    <span class="num"></span>
+    <h2 id="logro">Qué van a lograr</h2>
+    <p>Un nodo de IA configurado con la credencial del paso 10, la misma pregunta corrida con <b>dos modelos distintos</b> y una tabla corta con la decisión: cuál usaron, para qué tarea y por qué.</p>
+    <div class="mock" aria-label="Tabla para comparar dos modelos con la misma tarea">
+      <table><thead><tr><th>TAREA</th><th>MODELO A</th><th>MODELO B</th><th>DECISIÓN</th></tr></thead>
+      <tbody><tr><td>Resumir 2 avisos de RSI</td><td>rápido, correcto</td><td>lento, igual de correcto</td><td>A, por costo</td></tr><tr><td>Auditar una cartera</td><td>omite un supuesto</td><td>lo detecta</td><td>B, por calidad</td></tr></tbody></table>
+      <div class="mock-foot">La grilla se completa con lo que observan, no con lo que dice el marketing. Los nombres y precios de los modelos cambian: el criterio no.</div>
+    </div>
+  </section>
+
+  <section class="block" data-section="prompts" aria-labelledby="prompt">
+    <span class="num"></span>
+    <h2 id="prompt">El prompt</h2>
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT · PASO 11</span><div class="d">Antes de comparar modelos.</div></div><button class="copy" data-copy="#p11" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="p11">Paso 11 de un taller de finanzas con n8n. Tengo un nodo de IA y una credencial que funciona.
+
+Quiero elegir el modelo con criterio, no por el más caro. Armame:
+1. tres tareas típicas de este proyecto (resumir avisos, explicar un indicador, auditar una cartera) y qué exige cada una en contexto y precisión
+2. para cada tarea, qué preguntar para notar la diferencia entre un modelo chico y uno grande
+3. una tabla de decisión con tres columnas: correcto / alcanza / costo-velocidad
+
+No inventes precios ni nombres de modelos actuales: decime qué tengo que mirar en el panel del proveedor para completarlos yo.</pre></div>
+    </div>
+    <div class="note tip"><b>Puente con el proyecto real:</b> la respuesta honesta es “depende de la tarea y del panel del proveedor”. Cualquier lista de precios fijos en el tiempo va a estar vencida: úsenla como ejemplo, no como dato.</div>
+  </section>
+
+  <section class="block" aria-labelledby="hacer">
+    <span class="num"></span>
+    <h2 id="hacer">Qué hacer, clic por clic</h2>
+    <ol class="do">
+      <li><b>Abran el workflow del paso 8</b> o uno nuevo con un nodo de IA (Basic LLM Chain o AI Agent) y asignen la credencial del paso 10.</li>
+      <li><b>Escriban una tarea concreta y corta:</b> “explicá en 3 líneas por qué el RSI de JNJ da 28”. Guarden la respuesta tal cual.</li>
+      <li><b>Cambien el modelo</b> por otro de distinto tamaño y repitan la misma pregunta, con el mismo texto.</li>
+      <li><b>Anoten tres cosas</b> por respuesta: si es correcta, si alcanza para el objetivo y cuánto tardó.</li>
+      <li><b>Prueben con una tarea más larga</b> (el informe semanal) y repitan la comparación.</li>
+      <li><b>Elijan un modelo por tarea</b> y escríbanlo en el kit del grupo, con la razón en una línea.</li>
+    </ol>
+  </section>
+
+  <section class="block" aria-labelledby="comprobar">
+    <span class="num"></span>
+    <h2 id="comprobar">Cómo comprobar</h2>
+    <ul class="check">
+      <li><b>Mismo texto, dos respuestas:</b> las dos corridas usan exactamente la misma entrada; solo cambia el modelo.</li>
+      <li><b>La decisión tiene una razón:</b> “porque sí” no cuenta; tiene que decir costo, velocidad o calidad.</li>
+      <li><b>Ningún número inventado:</b> si el modelo afirma un precio o una fecha de corte, se verifica en el panel antes de usarlo.</li>
+      <li><b>La tarea chica no usa el modelo grande:</b> si el modelo chico acierta, no hay razón para pagar más.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="falla">
+    <span class="num"></span>
+    <h2 id="falla">Si algo falla</h2>
+    <div class="note tip"><b>¿Se trabaron después de tres intentos?</b> Prueben la misma comparación en el chat del proveedor, fuera de n8n: si ahí funciona, el problema está en el nodo o en la credencial, no en el modelo.</div>
+    <ul>
+      <li><b>“Modelo no disponible”:</b> la credencial no tiene acceso a ese modelo. Elijan otro del mismo proveedor o pidan acceso.</li>
+      <li><b>Error 429:</b> llegaron al <a href="glosario.html#limite">límite</a> de pedidos por minuto. Esperen un minuto o bajen la cantidad de corridas.</li>
+      <li><b>La respuesta viene vacía:</b> el nodo no está recibiendo el texto de entrada. Revisen que el campo de la pregunta esté conectado al nodo anterior.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="grafico">
+    <span class="num"></span>
+    <h2 id="grafico">La idea, en un gráfico</h2>
+    <!-- @viz:p11 -->
+    <figure class="viz" id="viz-p11" data-titulo="Elegir modelo">
+      <div class="viz-grafico"><svg class="viz-svg" viewBox="0 0 960 330" role="img" aria-labelledby="viz-p11-t viz-p11-d"><title id="viz-p11-t">Tres tamaños de modelo y para qué sirve cada uno</title><desc id="viz-p11-d">Chico para clasificar y extraer; mediano para redactar; grande para decidir y auditar</desc><line class="v-axis " x1="20" y1="34" x2="931" y2="34"/><path class="v-axis-fill" d="M940,34 L931,39 L931,29 Z"/><text class="v-mut v-sm" x="480" y="24" text-anchor="middle">más contexto por consulta → más costo y más espera</text><g><rect class="v-card " x="20" y="70" width="280" height="190" rx="10"/><text class="v-ink v-b" x="36" y="98">Chico y rápido</text><text class="v-mut v-sm" x="36" y="120">clasificar avisos</text><text class="v-mut v-sm" x="36" y="140">extraer un dato de un texto</text><text class="v-mut v-sm" x="36" y="160">resumir una lista corta</text></g><g><rect class="v-card " x="340" y="70" width="280" height="190" rx="10"/><text class="v-ink v-b" x="356" y="98">Equilibrado</text><text class="v-mut v-sm" x="356" y="120">redactar el informe semanal</text><text class="v-mut v-sm" x="356" y="140">adaptar un workflow</text><text class="v-mut v-sm" x="356" y="160">explicar un indicador</text></g><g><rect class="v-card " x="660" y="70" width="280" height="190" rx="10"/><text class="v-ink v-b" x="676" y="98">Grande y caro</text><text class="v-mut v-sm" x="676" y="120">decidir con muchas herramientas</text><text class="v-mut v-sm" x="676" y="140">auditar código y datos</text><text class="v-mut v-sm" x="676" y="160">encadenar varios pasos largos</text></g><text class="v-ink v-sm v-b" x="480" y="300" text-anchor="middle">regla: el más chico que resuelva la tarea; si falla, subí un escalón</text></svg></div>
+      <figcaption><b>Elegir modelo.</b> No hay un “mejor modelo”: hay uno adecuado para cada tarea. En n8n se cambia el modelo de un nodo sin rehacer el flujo, así que conviene empezar por el más chico y subir solo si la respuesta no alcanza.<small>Recomendación del paso 11; los precios y nombres cambian con cada proveedor.</small></figcaption>
+    </figure>
+    <!-- /@viz:p11 -->
+  </section>
+
+  <details class="more" id="entender">
+    <summary>Para entender más <small>· cómo funciona y palabras nuevas</small></summary>
+
+  <section class="block" aria-labelledby="flujo">
+    <span class="num"></span>
+    <h2 id="flujo">El flujo: de la pregunta a la respuesta</h2>
+    <div class="flow">
+      <div class="flow-row"><span class="n">1</span><div><h3>Entra el texto</h3><p>La pregunta o los datos que manda el nodo anterior.</p></div></div>
+      <div class="flow-row"><span class="n">2</span><div><h3>Se cuenta en tokens</h3><p>Entrada más salida: eso es lo que se mide y se cobra.</p></div></div>
+      <div class="flow-row"><span class="n">3</span><div><h3>El modelo responde</h3><p>Un modelo más grande puede entender más contexto, y tarda más.</p></div></div>
+      <div class="flow-row"><span class="n">4</span><div><h3>Se decide por tarea</h3><p>Chico para clasificar, grande para auditar. Siempre el más chico que alcance.</p></div></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="palabras">
+    <span class="num"></span>
+    <h2 id="palabras">Palabras nuevas de este paso</h2>
+    <dl class="terms">
+      <div class="term-card"><dt>Modelo</dt><dd>El motor de IA que responde; hay tamaños y precios. <a href="glosario.html#modelo">Más →</a></dd></div>
+      <div class="term-card"><dt>Token</dt><dd>La unidad de texto con la que se mide el consumo. <a href="glosario.html#token">Más →</a></dd></div>
+      <div class="term-card"><dt>Costo</dt><dd>Lo que se paga por tokens de entrada y de salida. <a href="glosario.html#costo">Más →</a></dd></div>
+      <div class="term-card"><dt>Límite</dt><dd>El tope de pedidos o de gasto por minuto. <a href="glosario.html#limite">Más →</a></dd></div>
+    </dl>
+  </section>
+  </details>
+
+  <div class="pager">
+    <a href="paso-10.html">← PASO 10 · CLAVES</a>
+    <a href="paso-12.html">PASO 12 · AGENTE →</a>
+  </div>
+</main>
+
+<!-- @pie -->
+<footer>
+  FIN·LAB · material didáctico del posgrado de IA aplicada a Finanzas (UNLP) — taller de construcción guiada.<br>
+  Datos simulados con fines educativos. No es asesoramiento financiero.
+</footer>
+
+<script src="../automatizaciones/lab.js"></script>
+<script src="taller.js"></script>
+<!-- /@pie -->
+</body>
+</html>

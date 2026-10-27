@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="theme-color" content="#0B0F13" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F2F5F2" media="(prefers-color-scheme: light)">
 <title>Paso 9 · La terminal terminada en #/guiado · Taller FIN·LAB</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -13,19 +16,20 @@
 <body>
 
 <!-- @top -->
+<a class="skip" href="#contenido">Saltar al contenido</a>
 <header class="top">
   <div class="top-in">
     <a class="brand" href="index.html"><span class="brand-dot"></span><b>FIN·LAB</b> TALLER</a>
-    <span class="crumb">CLASE 2 · PASO 9 / 9 · #/GUIADO</span>
+    <span class="crumb">CLASE 2 · PASO 9 / 14 · #/GUIADO</span>
   </div>
 </header>
 <!-- /@top -->
 
-<main class="page">
+<main id="contenido" class="page">
   <!-- @nav -->
-<ul class="steps" aria-label="Pasos del taller">
-    <li><a href="index.html">MAPA</a></li><li class="sep" aria-hidden="true">CLASE 1</li><li><a href="paso-0.html">P0</a></li><li><a href="paso-1.html">P1</a></li><li><a href="paso-2.html">P2</a></li><li><a href="paso-3.html">P3</a></li><li><a href="paso-4.html">P4</a></li><li><a href="paso-5.html">P5</a></li><li class="sep" aria-hidden="true">CLASE 2</li><li><a href="paso-6.html">P6</a></li><li><a href="paso-7.html">P7</a></li><li><a href="paso-8.html">P8</a></li><li><a href="paso-9.html" aria-current="page">P9</a></li><li><a href="kit.html">KIT</a></li><li><a href="glosario.html">GLOSARIO</a></li>
-  </ul>
+<nav class="steps" aria-label="Pasos del taller">
+    <li><a href="index.html">MAPA</a></li><li class="sep">CLASE 1</li><li><a href="paso-0.html">P0</a></li><li><a href="paso-1.html">P1</a></li><li><a href="paso-2.html">P2</a></li><li><a href="paso-3.html">P3</a></li><li><a href="paso-4.html">P4</a></li><li><a href="paso-5.html">P5</a></li><li class="sep">CLASE 2</li><li><a href="paso-6.html">P6</a></li><li><a href="paso-7.html">P7</a></li><li><a href="paso-8.html">P8</a></li><li><a href="paso-9.html" aria-current="page">P9</a></li><li class="sep">CLASE 3</li><li><a href="paso-10.html">P10</a></li><li><a href="paso-11.html">P11</a></li><li><a href="paso-12.html">P12</a></li><li><a href="paso-13.html">P13</a></li><li><a href="paso-14.html">P14</a></li><li><a href="kit.html">KIT</a></li><li><a href="glosario.html">GLOSARIO</a></li>
+  </nav>
 <!-- /@nav -->
 
   <p class="eyebrow">PASO 9 · CIERRE DEL TALLER</p>
@@ -133,6 +137,17 @@ Para cada hallazgo indicá: dónde está (nombre de la función o sección), qu�
     </ul>
   </section>
 
+  <section class="block" aria-labelledby="grafico">
+    <span class="num"></span>
+    <h2 id="grafico">La idea, en un gráfico</h2>
+    <!-- @viz:p9 -->
+    <figure class="viz" id="viz-p9" data-titulo="El recorrido completo">
+      <div class="viz-grafico"><svg class="viz-svg" viewBox="0 0 960 290" role="img" aria-labelledby="viz-p9-t viz-p9-d"><title id="viz-p9-t">Lo construido hasta el paso 8 y lo que agrega la clase 3</title><desc id="viz-p9-d">Dos columnas: lo que ya funciona y lo que sigue</desc><g><rect class="v-card " x="40" y="50" width="420" height="180" rx="10"/><text class="v-ink v-b" x="56" y="78">Lo que ya funciona al terminar el paso 8</text><text class="v-mut v-sm" x="56" y="100">la terminal publicada, con sus pestañas</text><text class="v-mut v-sm" x="56" y="120">la API con datos y alertas</text><text class="v-mut v-sm" x="56" y="140">un workflow de n8n que avisa solo</text><text class="v-mut v-sm" x="56" y="160">una auditoría hecha por otro grupo</text></g><line class="v-axis " x1="464" y1="140" x2="487" y2="140"/><path class="v-axis-fill" d="M496,140 L487,145 L487,135 Z"/><g><rect class="v-card " x="500" y="50" width="420" height="180" rx="10"/><text class="v-ink v-b" x="516" y="78">Lo que agrega la clase 3</text><text class="v-mut v-sm" x="516" y="100">claves de API guardadas donde corresponde</text><text class="v-mut v-sm" x="516" y="120">un modelo de IA elegido con criterio</text><text class="v-mut v-sm" x="516" y="140">un agente que decide qué herramienta usar</text><text class="v-mut v-sm" x="516" y="160">un consejo de agentes y el MCP de n8n</text></g></svg></div>
+      <figcaption><b>El recorrido completo.</b> Al terminar el paso 9 el circuito funciona de punta a punta: página, API, n8n y auditoría. La clase 3 no agrega pantallas nuevas: le pone <b>un agente arriba</b> a lo que ya construyeron.<small>Esquema del paso 9.</small></figcaption>
+    </figure>
+    <!-- /@viz:p9 -->
+  </section>
+
   <details class="more" id="entender">
     <summary>Para entender más <small>· cómo funciona y palabras nuevas</small></summary>
 
@@ -140,10 +155,10 @@ Para cada hallazgo indicá: dónde está (nombre de la función o sección), qu�
     <span class="num"></span>
     <h2 id="flujo">El flujo: de tu computadora a n8n y de vuelta</h2>
     <div class="flow">
-      <div class="flow-row"><span class="n">1</span><div><h4>Abren la terminal</h4><p>La versión publicada, con doble clic o en 127.0.0.1:4173.</p></div></div>
-      <div class="flow-row"><span class="n">2</span><div><h4>Eligen una señal</h4><p>Y bajan el workflow que arma la página.</p></div></div>
-      <div class="flow-row"><span class="n">3</span><div><h4>Lo ejecutan en n8n</h4><p>Y miran qué salida se activa.</p></div></div>
-      <div class="flow-row"><span class="n">4</span><div><h4>Comparan y discuten</h4><p>Contra lo que predijeron, con los tres ejercicios en grupo.</p></div></div>
+      <div class="flow-row"><span class="n">1</span><div><h3>Abren la terminal</h3><p>La versión publicada, con doble clic o en 127.0.0.1:4173.</p></div></div>
+      <div class="flow-row"><span class="n">2</span><div><h3>Eligen una señal</h3><p>Y bajan el workflow que arma la página.</p></div></div>
+      <div class="flow-row"><span class="n">3</span><div><h3>Lo ejecutan en n8n</h3><p>Y miran qué salida se activa.</p></div></div>
+      <div class="flow-row"><span class="n">4</span><div><h3>Comparan y discuten</h3><p>Contra lo que predijeron, con los tres ejercicios en grupo.</p></div></div>
     </div>
     <p style="margin-top:14px"><a class="btn" href="diagramas/p9-guiado.html" target="_blank" rel="noopener">VER EL DIAGRAMA COMPLETO ↗</a></p>
   </section>

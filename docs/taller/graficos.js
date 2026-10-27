@@ -43,6 +43,16 @@ const svg = (id, w, h, titulo, desc, cuerpo) =>
   `<svg class="viz-svg" viewBox="0 0 ${w} ${h}" role="img" aria-labelledby="${id}-t ${id}-d"><title id="${id}-t">${esc(titulo)}</title><desc id="${id}-d">${esc(desc)}</desc>${cuerpo}</svg>`;
 const figura = (id, titulo, idea, svgTxt, fuente) =>
   `<figure class="viz" id="${id}" data-titulo="${esc(titulo)}">\n      <div class="viz-grafico">${svgTxt}</div>\n      <figcaption><b>${esc(titulo)}.</b> ${idea}<small>${fuente}</small></figcaption>\n    </figure>`;
+const nodo = (x, y, w, h, titulo, lineas = [], cls = '') =>
+  `<g><rect class="v-card ${cls}" x="${x}" y="${y}" width="${w}" height="${h}" rx="10"/>` +
+  `<text class="v-ink v-b" x="${x + 16}" y="${y + 28}">${esc(titulo)}</text>` +
+  lineas.map((l, i) => `<text class="v-mut v-sm" x="${x + 16}" y="${y + 50 + i * 20}">${esc(l)}</text>`).join('') + '</g>';
+const flecha = (x1, y1, x2, y2, cls = '') => {
+  const a = Math.atan2(y2 - y1, x2 - x1), bx = x2 - 9 * Math.cos(a), by = y2 - 9 * Math.sin(a);
+  const px = -5 * Math.sin(a), py = 5 * Math.cos(a);
+  return `<line class="v-axis ${cls}" x1="${r1(x1)}" y1="${r1(y1)}" x2="${r1(bx)}" y2="${r1(by)}"/>` +
+    `<path class="v-axis-fill" d="M${r1(x2)},${r1(y2)} L${r1(bx + px)},${r1(by + py)} L${r1(bx - px)},${r1(by - py)} Z"/>`;
+};
 
 // ---------- P2 · Un año de precios: un panel por activo ----------
 function p2() {
@@ -207,7 +217,185 @@ function p5() {
     `Datos: versión de rescate al ${FECHA_TXT}. En datos simulados los activos no se mueven juntos, así que la diversificación ayuda más que en la realidad.`);
 }
 
-const GRAFICOS = { p2: [p2], p3: [p3], p4: [p4medias, p4rsi], p5: [p5] };
+// ---------- P6 · El viaje de un pedido a la API ----------
+function p6() {
+  const W = 960, H = 260, y = 60, w = 210, h = 120, xs = [15, 255, 495, 735];
+  const cajas = [
+    ['Un programa pregunta', ['GET /api/market/summary', 'sin pantalla, sin clics']],
+    ['La página revisa', ['¿el activo existe?', '¿la sesión es de hoy?']],
+    ['Responde en JSON', ['{ ok: true, data: … }', 'los mismos números de la tabla']],
+    ['Y las alertas', ['precio > 0 → se dispara', 'RSI < 30 → se dispara']]
+  ];
+  let cuerpo = '';
+  cajas.forEach(([t, ls], i) => {
+    cuerpo += nodo(xs[i], y, w, h, t, ls);
+    if (i < 3) cuerpo += flecha(xs[i] + w + 4, y + h / 2, xs[i + 1] - 4, y + h / 2);
+  });
+  cuerpo += `<text class="v-dn v-sm v-b" x="${xs[1] + w / 2}" y="${y + h + 34}" text-anchor="middle">si no existe: 404 y un mensaje claro</text>`;
+  return figura('viz-p6', 'El viaje de un pedido', 'Un programa pide, la página revisa y contesta en JSON. Las <b>alertas</b> son reglas guardadas que se comparan con esos mismos datos: todavía no avisan solas, eso llega con n8n en el paso 8.',
+    svg('viz-p6', W, H, 'Un pedido a la API recorriendo cuatro etapas', 'Programa → revisión → JSON → alertas', cuerpo),
+    'Esquema del paso 6: no usa datos de mercado.');
+}
+
+// ---------- P7 · Dos herramientas, los mismos números ----------
+function p7() {
+  const c = SERIES.AAPL.map((x) => x.c);
+  const filas = [
+    ['Último cierre', num(c.at(-1))],
+    ['SMA 20', num(D.sma(c, 20).at(-1))],
+    ['SMA 50', num(D.sma(c, 50).at(-1))],
+    ['RSI 14', num(D.rsi(c, 14).at(-1), 1)]
+  ];
+  const W = 960, H = 280, y = 40, h = 170, w = 380;
+  const caja = (x, titulo, nota) => nodo(x, y, w, h, titulo,
+    filas.map(([k, v]) => `${k}: ${v}`).concat([nota]), '');
+  const cuerpo = caja(60, 'La página del paso 4', 'JavaScript, en el navegador') +
+    caja(520, 'Colab con pandas', 'Python, en la nube') +
+    `<text class="v-ink v-b" x="480" y="${y + h / 2 + 14}" text-anchor="middle" style="font-size:46px">=</text>` +
+    `<text class="v-mut v-sm" x="480" y="${y + h + 42}" text-anchor="middle">diferencia máxima: 0,004</text>`;
+  return figura('viz-p7', 'Dos herramientas, los mismos números', 'La página y pandas llegan al mismo precio, las mismas medias y el mismo RSI. Lo que cambia es <b>quién hace la cuenta</b>, no el resultado: por eso sirve para verificar. Una diferencia mayor a 0,01 avisa que una de las dos fórmulas está mal.',
+    svg('viz-p7', W, H, 'Comparación de los indicadores de AAPL calculados por la página y por pandas', filas.map(([k, v]) => `${k} ${v}`).join(', ') + ' en las dos herramientas', cuerpo),
+    `Datos: versión de rescate al ${FECHA_TXT}, AAPL, última rueda.`);
+}
+
+// ---------- P8 · El workflow que corre solo ----------
+function p8() {
+  const W = 960, H = 300, y = 40, h = 150, w = 168, g = 22;
+  const xs = [10, 10 + (w + g), 10 + 2 * (w + g), 10 + 3 * (w + g), 10 + 4 * (w + g)];
+  const cajas = [
+    ['Cada día 9:00', ['Schedule Trigger', 'sin nadie mirando']],
+    ['Pide la API', ['HTTP Request', 'la URL pública del paso 9']],
+    ['Filtra señales', ['Code', 'quedan 2: JNJ y KO']],
+    ['¿Hay avisos?', ['IF', 'sí → manda · no → corta']],
+    ['Manda el mail', ['Email', 'JNJ · KO · 2 avisos']]
+  ];
+  let cuerpo = '';
+  cajas.forEach(([t, ls], i) => {
+    cuerpo += nodo(xs[i], y, w, h, t, ls);
+    if (i < 4) cuerpo += flecha(xs[i] + w + 2, y + h / 2, xs[i + 1] - 2, y + h / 2);
+  });
+  cuerpo += `<text class="v-mut v-sm" x="${W / 2}" y="${y + h + 42}" text-anchor="middle">cada nodo le pasa al siguiente un JSON; si el filtro no encuentra nada, el flujo termina sin mandar correo</text>`;
+  return figura('viz-p8', 'El workflow que corre solo', 'Cinco nodos encadenados: el disparador arranca sin que nadie toque nada, el HTTP pide los datos y el filtro decide si hay algo que avisar. Cambiar la regla del filtro es cambiar <b>una condición</b>, no todo el flujo.',
+    svg('viz-p8', W, H, 'Workflow de n8n con cinco nodos encadenados', 'Disparador, pedido HTTP, filtro, condición y correo', cuerpo),
+    'Esquema del paso 8, con la muestra fija de la API del curso.');
+}
+
+// ---------- P9 · Dónde termina el taller y qué agrega la clase 3 ----------
+function p9() {
+  const W = 960, H = 290, y = 50, h = 180, w = 420;
+  const cuerpo = nodo(40, y, w, h, 'Lo que ya funciona al terminar el paso 8', [
+    'la terminal publicada, con sus pestañas',
+    'la API con datos y alertas',
+    'un workflow de n8n que avisa solo',
+    'una auditoría hecha por otro grupo'
+  ]) + flecha(464, y + h / 2, 496, y + h / 2) + nodo(500, y, w, h, 'Lo que agrega la clase 3', [
+    'claves de API guardadas donde corresponde',
+    'un modelo de IA elegido con criterio',
+    'un agente que decide qué herramienta usar',
+    'un consejo de agentes y el MCP de n8n'
+  ]);
+  return figura('viz-p9', 'El recorrido completo', 'Al terminar el paso 9 el circuito funciona de punta a punta: página, API, n8n y auditoría. La clase 3 no agrega pantallas nuevas: le pone <b>un agente arriba</b> a lo que ya construyeron.',
+    svg('viz-p9', W, H, 'Lo construido hasta el paso 8 y lo que agrega la clase 3', 'Dos columnas: lo que ya funciona y lo que sigue', cuerpo),
+    'Esquema del paso 9.');
+}
+
+// ---------- P10 · Dónde vive una clave de API ----------
+function p10() {
+  const W = 960, H = 310, y = 110, h = 130, w = 260, xs = [20, 350, 680];
+  const cuerpo = nodo(xs[0], y, w, h, 'La página HTML', ['la clave a la vista', 'la abre cualquiera con F12', 'y queda en el historial de git']) +
+    nodo(xs[1], y, w, h, 'n8n · Credenciales', ['guardada y cifrada aparte', 'el flujo la usa sin mostrarla', 'se cambia sin tocar el flujo']) +
+    nodo(xs[2], y, w, h, 'La API del modelo', ['verifica la clave', 'cobra por uso']) +
+    flecha(xs[0] + w + 4, y + h / 2, xs[1] - 4, y + h / 2, 'v-dash') +
+    flecha(xs[1] + w + 4, y + h / 2, xs[2] - 4, y + h / 2) +
+    `<text class="v-dn v-sm v-b" x="${(xs[0] + w + xs[1]) / 2}" y="${y - 10}" text-anchor="middle">✗ NO</text>` +
+    `<text class="v-up v-sm v-b" x="${(xs[1] + w + xs[2]) / 2}" y="${y - 10}" text-anchor="middle">✓ SÍ</text>` +
+    `<text class="v-mut v-sm" x="${W / 2}" y="${y + h + 40}" text-anchor="middle">una clave por servicio, con el menor permiso posible: si se filtra, se revoca y se genera otra</text>`;
+  return figura('viz-p10', 'Dónde vive la clave', 'La clave se crea en el panel del proveedor del modelo y se pega <b>una sola vez</b> en las credenciales de n8n. Nunca va en el HTML, ni en el prompt, ni en el workflow exportado: cualquiera que abra el archivo la vería.',
+    svg('viz-p10', W, H, 'La clave va de la página a n8n y de n8n a la API del modelo', 'Página y n8n no comparten la clave; n8n la usa desde su gestor de credenciales', cuerpo),
+    'Esquema del paso 10.');
+}
+
+// ---------- P11 · Elegir modelo ----------
+function p11() {
+  const W = 960, H = 330, y = 70, h = 190, w = 280, xs = [20, 340, 660];
+  const cajas = [
+    ['Chico y rápido', ['clasificar avisos', 'extraer un dato de un texto', 'resumir una lista corta']],
+    ['Equilibrado', ['redactar el informe semanal', 'adaptar un workflow', 'explicar un indicador']],
+    ['Grande y caro', ['decidir con muchas herramientas', 'auditar código y datos', 'encadenar varios pasos largos']]
+  ];
+  let cuerpo = flecha(20, 34, 940, 34) + `<text class="v-mut v-sm" x="480" y="24" text-anchor="middle">más contexto por consulta → más costo y más espera</text>`;
+  cajas.forEach(([t, ls], i) => { cuerpo += nodo(xs[i], y, w, h, t, ls); });
+  cuerpo += `<text class="v-ink v-sm v-b" x="${W / 2}" y="${y + h + 40}" text-anchor="middle">regla: el más chico que resuelva la tarea; si falla, subí un escalón</text>`;
+  return figura('viz-p11', 'Elegir modelo', 'No hay un “mejor modelo”: hay uno adecuado para cada tarea. En n8n se cambia el modelo de un nodo sin rehacer el flujo, así que conviene empezar por el más chico y subir solo si la respuesta no alcanza.',
+    svg('viz-p11', W, H, 'Tres tamaños de modelo y para qué sirve cada uno', 'Chico para clasificar y extraer; mediano para redactar; grande para decidir y auditar', cuerpo),
+    'Recomendación del paso 11; los precios y nombres cambian con cada proveedor.');
+}
+
+// ---------- P12 · El ciclo del agente ----------
+function p12() {
+  const W = 960, H = 300, y = 60, h = 110, w = 210, xs = [15, 255, 495, 735];
+  const cajas = [
+    ['1 · La pregunta', ['“¿qué cartera conviene?”', 'en castellano']],
+    ['2 · El modelo decide', ['¿qué herramienta sirve?', '¿en qué orden?']],
+    ['3 · Usa la herramienta', ['la API, el CSV, la calculadora', 'una por vez']],
+    ['4 · Lee el resultado', ['¿alcanza para responder?', '¿falta un dato?']]
+  ];
+  let cuerpo = '';
+  cajas.forEach(([t, ls], i) => {
+    cuerpo += nodo(xs[i], y, w, h, t, ls);
+    if (i < 3) cuerpo += flecha(xs[i] + w + 4, y + h / 2, xs[i + 1] - 4, y + h / 2);
+  });
+  // La vuelta: del resultado otra vez a decidir.
+  cuerpo += `<path class="v-axis v-dash" fill="none" d="M${xs[3] + w / 2},${y + h} V${y + h + 70} H${xs[1] + w / 2}"/>` +
+    flecha(xs[1] + w / 2, y + h + 70, xs[1] + w / 2, y + h + 4) +
+    `<text class="v-mut v-sm" x="${(xs[1] + xs[3]) / 2 + w / 2}" y="${y + h + 60}" text-anchor="middle">si falta algo, vuelve a decidir</text>` +
+    `<text class="v-up v-sm v-b" x="${xs[1] + w / 2}" y="${y - 12}" text-anchor="middle">si ya está, responde</text>`;
+  return figura('viz-p12', 'El ciclo del agente', 'Un agente no responde de memoria: <b>decide qué herramienta usar</b>, la usa, lee el resultado y vuelve a decidir. Repite hasta que tiene con qué contestar. Ahí está la diferencia con un prompt común, que contesta de una sola vez.',
+    svg('viz-p12', W, H, 'Ciclo de un agente: pregunta, decisión, herramienta y resultado', 'Del resultado vuelve a la decisión hasta poder responder', cuerpo),
+    'Esquema del paso 12.');
+}
+
+// ---------- P13 · El consejo de agentes ----------
+function p13() {
+  const W = 960, H = 360, w = 250, h = 120;
+  const coord = nodo(20, 120, 230, h, 'Coordinador', ['reparte la pregunta', 'pide la evidencia', 'junta la respuesta']);
+  const roles = [
+    ['Analista', ['mira los datos y los indicadores', 'propone una cartera']],
+    ['Auditor', ['busca el error y el supuesto', 'que no se dijo']],
+    ['Redactor', ['lo cuenta en 5 líneas', 'para el cliente']]
+  ];
+  const ys = [20, 120, 220];
+  let cuerpo = coord;
+  roles.forEach(([t, ls], i) => {
+    cuerpo += nodo(370, ys[i], 310, 100, t, ls) +
+      flecha(254, 180, 366, ys[i] + 50) +
+      flecha(684, ys[i] + 50, 716, 180);
+  });
+  cuerpo += nodo(720, 120, 220, 110, 'Decisión', ['tres miradas', 'y los desacuerdos a la vista']);
+  return figura('viz-p13', 'El consejo de agentes', 'Un solo agente tiende a estar de acuerdo consigo mismo. El consejo reparte el trabajo: uno analiza, otro audita y otro redacta. El valor no está en la respuesta, está en el <b>desacuerdo</b> que queda a la vista.',
+    svg('viz-p13', W, H, 'Un coordinador reparte la pregunta entre tres agentes y junta la decisión', 'Analista, auditor y redactor; el coordinador junta la respuesta final', cuerpo),
+    'Esquema del paso 13.');
+}
+
+// ---------- P14 · El MCP de n8n ----------
+function p14() {
+  const W = 960, H = 320, y = 70, w = 250, xs = [10, 355, 700];
+  const cuerpo = nodo(xs[0], y, w, 140, 'El asistente', ['el chat donde trabajan', 'no sabe nada de n8n', 'hasta que recibe la herramienta']) +
+    nodo(xs[1], y, w, 140, 'MCP de n8n', ['listar workflows', 'leer uno por id', 'crear o actualizar', 'probarlo desde el chat']) +
+    nodo(xs[2], y, w, 140, 'Tus workflows', ['los mismos de siempre', 'con las credenciales', 'que ya configuraron']) +
+    flecha(xs[0] + w + 4, y + 45, xs[1] - 4, y + 45) +
+    flecha(xs[1] - 4, y + 95, xs[0] + w + 4, y + 95) +
+    flecha(xs[1] + w + 4, y + 45, xs[2] - 4, y + 45) +
+    flecha(xs[2] - 4, y + 95, xs[1] + w + 4, y + 95) +
+    `<text class="v-mut v-sm" x="${(xs[0] + w + xs[1]) / 2}" y="${y - 10}" text-anchor="middle">pide</text>` +
+    `<text class="v-mut v-sm" x="${(xs[0] + w + xs[1]) / 2}" y="${y + 155}" text-anchor="middle">devuelve JSON</text>` +
+    `<text class="v-mut v-sm" x="${W / 2}" y="${y + 210}" text-anchor="middle">MCP es el estándar que permite ese ida y vuelta; sin él, copiar y pegar el JSON a mano</text>`;
+  return figura('viz-p14', 'El MCP de n8n', 'El <b>MCP</b> es un estándar para que un asistente use las herramientas de otro programa. Con el MCP de n8n, el chat puede listar, leer y crear workflows sin que nadie copie y pegue JSON: el asistente deja de opinar sobre el flujo y pasa a tocarlo.',
+    svg('viz-p14', W, H, 'El asistente, el servidor MCP de n8n y los workflows', 'Pedidos y respuestas en JSON en los dos tramos', cuerpo),
+    'Esquema del paso 14.');
+}
+
+const GRAFICOS = { p2: [p2], p3: [p3], p4: [p4medias, p4rsi], p5: [p5], p6: [p6], p7: [p7], p8: [p8], p9: [p9], p10: [p10], p11: [p11], p12: [p12], p13: [p13], p14: [p14] };
 
 const check = process.argv.includes('--check');
 const desactualizados = [];

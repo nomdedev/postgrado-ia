@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="theme-color" content="#0B0F13" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F2F5F2" media="(prefers-color-scheme: light)">
 <title>Glosario del taller · FIN·LAB</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -13,6 +16,7 @@
 <body>
 
 <!-- @top -->
+<a class="skip" href="#contenido">Saltar al contenido</a>
 <header class="top">
   <div class="top-in">
     <a class="brand" href="index.html"><span class="brand-dot"></span><b>FIN·LAB</b> TALLER</a>
@@ -21,17 +25,19 @@
 </header>
 <!-- /@top -->
 
-<main class="page">
+<main id="contenido" class="page">
   <!-- @nav -->
-<ul class="steps" aria-label="Pasos del taller">
-    <li><a href="index.html">MAPA</a></li><li class="sep" aria-hidden="true">CLASE 1</li><li><a href="paso-0.html">P0</a></li><li><a href="paso-1.html">P1</a></li><li><a href="paso-2.html">P2</a></li><li><a href="paso-3.html">P3</a></li><li><a href="paso-4.html">P4</a></li><li><a href="paso-5.html">P5</a></li><li class="sep" aria-hidden="true">CLASE 2</li><li><a href="paso-6.html">P6</a></li><li><a href="paso-7.html">P7</a></li><li><a href="paso-8.html">P8</a></li><li><a href="paso-9.html">P9</a></li><li><a href="kit.html">KIT</a></li><li><a href="glosario.html" aria-current="page">GLOSARIO</a></li>
-  </ul>
+<nav class="steps" aria-label="Pasos del taller">
+    <li><a href="index.html">MAPA</a></li><li class="sep">CLASE 1</li><li><a href="paso-0.html">P0</a></li><li><a href="paso-1.html">P1</a></li><li><a href="paso-2.html">P2</a></li><li><a href="paso-3.html">P3</a></li><li><a href="paso-4.html">P4</a></li><li><a href="paso-5.html">P5</a></li><li class="sep">CLASE 2</li><li><a href="paso-6.html">P6</a></li><li><a href="paso-7.html">P7</a></li><li><a href="paso-8.html">P8</a></li><li><a href="paso-9.html">P9</a></li><li class="sep">CLASE 3</li><li><a href="paso-10.html">P10</a></li><li><a href="paso-11.html">P11</a></li><li><a href="paso-12.html">P12</a></li><li><a href="paso-13.html">P13</a></li><li><a href="paso-14.html">P14</a></li><li><a href="kit.html">KIT</a></li><li><a href="glosario.html" aria-current="page">GLOSARIO</a></li>
+  </nav>
 <!-- /@nav -->
   <p class="eyebrow">PALABRAS RARAS, EXPLICADAS SIN JERGA</p>
   <h1>Glosario del taller</h1>
   <p class="lede">Cada vez que en una página aparece una palabra subrayada con puntos, el enlace te trae acá. Las definiciones son cortas a propósito: alcanza con entender para qué sirve cada cosa, no cómo está hecha por dentro.</p>
   <label class="sr" for="buscar">Buscar en el glosario</label>
   <input id="buscar" class="gloss-search" type="search" placeholder="Escribí una palabra: rsi, api, nodo, csv…" autocomplete="off">
+  <p class="hint" id="gloss-count" role="status" aria-live="polite"></p>
+  <p class="note" id="gloss-none" hidden>No hay ninguna definición con esa palabra. Probá con “api”, “agente” o “modelo”.</p>
 
   <section class="block" aria-labelledby="g-ia">
     <span class="num">01</span>
@@ -153,6 +159,23 @@
     </dl>
   </section>
 
+  <section class="block" aria-labelledby="g-agentes">
+    <span class="num">08</span>
+    <h2 id="g-agentes">Agentes, modelos y claves</h2>
+    <dl class="gloss">
+      <div id="clave-api"><dt>Clave de API <small>API key</small></dt><dd>La contraseña larga que identifica a tu cuenta cuando un programa usa un servicio (un modelo de IA, una API de datos). Se guarda en el gestor de credenciales del servidor, nunca dentro de una página web: cualquiera que abra el archivo la vería.</dd></div>
+      <div id="modelo"><dt>Modelo <small>LLM</small></dt><dd>El programa de IA que recibe un texto y devuelve otro (responder, resumir, escribir código). Se elige por modelo según la tarea: uno chico y rápido para clasificar, uno grande para razonar.</dd></div>
+      <div id="token"><dt>Token</dt><dd>La unidad con la que se mide y se cobra el texto que entra y sale de un modelo: aproximadamente 4 letras o ¾ de palabra. Un prompt largo gasta más tokens que uno corto.</dd></div>
+      <div id="prompt-sistema"><dt>Prompt de sistema <small>system</small></dt><dd>La instrucción fija que define el papel del modelo antes de la pregunta: “sos un analista que responde en español y no da recomendaciones de inversión”. En n8n es el campo <em>System Message</em>.</dd></div>
+      <div id="agente"><dt>Agente</dt><dd>Una IA a la que además del texto se le dan <b>herramientas</b> y permiso para decidir cuál usar y en qué orden hasta responder. La diferencia con un workflow: el camino lo elige el modelo, no el dibujo.</dd></div>
+      <div id="herramienta"><dt>Herramienta <small>tool</small></dt><dd>Una acción que el agente puede pedir: consultar una API, leer un archivo, hacer una cuenta, buscar en la web. En n8n se conecta como un sub-nodo del agente.</dd></div>
+      <div id="consejo"><dt>Consejo de agentes</dt><dd>Varios agentes con roles distintos que se revisan entre sí: uno redacta, otro audita los números, otro controla el tono. Sirve para lo mismo que la auditoría cruzada del taller: quien hace no se califica a sí mismo.</dd></div>
+      <div id="mcp"><dt>MCP <small>Model Context Protocol</small></dt><dd>Un estándar para que un asistente use herramientas de otro programa. Con el MCP de n8n, el asistente puede listar, leer y crear workflows sin que nadie copie y pegue JSON.</dd></div>
+      <div id="limite"><dt>Límite de uso <small>rate limit</small></dt><dd>El máximo de pedidos por minuto que acepta un servicio. Si se pasa, responde con error 429; la solución es esperar o pedir menos.</dd></div>
+      <div id="costo"><dt>Costo por token</dt><dd>El precio de cada millón de tokens de entrada y de salida, distinto en cada modelo. Un agente con muchas herramientas gasta más: cada vuelta vuelve a mandar la conversación.</dd></div>
+    </dl>
+  </section>
+
   <div class="pager">
     <a href="index.html">← VOLVER AL MAPA DEL TALLER</a>
     <a href="paso-0.html">EMPEZAR POR EL PASO 0 →</a>
@@ -169,13 +192,23 @@
 <script src="taller.js"></script>
 <!-- /@pie -->
 <script>
-  // Filtro del glosario: oculta las definiciones que no contienen el texto buscado.
-  document.getElementById('buscar').addEventListener('input', function (e) {
-    var q = e.target.value.trim().toLowerCase();
-    document.querySelectorAll('.gloss > div').forEach(function (item) {
-      item.hidden = q !== '' && item.textContent.toLowerCase().indexOf(q) === -1;
+  // Filtro del glosario: oculta las definiciones que no contienen el texto buscado y anuncia cuántas quedan.
+  (function () {
+    var input = document.getElementById('buscar');
+    var cuenta = document.getElementById('gloss-count');
+    var vacio = document.getElementById('gloss-none');
+    var items = document.querySelectorAll('.gloss > div');
+    input.addEventListener('input', function (e) {
+      var q = e.target.value.trim().toLowerCase(), visibles = 0;
+      items.forEach(function (item) {
+        var oculto = q !== '' && item.textContent.toLowerCase().indexOf(q) === -1;
+        item.hidden = oculto;
+        if (!oculto) visibles++;
+      });
+      cuenta.textContent = q ? visibles + ' de ' + items.length + ' definiciones con «' + e.target.value.trim() + '»' : '';
+      vacio.hidden = !(q && !visibles);
     });
-  });
+  })();
 </script>
 </body>
 </html>

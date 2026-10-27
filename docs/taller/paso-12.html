@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="theme-color" content="#0B0F13" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F2F5F2" media="(prefers-color-scheme: light)">
+<title>Paso 12 · El agente · Taller FIN·LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../automatizaciones/lab.css">
+<link rel="stylesheet" href="taller.css">
+<script>try{var t=localStorage.getItem("finlab-tema");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+
+<!-- @top -->
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index.html"><span class="brand-dot"></span><b>FIN·LAB</b> TALLER</a>
+    <span class="crumb">CLASE 3 · PASO 12 / 14 · AGENTE</span>
+  </div>
+</header>
+<!-- /@top -->
+
+<main id="contenido" class="page">
+  <!-- @nav -->
+<nav class="steps" aria-label="Pasos del taller">
+    <li><a href="index.html">MAPA</a></li><li class="sep">CLASE 1</li><li><a href="paso-0.html">P0</a></li><li><a href="paso-1.html">P1</a></li><li><a href="paso-2.html">P2</a></li><li><a href="paso-3.html">P3</a></li><li><a href="paso-4.html">P4</a></li><li><a href="paso-5.html">P5</a></li><li class="sep">CLASE 2</li><li><a href="paso-6.html">P6</a></li><li><a href="paso-7.html">P7</a></li><li><a href="paso-8.html">P8</a></li><li><a href="paso-9.html">P9</a></li><li class="sep">CLASE 3</li><li><a href="paso-10.html">P10</a></li><li><a href="paso-11.html">P11</a></li><li><a href="paso-12.html" aria-current="page">P12</a></li><li><a href="paso-13.html">P13</a></li><li><a href="paso-14.html">P14</a></li><li><a href="kit.html">KIT</a></li><li><a href="glosario.html">GLOSARIO</a></li>
+  </nav>
+<!-- /@nav -->
+
+  <p class="eyebrow">PASO 12 · LA IA QUE ELIGE SUS HERRAMIENTAS</p>
+  <h1>El agente: la IA que decide qué hacer</h1>
+  <p class="lede">Un prompt común contesta de una vez. Un <a class="w" href="glosario.html#agente">agente</a> elige una <a class="w" href="glosario.html#herramienta">herramienta</a>, mira el resultado y vuelve a decidir. Acá le dan dos herramientas reales —la API del curso y una calculadora— y lo dejan resolver una pregunta de cartera <b>sin respuestas inventadas</b>.</p>
+  <div class="meta"><span class="chip"><b>25 MIN</b></span><span class="chip">N8N</span><span class="chip">2 HERRAMIENTAS</span><span class="chip">SALIDA: <b>UN AGENTE QUE RESPONDE CON DATOS</b></span></div>
+  <div class="note tip"><b>¿Les falta el paso anterior?</b> El agente necesita la credencial probada y una decisión de modelo. <a class="btn" href="paso-10.html">VOLVER AL PASO 10</a> <a class="btn" href="paso-11.html">VOLVER AL PASO 11</a></div>
+
+  <section class="block" aria-labelledby="logro">
+    <span class="num"></span>
+    <h2 id="logro">Qué van a lograr</h2>
+    <p>Un nodo <em>AI Agent</em> en n8n con un <a class="w" href="glosario.html#prompt-sistema">prompt de sistema</a>, dos herramientas conectadas y un tope de pasos. Le preguntan algo que <b>solo se puede responder consultando la API</b> y el agente elige la herramienta correcta.</p>
+    <div class="mock" aria-label="Ejemplo de la traza de un agente">
+      <table><thead><tr><th>PASO</th><th>QUÉ HIZO</th><th>RESULTADO</th></tr></thead>
+      <tbody><tr><td>1</td><td>eligió <em>HTTP Request</em> a /api/market/summary</td><td>8 activos, con RSI y señal</td></tr><tr><td>2</td><td>eligió <em>Calculadora</em> para comparar dos carteras</td><td>Sharpe de cada una</td></tr><tr><td>3</td><td>respondió con los números de la API</td><td>“Moderada, Sharpe 0,84”</td></tr></tbody></table>
+      <div class="mock-foot">La traza es lo que hay que mirar: muestra qué herramienta eligió y en qué orden. Si no usó ninguna, no es un agente: es un prompt.</div>
+    </div>
+  </section>
+
+  <section class="block" data-section="prompts" aria-labelledby="prompt">
+    <span class="num"></span>
+    <h2 id="prompt">El prompt</h2>
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT · PASO 12</span><div class="d">Para configurar el agente y para pedirle ayuda si se traba.</div></div><button class="copy" data-copy="#p12" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="p12">Paso 12 de un taller de finanzas con n8n. Voy a configurar un AI Agent.
+
+Ayudame a escribir el prompt de sistema con estas reglas:
+- solo puede responder con datos que traiga de una herramienta; si no los tiene, dice que no los tiene
+- tiene dos herramientas: GET /api/market/summary (los 8 activos con precio, RSI y señal) y una calculadora
+- para comparar carteras usa la calculadora; para precios y señales usa la API
+- no puede dar consejos de inversión: describe los datos y las métricas
+- máximo 6 pasos; si no alcanzan, responde lo que tiene y aclara qué faltó
+
+Después decime qué tres preguntas de prueba muestran si el agente eligió bien las herramientas, y qué mirar en la traza para saberlo.</pre></div>
+    </div>
+    <div class="note tip"><b>Puente con el proyecto real:</b> el agente de la pestaña <span class="code-inline">06 · Agentes</span> de la terminal está guionado, pero consulta la API real. Cuando le conectan un modelo con la credencial del paso 10, pasa a decidir de verdad. El prompt de sistema es lo que mantiene ese cambio bajo control.</div>
+  </section>
+
+  <section class="block" aria-labelledby="hacer">
+    <span class="num"></span>
+    <h2 id="hacer">Qué hacer, clic por clic</h2>
+    <ol class="do">
+      <li><b>Agreguen un nodo AI Agent</b> y conéctenle la credencial del paso 10 y el modelo elegido en el paso 11.</li>
+      <li><b>Peguen el prompt de sistema</b> en el campo correspondiente, antes de conectar herramientas.</li>
+      <li><b>Agreguen la herramienta HTTP Request</b> apuntando a <span class="code-inline">/api/market/summary</span> de su terminal publicada.</li>
+      <li><b>Agreguen la calculadora</b> (o un nodo Code que haga las cuentas de Sharpe) como segunda herramienta.</li>
+      <li><b>Pongan el tope de pasos</b> en 6 y guarden.</li>
+      <li><b>Pregunten algo concreto:</b> “¿cuál de las tres carteras tiene mejor Sharpe hoy?” y abran la traza.</li>
+      <li><b>Repitan con una pregunta imposible</b> (“¿cuánto va a valer AAPL mañana?”) y comprueben que no inventa.</li>
+    </ol>
+  </section>
+
+  <section class="block" aria-labelledby="comprobar">
+    <span class="num"></span>
+    <h2 id="comprobar">Cómo comprobar</h2>
+    <ul class="check">
+      <li><b>Usó una herramienta:</b> la traza muestra al menos una consulta a la API antes de responder.</li>
+      <li><b>Los números coinciden:</b> el precio y el RSI de la respuesta son los mismos que muestra la pestaña Mercado.</li>
+      <li><b>No inventa:</b> con la API caída o una pregunta sobre el futuro, aclara que no tiene el dato.</li>
+      <li><b>Se detiene:</b> la traza no pasa de 6 pasos y la respuesta final llega igual.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="falla">
+    <span class="num"></span>
+    <h2 id="falla">Si algo falla</h2>
+    <div class="note tip"><b>¿Se trabaron después de tres intentos?</b> Bájenlo a una sola herramienta y una sola pregunta. Si así funciona, el problema está en cómo el prompt de sistema elige entre las dos.</div>
+    <ul>
+      <li><b>Entra en un bucle:</b> el agente repite la misma consulta. Bajen el tope de pasos y pidan en el prompt que no repita una herramienta con los mismos argumentos.</li>
+      <li><b>Responde sin consultar:</b> la herramienta no está conectada o el prompt de sistema no la nombra. Nombren la URL exacta en las reglas.</li>
+      <li><b>La API devuelve 404:</b> la URL de su terminal cambió. Pruébenla en el navegador antes de culpar al agente.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="grafico">
+    <span class="num"></span>
+    <h2 id="grafico">La idea, en un gráfico</h2>
+    <!-- @viz:p12 -->
+    <figure class="viz" id="viz-p12" data-titulo="El ciclo del agente">
+      <div class="viz-grafico"><svg class="viz-svg" viewBox="0 0 960 300" role="img" aria-labelledby="viz-p12-t viz-p12-d"><title id="viz-p12-t">Ciclo de un agente: pregunta, decisión, herramienta y resultado</title><desc id="viz-p12-d">Del resultado vuelve a la decisión hasta poder responder</desc><g><rect class="v-card " x="15" y="60" width="210" height="110" rx="10"/><text class="v-ink v-b" x="31" y="88">1 · La pregunta</text><text class="v-mut v-sm" x="31" y="110">“¿qué cartera conviene?”</text><text class="v-mut v-sm" x="31" y="130">en castellano</text></g><line class="v-axis " x1="229" y1="115" x2="242" y2="115"/><path class="v-axis-fill" d="M251,115 L242,120 L242,110 Z"/><g><rect class="v-card " x="255" y="60" width="210" height="110" rx="10"/><text class="v-ink v-b" x="271" y="88">2 · El modelo decide</text><text class="v-mut v-sm" x="271" y="110">¿qué herramienta sirve?</text><text class="v-mut v-sm" x="271" y="130">¿en qué orden?</text></g><line class="v-axis " x1="469" y1="115" x2="482" y2="115"/><path class="v-axis-fill" d="M491,115 L482,120 L482,110 Z"/><g><rect class="v-card " x="495" y="60" width="210" height="110" rx="10"/><text class="v-ink v-b" x="511" y="88">3 · Usa la herramienta</text><text class="v-mut v-sm" x="511" y="110">la API, el CSV, la calculadora</text><text class="v-mut v-sm" x="511" y="130">una por vez</text></g><line class="v-axis " x1="709" y1="115" x2="722" y2="115"/><path class="v-axis-fill" d="M731,115 L722,120 L722,110 Z"/><g><rect class="v-card " x="735" y="60" width="210" height="110" rx="10"/><text class="v-ink v-b" x="751" y="88">4 · Lee el resultado</text><text class="v-mut v-sm" x="751" y="110">¿alcanza para responder?</text><text class="v-mut v-sm" x="751" y="130">¿falta un dato?</text></g><path class="v-axis v-dash" fill="none" d="M840,170 V240 H360"/><line class="v-axis " x1="360" y1="240" x2="360" y2="183"/><path class="v-axis-fill" d="M360,174 L365,183 L355,183 Z"/><text class="v-mut v-sm" x="600" y="230" text-anchor="middle">si falta algo, vuelve a decidir</text><text class="v-up v-sm v-b" x="360" y="48" text-anchor="middle">si ya está, responde</text></svg></div>
+      <figcaption><b>El ciclo del agente.</b> Un agente no responde de memoria: <b>decide qué herramienta usar</b>, la usa, lee el resultado y vuelve a decidir. Repite hasta que tiene con qué contestar. Ahí está la diferencia con un prompt común, que contesta de una sola vez.<small>Esquema del paso 12.</small></figcaption>
+    </figure>
+    <!-- /@viz:p12 -->
+  </section>
+
+  <details class="more" id="entender">
+    <summary>Para entender más <small>· cómo funciona y palabras nuevas</small></summary>
+
+  <section class="block" aria-labelledby="flujo">
+    <span class="num"></span>
+    <h2 id="flujo">El flujo: cómo decide un agente</h2>
+    <div class="flow">
+      <div class="flow-row"><span class="n">1</span><div><h3>Lee la pregunta y las reglas</h3><p>El prompt de sistema dice qué puede y qué no puede hacer.</p></div></div>
+      <div class="flow-row"><span class="n">2</span><div><h3>Elige una herramienta</h3><p>La API para precios y señales; la calculadora para las cuentas.</p></div></div>
+      <div class="flow-row"><span class="n">3</span><div><h3>Lee el resultado</h3><p>Si alcanza, responde; si falta un dato, vuelve a decidir.</p></div></div>
+      <div class="flow-row"><span class="n">4</span><div><h3>Se detiene</h3><p>El tope de pasos evita que el ciclo siga para siempre.</p></div></div>
+    </div>
+    <p style="margin-top:14px"><a class="btn" href="diagramas/a1-ciclo-agente.html" target="_blank" rel="noopener">VER EL CICLO COMPLETO ↗</a></p>
+  </section>
+
+  <section class="block" aria-labelledby="palabras">
+    <span class="num"></span>
+    <h2 id="palabras">Palabras nuevas de este paso</h2>
+    <dl class="terms">
+      <div class="term-card"><dt>Agente</dt><dd>La IA que decide qué herramienta usar y en qué orden. <a href="glosario.html#agente">Más →</a></dd></div>
+      <div class="term-card"><dt>Herramienta</dt><dd>Lo que el agente puede ejecutar: una API, una cuenta. <a href="glosario.html#herramienta">Más →</a></dd></div>
+      <div class="term-card"><dt>Prompt de sistema</dt><dd>Las reglas fijas que el agente no debería romper. <a href="glosario.html#prompt-sistema">Más →</a></dd></div>
+      <div class="term-card"><dt>Límite de pasos</dt><dd>El tope de vueltas para que el ciclo termine. <a href="glosario.html#limite">Más →</a></dd></div>
+    </dl>
+  </section>
+  </details>
+
+  <div class="pager">
+    <a href="paso-11.html">← PASO 11 · MODELOS</a>
+    <a href="paso-13.html">PASO 13 · CONSEJO →</a>
+  </div>
+</main>
+
+<!-- @pie -->
+<footer>
+  FIN·LAB · material didáctico del posgrado de IA aplicada a Finanzas (UNLP) — taller de construcción guiada.<br>
+  Datos simulados con fines educativos. No es asesoramiento financiero.
+</footer>
+
+<script src="../automatizaciones/lab.js"></script>
+<script src="taller.js"></script>
+<!-- /@pie -->
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="theme-color" content="#0B0F13" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F2F5F2" media="(prefers-color-scheme: light)">
+<title>Paso 13 · El consejo de agentes · Taller FIN·LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../automatizaciones/lab.css">
+<link rel="stylesheet" href="taller.css">
+<script>try{var t=localStorage.getItem("finlab-tema");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+
+<!-- @top -->
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index.html"><span class="brand-dot"></span><b>FIN·LAB</b> TALLER</a>
+    <span class="crumb">CLASE 3 · PASO 13 / 14 · CONSEJO</span>
+  </div>
+</header>
+<!-- /@top -->
+
+<main id="contenido" class="page">
+  <!-- @nav -->
+<nav class="steps" aria-label="Pasos del taller">
+    <li><a href="index.html">MAPA</a></li><li class="sep">CLASE 1</li><li><a href="paso-0.html">P0</a></li><li><a href="paso-1.html">P1</a></li><li><a href="paso-2.html">P2</a></li><li><a href="paso-3.html">P3</a></li><li><a href="paso-4.html">P4</a></li><li><a href="paso-5.html">P5</a></li><li class="sep">CLASE 2</li><li><a href="paso-6.html">P6</a></li><li><a href="paso-7.html">P7</a></li><li><a href="paso-8.html">P8</a></li><li><a href="paso-9.html">P9</a></li><li class="sep">CLASE 3</li><li><a href="paso-10.html">P10</a></li><li><a href="paso-11.html">P11</a></li><li><a href="paso-12.html">P12</a></li><li><a href="paso-13.html" aria-current="page">P13</a></li><li><a href="paso-14.html">P14</a></li><li><a href="kit.html">KIT</a></li><li><a href="glosario.html">GLOSARIO</a></li>
+  </nav>
+<!-- /@nav -->
+
+  <p class="eyebrow">PASO 13 · TRES MIRADAS, UNA DECISIÓN</p>
+  <h1>El consejo de agentes: que el desacuerdo se vea</h1>
+  <p class="lede">Un solo agente tiende a estar de acuerdo consigo mismo. Un <a class="w" href="glosario.html#consejo">consejo de agentes</a> reparte el trabajo: uno analiza, otro audita y otro redacta. Lo valioso no es la coincidencia, es el <b>desacuerdo que queda escrito</b> antes de decidir.</p>
+  <div class="meta"><span class="chip"><b>30 MIN</b></span><span class="chip">N8N</span><span class="chip">3 AGENTES</span><span class="chip">SALIDA: <b>UN INFORME CON REPAROS</b></span></div>
+  <div class="note tip"><b>¿Les falta el agente?</b> Este paso encadena tres agentes como el del paso 12. Sin uno que funcione, el consejo no arranca. <a class="btn" href="paso-12.html">VOLVER AL PASO 12</a></div>
+
+  <section class="block" aria-labelledby="logro">
+    <span class="num"></span>
+    <h2 id="logro">Qué van a lograr</h2>
+    <p>Tres agentes encadenados en n8n y una pregunta de inversión que pasa por los tres. El resultado es un informe corto que dice <b>qué se analizó, qué reparos hay y qué se decidió</b>, con los números de la API a la vista.</p>
+    <div class="mock" aria-label="Ejemplo de salida del consejo de agentes">
+      <table><thead><tr><th>ROL</th><th>APORTA</th><th>EJEMPLO</th></tr></thead>
+      <tbody><tr><td>Analista</td><td>los datos y una propuesta</td><td>“Moderada: Sharpe 0,84, la mejor de las tres”</td></tr><tr><td>Auditor</td><td>el supuesto que falta</td><td>“los datos son simulados; el Sharpe no se sostiene en una crisis”</td></tr><tr><td>Redactor</td><td>la respuesta en 5 líneas</td><td>informe con el reparo incluido, sin recomendación</td></tr></tbody></table>
+      <div class="mock-foot">Sin el auditor, el informe sale limpio y engañoso. El rol que molesta es el que agrega valor.</div>
+    </div>
+  </section>
+
+  <section class="block" data-section="prompts" aria-labelledby="prompt">
+    <span class="num"></span>
+    <h2 id="prompt">El prompt</h2>
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT · PASO 13</span><div class="d">Para diseñar los roles del consejo.</div></div><button class="copy" data-copy="#p13" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="p13">Paso 13 de un taller de finanzas con n8n. Tengo un agente que consulta la API del curso y calcula Sharpe.
+
+Quiero armar un consejo de tres agentes encadenados: analista → auditor → redactor.
+
+Para cada rol escribime el prompt de sistema, con estas condiciones:
+- el analista propone una cartera y muestra los números que usó
+- el auditor busca el error, el dato faltante y el supuesto no dicho; no puede proponer otra cartera
+- el redactor escribe 5 líneas para un cliente, incluye el reparo del auditor y no da recomendaciones de inversión
+- si el auditor no encuentra nada, tiene que decirlo explícitamente y explicar qué revisó
+
+Después decime qué pregunta de prueba hace visible la diferencia entre un solo agente y el consejo.</pre></div>
+    </div>
+    <div class="note tip"><b>Puente con el proyecto real:</b> el diagrama <em>“Un consejo de agentes para una decisión de inversión”</em> muestra este mismo circuito con los roles y el orden de los pedidos.</div>
+  </section>
+
+  <section class="block" aria-labelledby="hacer">
+    <span class="num"></span>
+    <h2 id="hacer">Qué hacer, clic por clic</h2>
+    <ol class="do">
+      <li><b>Dupliquen el agente del paso 12</b> tres veces en el mismo workflow: analista, auditor y redactor.</li>
+      <li><b>Cambien solo el prompt de sistema</b> de cada uno, con las reglas del prompt de arriba.</li>
+      <li><b>Encadénenlos</b>: la salida del analista entra al auditor, y la de los dos al redactor.</li>
+      <li><b>Hagan una pregunta de inversión</b> con datos de la API: “¿qué cartera conviene para un perfil moderado hoy?”.</li>
+      <li><b>Comparen con el paso 12:</b> corran la misma pregunta con un solo agente y guarden las dos respuestas.</li>
+      <li><b>Marquen el reparo</b> que encontró el auditor. Si no encontró ninguno, revisen si los roles están realmente diferenciados.</li>
+    </ol>
+  </section>
+
+  <section class="block" aria-labelledby="comprobar">
+    <span class="num"></span>
+    <h2 id="comprobar">Cómo comprobar</h2>
+    <ul class="check">
+      <li><b>El auditor agrega algo:</b> el informe final menciona al menos un supuesto, un dato faltante o un límite del análisis.</li>
+      <li><b>Los números son de la API:</b> el Sharpe y los precios citados coinciden con la pestaña Carteras.</li>
+      <li><b>No hay recomendación:</b> el texto describe métricas; no dice “comprá” ni “vendé”.</li>
+      <li><b>El costo se justifica:</b> la respuesta es mejor que la del paso 12. Si no lo es, el consejo sobra.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="falla">
+    <span class="num"></span>
+    <h2 id="falla">Si algo falla</h2>
+    <div class="note tip"><b>¿Se trabaron después de tres intentos?</b> Prueben el consejo con una sola pregunta y sin herramientas: si los tres roles dicen lo mismo, el problema es el prompt de sistema, no el encadenado.</div>
+    <ul>
+      <li><b>Los tres coinciden en todo:</b> tienen el mismo prompt. El auditor necesita una instrucción explícita de buscar el error.</li>
+      <li><b>El informe ignora al auditor:</b> el redactor no está recibiendo su salida. Revisen el orden de los nodos y qué campo entra a cada uno.</li>
+      <li><b>Tarda demasiado o gasta de más:</b> es el costo real de tres agentes. Bajen el modelo de los roles simples, como el redactor.</li>
+      <li><b>El auditor inventa un problema:</b> pídanle que cite el dato o el supuesto exacto; si no lo puede citar, no cuenta.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="grafico">
+    <span class="num"></span>
+    <h2 id="grafico">La idea, en un gráfico</h2>
+    <!-- @viz:p13 -->
+    <figure class="viz" id="viz-p13" data-titulo="El consejo de agentes">
+      <div class="viz-grafico"><svg class="viz-svg" viewBox="0 0 960 360" role="img" aria-labelledby="viz-p13-t viz-p13-d"><title id="viz-p13-t">Un coordinador reparte la pregunta entre tres agentes y junta la decisión</title><desc id="viz-p13-d">Analista, auditor y redactor; el coordinador junta la respuesta final</desc><g><rect class="v-card " x="20" y="120" width="230" height="120" rx="10"/><text class="v-ink v-b" x="36" y="148">Coordinador</text><text class="v-mut v-sm" x="36" y="170">reparte la pregunta</text><text class="v-mut v-sm" x="36" y="190">pide la evidencia</text><text class="v-mut v-sm" x="36" y="210">junta la respuesta</text></g><g><rect class="v-card " x="370" y="20" width="310" height="100" rx="10"/><text class="v-ink v-b" x="386" y="48">Analista</text><text class="v-mut v-sm" x="386" y="70">mira los datos y los indicadores</text><text class="v-mut v-sm" x="386" y="90">propone una cartera</text></g><line class="v-axis " x1="254" y1="180" x2="359.6" y2="76.3"/><path class="v-axis-fill" d="M366,70 L363.1,79.9 L356.1,72.7 Z"/><line class="v-axis " x1="684" y1="70" x2="713.5" y2="171.4"/><path class="v-axis-fill" d="M716,180 L708.7,172.8 L718.3,170 Z"/><g><rect class="v-card " x="370" y="120" width="310" height="100" rx="10"/><text class="v-ink v-b" x="386" y="148">Auditor</text><text class="v-mut v-sm" x="386" y="170">busca el error y el supuesto</text><text class="v-mut v-sm" x="386" y="190">que no se dijo</text></g><line class="v-axis " x1="254" y1="180" x2="357" y2="170.8"/><path class="v-axis-fill" d="M366,170 L357.5,175.8 L356.6,165.8 Z"/><line class="v-axis " x1="684" y1="170" x2="707.4" y2="177.3"/><path class="v-axis-fill" d="M716,180 L705.9,182.1 L708.9,172.5 Z"/><g><rect class="v-card " x="370" y="220" width="310" height="100" rx="10"/><text class="v-ink v-b" x="386" y="248">Redactor</text><text class="v-mut v-sm" x="386" y="270">lo cuenta en 5 líneas</text><text class="v-mut v-sm" x="386" y="290">para el cliente</text></g><line class="v-axis " x1="254" y1="180" x2="359" y2="264.4"/><path class="v-axis-fill" d="M366,270 L355.9,268.3 L362.1,260.5 Z"/><line class="v-axis " x1="684" y1="270" x2="713" y2="188.5"/><path class="v-axis-fill" d="M716,180 L717.7,190.2 L708.3,186.8 Z"/><g><rect class="v-card " x="720" y="120" width="220" height="110" rx="10"/><text class="v-ink v-b" x="736" y="148">Decisión</text><text class="v-mut v-sm" x="736" y="170">tres miradas</text><text class="v-mut v-sm" x="736" y="190">y los desacuerdos a la vista</text></g></svg></div>
+      <figcaption><b>El consejo de agentes.</b> Un solo agente tiende a estar de acuerdo consigo mismo. El consejo reparte el trabajo: uno analiza, otro audita y otro redacta. El valor no está en la respuesta, está en el <b>desacuerdo</b> que queda a la vista.<small>Esquema del paso 13.</small></figcaption>
+    </figure>
+    <!-- /@viz:p13 -->
+  </section>
+
+  <details class="more" id="entender">
+    <summary>Para entender más <small>· cómo funciona y palabras nuevas</small></summary>
+
+  <section class="block" aria-labelledby="flujo">
+    <span class="num"></span>
+    <h2 id="flujo">El flujo: cómo trabaja el consejo</h2>
+    <div class="flow">
+      <div class="flow-row"><span class="n">1</span><div><h3>El coordinador reparte</h3><p>La misma pregunta, con un rol distinto para cada agente.</p></div></div>
+      <div class="flow-row"><span class="n">2</span><div><h3>El analista propone</h3><p>Consulta la API y muestra los números que usó.</p></div></div>
+      <div class="flow-row"><span class="n">3</span><div><h3>El auditor objeta</h3><p>Busca el error y el supuesto que nadie dijo.</p></div></div>
+      <div class="flow-row"><span class="n">4</span><div><h3>El redactor escribe</h3><p>Cinco líneas con el reparo incluido, sin recomendar.</p></div></div>
+    </div>
+    <p style="margin-top:14px"><a class="btn" href="diagramas/a2-consejo.html" target="_blank" rel="noopener">VER EL DIAGRAMA COMPLETO ↗</a></p>
+  </section>
+
+  <section class="block" aria-labelledby="palabras">
+    <span class="num"></span>
+    <h2 id="palabras">Palabras nuevas de este paso</h2>
+    <dl class="terms">
+      <div class="term-card"><dt>Consejo de agentes</dt><dd>Varios agentes con roles que se controlan entre sí. <a href="glosario.html#consejo">Más →</a></dd></div>
+      <div class="term-card"><dt>Agente</dt><dd>La IA que decide qué herramienta usar. <a href="glosario.html#agente">Más →</a></dd></div>
+      <div class="term-card"><dt>Alucinación</dt><dd>Una respuesta inventada que suena segura. <a href="glosario.html#alucinacion">Más →</a></dd></div>
+      <div class="term-card"><dt>Costo</dt><dd>Tres agentes cuestan tres veces más consultas. <a href="glosario.html#costo">Más →</a></dd></div>
+    </dl>
+  </section>
+  </details>
+
+  <div class="pager">
+    <a href="paso-12.html">← PASO 12 · AGENTE</a>
+    <a href="paso-14.html">PASO 14 · MCP →</a>
+  </div>
+</main>
+
+<!-- @pie -->
+<footer>
+  FIN·LAB · material didáctico del posgrado de IA aplicada a Finanzas (UNLP) — taller de construcción guiada.<br>
+  Datos simulados con fines educativos. No es asesoramiento financiero.
+</footer>
+
+<script src="../automatizaciones/lab.js"></script>
+<script src="taller.js"></script>
+<!-- /@pie -->
+</body>
+</html>
