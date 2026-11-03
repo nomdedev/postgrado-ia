@@ -729,10 +729,10 @@ function analyzePortfolio(db, weights){
   const sharpe = (expRet-RF)/volP;
   // correlaciones (solo pares i<j, matriz completa para el heatmap)
   const corr = syms.map((_,i)=>syms.map((__,j)=>cov[i][j]/sq(cov[i][i]*cov[j][j])));
-  // contribución al riesgo: RC_i = w_i · (Σw)_i ; Σ RC_i = σ_p
+  // contribución al riesgo: RC_i = w_i · (Σw)_i / σ_p ; Σ RC_i = σ_p
   const contrib = syms.map((s,i)=>{
     const marginal = syms.reduce((a,t,j)=>a+w[t]*ann(cov[i][j]),0);
-    return {symbol:s, weight:w[s], expContrib:w[s]*ann(mean[i]), rc:w[s]*marginal};
+    return {symbol:s, weight:w[s], expContrib:w[s]*ann(mean[i]), rc:w[s]*marginal/volP};
   });
   const rcTot = contrib.reduce((a,c)=>a+c.rc,0);
   contrib.forEach(c=>c.pct=c.rc/rcTot);
@@ -790,6 +790,8 @@ const api = {
         const ws=(q.get('weights')||'').split(',').map(Number);
         if(ts.length<2) json=errData('Se requieren al menos 2 tickers (ej: tickers=AAPL,MSFT)'),status=400;
         else if(ws.length!==ts.length || ws.some(x=>!isFinite(x))) json=errData('Los pesos deben tener la misma cantidad de elementos que los tickers y ser numéricos'),status=400;
+        else if(new Set(ts).size!==ts.length) json=errData('Los tickers no se pueden repetir'),status=400;
+        else if(ws.some(x=>x<0) || !(ws.reduce((a,x)=>a+x,0)>0)) json=errData('Los pesos deben ser positivos y sumar más que cero'),status=400;
         else{
           const bad=ts.filter(s=>!T_BY_SYM[s]);
           if(bad.length) json=errData('Tickers desconocidos: '+bad.join(', ')),status=400;
@@ -839,7 +841,7 @@ const api = {
         const CONDS=['PRECIO_MENOR_QUE','PRECIO_MAYOR_QUE','RSI_MENOR_QUE','RSI_MAYOR_QUE'];
         if(!T_BY_SYM[ticker]) {json=errData('Ticker desconocido: '+ticker);status=400;}
         else if(!CONDS.includes(condition)){json=errData('Condición inválida. Válidas: '+CONDS.join(', '));status=400;}
-        else if(!isFinite(threshold)){json=errData('El umbral debe ser numérico');status=400;}
+        else if(typeof threshold!=='number'||!isFinite(threshold)){json=errData('El umbral debe ser numérico');status=400;}
         else{
           const alert={id:'al_'+Date.now().toString(36),ticker,condition,threshold,note:note||'',
             created_at:new Date().toISOString()};
@@ -999,7 +1001,7 @@ print(datos.isna().sum())  # valores faltantes por columna`,
 },
 {
   key:'b', title:'Indicadores técnicos con pandas (SMA, EMA, RSI)',
-  desc:'Las mismas fórmulas que calcula el backend de esta terminal: medias móviles y RSI en pocas líneas de pandas.',
+  desc:'Las mismas ideas que calcula el backend de esta terminal (medias móviles y RSI) en pocas líneas de pandas; en las primeras ruedas los valores difieren un poco.',
   code:`# =============================================================
 # BLOQUE B · Medias móviles y RSI con pandas
 # =============================================================
@@ -1018,19 +1020,19 @@ datos["EMA26"] = precio.ewm(span=26, adjust=False).mean()
 delta    = precio.diff()               # cambio día a día
 subas    = delta.clip(lower=0)         # nos quedamos solo las subas
 bajas    = -delta.clip(upper=0)        # ...y solo las bajas (en positivo)
-prom_sub = subas.ewm(alpha=1/14).mean()  # suavizado de Wilder
-prom_baj = bajas.ewm(alpha=1/14).mean()
+prom_sub = subas.ewm(alpha=1/14, adjust=False, min_periods=14).mean()  # suavizado de Wilder
+prom_baj = bajas.ewm(alpha=1/14, adjust=False, min_periods=14).mean()
 rs       = prom_sub / prom_baj         # "razón de fuerzas"
 datos["RSI14"] = 100 - 100 / (1 + rs)  # fórmula final del RSI
 
-# 4) Regla simple de tendencia (la misma que usa esta terminal)
+# 4) Regla simple de tendencia (más corta que la de la terminal, que también mira la EMA y puede dar NEUTRAL)
 senal = "COMPRA" if datos["SMA20"].iloc[-1] > datos["SMA50"].iloc[-1] else "VENTA"
 print(senal, "| RSI:", round(datos["RSI14"].iloc[-1], 1))`,
   lines:[
     ['rolling(window=20).mean()','"rolling" crea una ventana móvil de 20 días y calcula el promedio en cada punto: la media móvil clásica.'],
     ['ewm(span=12, ...)','Media exponencial: los días recientes pesan más. Reacciona antes a los giros de precio.'],
     ['delta.clip(lower=0)','Separa las subas de las bajas: clip "recorta" los valores negativos a cero. Es la base del RSI.'],
-    ['ewm(alpha=1/14)','El suavizado de Wilder que usa el RSI estándar de 14 ruedas.'],
+    ['ewm(alpha=1/14, adjust=False)','El suavizado de Wilder que usa el RSI estándar de 14 ruedas. Las primeras ruedas difieren un poco de la terminal y después coinciden.'],
     ['100 - 100 / (1 + rs)','La fórmula del RSI: si las subas dominan, rs crece y el RSI se acerca a 100.'],
     ['if ... else en una línea','Python permite escribir condicionales cortos en una sola línea ("expresión ternaria").'],
   ]
@@ -1444,7 +1446,7 @@ function PortfolioSection({db,goApi}){
             {/* Banda de métricas principales */}
             <div className="statband">
               <div className="stat"><div className="stat-l">RETORNO ESPERADO (ANUALIZ.)</div>
-                <div className="stat-v up">+{nf1.format(analysis.expRet*100)} %</div>
+                <div className={'stat-v '+(analysis.expRet>=0?'up':'dn')}>{fmtPct1(analysis.expRet*100)}</div>
                 <div className="stat-s">media diaria × 252 ruedas</div></div>
               <div className="stat"><div className="stat-l">VOLATILIDAD ANUALIZ.</div>
                 <div className="stat-v">{nf1.format(analysis.volP*100)} %</div>

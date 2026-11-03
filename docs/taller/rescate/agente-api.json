@@ -1,0 +1,77 @@
+{
+  "name": "FINLAB - Rescate paso 12 · agente con API y calculadora (completar credencial)",
+  "nodes": [
+    {
+      "parameters": { "options": {} },
+      "id": "12000000-0000-4000-8000-000000000001",
+      "name": "Chat",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [240, 320]
+    },
+    {
+      "parameters": {
+        "promptType": "auto",
+        "options": {
+          "systemMessage": "Sos un asistente de un taller de finanzas. Respondé SOLO con datos que traigas de una herramienta; si no los tenés, decí que no los tenés. Para precios, RSI y señales usá la herramienta consultar_api_finlab. Para ponderar una cartera (variación del día) usá la calculadora. No des consejos de inversión: describí los datos y las métricas. Aclarás que los datos son simulados. Máximo 6 pasos; si no alcanzan, respondé lo que tengas y decí qué faltó. No repitas una herramienta con los mismos argumentos.",
+          "maxIterations": 6
+        }
+      },
+      "id": "12000000-0000-4000-8000-000000000002",
+      "name": "Agente FIN·LAB",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [500, 320]
+    },
+    {
+      "parameters": {
+        "model": { "__rl": true, "mode": "list", "value": "gpt-4o-mini" },
+        "options": { "temperature": 0.2 }
+      },
+      "id": "12000000-0000-4000-8000-000000000003",
+      "name": "Modelo (conectar credencial del paso 10)",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [400, 560]
+    },
+    {
+      "parameters": {
+        "name": "consultar_api_finlab",
+        "toolDescription": "Devuelve los 8 activos de la muestra del curso con precio, variación del día en %, RSI de 14 ruedas y señal (COMPRA, VENTA o NEUTRAL). Datos simulados. No recibe parámetros.",
+        "url": "https://postgrado-ia.vercel.app/api/market/summary",
+        "options": { "timeout": 10000 }
+      },
+      "id": "12000000-0000-4000-8000-000000000004",
+      "name": "Herramienta: API FIN·LAB",
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [560, 560]
+    },
+    {
+      "parameters": {},
+      "id": "12000000-0000-4000-8000-000000000005",
+      "name": "Herramienta: Calculadora",
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [720, 560]
+    }
+  ],
+  "connections": {
+    "Chat": {
+      "main": [[{ "node": "Agente FIN·LAB", "type": "main", "index": 0 }]]
+    },
+    "Modelo (conectar credencial del paso 10)": {
+      "ai_languageModel": [[{ "node": "Agente FIN·LAB", "type": "ai_languageModel", "index": 0 }]]
+    },
+    "Herramienta: API FIN·LAB": {
+      "ai_tool": [[{ "node": "Agente FIN·LAB", "type": "ai_tool", "index": 0 }]]
+    },
+    "Herramienta: Calculadora": {
+      "ai_tool": [[{ "node": "Agente FIN·LAB", "type": "ai_tool", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "pinData": {},
+  "tags": []
+}

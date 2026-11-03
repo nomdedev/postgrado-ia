@@ -88,7 +88,8 @@ Después decime qué tres preguntas de prueba muestran si el agente eligió bien
     <span class="num"></span>
     <h2 id="hacer">Qué hacer, clic por clic</h2>
     <ol class="do">
-      <li><b>Agreguen un nodo AI Agent</b> y conéctenle la credencial del paso 10 y el modelo elegido en el paso 11.</li>
+      <li><b>Camino corto:</b> descarguen <a href="rescate/agente-api.json" download>agente-api.json</a>, impórtenlo en n8n (menú ⋯ → <em>Import from file</em>), abran el nodo del modelo y elijan la credencial del paso 10. Ya trae el prompt de sistema, las dos herramientas y el tope de 6 pasos: salteen hasta “Pregunten algo concreto”.</li>
+      <li><b>Camino largo:</b> agreguen un nodo AI Agent y conéctenle la credencial del paso 10 y el modelo elegido en el paso 11. La credencial va en el nodo del modelo, que se enchufa al agente.</li>
       <li><b>Peguen el prompt de sistema</b> en el campo correspondiente, antes de conectar herramientas.</li>
       <li><b>Agreguen la herramienta HTTP Request</b> apuntando a <span class="code-inline">/api/market/summary</span> de su terminal publicada.</li>
       <li><b>Agreguen la calculadora</b> (o un nodo Code que haga las cuentas) como segunda herramienta.</li>
