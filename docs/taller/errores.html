@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="theme-color" content="#0B0F13" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F2F5F2" media="(prefers-color-scheme: light)">
+<title>Errores típicos de la IA en finanzas · Taller FIN·LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../automatizaciones/lab.css">
+<link rel="stylesheet" href="taller.css">
+<script>try{var t=localStorage.getItem("finlab-tema");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+
+<!-- @top -->
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index.html"><span class="brand-dot"></span><b>FIN·LAB</b> TALLER</a>
+    <span class="crumb">ERRORES DE LA IA EN FINANZAS</span>
+  </div>
+</header>
+<!-- /@top -->
+
+<main id="contenido" class="page">
+  <!-- @nav -->
+<nav class="steps" aria-label="Pasos del taller"><ul>
+    <li><a href="index.html">MAPA</a></li><li class="sep">CLASE 1</li><li><a href="paso-0.html">P0</a></li><li><a href="paso-1.html">P1</a></li><li><a href="paso-2.html">P2</a></li><li><a href="paso-3.html">P3</a></li><li><a href="paso-4.html">P4</a></li><li><a href="paso-5.html">P5</a></li><li class="sep">CLASE 2</li><li><a href="paso-6.html">P6</a></li><li><a href="paso-7.html">P7</a></li><li><a href="paso-8.html">P8</a></li><li><a href="paso-9.html">P9</a></li><li class="sep">CLASE 3</li><li><a href="paso-10.html">P10</a></li><li><a href="paso-11.html">P11</a></li><li><a href="paso-12.html">P12</a></li><li><a href="paso-13.html">P13</a></li><li><a href="paso-14.html">P14</a></li><li><a href="retos.html">RETOS</a></li><li><a href="kit.html">KIT</a></li><li><a href="errores.html" aria-current="page">ERRORES</a></li><li><a href="traza.html">TRAZA</a></li><li><a href="glosario.html">GLOSARIO</a></li>
+  </ul></nav>
+<!-- /@nav -->
+
+  <p class="eyebrow">GALERÍA · VERIFICAR LO QUE DICE LA IA</p>
+  <h1>Cinco errores típicos de la IA en finanzas, y cómo se cazan</h1>
+  <p class="lede">La IA escribe código y cuentas con mucha seguridad, también cuando se equivoca. Acá hay cinco errores que conviene buscar a propósito. Cada uno trae el número correcto, el número equivocado, cómo se detecta con una cuenta a mano y un prompt que lo evita.</p>
+  <div class="meta">
+    <span class="chip"><b>5</b> ERRORES</span>
+    <span class="chip">20 A 30 MIN</span>
+    <a class="chip" href="index.html#niveles">NIVEL DE IA <b>3 · VERIFICAR Y MEDIR</b></a>
+  </div>
+  <div class="note tip"><b>Cómo leer esta página.</b> Los números salen de <a href="rescate/finlab-AAPL.csv" download>finlab-AAPL.csv</a> (AAPL, 252 cierres de la versión de rescate) y se pueden recalcular en una planilla. Estos son errores posibles: no todos los modelos los cometen siempre, y no probé estos prompts con un modelo en particular. Lo que importa es el hábito de buscarlos.</div>
+
+  <section class="block" aria-labelledby="e1">
+    <span class="num"></span>
+    <h2 id="e1">1 · Anualizar con 365 en vez de 252</h2>
+    <p>La volatilidad diaria se anualiza con la raíz de los días en que el mercado <b>opera</b>: 252, no 365.</p>
+    <div class="mock" aria-label="Volatilidad anual de AAPL con dos cuentas">
+      <table><thead><tr><th>CUENTA</th><th>VOLATILIDAD ANUAL</th></tr></thead>
+      <tbody><tr><td>desvío diario × √252 (correcta)</td><td><b>23,92 %</b></td></tr><tr><td>desvío diario × √365 (error)</td><td>28,78 %</td></tr></tbody></table>
+      <div class="mock-foot">Un 20 % de riesgo de más se arrastra al Sharpe, a la cartera y a cualquier conclusión.</div>
+    </div>
+    <ul class="check">
+      <li><b>Cómo se detecta:</b> buscar en el código <span class="code-inline">365</span> o <span class="code-inline">sqrt(365)</span>. Contar las filas: son 252 cierres, no 365.</li>
+      <li><b>Cuenta a mano:</b> el desvío de los retornos diarios por 15,87 (que es √252) tiene que dar 23,92 %.</li>
+    </ul>
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT QUE LO EVITA</span><div class="d">Para pedir la volatilidad anual.</div></div><button class="copy" data-copy="#e1p" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="e1p">Calculá la volatilidad anual de cada activo: desvío estándar muestral (N−1) de los retornos diarios por la raíz de 252, porque el mercado opera unos 252 días al año. Mostrame la fórmula en un comentario y el número 252 como una constante con nombre.</pre></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="e2">
+    <span class="num"></span>
+    <h2 id="e2">2 · RSI con promedio simple en lugar del suavizado de Wilder</h2>
+    <p>El RSI estándar suaviza las subas y bajas con el método de Wilder. Con un promedio simple de las últimas 14 ruedas da un número parecido, pero distinto.</p>
+    <div class="mock" aria-label="RSI de AAPL con dos métodos">
+      <table><thead><tr><th>MÉTODO</th><th>RSI(14) DE LA ÚLTIMA RUEDA</th></tr></thead>
+      <tbody><tr><td>Wilder (correcto, coincide con el CSV)</td><td><b>62,16</b></td></tr><tr><td>promedio simple de 14 (error)</td><td>60,01</td></tr></tbody></table>
+      <div class="mock-foot">Dos puntos de diferencia pueden cambiar de lado una lectura de sobrecompra o sobreventa en un activo cerca del 70 o del 30.</div>
+    </div>
+    <ul class="check">
+      <li><b>Cómo se detecta:</b> comparar contra una fuente independiente. La columna <span class="code-inline">rsi14</span> del CSV o el bloque de Colab del <a href="paso-7.html">paso 7</a> tienen que coincidir con la diferencia máxima menor a 0,01.</li>
+      <li><b>Pista en el código:</b> si el RSI se calcula con <span class="code-inline">mean()</span> de las últimas 14 y no con un suavizado, no es el de Wilder.</li>
+    </ul>
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT QUE LO EVITA</span><div class="d">Para pedir el RSI.</div></div><button class="copy" data-copy="#e2p" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="e2p">Calculá el RSI de 14 ruedas con el método de Wilder: la primera suba y baja promedio es el promedio simple de los primeros 14 cambios, y después cada promedio es (promedio anterior × 13 + valor nuevo) / 14. RSI = 100 − 100 / (1 + suba promedio / baja promedio). Dejá null mientras no haya 14 cambios.</pre></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="e3">
+    <span class="num"></span>
+    <h2 id="e3">3 · Confundir retorno aritmético con retorno compuesto</h2>
+    <p>La media diaria por 252 y la variación real del año son dos números distintos, y los dos son correctos <b>para cosas distintas</b>. El error es llamar a uno con el nombre del otro.</p>
+    <div class="mock" aria-label="Dos formas de medir el retorno de AAPL en el año">
+      <table><thead><tr><th>MEDIDA</th><th>AAPL EN EL AÑO</th></tr></thead>
+      <tbody><tr><td>variación del año (último / primero − 1)</td><td><b>103,2 %</b></td></tr><tr><td>media diaria × 252</td><td>74,1 %</td></tr></tbody></table>
+      <div class="mock-foot">La diferencia viene de la volatilidad: cuanto más sube y baja el precio, más se separan las dos medidas.</div>
+    </div>
+    <ul class="check">
+      <li><b>Cómo se detecta:</b> la variación del año se calcula con dos celdas: <span class="code-inline">=B253/B2-1</span>. Si el informe dice “retorno del año” y no coincide, pregunten cuál de las dos medidas usó.</li>
+      <li><b>Regla:</b> para decir cuánto ganó el activo, la variación del año; para el Sharpe, la media anualizada.</li>
+    </ul>
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT QUE LO EVITA</span><div class="d">Para pedir los retornos.</div></div><button class="copy" data-copy="#e3p" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="e3p">Mostrame dos columnas con nombres distintos: "Variación del año" = cierre final / cierre inicial − 1, y "Retorno medio anualizado" = media de los retornos diarios × 252. No las mezcles ni las llames igual.</pre></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="e4">
+    <span class="num"></span>
+    <h2 id="e4">4 · Un Sharpe sin tasa libre de riesgo</h2>
+    <p>El Sharpe mide cuánto retorno <b>por encima de una inversión sin riesgo</b> se obtiene por cada punto de volatilidad. Si la IA se olvida de restar esa tasa, el número sale más alto.</p>
+    <div class="mock" aria-label="Sharpe de AAPL con y sin tasa libre">
+      <table><thead><tr><th>CUENTA</th><th>SHARPE DE AAPL</th></tr></thead>
+      <tbody><tr><td>(retorno − 4,3 %) / volatilidad (correcta)</td><td><b>2,92</b></td></tr><tr><td>retorno / volatilidad (error)</td><td>3,10</td></tr></tbody></table>
+      <div class="mock-foot">El error siempre favorece al activo y, en una comparación de carteras, puede cambiar cuál parece mejor.</div>
+    </div>
+    <ul class="check">
+      <li><b>Cómo se detecta:</b> el código tiene que mostrar la tasa libre (4,3 % en este taller) como un dato visible. Si no aparece, no se restó.</li>
+      <li><b>Cuenta a mano:</b> (74,1 % − 4,3 %) / 23,92 % = 2,92.</li>
+    </ul>
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT QUE LO EVITA</span><div class="d">Para pedir el Sharpe.</div></div><button class="copy" data-copy="#e4p" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="e4p">Calculá el Sharpe como (retorno medio anualizado − tasa libre de riesgo) / volatilidad anual. Definí la tasa libre como una constante con nombre RF = 0.043 y mostrala en pantalla junto al resultado.</pre></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="e5">
+    <span class="num"></span>
+    <h2 id="e5">5 · Mirar solo el precio y olvidar los dividendos</h2>
+    <p>Un precio que no se movió no quiere decir que el inversor no ganó. Esta muestra no tiene dividendos, así que acá el ejemplo es de cuaderno: <b>un caso inventado para ver la cuenta</b>.</p>
+    <div class="mock" aria-label="Ejemplo ilustrativo de retorno total con dividendos">
+      <table><thead><tr><th>EJEMPLO ILUSTRATIVO</th><th>RESULTADO</th></tr></thead>
+      <tbody><tr><td>compra a 100, cierra el año a 100, cobra 4 de dividendos</td><td></td></tr><tr><td>variación del precio</td><td>0 %</td></tr><tr><td>retorno total (precio + dividendos)</td><td><b>4 %</b></td></tr></tbody></table>
+      <div class="mock-foot">Con datos reales hay que pedir los precios <b>ajustados</b> por dividendos y splits, o decir de qué tipo de precio se trata.</div>
+    </div>
+    <ul class="check">
+      <li><b>Cómo se detecta:</b> preguntarle a la IA “¿este precio está ajustado por dividendos y splits?”. Si no sabe decir de dónde vienen los datos, no hay que usarlos.</li>
+      <li><b>En este taller:</b> los datos son simulados y sin dividendos. Es una advertencia para cuando pasen a datos reales.</li>
+    </ul>
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT QUE LO EVITA</span><div class="d">Para trabajar con datos reales.</div></div><button class="copy" data-copy="#e5p" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="e5p">Voy a usar precios reales de la fuente que te indico. Antes de calcular, decime si son precios ajustados por dividendos y splits o precios sin ajustar, y qué cambiaría en los retornos. Si no podés saberlo, marcá el supuesto en un comentario.</pre></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="como">
+    <span class="num"></span>
+    <h2 id="como">Cómo usarlo en clase</h2>
+    <ol class="do">
+      <li><b>Un error por grupo.</b> Cada grupo recibe uno, lo busca en el código que les generó la IA y dice si lo tiene.</li>
+      <li><b>Luego cambian de rol:</b> el auditor del grupo prueba el prompt corregido y compara el número.</li>
+      <li><b>Cierran con una regla:</b> ¿qué número de este informe no creerían sin recalcularlo?</li>
+    </ol>
+    <p class="hint">Vuelvan a los pasos <a href="paso-4.html">4</a>, <a href="paso-5.html">5</a> y <a href="paso-7.html">7</a> para ver cada cálculo en su lugar. También está el <a href="traza.html">ejemplo de traza de un comité de agentes</a>.</p>
+  </section>
+</main>
+
+<!-- @pie -->
+<footer>
+  FIN·LAB · material didáctico del posgrado de IA aplicada a Finanzas (UNLP) — taller de construcción guiada.<br>
+  Datos simulados con fines educativos. No es asesoramiento financiero.
+</footer>
+
+<script src="../automatizaciones/lab.js"></script>
+<script src="taller.js"></script>
+<!-- /@pie -->
+</body>
+</html>

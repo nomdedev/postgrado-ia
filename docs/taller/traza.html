@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="theme-color" content="#0B0F13" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F2F5F2" media="(prefers-color-scheme: light)">
+<title>Traza de un comité de agentes · Taller FIN·LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../automatizaciones/lab.css">
+<link rel="stylesheet" href="taller.css">
+<script>try{var t=localStorage.getItem("finlab-tema");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+
+<!-- @top -->
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index.html"><span class="brand-dot"></span><b>FIN·LAB</b> TALLER</a>
+    <span class="crumb">TRAZA DEL COMITÉ DE AGENTES</span>
+  </div>
+</header>
+<!-- /@top -->
+
+<main id="contenido" class="page">
+  <!-- @nav -->
+<nav class="steps" aria-label="Pasos del taller"><ul>
+    <li><a href="index.html">MAPA</a></li><li class="sep">CLASE 1</li><li><a href="paso-0.html">P0</a></li><li><a href="paso-1.html">P1</a></li><li><a href="paso-2.html">P2</a></li><li><a href="paso-3.html">P3</a></li><li><a href="paso-4.html">P4</a></li><li><a href="paso-5.html">P5</a></li><li class="sep">CLASE 2</li><li><a href="paso-6.html">P6</a></li><li><a href="paso-7.html">P7</a></li><li><a href="paso-8.html">P8</a></li><li><a href="paso-9.html">P9</a></li><li class="sep">CLASE 3</li><li><a href="paso-10.html">P10</a></li><li><a href="paso-11.html">P11</a></li><li><a href="paso-12.html">P12</a></li><li><a href="paso-13.html">P13</a></li><li><a href="paso-14.html">P14</a></li><li><a href="retos.html">RETOS</a></li><li><a href="kit.html">KIT</a></li><li><a href="errores.html">ERRORES</a></li><li><a href="traza.html" aria-current="page">TRAZA</a></li><li><a href="glosario.html">GLOSARIO</a></li>
+  </ul></nav>
+<!-- /@nav -->
+
+  <p class="eyebrow">EJEMPLO · SIN CUENTA NI CLAVE</p>
+  <h1>Cómo se ve la traza de un comité de agentes</h1>
+  <p class="lede">Una pregunta de inversión pasa por tres agentes: analista, auditor y redactor. Acá está el recorrido completo, paso por paso, para mirarlo en el proyector o para seguirlo si en el aula no hay cuenta ni clave.</p>
+  <div class="meta">
+    <span class="chip"><b>3</b> AGENTES</span>
+    <span class="chip">10 A 15 MIN</span>
+    <a class="chip" href="index.html#niveles">NIVEL DE IA <b>5 · ORQUESTAR · EXPERTO</b></a>
+  </div>
+  <div class="note warn"><b>Ejemplo armado a mano.</b> Los datos son los reales de la muestra de la API del curso (simulados, no son cotizaciones). Los textos de los agentes <b>no son la salida de un modelo en vivo</b>: están escritos para mostrar la forma que tiene una traza. Con un modelo de verdad, las palabras cambian; lo que tiene que mantenerse es el orden, las herramientas usadas y el reparo del auditor.</div>
+
+  <section class="block" aria-labelledby="pregunta">
+    <span class="num"></span>
+    <h2 id="pregunta">La pregunta</h2>
+    <p>“Tengo 40 % KO, 30 % JNJ y 30 % GGAL: ¿qué reparos hay antes de mantenerla hoy?”</p>
+    <p>Es la misma que se usa en los <a href="paso-12.html">pasos 12</a> y <a href="paso-13.html">13</a>. Se puede verificar con la API y con una calculadora.</p>
+  </section>
+
+  <section class="block" aria-labelledby="analista">
+    <span class="num"></span>
+    <h2 id="analista">1 · Analista: trae datos y propone</h2>
+    <div class="mock" aria-label="Traza del analista">
+      <table><thead><tr><th>PASO</th><th>QUÉ HIZO</th><th>RESULTADO</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>eligió <em>HTTP Request</em>: <span class="code-inline">GET /api/market/summary</span></td><td>8 activos con precio, variación, RSI y señal</td></tr>
+        <tr><td>2</td><td>se quedó con los tres de la cartera</td><td>KO 66,09 (+0,82 %, RSI 70,7, COMPRA) · JNJ 117,88 (+0,25 %, RSI 28,1, VENTA) · GGAL 28,75 (+0,52 %, RSI 59,0, NEUTRAL)</td></tr>
+        <tr><td>3</td><td>eligió <em>Calculadora</em>: 0,4 × 0,82 + 0,3 × 0,25 + 0,3 × 0,52</td><td>+0,56 % la cartera en el día</td></tr>
+        <tr><td>4</td><td>respondió</td><td>texto de abajo</td></tr>
+      </tbody></table>
+    </div>
+    <div class="note tip"><b>Respuesta del analista (ejemplo):</b> “La cartera subió 0,56 % en la rueda. KO tiene señal de COMPRA y RSI 70,7; JNJ tiene señal de VENTA y RSI 28,1; GGAL está en NEUTRAL. Propongo mantener los pesos y revisar JNJ.”</div>
+  </section>
+
+  <section class="block" aria-labelledby="auditor">
+    <span class="num"></span>
+    <h2 id="auditor">2 · Auditor: busca el error, el dato que falta y el supuesto no dicho</h2>
+    <div class="mock" aria-label="Traza del auditor">
+      <table><thead><tr><th>PASO</th><th>QUÉ HIZO</th><th>RESULTADO</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>leyó la salida del analista (sin proponer otra cartera)</td><td>tres datos citados, una cuenta, una propuesta</td></tr>
+        <tr><td>2</td><td>revisó la cuenta con la calculadora</td><td>0,56 %: coincide</td></tr>
+        <tr><td>3</td><td>buscó qué no se dijo</td><td>cuatro reparos, abajo</td></tr>
+      </tbody></table>
+    </div>
+    <div class="note tip"><b>Reparos del auditor (ejemplo):</b>
+      <ul>
+        <li><b>Una sola rueda:</b> 0,56 % es lo que pasó hoy; no dice nada del riesgo de la cartera.</li>
+        <li><b>El RSI y la señal miden cosas distintas:</b> JNJ está en sobreventa (RSI 28,1) y a la vez con señal de VENTA por tendencia. “Muy castigada” no es lo mismo que “está cerca de dar vuelta”.</li>
+        <li><b>KO con RSI 70,7:</b> pasa el umbral de sobrecompra de 70; el propio analista lo citó y no lo comentó.</li>
+        <li><b>Faltan datos:</b> la API no trae volatilidad ni correlaciones, así que no se puede hablar de riesgo de la cartera. Y los datos son simulados.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="redactor">
+    <span class="num"></span>
+    <h2 id="redactor">3 · Redactor: cinco líneas para un cliente, con el reparo incluido</h2>
+    <div class="note tip"><b>Informe (ejemplo):</b>
+      <ol>
+        <li>La cartera subió 0,56 % en la rueda de hoy (datos simulados de una muestra educativa).</li>
+        <li>KO tiene señal de COMPRA, pero su RSI de 70,7 está en zona de sobrecompra.</li>
+        <li>JNJ tiene señal de VENTA y RSI de 28,1: está muy castigada, y la tendencia sigue a la baja.</li>
+        <li>Con estos datos no se puede medir el riesgo de la cartera: faltan volatilidad y correlaciones.</li>
+        <li>Este texto describe datos y no es una recomendación de inversión.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="solo">
+    <span class="num"></span>
+    <h2 id="solo">Un solo agente contra el comité</h2>
+    <div class="mock" aria-label="Comparación entre un agente y el comité">
+      <table><thead><tr><th></th><th>UN SOLO AGENTE (PASO 12)</th><th>COMITÉ (PASO 13)</th></tr></thead>
+      <tbody>
+        <tr><td>Respuesta</td><td>“La cartera subió 0,56 %. JNJ tiene señal de VENTA. KO y GGAL, COMPRA y NEUTRAL.”</td><td>las cinco líneas de arriba</td></tr>
+        <tr><td>Reparos</td><td>ninguno</td><td>cuatro, y el informe incluye los dos más importantes</td></tr>
+        <tr><td>Se nota que los datos son simulados</td><td>no</td><td>sí</td></tr>
+        <tr><td>Costo</td><td>una consulta al modelo</td><td>tres consultas al modelo</td></tr>
+      </tbody></table>
+      <div class="mock-foot">El comité vale la pena solo si el auditor agrega algo que el agente solo no dijo. Si no lo agrega, sobra.</div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="mirar">
+    <span class="num"></span>
+    <h2 id="mirar">Qué mirar en una traza real</h2>
+    <ul class="check">
+      <li><b>Quién llamó a qué:</b> la API la consulta el analista y la calculadora la usan el analista y el auditor. Si el redactor llama a la API, tiene demasiado poder.</li>
+      <li><b>Qué dato citó cada uno:</b> todos los números de las respuestas tienen que estar en el resultado de la API. Un número que no aparece ahí es inventado.</li>
+      <li><b>Dónde aparece el reparo:</b> el informe final menciona al menos un reparo del auditor.</li>
+      <li><b>Qué no dice:</b> ninguna línea dice “comprá” ni “vendé”.</li>
+      <li><b>Cuántos pasos dio:</b> no pasa del tope de 6 de cada agente.</li>
+    </ul>
+    <p class="hint">Para armarlo en n8n, el <a href="paso-12.html">paso 12</a> trae un rescate (<a href="rescate/agente-api.json" download>agente-api.json</a>) y el <a href="paso-13.html">paso 13</a> los prompts de los tres roles. Para practicar a cazar errores de cálculo, la <a href="errores.html">galería de errores</a>.</p>
+  </section>
+</main>
+
+<!-- @pie -->
+<footer>
+  FIN·LAB · material didáctico del posgrado de IA aplicada a Finanzas (UNLP) — taller de construcción guiada.<br>
+  Datos simulados con fines educativos. No es asesoramiento financiero.
+</footer>
+
+<script src="../automatizaciones/lab.js"></script>
+<script src="taller.js"></script>
+<!-- /@pie -->
+</body>
+</html>

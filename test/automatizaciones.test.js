@@ -310,3 +310,25 @@ test('el menú de retos tiene 10 ejercicios con prompt para copiar y tres compro
     assert.ok(html.includes(`href="#${id}"`), `${id}: no está en el menú`);
   }
 });
+
+test('la galería de errores de la IA muestra los números que salen del CSV de rescate', () => {
+  const taller = path.join(__dirname, '..', 'docs', 'taller');
+  const filas = fs.readFileSync(path.join(taller, 'rescate', 'finlab-AAPL.csv'), 'utf8').trim().split('\n').slice(1).map((l) => l.split(','));
+  const p = filas.map((f) => Number(f[1]));
+  const r = p.slice(1).map((x, i) => x / p[i] - 1);
+  const media = r.reduce((a, b) => a + b) / r.length;
+  const desvio = Math.sqrt(r.reduce((a, b) => a + (b - media) ** 2, 0) / (r.length - 1));
+  const coma = (n, d = 2) => n.toFixed(d).replace('.', ',');
+  const vol = desvio * Math.sqrt(252);
+  // RSI simple de las últimas 14 ruedas, el "error" de la galería
+  const cambios = p.slice(1).map((x, i) => x - p[i]).slice(-14);
+  const subas = cambios.reduce((a, x) => a + Math.max(x, 0), 0), bajas = cambios.reduce((a, x) => a + Math.max(-x, 0), 0);
+  const esperados = [
+    coma(vol * 100), coma(desvio * Math.sqrt(365) * 100), // paso 1
+    coma(Number(filas[filas.length - 1][4])), coma(100 - 100 / (1 + subas / bajas)), // paso 2
+    coma((p[p.length - 1] / p[0] - 1) * 100, 1), coma(media * 252 * 100, 1), // paso 3
+    coma((media * 252 - 0.043) / vol), coma((media * 252) / vol) // paso 4
+  ];
+  const pagina = fs.readFileSync(path.join(taller, 'errores.html'), 'utf8');
+  for (const valor of esperados) assert.ok(pagina.includes(valor), `errores.html: no aparece ${valor} (recalculado desde finlab-AAPL.csv)`);
+});
