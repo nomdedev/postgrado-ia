@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="theme-color" content="#0B0F13" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F2F5F2" media="(prefers-color-scheme: light)">
+<title>¿Habría funcionado la señal? · Taller FIN·LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../automatizaciones/lab.css">
+<link rel="stylesheet" href="taller.css">
+<script>try{var t=localStorage.getItem("finlab-tema");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+
+<!-- @top -->
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index.html"><span class="brand-dot"></span><b>FIN·LAB</b> TALLER</a>
+    <span class="crumb">¿HABRÍA FUNCIONADO LA SEÑAL?</span>
+  </div>
+</header>
+<!-- /@top -->
+
+<main id="contenido" class="page">
+  <!-- @nav -->
+<nav class="steps" aria-label="Pasos del taller"><ul>
+    <li><a href="index.html">MAPA</a></li><li class="sep">CLASE 1</li><li><a href="paso-0.html">P0</a></li><li><a href="paso-1.html">P1</a></li><li><a href="paso-2.html">P2</a></li><li><a href="paso-3.html">P3</a></li><li><a href="paso-4.html">P4</a></li><li><a href="paso-5.html">P5</a></li><li class="sep">CLASE 2</li><li><a href="paso-6.html">P6</a></li><li><a href="paso-7.html">P7</a></li><li><a href="paso-8.html">P8</a></li><li><a href="paso-9.html">P9</a></li><li class="sep">CLASE 3</li><li><a href="paso-10.html">P10</a></li><li><a href="paso-11.html">P11</a></li><li><a href="paso-12.html">P12</a></li><li><a href="paso-13.html">P13</a></li><li><a href="paso-14.html">P14</a></li><li><a href="retos.html">RETOS</a></li><li><a href="kit.html">KIT</a></li><li><a href="errores.html">ERRORES</a></li><li><a href="traza.html">TRAZA</a></li><li><a href="backtest.html" aria-current="page">BACKTEST</a></li><li><a href="glosario.html">GLOSARIO</a></li>
+  </ul></nav>
+<!-- /@nav -->
+
+  <p class="eyebrow">EJEMPLO · MEDIR UNA SEÑAL</p>
+  <h1>¿Habría funcionado la señal? Un backtest ingenuo y qué no prueba</h1>
+  <p class="lede">La pregunta de cualquier alumno después del <a href="paso-4.html">paso 4</a> es si comprar cuando la media corta cruza a la larga habría dado plata. Acá hay una prueba simple con AAPL del archivo de rescate. Lo importante no es el resultado: es ver <b>cuántas cosas pueden torcerlo</b> sin que nadie se dé cuenta.</p>
+  <div class="meta">
+    <span class="chip">1 ACTIVO · 252 RUEDAS</span>
+    <span class="chip">15 A 20 MIN</span>
+    <a class="chip" href="index.html#niveles">NIVEL DE IA <b>3 · VERIFICAR Y MEDIR</b></a>
+  </div>
+  <div class="note warn"><b>Esto no es una recomendación ni una prueba de que una estrategia funcione.</b> Los datos son simulados (<a href="rescate/finlab-AAPL.csv" download>finlab-AAPL.csv</a>) y el resultado de un activo en un año no dice nada sobre el futuro. Sirve para aprender a desconfiar de un backtest.</div>
+
+  <section class="block" aria-labelledby="regla">
+    <span class="num"></span>
+    <h2 id="regla">La regla que se prueba</h2>
+    <p>Se está <b>comprado</b> cuando la media de 20 ruedas (SMA 20) está por encima de la de 50 (SMA 50), y <b>afuera</b> cuando está por debajo. El retorno de cada día cuenta solo si ayer, al cierre, ya se estaba comprado. Se compara contra <b>comprar y mantener</b> durante el mismo período.</p>
+  </section>
+
+  <section class="block" aria-labelledby="resultado">
+    <span class="num"></span>
+    <h2 id="resultado">Qué da, y por qué no alcanza</h2>
+    <div class="mock" aria-label="Resultado de la regla con distintas medias móviles">
+      <table><thead><tr><th>MEDIAS</th><th>LA REGLA</th><th>COMPRAR Y MANTENER</th><th>CAMBIOS DE POSICIÓN</th></tr></thead>
+      <tbody>
+        <tr><td>20 / 50</td><td>78,6 %</td><td>78,6 %</td><td>1</td></tr>
+        <tr><td>10 / 30</td><td>62,3 %</td><td>91,9 %</td><td>7</td></tr>
+        <tr><td>5 / 20</td><td>70,6 %</td><td>100,0 %</td><td>11</td></tr>
+      </tbody></table>
+      <div class="mock-foot">Cada fila arranca cuando la media larga ya tiene datos, por eso “comprar y mantener” cambia de una fila a otra.</div>
+    </div>
+    <ul class="check">
+      <li><b>Con 20 / 50 da lo mismo que no hacer nada:</b> el activo subió casi sin pausa, entró una vez y se quedó. No hay nada que “acertar”.</li>
+      <li><b>Con otras medias da menos:</b> la misma regla, sobre el mismo activo, pasa de igualar a quedar casi 30 puntos abajo. Elegir las medias <em>después</em> de ver el resultado es lo que se llama ajustar a los datos.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="sesgos">
+    <span class="num"></span>
+    <h2 id="sesgos">Tres cosas que cambian el resultado sin avisar</h2>
+    <div class="mock" aria-label="Efecto de mirar el futuro y de los costos con medias 10 y 30">
+      <table><thead><tr><th>VARIANTE (MEDIAS 10 / 30)</th><th>RESULTADO</th></tr></thead>
+      <tbody>
+        <tr><td>correcta: la señal de ayer decide el retorno de hoy</td><td><b>62,3 %</b></td></tr>
+        <tr><td>con sesgo: la señal de hoy decide el retorno de hoy</td><td>72,9 %</td></tr>
+        <tr><td>correcta, con 0,1 % de costo por cada cambio de posición</td><td>61,2 %</td></tr>
+      </tbody></table>
+      <div class="mock-foot">La variante con sesgo “mira el futuro”: usa el cierre de hoy para decidir si ya estaba comprado hoy. En la vida real, esa señal recién se conoce al cierre.</div>
+    </div>
+    <ol class="do">
+      <li><b>Mirar el futuro.</b> Un desfase de un día en una fila de código sube el resultado 10 puntos. La IA lo comete con facilidad y el gráfico se ve igual de prolijo.</li>
+      <li><b>No contar los costos.</b> Siete cambios de posición con 0,1 % cada uno restan 1,1 puntos. Con más operaciones, más.</li>
+      <li><b>Mostrar solo la mejor.</b> Probar muchas combinaciones y presentar la que salió bien es el error de las tres filas de arriba.</li>
+    </ol>
+  </section>
+
+  <section class="block" aria-labelledby="prompt">
+    <span class="num"></span>
+    <h2 id="prompt">El prompt que lo hace bien</h2>
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">PROMPT · BACKTEST</span><div class="d">Para pedir la prueba y las advertencias a la vez.</div></div><button class="copy" data-copy="#bt" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="bt">Con el CSV adjunto (columna cierre), probá esta regla: estoy comprado cuando la SMA corta es mayor que la SMA larga y afuera en caso contrario.
+- el retorno de cada día cuenta solo si ayer, al cierre, ya estaba comprado (nada de usar la señal de hoy para el retorno de hoy)
+- descontá 0,1 % por cada cambio de posición
+- comparalo contra comprar y mantener en el mismo período, que arranca cuando la media larga tiene datos
+- probá tres combinaciones (20/50, 10/30, 5/20) y mostrame las tres, no solo la mejor
+- al final escribí tres límites de esta prueba: qué no dice sobre el futuro</pre></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="comprobar">
+    <span class="num"></span>
+    <h2 id="comprobar">Cómo comprobarlo</h2>
+    <ul class="check">
+      <li><b>Un día a mano:</b> elijan una fila y fíjense que el retorno que se cuenta use la señal de la fila <em>anterior</em>.</li>
+      <li><b>Con 20 / 50 da igual que comprar y mantener:</b> si el resultado difiere mucho, el código está mal.</li>
+      <li><b>Se muestran las tres combinaciones:</b> si la IA mostró una sola, pídanle las demás.</li>
+      <li><b>Los límites están escritos:</b> un activo, un año y datos simulados.</li>
+    </ul>
+    <p class="hint">Antes de confiar en un número, la <a href="errores.html">galería de errores de la IA</a> tiene cinco cuentas para recalcular. Para ver un comité de agentes discutir una decisión, la <a href="traza.html">traza</a>.</p>
+  </section>
+</main>
+
+<!-- @pie -->
+<footer>
+  FIN·LAB · material didáctico del posgrado de IA aplicada a Finanzas (UNLP) — taller de construcción guiada.<br>
+  Datos simulados con fines educativos. No es asesoramiento financiero.
+</footer>
+
+<script src="../automatizaciones/lab.js"></script>
+<script src="taller.js"></script>
+<!-- /@pie -->
+</body>
+</html>

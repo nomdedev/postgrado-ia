@@ -332,3 +332,30 @@ test('la galería de errores de la IA muestra los números que salen del CSV de 
   const pagina = fs.readFileSync(path.join(taller, 'errores.html'), 'utf8');
   for (const valor of esperados) assert.ok(pagina.includes(valor), `errores.html: no aparece ${valor} (recalculado desde finlab-AAPL.csv)`);
 });
+
+test('el backtest ingenuo muestra los números que salen del CSV de rescate', () => {
+  const taller = path.join(__dirname, '..', 'docs', 'taller');
+  const p = fs.readFileSync(path.join(taller, 'rescate', 'finlab-AAPL.csv'), 'utf8').trim().split('\n').slice(1).map((l) => Number(l.split(',')[1]));
+  const sma = (n) => p.map((_, i) => (i >= n - 1 ? p.slice(i - n + 1, i + 1).reduce((a, b) => a + b) / n : null));
+  // sesgo=true usa la señal de hoy para el retorno de hoy (mira el futuro)
+  const correr = (corta, larga, { sesgo = false, costo = 0 } = {}) => {
+    const c = sma(corta), l = sma(larga);
+    let regla = 1, mantener = 1, pos = 0, cambios = 0;
+    for (let i = larga; i < p.length; i++) {
+      const r = p[i] / p[i - 1] - 1;
+      const usar = (sesgo ? c[i] > l[i] : c[i - 1] > l[i - 1]) ? 1 : 0;
+      if (usar !== pos) { cambios++; regla *= 1 - costo; pos = usar; }
+      regla *= 1 + (usar ? r : 0);
+      mantener *= 1 + r;
+    }
+    return { regla: (regla - 1) * 100, mantener: (mantener - 1) * 100, cambios };
+  };
+  const coma = (n) => n.toFixed(1).replace('.', ',');
+  const pagina = fs.readFileSync(path.join(taller, 'backtest.html'), 'utf8');
+  const esperados = [];
+  for (const [c, l] of [[20, 50], [10, 30], [5, 20]]) { const r = correr(c, l); esperados.push(coma(r.regla), coma(r.mantener)); }
+  esperados.push(coma(correr(10, 30, { sesgo: true }).regla), coma(correr(10, 30, { costo: 0.001 }).regla));
+  for (const valor of esperados) assert.ok(pagina.includes(valor + ' %'), `backtest.html: no aparece ${valor} % (recalculado desde finlab-AAPL.csv)`);
+  assert.equal(correr(10, 30).cambios, 7);
+  assert.equal(correr(5, 20).cambios, 11);
+});

@@ -20,6 +20,7 @@ const PAGINAS = {
   'retos.html': { crumb: 'MENÚ DE RETOS', actual: 'retos' },
   'errores.html': { crumb: 'ERRORES DE LA IA EN FINANZAS', actual: 'errores' },
   'traza.html': { crumb: 'TRAZA DEL COMITÉ DE AGENTES', actual: 'traza' },
+  'backtest.html': { crumb: '¿HABRÍA FUNCIONADO LA SEÑAL?', actual: 'backtest' },
   ...Object.fromEntries(TITULOS.map((t, n) => [`paso-${n}.html`, { crumb: `${clase(n)} · PASO ${n} / ${ULTIMO} · ${t}`, actual: n }]))
 };
 
@@ -36,7 +37,7 @@ const nav = (p) => {
   const grupos = CLASES.map((c) => `<li class="sep">${c.nombre}</li>` +
     c.pasos.map((n) => item(`paso-${n}.html`, `P${n}`, p.actual === n)).join('')).join('');
   return `<nav class="steps" aria-label="Pasos del taller"><ul>
-    ${item('index.html', 'MAPA', p.actual === 'index')}${grupos}${item('retos.html', 'RETOS', p.actual === 'retos')}${item('kit.html', 'KIT', p.actual === 'kit')}${item('errores.html', 'ERRORES', p.actual === 'errores')}${item('traza.html', 'TRAZA', p.actual === 'traza')}${item('glosario.html', 'GLOSARIO', p.actual === 'glosario')}
+    ${item('index.html', 'MAPA', p.actual === 'index')}${grupos}${item('retos.html', 'RETOS', p.actual === 'retos')}${item('kit.html', 'KIT', p.actual === 'kit')}${item('errores.html', 'ERRORES', p.actual === 'errores')}${item('traza.html', 'TRAZA', p.actual === 'traza')}${item('backtest.html', 'BACKTEST', p.actual === 'backtest')}${item('glosario.html', 'GLOSARIO', p.actual === 'glosario')}
   </ul></nav>`;
 };
 
