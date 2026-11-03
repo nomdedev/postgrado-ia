@@ -107,3 +107,14 @@
   paint();
   syncDiagrams();
 })();
+
+// Una tabla que se desplaza en horizontal tiene que poder enfocarse para moverla con el teclado.
+(function () {
+  document.querySelectorAll('.tbl, .tabla-scroll').forEach(function (el) {
+    if (el.scrollWidth > el.clientWidth) {
+      el.tabIndex = 0;
+      el.setAttribute('role', 'region');
+      el.setAttribute('aria-label', 'Tabla con desplazamiento horizontal');
+    }
+  });
+})();

@@ -33,9 +33,9 @@ const nav = (p) => {
   const item = (href, texto, actual) => `<li><a href="${href}"${actual ? ' aria-current="page"' : ''}>${texto}</a></li>`;
   const grupos = CLASES.map((c) => `<li class="sep">${c.nombre}</li>` +
     c.pasos.map((n) => item(`paso-${n}.html`, `P${n}`, p.actual === n)).join('')).join('');
-  return `<nav class="steps" aria-label="Pasos del taller">
+  return `<nav class="steps" aria-label="Pasos del taller"><ul>
     ${item('index.html', 'MAPA', p.actual === 'index')}${grupos}${item('retos.html', 'RETOS', p.actual === 'retos')}${item('kit.html', 'KIT', p.actual === 'kit')}${item('glosario.html', 'GLOSARIO', p.actual === 'glosario')}
-  </nav>`;
+  </ul></nav>`;
 };
 
 const pie = () => `<footer>

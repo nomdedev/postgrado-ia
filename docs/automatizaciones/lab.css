@@ -50,7 +50,7 @@ code,pre,kbd{font-family:var(--mono)}
 /* ---------- Barra superior ---------- */
 .top{position:sticky;top:0;z-index:20;background:rgba(11,15,19,.93);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
 @media (prefers-color-scheme: light){.top{background:rgba(242,245,242,.94)}}
-.top-in{max-width:var(--w);margin:0 auto;padding:11px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.top-in{flex-wrap:wrap;max-width:var(--w);margin:0 auto;padding:11px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px}
 .brand{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--mut)}
 .brand b{color:var(--txt);letter-spacing:.04em;font-family:var(--sans);font-size:14px}
 .brand-dot{width:8px;height:8px;border-radius:50%;background:var(--amb)}
