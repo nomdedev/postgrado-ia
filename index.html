@@ -24,7 +24,7 @@
   --bg:#0B0F13; --bg2:#0A0E13; --panel:#0F151D; --panel2:#121A23; --panel3:#0D131A;
   --line:#1D2A36; --line2:#28394A;
   --txt:#D8E1E9; --mut:#7E8FA0; --dim:#6E8194;
-  --amb:#FFB020; --amb-soft:rgba(255,176,32,.09);
+  --amb:#FFB020; --amb-soft:rgba(255,176,32,.09); --on-amb:#0B0F13;
   --up:#2EBD85; --up-soft:rgba(46,189,133,.10);
   --dn:#F6465D; --dn-soft:rgba(246,70,93,.10);
   --teal:#4DC5B6;
@@ -36,7 +36,7 @@ html[data-theme="light"]{
   --bg:#F2F5F2; --bg2:#E8EDE9; --panel:#FFFFFF; --panel2:#F6F8F6; --panel3:#EDF1EE;
   --line:#CDD7D1; --line2:#AEBDB5;
   --txt:#1B2924; --mut:#52645C; --dim:#5A6A63;
-  --amb:#A95D00; --amb-soft:rgba(169,93,0,.09);
+  --amb:#9A5400; --amb-soft:rgba(154,84,0,.09); --on-amb:#fff;
   --up:#147454; --up-soft:rgba(20,116,84,.09);
   --dn:#C23B4B; --dn-soft:rgba(194,59,75,.08);
   --teal:#087A82;
@@ -136,13 +136,13 @@ input,select,textarea{font-family:var(--mono);color:var(--txt)}
 .mono{font-family:var(--mono)}
 .dim{color:var(--dim)}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-.skip{position:absolute;left:12px;top:-60px;z-index:300;background:var(--amb);color:#0B0F13;font:600 12px var(--mono);padding:10px 14px;border-radius:4px;transition:top .15s}
+.skip{position:absolute;left:12px;top:-60px;z-index:300;background:var(--amb);color:var(--on-amb);font:600 12px var(--mono);padding:10px 14px;border-radius:4px;transition:top .15s}
 .skip:focus{top:12px}
 
 /* ---------- Botones ---------- */
 .btn{display:inline-flex;align-items:center;gap:7px;background:transparent;border:1px solid var(--line2);color:var(--txt);border-radius:4px;padding:7px 13px;font-size:11px;letter-spacing:.06em;transition:.15s}
 .btn:hover{border-color:var(--amb);color:var(--amb)}
-.btn-primary{background:var(--amb);border-color:var(--amb);color:#0B0F13;font-weight:700}
+.btn-primary{background:var(--amb);border-color:var(--amb);color:var(--on-amb);font-weight:700}
 .btn-primary:hover{background:#FFC24D;color:#0B0F13}
 .btn-danger:hover{border-color:var(--dn);color:var(--dn)}
 .btn-sm{padding:5px 9px;font-size:11px}
@@ -185,7 +185,7 @@ tbody tr{transition:background .12s}
 .mb-l{font-family:var(--mono);font-size:11px;letter-spacing:.15em;color:var(--dim)}
 .mb-v{font-family:var(--mono);font-size:17px;font-weight:600}
 .mkt-grid{display:grid;grid-template-columns:1fr 400px;gap:18px;align-items:start}
-@media(max-width:1080px){.mkt-grid{grid-template-columns:1fr}}
+@media(max-width:1080px){.mkt-grid{grid-template-columns:minmax(0,1fr)}}
 
 /* Detalle del ticker */
 .tk-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;padding:16px 18px 14px;flex-wrap:wrap}
@@ -216,7 +216,7 @@ tbody tr{transition:background .12s}
 
 /* ---------- Carteras ---------- */
 .pf-grid{display:grid;grid-template-columns:330px 1fr;gap:18px;align-items:start}
-@media(max-width:1080px){.pf-grid{grid-template-columns:1fr}}
+@media(max-width:1080px){.pf-grid{grid-template-columns:minmax(0,1fr)}}
 .preset-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
 .wrow{display:flex;align-items:center;gap:10px;padding:7px 4px;border-bottom:1px solid rgba(29,42,54,.5)}
 .wrow:last-child{border-bottom:none}
@@ -232,7 +232,7 @@ tbody tr{transition:background .12s}
 .rcbar i{display:block;height:100%;background:var(--amb);border-radius:2px}
 
 /* ---------- Código Python / JSON ---------- */
-.codebox{border:1px solid var(--line);border-radius:6px;background:var(--bg2);overflow:hidden}
+.codebox{border:1px solid var(--line);border-radius:6px;background:var(--bg2);overflow:hidden;min-width:0;max-width:100%}
 .codebox-h{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 12px;border-bottom:1px solid var(--line);background:var(--panel3)}
 .codebox-t{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.1em;display:flex;align-items:center;gap:8px}
 .codebox-h .acts{display:flex;gap:6px}
@@ -253,7 +253,7 @@ tbody tr{transition:background .12s}
 .expl-code{font-family:var(--mono);font-size:11px;color:var(--teal);flex:none;min-width:0;max-width:46%;overflow-wrap:break-word}
 .expl-txt{font-size:12.5px;color:var(--mut);line-height:1.5}
 .py-step{display:grid;grid-template-columns:1.35fr 1fr;gap:18px;margin-bottom:26px;align-items:start}
-@media(max-width:1000px){.py-step{grid-template-columns:1fr}}
+@media(max-width:1000px){.py-step{grid-template-columns:minmax(0,1fr)}}
 .py-step-h{display:flex;gap:14px;align-items:baseline;margin-bottom:12px}
 .py-step-h .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--amb);letter-spacing:.1em}
 .py-step-h h3{font-size:17px}
@@ -261,7 +261,7 @@ tbody tr{transition:background .12s}
 
 /* ---------- API / playground ---------- */
 .api-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
-@media(max-width:1000px){.api-grid{grid-template-columns:1fr}}
+@media(max-width:1000px){.api-grid{grid-template-columns:minmax(0,1fr)}}
 .ep{border:1px solid var(--line);border-radius:6px;background:var(--panel);overflow:hidden;margin-bottom:12px}
 .ep-h{display:flex;align-items:center;gap:10px;padding:10px 13px;border-bottom:1px solid var(--line);flex-wrap:wrap}
 .ep-m{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.1em;padding:3px 8px;border-radius:3px}
@@ -364,7 +364,7 @@ tbody tr{transition:background .12s}
 .wl-need code{font-family:var(--mono);color:var(--amb)}
 .wl-legal{margin-top:16px;font-size:12px;color:var(--dim)}
 /* Modo presentación de la bienvenida (Presentacion, abajo): 4 diapositivas con los mismos datos de la página. */
-.pres-open{display:inline-flex;align-items:center;gap:6px;background:var(--amb);border:1px solid var(--amb);color:#0B0F13;border-radius:999px;padding:5px 12px;font:600 12px var(--sans);cursor:pointer}
+.pres-open{display:inline-flex;align-items:center;gap:6px;background:var(--amb);border:1px solid var(--amb);color:var(--on-amb);border-radius:999px;padding:5px 12px;font:600 12px var(--sans);cursor:pointer}
 .pres-wl{position:fixed;inset:0;z-index:200;background:var(--bg);display:grid;grid-template-rows:1fr auto;gap:18px;padding:clamp(18px,3vw,44px);animation:pres-wl-in .18s ease-out}
 @keyframes pres-wl-in{from{opacity:0}to{opacity:1}}
 .pres-wl-slide{display:flex;flex-direction:column;justify-content:center;gap:20px;width:100%;max-width:1100px;margin:0 auto;overflow:auto}
@@ -436,12 +436,13 @@ html[data-theme="light"] .exercise-feedback.retry{background:var(--amb-soft)}
 @media(max-width:850px){.guide-flow{grid-template-columns:1fr}.guide-step{min-height:0}.guide-step:not(:last-child):after{display:block;content:'↓';right:14px;top:auto;bottom:-19px;z-index:1}.group-roles{grid-template-columns:repeat(2,minmax(0,1fr))}.exercise{grid-template-columns:1fr;gap:12px}.hd-in{padding:10px 16px;flex-wrap:wrap}.hd-right{width:100%;flex-wrap:wrap;gap:8px}.db-pill{flex:1 1 auto}.clock{margin-left:auto}.nav{padding:0 14px}.nav a{flex:none;white-space:nowrap}.pres-open{display:none}}
 @media(max-width:600px){.wrap{padding:20px 14px 48px}.guide-intro{padding-top:8px}.guide-intro h1{font-size:22px}.guide-flag{white-space:normal;line-height:1.5}.guide-actions{display:grid;grid-template-columns:1fr}.guide-actions .btn{justify-content:center;min-height:44px}.guide-json pre{font-size:11px}.group-lab-head{display:block}.group-lab-head h3{font-size:18px}.group-time{display:inline-block;margin-top:10px}.group-roles{grid-template-columns:1fr 1fr}.group-role{padding:10px}.exercise{padding:13px}.exercise-controls{align-items:stretch;flex-direction:column}.exercise-controls select,.exercise-controls .btn{width:100%;min-height:44px}.hd-right{display:grid;grid-template-columns:1fr auto auto}.db-pill{grid-column:1/-1}.hd-btn{justify-content:center;min-height:40px}.theme-btn{min-height:40px}.clock{margin-left:0;padding-left:8px;font-size:11px}.nav{padding:0 10px}.nav a{padding:12px 11px;font-size:11px}}
 .doc-sec{margin-bottom:34px}
-.doc-sec h3{font-size:16px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.doc-sec h3{font-size:16px;margin-bottom:10px;display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;overflow-wrap:anywhere}
 .doc-sec h3 .k{font-family:var(--mono);font-size:11px;color:var(--amb);border:1px solid rgba(255,176,32,.4);border-radius:3px;padding:2px 7px;letter-spacing:.1em}
 .doc-sec p,.doc-sec li{color:var(--mut);font-size:13px;line-height:1.7}
 .doc-sec ul,.doc-sec ol{padding-left:20px;margin:8px 0}
 .doc-sec code{font-family:var(--mono);font-size:11.5px;background:var(--bg2);border:1px solid var(--line);border-radius:3px;padding:1px 6px;color:var(--teal)}
 .param-tbl td,.param-tbl th{text-align:left;font-size:11.5px}
+.tscroll{overflow-x:auto;max-width:100%}
 footer{max-width:1440px;margin:50px auto 0;border-top:1px solid var(--line);padding:22px 28px 60px;font-family:var(--mono);font-size:10.5px;color:var(--dim);letter-spacing:.04em;line-height:1.8}
 #contenido:focus{outline:0}
 .mono-num{font-variant-numeric:tabular-nums}
@@ -1941,10 +1942,10 @@ function GroupExercises({signal}){
         <span className="group-time">15 MIN · {score}/3 RESUELTOS</span>
       </div>
       <div className="group-roles" role="group" aria-label="Roles sugeridos para el grupo">
-        <div className="group-role"><b>Coordina</b><span>Lee la consigna y reparte turnos para opinar.</span></div>
-        <div className="group-role"><b>Sigue el flujo</b><span>Señala en qué paso se encuentra la automatización.</span></div>
-        <div className="group-role"><b>Opera n8n</b><span>Prueba el JSON importado cuando el grupo acuerda.</span></div>
-        <div className="group-role"><b>Relata</b><span>Resume qué aprendieron y qué falta para producción.</span></div>
+        <div className="group-role"><b>Redactor</b><span>Lee la consigna y reparte turnos para opinar.</span></div>
+        <div className="group-role"><b>Auditor</b><span>Señala en qué paso está la automatización y si cada respuesta se puede comprobar.</span></div>
+        <div className="group-role"><b>Piloto</b><span>Opera n8n: prueba el JSON importado cuando el grupo acuerda.</span></div>
+        <div className="group-role"><b>Presentador</b><span>Resume qué aprendieron y qué falta para producción.</span></div>
       </div>
       <div className="exercise-list">
         {TEAM_EXERCISES.map((ex,index)=>{
@@ -2068,13 +2069,13 @@ function DocsPage({notify}){
       <div className="doc-sec">
         <h3><span className="k">GET</span>/api/market/summary</h3>
         <p>Resumen de mercado de los 8 tickers con señales técnicas. Sin parámetros.</p>
-        <table className="param-tbl"><thead><tr><th>CAMPO (data)</th><th>TIPO</th><th>DESCRIPCIÓN</th></tr></thead>
+        <div className="tscroll"><table className="param-tbl"><thead><tr><th>CAMPO (data)</th><th>TIPO</th><th>DESCRIPCIÓN</th></tr></thead>
         <tbody>
           <tr><td><code>index.level / change_pct</code></td><td>number</td><td>Índice sintético FINLAB-8 (igual-ponderado, base 100) y variación diaria.</td></tr>
           <tr><td><code>breadth.advancing / declining</code></td><td>int</td><td>Cantidad de activos que suben / bajan en la sesión.</td></tr>
           <tr><td><code>tickers[]</code></td><td>array</td><td>Por activo: <code>last, change, change_pct, volume, rsi14, sma20, sma50, signal</code>.</td></tr>
           <tr><td><code>tickers[].signal</code></td><td>string</td><td><code>COMPRA</code> · <code>VENTA</code> · <code>NEUTRAL</code> (doble cruce SMA20/50 + EMA12/26).</td></tr>
-        </tbody></table>
+        </tbody></table></div>
         <div className="curl" style={{marginTop:10}}>{curlBase}/api/market/summary</div>
         <div style={{marginTop:10}}><CodeBox title="RESPUESTA DE EJEMPLO (RECORTADA)" code={exSummary} lang="json" onCopy={()=>notify('Ejemplo copiado')}/></div>
       </div>
@@ -2082,11 +2083,11 @@ function DocsPage({notify}){
       <div className="doc-sec">
         <h3><span className="k">GET</span>/api/portfolio/analyze</h3>
         <p>Analiza una cartera ad-hoc sin persistirla.</p>
-        <table className="param-tbl"><thead><tr><th>PARÁMETRO</th><th>TIPO</th><th>DESCRIPCIÓN</th></tr></thead>
+        <div className="tscroll"><table className="param-tbl"><thead><tr><th>PARÁMETRO</th><th>TIPO</th><th>DESCRIPCIÓN</th></tr></thead>
         <tbody>
           <tr><td><code>tickers</code></td><td>string (query)</td><td>Lista separada por comas. Mínimo 2. Ej: <code>GGAL,YPF,AAPL</code>.</td></tr>
           <tr><td><code>weights</code></td><td>string (query)</td><td>Pesos separados por comas, misma cantidad que tickers. Si no suman 1 se normalizan (<code>meta.weights_normalized = true</code>).</td></tr>
-        </tbody></table>
+        </tbody></table></div>
         <div className="curl" style={{marginTop:10}}>{`curl "http://localhost:8000/api/portfolio/analyze?tickers=AAPL,MSFT&weights=0.5,0.5"`}</div>
         <div style={{marginTop:10}}><CodeBox title="RESPUESTA DE EJEMPLO (RECORTADA)" code={exPortfolio} lang="json" onCopy={()=>notify('Ejemplo copiado')}/></div>
         <p style={{marginTop:8}}><b>Nota:</b> <code>history_sample</code> devuelve ~24 puntos muestreados para legibilidad; todas las métricas se calculan sobre los 252 días completos.</p>
@@ -2102,13 +2103,13 @@ function DocsPage({notify}){
       <div className="doc-sec">
         <h3><span className="k">POST</span>/api/alerts &nbsp;·&nbsp; <span className="k">GET</span>/api/alerts &nbsp;·&nbsp; <span className="k">DELETE</span>/api/alerts/:id</h3>
         <p>Ciclo completo de reglas de alerta sobre la base de datos.</p>
-        <table className="param-tbl"><thead><tr><th>CAMPO (body)</th><th>TIPO</th><th>DESCRIPCIÓN</th></tr></thead>
+        <div className="tscroll"><table className="param-tbl"><thead><tr><th>CAMPO (body)</th><th>TIPO</th><th>DESCRIPCIÓN</th></tr></thead>
         <tbody>
           <tr><td><code>ticker</code></td><td>string</td><td>Uno de: AAPL, MSFT, JNJ, KO, PG, GGAL, YPF, PAM.</td></tr>
           <tr><td><code>condition</code></td><td>enum</td><td><code>PRECIO_MENOR_QUE</code> · <code>PRECIO_MAYOR_QUE</code> · <code>RSI_MENOR_QUE</code> · <code>RSI_MAYOR_QUE</code>.</td></tr>
           <tr><td><code>threshold</code></td><td>number</td><td>Umbral de comparación (precio en USD o nivel de RSI 0–100).</td></tr>
           <tr><td><code>note</code></td><td>string?</td><td>Opcional. Nota libre para el operador.</td></tr>
-        </tbody></table>
+        </tbody></table></div>
         <div className="curl" style={{marginTop:10}}>{`${curlBase} -X POST /api/alerts \\
   -H "Content-Type: application/json" \\
   -d '{"ticker":"GGAL","condition":"RSI_MENOR_QUE","threshold":30}'`}</div>
@@ -2283,7 +2284,7 @@ function Welcome(){
           <span className="wl-flag">TALLER EN GRUPO · NO HACE FALTA SABER PROGRAMAR</span>
           <h1>Construyan su propia terminal financiera, con IA</h1>
           <p>En dos clases le van a pedir el código a una IA, paso a paso, y van a <b>comprobar que los números estén bien</b>. Terminan con una terminal como esta: precios, indicadores, riesgo de carteras y una alerta que llega sola. Es lo que un analista mira todos los días, armado por ustedes.</p>
-          <ul className="wl-meta"><li><b>2 clases</b> de unas 2 h 15</li><li>grupos de <b>3 o 4</b></li><li>sin instalar nada</li></ul>
+          <ul className="wl-meta"><li><b>2 clases</b> de unas 2 h 30</li><li>grupos de <b>3 o 4</b></li><li>sin instalar nada</li></ul>
           <div className="wl-cta">
             <a className="btn btn-primary wl-go" href="docs/taller/paso-0.html">EMPEZAR EL TALLER · PASO 0 →</a>
             <a className="wl-link" href="docs/taller/index.html">¿Vienen de otra clase? Retomar donde quedaron</a>
@@ -2331,6 +2332,7 @@ function Presentacion({setAbierto}){
     // Pantalla completa si el navegador la permite (file:// o un iframe pueden negarla).
     if(el.requestFullscreen) el.requestFullscreen().catch(()=>{});
     const teclas=e=>{
+      if((e.key==='Enter'||e.key===' ')&&e.target.closest&&e.target.closest('button'))return; // los botones de la presentación responden a Enter y Espacio
       const avanza=['ArrowRight','ArrowDown','PageDown',' ','Enter'], vuelve=['ArrowLeft','ArrowUp','PageUp','Backspace'];
       if(avanza.includes(e.key)){e.preventDefault();setI(v=>Math.min(TOTAL-1,v+1));}
       else if(vuelve.includes(e.key)){e.preventDefault();setI(v=>Math.max(0,v-1));}

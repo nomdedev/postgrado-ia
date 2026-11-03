@@ -44,7 +44,7 @@
     <p>Tres agentes encadenados en n8n y una pregunta de inversión que pasa por los tres. El resultado es un informe corto que dice <b>qué se analizó, qué reparos hay y qué se decidió</b>, con los números de la API a la vista.</p>
     <div class="mock" aria-label="Ejemplo de salida del consejo de agentes">
       <table><thead><tr><th>ROL</th><th>APORTA</th><th>EJEMPLO</th></tr></thead>
-      <tbody><tr><td>Analista</td><td>los datos y una propuesta</td><td>“Moderada: Sharpe 0,84, la mejor de las tres”</td></tr><tr><td>Auditor</td><td>el supuesto que falta</td><td>“los datos son simulados; el Sharpe no se sostiene en una crisis”</td></tr><tr><td>Redactor</td><td>la respuesta en 5 líneas</td><td>informe con el reparo incluido, sin recomendación</td></tr></tbody></table>
+      <tbody><tr><td>Analista</td><td>los datos y una propuesta</td><td>“Mantener 40 % KO, 30 % JNJ y 30 % GGAL: subió 0,56 % hoy”</td></tr><tr><td>Auditor</td><td>el supuesto que falta</td><td>“los datos son simulados; JNJ tiene señal VENTA y RSI 28,1 y la propuesta la mantiene”</td></tr><tr><td>Redactor</td><td>la respuesta en 5 líneas</td><td>informe con el reparo incluido, sin recomendación</td></tr></tbody></table>
       <div class="mock-foot">Sin el auditor, el informe sale limpio y engañoso. El rol que molesta es el que agrega valor.</div>
     </div>
   </section>
@@ -67,7 +67,7 @@
     <h2 id="prompt">El prompt</h2>
     <div class="prompt">
       <div class="prompt-h"><div><span class="t">PROMPT · PASO 13</span><div class="d">Para diseñar los roles del consejo.</div></div><button class="copy" data-copy="#p13" type="button">COPIAR</button></div>
-      <div class="prompt-b"><pre id="p13">Paso 13 de un taller de finanzas con n8n. Tengo un agente que consulta la API del curso y calcula Sharpe.
+      <div class="prompt-b"><pre id="p13">Paso 13 de un taller de finanzas con n8n. Tengo un agente que consulta la API del curso y hace cuentas con una calculadora.
 
 Quiero armar un consejo de tres agentes encadenados: analista → auditor → redactor.
 
@@ -89,7 +89,7 @@ Después decime qué pregunta de prueba hace visible la diferencia entre un solo
       <li><b>Dupliquen el agente del paso 12</b> tres veces en el mismo workflow: analista, auditor y redactor.</li>
       <li><b>Cambien solo el prompt de sistema</b> de cada uno, con las reglas del prompt de arriba.</li>
       <li><b>Encadénenlos</b>: la salida del analista entra al auditor, y la de los dos al redactor.</li>
-      <li><b>Hagan una pregunta de inversión</b> con datos de la API: “¿qué cartera conviene para un perfil moderado hoy?”.</li>
+      <li><b>Hagan una pregunta de inversión</b> con datos de la API: “Tengo 40 % KO, 30 % JNJ y 30 % GGAL: ¿qué reparos hay antes de mantenerla hoy?”.</li>
       <li><b>Comparen con el paso 12:</b> corran la misma pregunta con un solo agente y guarden las dos respuestas.</li>
       <li><b>Marquen el reparo</b> que encontró el auditor. Si no encontró ninguno, revisen si los roles están realmente diferenciados.</li>
     </ol>
@@ -100,7 +100,7 @@ Después decime qué pregunta de prueba hace visible la diferencia entre un solo
     <h2 id="comprobar">Cómo comprobar</h2>
     <ul class="check">
       <li><b>El auditor agrega algo:</b> el informe final menciona al menos un supuesto, un dato faltante o un límite del análisis.</li>
-      <li><b>Los números son de la API:</b> el Sharpe y los precios citados coinciden con la pestaña Carteras.</li>
+      <li><b>Los números son de la API:</b> los precios, el RSI y las señales citados coinciden con <span class="code-inline">/api/market/summary</span> (en la muestra de clase: KO 66,09 · JNJ 117,88 · GGAL 28,75).</li>
       <li><b>No hay recomendación:</b> el texto describe métricas; no dice “comprá” ni “vendé”.</li>
       <li><b>El costo se justifica:</b> la respuesta es mejor que la del paso 12. Si no lo es, el consejo sobra.</li>
     </ul>

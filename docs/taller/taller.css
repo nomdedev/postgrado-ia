@@ -7,9 +7,9 @@
 .prompt.collapsed .prompt-b{display:none}
 .prompt-b pre{font-family:var(--sans);font-size:14px;line-height:1.6}   /* los prompts son texto en castellano */
 .prompt.code .prompt-b pre,.prompt[data-open] .prompt-b pre{font-family:var(--mono);font-size:12.5px}
-.copy{background:var(--amb);border-color:var(--amb);color:#0B0F13;font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.03em;padding:8px 16px;border-radius:6px}
+.copy{background:var(--amb);border-color:var(--amb);color:var(--on-amb);font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.03em;padding:8px 16px;border-radius:6px}
 .copy:hover{filter:brightness(1.08);color:#0B0F13}
-.copy.done{background:var(--up);border-color:var(--up);color:#fff}
+.copy.done{background:var(--up);border-color:var(--up);color:var(--on-amb)}
 .copy.mini{font-size:11px;padding:3px 9px;margin-left:6px;vertical-align:middle}
 .peek{background:transparent;border:1px solid var(--line2);color:var(--mut);border-radius:6px;padding:7px 12px;font:600 12px var(--sans);cursor:pointer}
 .peek:hover{border-color:var(--amb);color:var(--amb)}
@@ -141,7 +141,7 @@ main.page{counter-reset:seccion}
 .viz-svg [class*="-fill"]:hover,.viz-svg path.v-line:hover{opacity:.8}
 
 /* ---------- Modo presentación (taller.js) ---------- */
-.present-btn{background:var(--amb);border:1px solid var(--amb);color:#0B0F13;border-radius:999px;padding:5px 12px;font:600 12px var(--sans);cursor:pointer}
+.present-btn{background:var(--amb);border:1px solid var(--amb);color:var(--on-amb);border-radius:999px;padding:5px 12px;font:600 12px var(--sans);cursor:pointer}
 .present-btn:hover{filter:brightness(1.08)}
 .pres{position:fixed;inset:0;z-index:1000;display:grid;grid-template-rows:1fr auto;background:var(--bg);color:var(--txt)}
 .pres:focus{outline:none}

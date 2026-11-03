@@ -35,7 +35,7 @@
       "parameters": {
         "mode": "runOnceForAllItems",
         "language": "javaScript",
-        "jsCode": "// Convierte la respuesta de la API en un texto plano y verificable.\nconst d = $input.first().json.data;\nif (!d || !Array.isArray(d.tickers)) {\n  throw new Error('La API no devolvió la lista de activos.');\n}\n\nconst lineas = d.tickers.map((t) => t.symbol + ': ' + t.last + ' USD (' + t.change_pct + '%), RSI ' + t.rsi14 + ', señal ' + t.signal);\nconst hechos = [\n  'Sesión: ' + d.session,\n  'Índice ' + d.index.name + ': ' + d.index.level + ' (' + d.index.change_pct + '%)',\n  'Amplitud: ' + d.breadth.advancing + ' al alza / ' + d.breadth.declining + ' a la baja',\n  '',\n  ...lineas\n].join('\\n');\n\nreturn [{ json: { hechos } }];"
+        "jsCode": "// Convierte la respuesta de la API en un texto plano y verificable.\nconst d = $input.first().json.data;\nif (!d || !Array.isArray(d.tickers)) {\n  throw new Error('La API no devolvió la lista de activos.');\n}\n\nconst lineas = d.tickers.map((t) => t.symbol + ': ' + t.last + ' USD (' + t.change_pct + '%), RSI ' + t.rsi14 + ', señal ' + t.signal);\nconst hechos = [\n  'AVISO: datos simulados de una muestra educativa fija, no son cotizaciones reales.',\n  'Sesión: ' + d.session,\n  'Índice ' + d.index.name + ': ' + d.index.level + ' (' + d.index.change_pct + '%)',\n  'Amplitud: ' + d.breadth.advancing + ' al alza / ' + d.breadth.declining + ' a la baja',\n  '',\n  ...lineas\n].join('\\n');\n\nreturn [{ json: { hechos } }];"
       },
       "id": "3c000000-0000-4000-8000-000000000003",
       "name": "Preparar hechos",
@@ -51,7 +51,7 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ model: 'gpt-4o-mini', temperature: 0.2, messages: [{ role: 'system', content: 'Sos un analista que redacta informes breves de mercado. Usá SOLO los datos que recibís. Si falta un dato, escribí \"sin dato\". Máximo 160 palabras. No des recomendaciones de inversión ni predigas precios.' }, { role: 'user', content: $json.hechos }] }) }}",
+        "jsonBody": "={{ JSON.stringify({ model: 'gpt-4o-mini', temperature: 0.2, messages: [{ role: 'system', content: 'Sos un analista que redacta informes breves de mercado. Usá SOLO los datos que recibís. Si falta un dato, escribí \"sin dato\". Máximo 160 palabras. Aclará al comienzo que los datos son simulados. No des recomendaciones de inversión ni predigas precios.' }, { role: 'user', content: $json.hechos }] }) }}",
         "options": {
           "timeout": 60000
         }
@@ -66,7 +66,7 @@
       "parameters": {
         "mode": "runOnceForAllItems",
         "language": "javaScript",
-        "jsCode": "// Se queda solo con el texto del modelo y falla fuerte si vino vacío.\nconst respuesta = $input.first().json;\nconst texto = respuesta.choices && respuesta.choices[0] && respuesta.choices[0].message\n  ? respuesta.choices[0].message.content\n  : '';\n\nif (!texto) {\n  throw new Error('El modelo no devolvió texto. Revisá la credencial, el nombre del modelo y el saldo de la cuenta.');\n}\n\nreturn [{ json: { texto: texto.trim() } }];"
+        "jsCode": "// Se queda solo con el texto del modelo y falla fuerte si vino vacío.\nconst respuesta = $input.first().json;\nconst texto = respuesta.choices && respuesta.choices[0] && respuesta.choices[0].message\n  ? respuesta.choices[0].message.content\n  : '';\n\nif (!texto) {\n  throw new Error('El modelo no devolvió texto. Revisá la credencial, el nombre del modelo y el saldo de la cuenta.');\n}\n\n// El aviso va fijo en el código para que no dependa de lo que escriba el modelo.\nconst aviso = '\\n\\n---\\nDatos simulados de una muestra educativa fija. No es una recomendación de inversión.';\n\nreturn [{ json: { texto: texto.trim() + aviso } }];"
       },
       "id": "3c000000-0000-4000-8000-000000000005",
       "name": "Armar informe",

@@ -44,7 +44,7 @@
     <p>Un nodo <em>AI Agent</em> en n8n con un <a class="w" href="glosario.html#prompt-sistema">prompt de sistema</a>, dos herramientas conectadas y un tope de pasos. Le preguntan algo que <b>solo se puede responder consultando la API</b> y el agente elige la herramienta correcta.</p>
     <div class="mock" aria-label="Ejemplo de la traza de un agente">
       <table><thead><tr><th>PASO</th><th>QUÉ HIZO</th><th>RESULTADO</th></tr></thead>
-      <tbody><tr><td>1</td><td>eligió <em>HTTP Request</em> a /api/market/summary</td><td>8 activos, con RSI y señal</td></tr><tr><td>2</td><td>eligió <em>Calculadora</em> para comparar dos carteras</td><td>Sharpe de cada una</td></tr><tr><td>3</td><td>respondió con los números de la API</td><td>“Moderada, Sharpe 0,84”</td></tr></tbody></table>
+      <tbody><tr><td>1</td><td>eligió <em>HTTP Request</em> a /api/market/summary</td><td>8 activos, con RSI y señal</td></tr><tr><td>2</td><td>eligió <em>Calculadora</em> para ponderar la variación de cada activo</td><td>variación de la cartera: +0,56 %</td></tr><tr><td>3</td><td>respondió con los números de la API</td><td>“La cartera subió 0,56 %; JNJ tiene señal VENTA”</td></tr></tbody></table>
       <div class="mock-foot">La traza es lo que hay que mirar: muestra qué herramienta eligió y en qué orden. Si no usó ninguna, no es un agente: es un prompt.</div>
     </div>
   </section>
@@ -75,13 +75,13 @@
 Ayudame a escribir el prompt de sistema con estas reglas:
 - solo puede responder con datos que traiga de una herramienta; si no los tiene, dice que no los tiene
 - tiene dos herramientas: GET /api/market/summary (los 8 activos con precio, RSI y señal) y una calculadora
-- para comparar carteras usa la calculadora; para precios y señales usa la API
+- para ponderar una cartera (variación del día) usa la calculadora; para precios, RSI y señales usa la API
 - no puede dar consejos de inversión: describe los datos y las métricas
 - máximo 6 pasos; si no alcanzan, responde lo que tiene y aclara qué faltó
 
 Después decime qué tres preguntas de prueba muestran si el agente eligió bien las herramientas, y qué mirar en la traza para saberlo.</pre></div>
     </div>
-    <div class="note tip"><b>Puente con el proyecto real:</b> el agente de la pestaña <span class="code-inline">06 · Agentes</span> de la terminal está guionado, pero consulta la API real. Cuando le conectan un modelo con la credencial del paso 10, pasa a decidir de verdad. El prompt de sistema es lo que mantiene ese cambio bajo control.</div>
+    <div class="note tip"><b>Puente con el proyecto real:</b> el agente de la pestaña <span class="code-inline">06 · Agentes</span> de la terminal está guionado, pero consulta una API interna que devuelve la misma muestra fija que la pública. Cuando le conectan un modelo con la credencial del paso 10, pasa a decidir de verdad. El prompt de sistema es lo que mantiene ese cambio bajo control.</div>
   </section>
 
   <section class="block" aria-labelledby="hacer">
@@ -91,9 +91,9 @@ Después decime qué tres preguntas de prueba muestran si el agente eligió bien
       <li><b>Agreguen un nodo AI Agent</b> y conéctenle la credencial del paso 10 y el modelo elegido en el paso 11.</li>
       <li><b>Peguen el prompt de sistema</b> en el campo correspondiente, antes de conectar herramientas.</li>
       <li><b>Agreguen la herramienta HTTP Request</b> apuntando a <span class="code-inline">/api/market/summary</span> de su terminal publicada.</li>
-      <li><b>Agreguen la calculadora</b> (o un nodo Code que haga las cuentas de Sharpe) como segunda herramienta.</li>
+      <li><b>Agreguen la calculadora</b> (o un nodo Code que haga las cuentas) como segunda herramienta.</li>
       <li><b>Pongan el tope de pasos</b> en 6 y guarden.</li>
-      <li><b>Pregunten algo concreto:</b> “¿cuál de las tres carteras tiene mejor Sharpe hoy?” y abran la traza.</li>
+      <li><b>Pregunten algo concreto:</b> “Mi cartera es 40 % KO, 30 % JNJ y 30 % GGAL: ¿cuánto varió hoy y qué señal tiene cada activo?” y abran la traza. La cuenta a mano: 0,4 × 0,82 + 0,3 × 0,25 + 0,3 × 0,52 = 0,56 %.</li>
       <li><b>Repitan con una pregunta imposible</b> (“¿cuánto va a valer AAPL mañana?”) y comprueben que no inventa.</li>
     </ol>
   </section>
@@ -103,7 +103,7 @@ Después decime qué tres preguntas de prueba muestran si el agente eligió bien
     <h2 id="comprobar">Cómo comprobar</h2>
     <ul class="check">
       <li><b>Usó una herramienta:</b> la traza muestra al menos una consulta a la API antes de responder.</li>
-      <li><b>Los números coinciden:</b> el precio y el RSI de la respuesta son los mismos que muestra la pestaña Mercado.</li>
+      <li><b>Los números coinciden:</b> el precio, el RSI y la señal de la respuesta son los que devuelve <span class="code-inline">/api/market/summary</span> (ábranla en el navegador y busquen el mismo activo). La variación de la cartera da 0,56 % con una calculadora.</li>
       <li><b>No inventa:</b> con la API caída o una pregunta sobre el futuro, aclara que no tiene el dato.</li>
       <li><b>Se detiene:</b> la traza no pasa de 6 pasos y la respuesta final llega igual.</li>
     </ul>

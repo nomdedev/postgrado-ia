@@ -35,7 +35,7 @@
   <p class="eyebrow">PASO 2 · SIN DATOS NO HAY ANÁLISIS</p>
   <h1>Un año de precios simulados que no cambia</h1>
   <p class="lede">La terminal genera 252 <a class="w" href="glosario.html#rueda">ruedas</a> (un año hábil) para cada activo. Parecen aleatorias, pero salen <b>iguales en cada recarga</b> gracias a una <a class="w" href="glosario.html#semilla">semilla</a>. Ojo con lo que garantiza: <b>con el mismo código</b>, cualquiera obtiene los mismos números. Cada grupo tiene su propio código (lo escribió su IA), así que sus números no van a coincidir con los de otro grupo.</p>
-  <div class="meta"><span class="chip"><b>15 MIN</b></span><span class="chip">CONSOLA</span><span class="chip">SALIDA: <b>finlab-v2.html</b></span></div>
+  <div class="meta"><span class="chip"><b>20 MIN</b></span><span class="chip">CONSOLA</span><span class="chip">SALIDA: <b>finlab-v2.html</b></span></div>
   <div class="note tip"><b>¿Llegan tarde o se rompió el archivo?</b> Bajen la versión con la que termina el paso 1, guárdenla como <span class="code-inline">finlab.html</span> y arranquen este paso desde ahí. <a class="btn" href="rescate/finlab-v1.html" download="finlab.html">⬇ BAJAR EL PUNTO DE PARTIDA (PASO 1)</a></div>
 
   <section class="block" aria-labelledby="logro">
@@ -75,6 +75,7 @@
 - una función simulateSeries(ticker) que genere 252 días hábiles (lunes a viernes) terminando hoy, con {d: 'AAAA-MM-DD', c: cierre, v: volumen}
 - retorno diario = tendencia/252 + volatilidad/√252 · z (normal estándar)
 - usá un generador pseudoaleatorio con semilla (por ejemplo mulberry32) y semilla distinta por símbolo, para que los datos sean SIEMPRE los mismos
+- exponé TICKERS y simulateSeries como window.TICKERS y window.simulateSeries, para poder probarlas desde la consola del navegador
 - imprimí en la consola una tabla con símbolo, primer cierre, último cierre y variación % del año
 
 Explicame en 3 líneas, para alguien que no programa, qué es una semilla y por qué la necesitamos.

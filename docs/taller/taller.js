@@ -104,6 +104,7 @@
     if (previo) previo.focus();
   }
   function teclas(e) {
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.closest && e.target.closest('button')) return; // los botones de la presentación responden a Enter y Espacio
     if (['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'].indexOf(e.key) >= 0) { e.preventDefault(); ir(actual + 1); }
     else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].indexOf(e.key) >= 0) { e.preventDefault(); ir(actual - 1); }
     else if (e.key === 'Home') { e.preventDefault(); ir(0); }
