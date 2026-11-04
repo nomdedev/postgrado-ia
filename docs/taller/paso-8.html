@@ -32,23 +32,22 @@
   </ul></nav>
 <!-- /@nav -->
 
-  <p class="eyebrow">PASO 8 · EL ANÁLISIS SALE SOLO</p>
+  <p class="eyebrow">PASO 8 · N8N</p>
   <h1>Un workflow de n8n que avisa cuando hay algo para mirar</h1>
-  <p class="lede">Un workflow de n8n consulta la API todos los días y avisa si encuentra algo; lo importan hecho y lo adaptan con IA.</p>
-  <div class="meta"><span class="chip"><b>30–40 MIN</b></span><span class="chip">N8N</span><span class="chip">SALIDA: <b>WORKFLOW FUNCIONANDO</b></span><a class="chip" href="index.html#niveles">IA · <b>NIVEL 4 DE 5</b></a></div>
-  <div class="note tip"><b>Una idea nueva:</b> <a class="w" href="glosario.html#n8n">n8n</a> encadena pasos que se ejecutan solos: consulta, decide y avisa. <em>Ejemplo: si JNJ tiene RSI 28,1 y señal de VENTA, el flujo manda el aviso.</em></div>
+  <p class="lede">Importan un workflow hecho y lo adaptan con IA.</p>
+  <div class="meta"><span class="chip"><b>30–40 MIN</b></span><span class="chip">SALIDA: <b>WORKFLOW FUNCIONANDO</b></span><a class="chip" href="index.html#niveles">IA · <b>NIVEL 4 DE 5</b></a></div>
+  <div class="note tip"><b>Una idea nueva:</b> <a class="w" href="glosario.html#n8n">n8n</a> ejecuta solo un <a class="w" href="glosario.html#workflow">workflow</a>: consulta, decide y avisa. <em>Ejemplo: si JNJ tiene RSI 28,1 y señal de VENTA, manda el aviso.</em></div>
 
   <section class="block" aria-labelledby="logro">
     <span class="num"></span>
     <h2 id="logro">Qué van a lograr</h2>
-    <p>Un workflow importado en n8n que, al ejecutarlo, muestra qué activos tienen señal de VENTA o un RSI fuera del rango 30–70, con el motivo de cada aviso:</p>
-    <div class="panel"><div class="panel-h"><span class="panel-t">RESULTADO ESPERADO · SALIDA DEL NODO “ARMAR AVISO”</span><span class="panel-t" style="color:var(--dim)">CON LA MUESTRA FIJA DE LA API</span></div><div class="panel-b"><pre>Asunto: FIN·LAB · 2 activos para mirar
+    <p>Al ejecutar el workflow, el nodo <em>Filtrar avisos</em> muestra los activos con señal VENTA o con <a class="w" href="glosario.html#rsi">RSI</a> fuera de 30–70 (menos de 30, bajó mucho; más de 70, subió mucho):</p>
+    <div class="panel"><div class="panel-h"><span class="panel-t">RESULTADO ESPERADO · NODO “FILTRAR AVISOS”</span></div><div class="panel-b"><pre>Asunto: FIN·LAB · 2 activos para mirar
 
 - JNJ: 117.88 USD · RSI 28.1 · señal VENTA → motivo: señal de venta y RSI menor a 30
 - KO: 66.09 USD · RSI 70.7 · señal COMPRA → motivo: RSI mayor a 70
 
 Muestra educativa fija de FIN·LAB. No es una recomendación de inversión.</pre></div></div>
-    <div class="note warn"><b>Importante:</b> n8n <b>no puede</b> consultar la API que armaron en el paso 6, porque esa vive dentro de su navegador. Usa la API publicada del proyecto (<span class="code-inline c">https://postgrado-ia.vercel.app/api/market/summary</span>), que devuelve el mismo formato que la API que armaron en el paso 6.</div>
   </section>
 
   <!-- @avance -->
@@ -67,27 +66,19 @@ Muestra educativa fija de FIN·LAB. No es una recomendación de inversión.</pre
   <section class="block" aria-labelledby="hacer">
     <span class="num"></span>
     <h2 id="hacer">Qué hacer, clic por clic</h2>
-    <h3 style="margin-top:14px">A · Tener n8n abierto (elijan una opción)</h3>
+    <p style="margin-top:14px"><a class="btn btn-primary" href="../automatizaciones/workflows/aviso-senal.json" download>DESCARGAR AVISO-SENAL.JSON</a></p>
     <ol class="do">
-      <li><b>En la nube (más simple):</b> creen una cuenta de prueba en <a href="https://n8n.io" target="_blank" rel="noopener">n8n.io</a> y entren a su espacio de trabajo.</li>
-      <li><b>En la computadora (si tienen Node.js):</b> abran PowerShell y escriban <span class="code-inline c">npx n8n</span>. Cuando diga <em>Editor is now accessible</em>, abran <span class="code-inline c">http://localhost:5678</span> en el navegador.</li>
+      <li><b>Abran n8n:</b> cuenta de prueba en <a href="https://n8n.io" target="_blank" rel="noopener">n8n.io</a> (la primera vez pide crear un usuario) o, con Node.js, <span class="code-inline">npx n8n</span> y <span class="code-inline">http://localhost:5678</span>. <b>Importen</b> el archivo: <em>Create workflow</em> → <em>⋯</em> → <em>Import from File…</em>. Tiene que verse una cadena de cajas conectadas.</li>
+      <li><b>Adáptenlo con IA:</b> abran el <span class="code-inline">.json</span> con el Bloc de notas, copien todo y péguenlo al final del prompt. Guarden la respuesta como <span class="code-inline">aviso-rsi.json</span> e impórtenla igual.</li>
+      <li><b>Ejecútenlo.</b> En <em>HTTP Request</em>, la URL tiene que ser <span class="code-inline">https://postgrado-ia.vercel.app/api/market/summary</span> (n8n no ve la API del paso 6). Toquen <em>Execute workflow</em>: los nodos se ponen verdes y <em>Filtrar avisos</em> muestra 2 avisos. El nodo de correo se pone rojo sin credencial: es normal.</li>
     </ol>
-    <h3 style="margin-top:18px">B · Importar y adaptar el workflow</h3>
-    <ol class="do">
-      <li><b>Descarguen</b> <span class="code-inline">aviso-senal.json</span> con el botón de abajo e impórtenlo: <em>Create workflow</em> → menú <em>⋯</em> → <em>Import from File…</em>.</li>
-      <li><b>Ábranlo con el Bloc de notas,</b> péguenlo en el chat de IA debajo del primer prompt de “Los prompts” y guarden la respuesta como <span class="code-inline">aviso-rsi.json</span>. Impórtenla igual.</li>
-      <li><b>Doble clic en el nodo HTTP Request</b> y confirmen la URL: <span class="code-inline c">https://postgrado-ia.vercel.app/api/market/summary</span>.</li>
-      <li><b>Toquen <em>Execute workflow</em>:</b> cada nodo que funciona se pone verde. Hagan clic en cada uno para ver qué recibió y qué entregó.</li>
-      <li><b>El nodo de correo se pone en rojo sin credencial: es normal.</b> Si crean una, bórrenla al terminar (<em>Credentials → ⋯ → Delete</em>).</li>
-    </ol>
-    <p style="margin-top:16px"><a class="btn btn-primary" href="../automatizaciones/workflows/aviso-senal.json" download>DESCARGAR AVISO-SENAL.JSON</a> &nbsp; <a class="btn" href="../automatizaciones/aviso-senal.html">VER LA EXPLICACIÓN COMPLETA DEL EJEMPLO</a></p>
   </section>
 
   <section class="block" data-section="prompts" aria-labelledby="prompt">
     <span class="num"></span>
-    <h2 id="prompt">Los prompts</h2>
+    <h2 id="prompt">El prompt</h2>
     <div class="prompt">
-      <div class="prompt-h"><div><span class="t">PROMPT · PASO 8 · ADAPTAR EL WORKFLOW</span><div class="d">Pegar debajo el contenido de aviso-senal.json.</div></div><button class="copy" data-copy="#p8" type="button">COPIAR</button></div>
+      <div class="prompt-h"><div><span class="t">PROMPT · ADAPTAR EL WORKFLOW</span></div><button class="copy" data-copy="#p8" type="button">COPIAR</button></div>
       <div class="prompt-b"><pre id="p8">Paso 8. Te paso un workflow de n8n (JSON) que consulta GET /api/market/summary, filtra los activos con señal VENTA y manda un correo.
 
 Quiero adaptarlo así:
@@ -100,12 +91,6 @@ Devolveme el JSON completo listo para importar y una tabla con cada nodo: nombre
 
 [pegar acá el contenido de aviso-senal.json]</pre></div>
     </div>
-    <div class="prompt">
-      <div class="prompt-h"><div><span class="t">PROMPT · ENTENDER UN NODO</span><div class="d">Para el auditor: que la IA explique cualquier nodo.</div></div><button class="copy" data-copy="#p8b" type="button">COPIAR</button></div>
-      <div class="prompt-b"><pre id="p8b">Este es el código de un nodo Code de n8n. Explicámelo línea por línea para alguien que no programa, y decime qué pasaría si la API devolviera una lista vacía.
-
-[pegar el código del nodo]</pre></div>
-    </div>
   </section>
 
   <section class="block" aria-labelledby="comprobar">
@@ -113,8 +98,8 @@ Devolveme el JSON completo listo para importar y una tabla con cada nodo: nombre
     <h2 id="comprobar">Cómo comprobar</h2>
     <ul class="check">
       <li><b>Importa sin errores</b> y todas las cajas están conectadas.</li>
-      <li><b>Cuenta a mano:</b> abran la URL de la API en el navegador y cuenten cuántos activos tienen señal VENTA o RSI fuera de 30–70. Tiene que coincidir con la cantidad de avisos <em>y</em> con los activos (con la muestra fija del curso: JNJ y KO).</li>
-      <li><b>Caso vacío:</b> abran el nodo Code y, en las primeras líneas, cambien <span class="code-inline">RSI_ALTO</span> a 99, <span class="code-inline">RSI_BAJO</span> a 1 y <span class="code-inline">SENAL</span> a <span class="code-inline">'NINGUNA'</span>. Al ejecutar, tiene que salir por la rama <em>no</em> y no enviar nada.</li>
+      <li><b>Cuenta a mano:</b> en la API, los activos con VENTA o con RSI fuera de 30–70 son los avisos: JNJ y KO.</li>
+      <li><b>Caso vacío:</b> en el nodo Code, pongan <span class="code-inline">RSI_ALTO</span> en 99, <span class="code-inline">RSI_BAJO</span> en 1 y <span class="code-inline">SENAL</span> en <span class="code-inline">'NINGUNA'</span>. Tiene que salir por la rama <em>false</em> y no enviar nada.</li>
       <li><b>Sin claves a la vista:</b> ningún nodo tiene contraseñas escritas.</li>
     </ul>
   </section>
@@ -122,12 +107,11 @@ Devolveme el JSON completo listo para importar y una tabla con cada nodo: nombre
   <section class="block" aria-labelledby="falla">
     <span class="num"></span>
     <h2 id="falla">Si algo falla</h2>
-    <div class="note tip"><b>¿Se trabaron después de tres intentos?</b> Este workflow ya cumple todo lo del paso: avisa por señal VENTA o RSI fuera de 30–70 y explica el motivo. Impórtenlo igual que el otro y toquen <em>Execute workflow</em>; tiene que avisar JNJ y KO. El nodo de correo viene <b>desactivado</b> para que funcione sin credenciales. <a class="btn btn-primary" href="rescate/aviso-rsi.json" download>⬇ BAJAR EL WORKFLOW DE RESCATE</a></div>
-    <div class="note tip"><b>¿No hay internet o la URL no responde?</b> Usen la versión <em>sin internet</em>: en lugar de consultar la API trae adentro la misma muestra fija, así pueden practicar todo el recorrido igual. <a class="btn" href="rescate/aviso-rsi-sin-url.json" download>⬇ BAJAR LA VERSIÓN SIN INTERNET</a></div>
+    <div class="note tip"><b>¿Trabados tras tres intentos?</b> Importen el workflow ya hecho: avisa JNJ y KO, con arranque manual y el correo desactivado. <a class="btn btn-primary" href="rescate/aviso-rsi.json" download>⬇ BAJAR EL RESCATE</a> <b>¿Sin internet?</b> Esta versión trae la muestra adentro. <a class="btn" href="rescate/aviso-rsi-sin-url.json" download>⬇ VERSIÓN SIN INTERNET</a></div>
     <ul>
-      <li><b>“Could not find property option” o un nodo en rojo al importar:</b> la IA usó una versión de nodo distinta. Copien el mensaje de error y pídanle: “n8n muestra este error al importar: [error]. Corregí solo ese nodo.”</li>
-      <li><b>El nodo HTTP falla con ENOTFOUND o 404:</b> la URL está mal escrita o le falta <span class="code-inline">/api/market/summary</span>.</li>
-      <li><b>Funciona, pero manda un correo vacío:</b> el IF está mirando el campo equivocado. Abran el nodo Code, miren cómo se llama el campo que indica si hay avisos y usen ese en el IF.</li>
+      <li><b>“Could not find property option” al importar:</b> pídanle a la IA “n8n muestra este error: [error]. Corregí solo ese nodo.”</li>
+      <li><b>ENOTFOUND o 404:</b> la URL está mal escrita o no termina en <span class="code-inline">/api/market/summary</span>.</li>
+      <li><b>Correo vacío:</b> el IF mira otro campo; usen el que arma el nodo Code.</li>
     </ul>
   </section>
 
@@ -136,8 +120,8 @@ Devolveme el JSON completo listo para importar y una tabla con cada nodo: nombre
     <h2 id="grafico">La idea, en un gráfico</h2>
     <!-- @viz:p8 -->
     <figure class="viz" id="viz-p8" data-titulo="El workflow que corre solo">
-      <div class="viz-grafico"><svg class="viz-svg" viewBox="0 0 960 300" role="img" aria-labelledby="viz-p8-t viz-p8-d"><title id="viz-p8-t">Workflow de n8n con cinco nodos encadenados</title><desc id="viz-p8-d">Disparador, pedido HTTP, filtro, condición y correo</desc><g><rect class="v-card " x="10" y="40" width="168" height="150" rx="10"/><text class="v-ink v-b" x="26" y="68">Cada día 9:00</text><text class="v-mut v-sm" x="26" y="90">Schedule Trigger</text><text class="v-mut v-sm" x="26" y="110">sin nadie mirando</text></g><line class="v-axis " x1="180" y1="115" x2="189" y2="115"/><path class="v-axis-fill" d="M198,115 L189,120 L189,110 Z"/><g><rect class="v-card " x="200" y="40" width="168" height="150" rx="10"/><text class="v-ink v-b" x="216" y="68">Pide la API</text><text class="v-mut v-sm" x="216" y="90">HTTP Request</text><text class="v-mut v-sm" x="216" y="110">la URL pública del paso 9</text></g><line class="v-axis " x1="370" y1="115" x2="379" y2="115"/><path class="v-axis-fill" d="M388,115 L379,120 L379,110 Z"/><g><rect class="v-card " x="390" y="40" width="168" height="150" rx="10"/><text class="v-ink v-b" x="406" y="68">Filtra señales</text><text class="v-mut v-sm" x="406" y="90">Code</text><text class="v-mut v-sm" x="406" y="110">quedan 2: JNJ y KO</text></g><line class="v-axis " x1="560" y1="115" x2="569" y2="115"/><path class="v-axis-fill" d="M578,115 L569,120 L569,110 Z"/><g><rect class="v-card " x="580" y="40" width="168" height="150" rx="10"/><text class="v-ink v-b" x="596" y="68">¿Hay avisos?</text><text class="v-mut v-sm" x="596" y="90">IF</text><text class="v-mut v-sm" x="596" y="110">sí → manda · no → corta</text></g><line class="v-axis " x1="750" y1="115" x2="759" y2="115"/><path class="v-axis-fill" d="M768,115 L759,120 L759,110 Z"/><g><rect class="v-card " x="770" y="40" width="168" height="150" rx="10"/><text class="v-ink v-b" x="786" y="68">Manda el mail</text><text class="v-mut v-sm" x="786" y="90">Email</text><text class="v-mut v-sm" x="786" y="110">JNJ · KO · 2 avisos</text></g><text class="v-mut v-sm" x="480" y="232" text-anchor="middle">cada nodo le pasa al siguiente un JSON; si el filtro no encuentra nada, el flujo termina sin mandar correo</text></svg></div>
-      <figcaption><b>El workflow que corre solo.</b> Cinco nodos encadenados: el disparador arranca sin que nadie toque nada, el HTTP pide los datos y el filtro decide si hay algo que avisar. Cambiar la regla del filtro es cambiar <b>una condición</b>, no todo el flujo.<small>Esquema del paso 8, con la muestra fija de la API del curso.</small></figcaption>
+      <div class="viz-grafico"><svg class="viz-svg" viewBox="0 0 960 300" role="img" aria-labelledby="viz-p8-t viz-p8-d"><title id="viz-p8-t">Workflow de n8n con cinco nodos encadenados</title><desc id="viz-p8-d">Disparador, pedido HTTP, filtro, condición y correo</desc><g><rect class="v-card " x="10" y="40" width="168" height="150" rx="10"/><text class="v-ink v-b" x="26" y="68">Cada día 18:00</text><text class="v-mut v-sm" x="26" y="90">Schedule Trigger</text><text class="v-mut v-sm" x="26" y="110">sin nadie mirando</text></g><line class="v-axis " x1="180" y1="115" x2="189" y2="115"/><path class="v-axis-fill" d="M198,115 L189,120 L189,110 Z"/><g><rect class="v-card " x="200" y="40" width="168" height="150" rx="10"/><text class="v-ink v-b" x="216" y="68">Pide la API</text><text class="v-mut v-sm" x="216" y="90">HTTP Request</text><text class="v-mut v-sm" x="216" y="110">la URL pública del curso</text></g><line class="v-axis " x1="370" y1="115" x2="379" y2="115"/><path class="v-axis-fill" d="M388,115 L379,120 L379,110 Z"/><g><rect class="v-card " x="390" y="40" width="168" height="150" rx="10"/><text class="v-ink v-b" x="406" y="68">Filtra señales</text><text class="v-mut v-sm" x="406" y="90">Code</text><text class="v-mut v-sm" x="406" y="110">quedan 2: JNJ y KO</text></g><line class="v-axis " x1="560" y1="115" x2="569" y2="115"/><path class="v-axis-fill" d="M578,115 L569,120 L569,110 Z"/><g><rect class="v-card " x="580" y="40" width="168" height="150" rx="10"/><text class="v-ink v-b" x="596" y="68">¿Hay avisos?</text><text class="v-mut v-sm" x="596" y="90">IF</text><text class="v-mut v-sm" x="596" y="110">sí → manda · no → corta</text></g><line class="v-axis " x1="750" y1="115" x2="759" y2="115"/><path class="v-axis-fill" d="M768,115 L759,120 L759,110 Z"/><g><rect class="v-card " x="770" y="40" width="168" height="150" rx="10"/><text class="v-ink v-b" x="786" y="68">Manda el mail</text><text class="v-mut v-sm" x="786" y="90">Email</text><text class="v-mut v-sm" x="786" y="110">JNJ · KO · 2 avisos</text></g><text class="v-mut v-sm" x="480" y="232" text-anchor="middle">cada nodo le pasa al siguiente un JSON; si el filtro no encuentra nada, el flujo termina sin mandar correo</text></svg></div>
+      <figcaption><b>El workflow que corre solo.</b> El disparador arranca solo y el filtro decide si hay algo que avisar.<small>Esquema del paso 8.</small></figcaption>
     </figure>
     <!-- /@viz:p8 -->
   </section>

@@ -32,22 +32,16 @@
   </ul></nav>
 <!-- /@nav -->
 
-  <p class="eyebrow">PASO 10 · LA LLAVE QUE NO SE MUESTRA</p>
+  <p class="eyebrow">PASO 10 · CLAVES</p>
   <h1>Claves de API: dónde se guardan y por qué</h1>
-  <p class="lede">Para que n8n hable con un modelo de IA hace falta una clave: se crea, se guarda en una credencial y no queda a la vista.</p>
-  <div class="meta"><span class="chip"><b>20 MIN</b></span><span class="chip">N8N</span><span class="chip">SIN CÓDIGO EN PANTALLA</span><span class="chip">SALIDA: <b>UNA CREDENCIAL QUE FUNCIONA</b></span><a class="chip" href="index.html#niveles">IA · <b>NIVEL 4 DE 5</b></a></div>
-  <div class="note tip"><b>Una idea nueva:</b> La <a class="w" href="glosario.html#credencial">credencial</a> es una caja fuerte: el flujo usa la llave sin verla. <em>Ejemplo: la clave se pega una sola vez en n8n, nunca en el HTML.</em></div>
-  <div class="note tip"><b>¿Llegan sin cuenta de n8n?</b> La clase 3 se trabaja dentro de n8n, así que conviene tener el acceso del paso 8 a mano. Si no lo tienen, hagan el paso mirando a otro grupo y prueben las claves en el chat. <a class="btn" href="paso-8.html">VER EL PASO 8</a></div>
+  <p class="lede">Creen una clave y guárdenla en n8n, donde nadie la ve.</p>
+  <div class="meta"><span class="chip"><b>20 MIN</b></span><span class="chip">N8N</span><span class="chip">SALIDA: <b>UNA CREDENCIAL QUE FUNCIONA</b></span><a class="chip" href="index.html#niveles">IA · <b>NIVEL 4 DE 5</b></a></div>
+  <div class="note tip"><b>Una idea nueva:</b> La <a class="w" href="glosario.html#credencial">credencial</a> es una caja fuerte: el flujo usa la llave sin verla. <em>Ejemplo: la clave se pega una sola vez en n8n, que la manda en cada pedido; nunca va en el HTML.</em></div>
 
   <section class="block" aria-labelledby="logro">
     <span class="num"></span>
     <h2 id="logro">Qué van a lograr</h2>
-    <p>Una clave creada en el panel del proveedor del modelo y guardada en las credenciales de n8n, más una prueba que demuestra que el flujo puede usar el modelo <b>sin que la clave se vea en ningún archivo</b>.</p>
-    <div class="mock" aria-label="Cómo se ve la credencial dentro de n8n">
-      <table><thead><tr><th>CREDENCIAL</th><th>DÓNDE VIVE</th><th>QUIÉN LA VE</th><th>SI SE FILTRA</th></tr></thead>
-      <tbody><tr><td>Modelo de IA</td><td>n8n · Credenciales</td><td>solo quien administra el flujo</td><td>se revoca y se genera otra</td></tr><tr><td>API del curso</td><td>pública, sin clave</td><td>cualquiera</td><td>no aplica</td></tr></tbody></table>
-      <div class="mock-foot">La credencial es una caja fuerte: el flujo usa la llave sin verla.</div>
-    </div>
+    <p>Una <a class="w" href="glosario.html#clave-api">clave</a> guardada en n8n y probada, sin que aparezca en ningún archivo. Si se filtra, otro gasta su saldo: usen el plan gratuito o pongan un tope de gasto.</p>
   </section>
 
   <!-- @avance -->
@@ -67,7 +61,7 @@
     <span class="num"></span>
     <h2 id="prompt">El prompt</h2>
     <div class="prompt">
-      <div class="prompt-h"><div><span class="t">PROMPT · PASO 10</span><div class="d">Antes de crear la clave.</div></div><button class="copy" data-copy="#p10" type="button">COPIAR</button></div>
+      <div class="prompt-h"><div><span class="t">PROMPT · PASO 10</span></div><button class="copy" data-copy="#p10" type="button">COPIAR</button></div>
       <div class="prompt-b"><pre id="p10">Paso 10 de un taller de finanzas con n8n. Voy a conectar un nodo de IA con un proveedor de modelos.
 
 Explicame, en 5 líneas y sin jerga:
@@ -77,19 +71,16 @@ Explicame, en 5 líneas y sin jerga:
 
 Después armame una lista de verificación de 5 puntos para comprobar que la clave no quedó en el HTML del proyecto, ni en un workflow exportado, ni en una captura de pantalla.</pre></div>
     </div>
-    <div class="note tip"><b>Lo que debería responder:</b> que la página la mostraría a cualquiera que abra el archivo, que la credencial la guarda cifrada el servidor y que el permiso mínimo alcanza. Si contesta “guardala en una variable de entorno del navegador”, está mal: el navegador no tiene secretos.</div>
+    <div class="note tip"><b>Debe decir</b> que la clave en el HTML la ve cualquiera y que la guarda el servidor. Si contesta “variable del navegador”, está mal.</div>
   </section>
 
   <section class="block" aria-labelledby="hacer">
     <span class="num"></span>
-    <h2 id="hacer">Qué hacer, clic por clic</h2>
+    <h2 id="hacer">Qué hacer</h2>
     <ol class="do">
-      <li><b>Entren al panel del proveedor</b> que eligió el docente (OpenAI, Anthropic, Google o el que tenga el curso) y busquen <em>API keys</em>.</li>
-      <li><b>Generen una clave nueva</b> con un nombre que se entienda (“taller-finlab”) y el permiso más acotado que ofrezca el panel.</li>
-      <li><b>Cópienla una sola vez</b> y péguenla en n8n: <em>Credenciales → Nueva →</em> el tipo del proveedor. Guárdenla ahí, no en un archivo.</li>
-      <li><b>Prueben la credencial</b> con el botón de probar del panel de n8n, o con un nodo que pida una respuesta corta.</li>
-      <li><b>Revisen el proyecto:</b> busquen los primeros caracteres de la clave en el HTML, en los workflows exportados y en el chat. No tiene que aparecer en ninguno.</li>
-      <li><b>Anoten el nombre de la credencial</b> en el kit del grupo, sin la clave, y guárdenlo para los pasos 11 a 14.</li>
+      <li><b>Creen la clave</b> en el panel del proveedor (<em>API keys</em>) con el nombre “taller-finlab” y el menor permiso posible. El panel la muestra una sola vez: si la pierden, generan otra.</li>
+      <li><b>Péguenla en n8n:</b> <em>Credentials → Create</em>, el tipo del proveedor. Después prueben la credencial: tiene que decir que conectó.</li>
+      <li><b>Anoten el nombre</b> de la credencial en el kit, sin la clave. Si se filtra, se revoca en el panel (<em>Revoke</em> o <em>Delete</em> junto a la clave) y se genera otra.</li>
     </ol>
   </section>
 
@@ -97,21 +88,20 @@ Después armame una lista de verificación de 5 puntos para comprobar que la cla
     <span class="num"></span>
     <h2 id="comprobar">Cómo comprobar</h2>
     <ul class="check">
-      <li><b>La prueba pasa:</b> el botón de probar la credencial responde “conectado” o devuelve una respuesta del modelo.</li>
-      <li><b>En el HTML no está:</b> buscar los últimos 6 caracteres de la clave en <span class="code-inline">finlab.html</span> no devuelve nada.</li>
-      <li><b>En el workflow exportado tampoco:</b> el JSON del flujo lleva el <em>id</em> de la credencial, nunca la clave.</li>
-      <li><b>El permiso es mínimo:</b> la clave sirve para el modelo y no para administrar la cuenta del proveedor.</li>
+      <li><b>La prueba pasa:</b> n8n responde “conectado” o devuelve una respuesta del modelo.</li>
+      <li><b>La clave no está:</b> con Ctrl+F, sus últimos 6 caracteres no aparecen en <span class="code-inline">finlab.html</span> ni en el workflow exportado (lleva el <em>id</em> de la credencial, nunca la clave). Revisen también el chat a ojo.</li>
+      <li><b>El permiso es mínimo:</b> la clave sirve para el modelo y no para administrar la cuenta.</li>
     </ul>
   </section>
 
   <section class="block" aria-labelledby="falla">
     <span class="num"></span>
     <h2 id="falla">Si algo falla</h2>
-    <div class="note tip"><b>¿Se trabaron después de tres intentos?</b> Pidan ayuda con la captura del error, sin mostrar la clave. Nunca peguen la clave en el chat del aula ni en el grupo: si ya lo hicieron, revóquenla y generen otra.</div>
     <ul>
-      <li><b>La credencial dice 401 o 403:</b> la clave está incompleta, venció o no tiene permiso para ese modelo. Generen otra y prueben de nuevo.</li>
-      <li><b>“No tenés cuota”:</b> la cuenta gratuita se agotó. Sirve para entender el paso; para la prueba final usen el modelo que indique el docente.</li>
-      <li><b>La clave aparece en una captura:</b> tápenla antes de compartir y revóquenla al terminar la clase.</li>
+      <li><b>401 o 403:</b> la clave está incompleta o venció. Generen otra.</li>
+      <li><b>“No tenés cuota”:</b> usen el modelo que indique el docente.</li>
+      <li><b>La clave quedó en un chat o una captura:</b> revóquenla y generen otra.</li>
+      <li><b>No tienen n8n:</b> miren a otro grupo; no prueben claves en el chat.</li>
     </ul>
   </section>
 
@@ -121,7 +111,7 @@ Después armame una lista de verificación de 5 puntos para comprobar que la cla
     <!-- @viz:p10 -->
     <figure class="viz" id="viz-p10" data-titulo="Dónde vive la clave">
       <div class="viz-grafico"><svg class="viz-svg" viewBox="0 0 960 310" role="img" aria-labelledby="viz-p10-t viz-p10-d"><title id="viz-p10-t">La clave va de la página a n8n y de n8n a la API del modelo</title><desc id="viz-p10-d">Página y n8n no comparten la clave; n8n la usa desde su gestor de credenciales</desc><g><rect class="v-card " x="20" y="110" width="260" height="130" rx="10"/><text class="v-ink v-b" x="36" y="138">La página HTML</text><text class="v-mut v-sm" x="36" y="160">la clave a la vista</text><text class="v-mut v-sm" x="36" y="180">la abre cualquiera con F12</text><text class="v-mut v-sm" x="36" y="200">y queda en el historial de git</text></g><g><rect class="v-card " x="350" y="110" width="260" height="130" rx="10"/><text class="v-ink v-b" x="366" y="138">n8n · Credenciales</text><text class="v-mut v-sm" x="366" y="160">guardada y cifrada aparte</text><text class="v-mut v-sm" x="366" y="180">el flujo la usa sin mostrarla</text><text class="v-mut v-sm" x="366" y="200">se cambia sin tocar el flujo</text></g><g><rect class="v-card " x="680" y="110" width="260" height="130" rx="10"/><text class="v-ink v-b" x="696" y="138">La API del modelo</text><text class="v-mut v-sm" x="696" y="160">verifica la clave</text><text class="v-mut v-sm" x="696" y="180">cobra por uso</text></g><line class="v-axis v-dash" x1="284" y1="175" x2="337" y2="175"/><path class="v-axis-fill" d="M346,175 L337,180 L337,170 Z"/><line class="v-axis " x1="614" y1="175" x2="667" y2="175"/><path class="v-axis-fill" d="M676,175 L667,180 L667,170 Z"/><text class="v-dn v-sm v-b" x="315" y="100" text-anchor="middle">✗ NO</text><text class="v-up v-sm v-b" x="645" y="100" text-anchor="middle">✓ SÍ</text><text class="v-mut v-sm" x="480" y="280" text-anchor="middle">una clave por servicio, con el menor permiso posible: si se filtra, se revoca y se genera otra</text></svg></div>
-      <figcaption><b>Dónde vive la clave.</b> La clave se crea en el panel del proveedor del modelo y se pega <b>una sola vez</b> en las credenciales de n8n. Nunca va en el HTML, ni en el prompt, ni en el workflow exportado: cualquiera que abra el archivo la vería.<small>Esquema del paso 10.</small></figcaption>
+      <figcaption><b>Dónde vive la clave.</b> La clave se pega <b>una sola vez</b> en n8n. Nunca va en el HTML ni en el workflow.<small>Esquema del paso 10.</small></figcaption>
     </figure>
     <!-- /@viz:p10 -->
   </section>

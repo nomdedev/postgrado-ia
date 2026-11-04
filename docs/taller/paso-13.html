@@ -32,21 +32,19 @@
   </ul></nav>
 <!-- /@nav -->
 
-  <p class="eyebrow">PASO 13 · TRES MIRADAS, UNA DECISIÓN</p>
+  <p class="eyebrow">PASO 13 · CONSEJO</p>
   <h1>El consejo de agentes: que el desacuerdo se vea</h1>
-  <p class="lede">Un <a class="w" href="glosario.html#consejo">consejo de agentes</a> reparte el trabajo (analiza, audita, redacta) y deja escrito el desacuerdo antes de decidir.</p>
-  <div class="meta"><span class="chip"><b>30 MIN</b></span><span class="chip">N8N</span><span class="chip">3 AGENTES</span><span class="chip">SALIDA: <b>UN INFORME CON REPAROS</b></span><a class="chip" href="index.html#niveles">IA · <b>NIVEL 5 DE 5</b></a></div>
-  <div class="note tip"><b>Una idea nueva:</b> El auditor busca lo que el analista no dijo; sin él, el informe sale limpio y engañoso. <em>Ejemplo: el analista dice “mantener”; el auditor marca que JNJ tiene señal de VENTA.</em></div>
-  <div class="note tip"><b>¿Les falta el agente?</b> Este paso encadena tres agentes como el del paso 12. Sin uno que funcione, el consejo no arranca. <a class="btn" href="paso-12.html">VOLVER AL PASO 12</a></div>
+  <p class="lede">Un <a class="w" href="glosario.html#consejo">consejo de agentes</a>: uno analiza, otro audita y otro redacta.</p>
+  <div class="meta"><span class="chip"><b>30 MIN</b></span><span class="chip">N8N</span><a class="chip" href="index.html#niveles">IA · <b>NIVEL 5 DE 5</b></a></div>
+  <div class="note tip"><b>Una idea nueva:</b> El auditor busca lo que el analista no dijo. <em>Ejemplo: el analista dice “mantener”; el auditor marca que JNJ tiene señal de VENTA.</em></div>
 
   <section class="block" aria-labelledby="logro">
     <span class="num"></span>
     <h2 id="logro">Qué van a lograr</h2>
-    <p>Tres agentes encadenados en n8n y una pregunta de inversión que pasa por los tres. El resultado es un informe corto que dice <b>qué se analizó, qué reparos hay y qué se decidió</b>, con los números de la API a la vista.</p>
+    <p>Un informe con el reparo del auditor a la vista, armado por tres <a class="w" href="glosario.html#agente">agentes</a> encadenados en n8n.</p>
     <div class="mock" aria-label="Ejemplo de salida del consejo de agentes">
-      <table><thead><tr><th>ROL</th><th>APORTA</th><th>EJEMPLO</th></tr></thead>
-      <tbody><tr><td>Analista</td><td>los datos y una propuesta</td><td>“Mantener 40 % KO, 30 % JNJ y 30 % GGAL: subió 0,56 % hoy”</td></tr><tr><td>Auditor</td><td>el supuesto que falta</td><td>“los datos son simulados; JNJ tiene señal VENTA y RSI 28,1 y la propuesta la mantiene”</td></tr><tr><td>Redactor</td><td>la respuesta en 5 líneas</td><td>informe con el reparo incluido, sin recomendación</td></tr></tbody></table>
-      <div class="mock-foot">Sin el auditor, el informe sale limpio y engañoso. El rol que molesta es el que agrega valor.</div>
+      <table><thead><tr><th>ROL</th><th>EJEMPLO</th></tr></thead>
+      <tbody><tr><td>Analista</td><td>“Mantener 40 % KO, 30 % JNJ y 30 % GGAL: subió 0,56 % hoy”</td></tr><tr><td>Auditor</td><td>“JNJ tiene señal VENTA y RSI 28,1 y la propuesta la mantiene”</td></tr><tr><td>Redactor</td><td>informe de 5 líneas con el reparo incluido, sin recomendación</td></tr></tbody></table>
     </div>
   </section>
 
@@ -67,7 +65,7 @@
     <span class="num"></span>
     <h2 id="prompt">El prompt</h2>
     <div class="prompt">
-      <div class="prompt-h"><div><span class="t">PROMPT · PASO 13</span><div class="d">Para diseñar los roles del consejo.</div></div><button class="copy" data-copy="#p13" type="button">COPIAR</button></div>
+      <div class="prompt-h"><div><span class="t">PROMPT · PASO 13</span></div><button class="copy" data-copy="#p13" type="button">COPIAR</button></div>
       <div class="prompt-b"><pre id="p13">Paso 13 de un taller de finanzas con n8n. Tengo un agente que consulta la API del curso y hace cuentas con una calculadora.
 
 Quiero armar un consejo de tres agentes encadenados: analista → auditor → redactor.
@@ -80,20 +78,17 @@ Para cada rol escribime el prompt de sistema, con estas condiciones:
 
 Después decime qué pregunta de prueba hace visible la diferencia entre un solo agente y el consejo.</pre></div>
     </div>
-    <div class="note tip"><b>Un ejemplo para comparar:</b> la <a href="traza.html">traza de un comité de agentes</a> muestra los tres roles con la misma pregunta.</div>
-    <div class="note tip"><b>Puente con el proyecto real:</b> el diagrama <em>“Un consejo de agentes para una decisión de inversión”</em> muestra este mismo circuito con los roles y el orden de los pedidos.</div>
+    <div class="note tip"><b>Ejemplo resuelto:</b> <a href="traza.html">la traza del comité</a>.</div>
   </section>
 
   <section class="block" aria-labelledby="hacer">
     <span class="num"></span>
-    <h2 id="hacer">Qué hacer, clic por clic</h2>
+    <h2 id="hacer">Qué hacer</h2>
     <ol class="do">
-      <li><b>Dupliquen el agente del paso 12</b> tres veces en el mismo workflow: analista, auditor y redactor.</li>
-      <li><b>Cambien solo el prompt de sistema</b> de cada uno, con las reglas del prompt de arriba.</li>
-      <li><b>Encadénenlos</b>: la salida del analista entra al auditor, y la de los dos al redactor.</li>
-      <li><b>Hagan una pregunta de inversión</b> con datos de la API: “Tengo 40 % KO, 30 % JNJ y 30 % GGAL: ¿qué reparos hay antes de mantenerla hoy?”.</li>
-      <li><b>Comparen con el paso 12:</b> corran la misma pregunta con un solo agente y guarden las dos respuestas.</li>
-      <li><b>Marquen el reparo</b> que encontró el auditor. Si no encontró ninguno, revisen si los roles están realmente diferenciados.</li>
+      <li><b>Copien tres veces el agente del paso 12</b>, con su modelo y sus herramientas: analista, auditor y redactor. El analista y el auditor llevan la API; el redactor no necesita herramientas.</li>
+      <li><b>Peguen en cada uno su prompt de sistema</b> (el que dio la IA) en el campo <em>System Message</em>.</li>
+      <li><b>Encadénenlos:</b> en el auditor, <em>Prompt</em> = <em>Define below</em> y arrastren ahí el campo <span class="code-inline">output</span> del analista; el redactor recibe el de los dos.</li>
+      <li><b>Abran <em>Open chat</em></b> y pregunten: “Tengo 40 % KO, 30 % JNJ y 30 % GGAL: ¿qué reparos hay antes de mantenerla hoy?”. Miren el <em>Output</em> de cada nodo: ahí se ve el desacuerdo.</li>
     </ol>
   </section>
 
@@ -101,22 +96,21 @@ Después decime qué pregunta de prueba hace visible la diferencia entre un solo
     <span class="num"></span>
     <h2 id="comprobar">Cómo comprobar</h2>
     <ul class="check">
-      <li><b>El auditor agrega algo:</b> el informe final menciona al menos un supuesto, un dato faltante o un límite del análisis.</li>
-      <li><b>Los números son de la API:</b> los precios, el RSI y las señales citados coinciden con <span class="code-inline">/api/market/summary</span> (en la muestra de clase: KO 66,09 · JNJ 117,88 · GGAL 28,75).</li>
-      <li><b>No hay recomendación:</b> el texto describe métricas; no dice “comprá” ni “vendé”.</li>
-      <li><b>El costo se justifica:</b> la respuesta es mejor que la del paso 12. Si no lo es, el consejo sobra.</li>
+      <li><b>El auditor agrega algo:</b> el informe menciona un supuesto o un dato faltante.</li>
+      <li><b>Los números son de la API:</b> KO 66,09 · JNJ 117,88 · GGAL 28,75 y la cartera +0,56 % (0,4 × 0,82 + 0,3 × 0,25 + 0,3 × 0,52).</li>
+      <li><b>No recomienda:</b> no dice “comprá” ni “vendé”.</li>
+      <li><b>Mejora al paso 12:</b> con la misma pregunta. Si no, el consejo sobra.</li>
     </ul>
   </section>
 
   <section class="block" aria-labelledby="falla">
     <span class="num"></span>
     <h2 id="falla">Si algo falla</h2>
-    <div class="note tip"><b>¿Se trabaron después de tres intentos?</b> Prueben el consejo con una sola pregunta y sin herramientas: si los tres roles dicen lo mismo, el problema es el prompt de sistema, no el encadenado.</div>
     <ul>
-      <li><b>Los tres coinciden en todo:</b> tienen el mismo prompt. El auditor necesita una instrucción explícita de buscar el error.</li>
-      <li><b>El informe ignora al auditor:</b> el redactor no está recibiendo su salida. Revisen el orden de los nodos y qué campo entra a cada uno.</li>
-      <li><b>Tarda demasiado o gasta de más:</b> es el costo real de tres agentes. Bajen el modelo de los roles simples, como el redactor.</li>
-      <li><b>El auditor inventa un problema:</b> pídanle que cite el dato o el supuesto exacto; si no lo puede citar, no cuenta.</li>
+      <li><b>Los tres dicen lo mismo:</b> tienen el mismo prompt. Pídanle al auditor que busque el error.</li>
+      <li><b>El informe ignora al auditor:</b> el redactor no recibe su salida.</li>
+      <li><b>El auditor inventa:</b> que cite el dato exacto; si no puede, no cuenta.</li>
+      <li><b>No les corre ningún agente:</b> importen <a href="rescate/agente-api.json" download>agente-api.json</a>, el rescate del paso 12.</li>
     </ul>
   </section>
 
@@ -126,7 +120,7 @@ Después decime qué pregunta de prueba hace visible la diferencia entre un solo
     <!-- @viz:p13 -->
     <figure class="viz" id="viz-p13" data-titulo="El consejo de agentes">
       <div class="viz-grafico"><svg class="viz-svg" viewBox="0 0 960 360" role="img" aria-labelledby="viz-p13-t viz-p13-d"><title id="viz-p13-t">Un coordinador reparte la pregunta entre tres agentes y junta la decisión</title><desc id="viz-p13-d">Analista, auditor y redactor; el coordinador junta la respuesta final</desc><g><rect class="v-card " x="20" y="120" width="230" height="120" rx="10"/><text class="v-ink v-b" x="36" y="148">Coordinador</text><text class="v-mut v-sm" x="36" y="170">reparte la pregunta</text><text class="v-mut v-sm" x="36" y="190">pide la evidencia</text><text class="v-mut v-sm" x="36" y="210">junta la respuesta</text></g><g><rect class="v-card " x="370" y="20" width="310" height="100" rx="10"/><text class="v-ink v-b" x="386" y="48">Analista</text><text class="v-mut v-sm" x="386" y="70">mira los datos y los indicadores</text><text class="v-mut v-sm" x="386" y="90">propone una cartera</text></g><line class="v-axis " x1="254" y1="180" x2="359.6" y2="76.3"/><path class="v-axis-fill" d="M366,70 L363.1,79.9 L356.1,72.7 Z"/><line class="v-axis " x1="684" y1="70" x2="713.5" y2="171.4"/><path class="v-axis-fill" d="M716,180 L708.7,172.8 L718.3,170 Z"/><g><rect class="v-card " x="370" y="120" width="310" height="100" rx="10"/><text class="v-ink v-b" x="386" y="148">Auditor</text><text class="v-mut v-sm" x="386" y="170">busca el error y el supuesto</text><text class="v-mut v-sm" x="386" y="190">que no se dijo</text></g><line class="v-axis " x1="254" y1="180" x2="357" y2="170.8"/><path class="v-axis-fill" d="M366,170 L357.5,175.8 L356.6,165.8 Z"/><line class="v-axis " x1="684" y1="170" x2="707.4" y2="177.3"/><path class="v-axis-fill" d="M716,180 L705.9,182.1 L708.9,172.5 Z"/><g><rect class="v-card " x="370" y="220" width="310" height="100" rx="10"/><text class="v-ink v-b" x="386" y="248">Redactor</text><text class="v-mut v-sm" x="386" y="270">lo cuenta en 5 líneas</text><text class="v-mut v-sm" x="386" y="290">para el cliente</text></g><line class="v-axis " x1="254" y1="180" x2="359" y2="264.4"/><path class="v-axis-fill" d="M366,270 L355.9,268.3 L362.1,260.5 Z"/><line class="v-axis " x1="684" y1="270" x2="713" y2="188.5"/><path class="v-axis-fill" d="M716,180 L717.7,190.2 L708.3,186.8 Z"/><g><rect class="v-card " x="720" y="120" width="220" height="110" rx="10"/><text class="v-ink v-b" x="736" y="148">Decisión</text><text class="v-mut v-sm" x="736" y="170">tres miradas</text><text class="v-mut v-sm" x="736" y="190">y los desacuerdos a la vista</text></g></svg></div>
-      <figcaption><b>El consejo de agentes.</b> Un solo agente tiende a estar de acuerdo consigo mismo. El consejo reparte el trabajo: uno analiza, otro audita y otro redacta. El valor no está en la respuesta, está en el <b>desacuerdo</b> que queda a la vista.<small>Esquema del paso 13.</small></figcaption>
+      <figcaption><b>El consejo de agentes.</b> El valor no está en la respuesta, sino en el <b>desacuerdo</b> que queda a la vista.<small>Esquema del paso 13.</small></figcaption>
     </figure>
     <!-- /@viz:p13 -->
   </section>

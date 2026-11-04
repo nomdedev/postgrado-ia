@@ -130,9 +130,9 @@ function p4medias() {
     `<circle class="v-ring" cx="${r1(cx)}" cy="${r1(cy)}" r="9"><title>Cruce el ${fechas[ic - ini].d}: la SMA 20 pasa ${alza ? 'por encima' : 'por debajo'} de la SMA 50</title></circle>` +
     `<text class="v-ink v-b" x="${r1(cx + (cx > 600 ? -14 : 14))}" y="${y0 + 18}" text-anchor="${cx > 600 ? 'end' : 'start'}">cruce ${alza ? 'al alza → COMPRA' : 'a la baja → VENTA'}</text>` +
     `<text class="v-mut v-sm" x="${x0}" y="${H - 14}">${fechas[0].d}</text><text class="v-mut v-sm" x="${x1}" y="${H - 14}" text-anchor="end">${fechas.at(-1).d}</text>`;
-  return figura('viz-p4a', 'La señal nace de un cruce', `Cuando la media corta (SMA 20) cruza ${alza ? '<b>por encima</b>' : '<b>por debajo</b>'} de la larga (SMA 50), el precio cambió de tendencia: es la señal de <b>${alza ? 'COMPRA' : 'VENTA'}</b>. Acá, en ${t.symbol}.`,
+  return figura('viz-p4a', 'La señal nace de un cruce', `Cuando la SMA 20 cruza ${alza ? '<b>por encima</b>' : '<b>por debajo</b>'} de la SMA 50, es la señal de <b>${alza ? 'COMPRA' : 'VENTA'}</b>. Acá, en ${t.symbol}.`,
     svg('viz-p4a', W, H, `Precio de ${t.symbol} con SMA 20 y SMA 50`, `Últimas ${VENTANA} ruedas; cruce ${alza ? 'al alza' : 'a la baja'} el ${fechas[ic - ini].d}`, cuerpo),
-    `Datos: versión de rescate al ${FECHA_TXT}, últimas ${VENTANA} ruedas de ${t.symbol}.`);
+    `Datos de rescate al ${FECHA_TXT}.`);
 }
 
 function p4rsi() {
@@ -157,9 +157,9 @@ function p4rsi() {
     cuerpo += `<text class="v-mut v-sm" x="${r1(sx((a + b) / 2))}" y="${y + 30}" text-anchor="middle">los otros ${dentro.length}, entre ${num(a, 0)} y ${num(b, 0)}</text>`;
   }
   const fuera = API.filter((d) => d.rsi14 < 30 || d.rsi14 > 70);
-  return figura('viz-p4b', 'El RSI ubica a cada activo', `El RSI va de 0 a 100. Abajo de 30 el activo viene muy castigado (sobreventa); arriba de 70, muy comprado (sobrecompra). Hoy quedan afuera <b>${fuera.map((d) => `${d.symbol} (${num(d.rsi14, 1)})`).join(' y ')}</b>.`,
+  return figura('viz-p4b', 'El RSI ubica a cada activo', `Abajo de 30, sobreventa; arriba de 70, sobrecompra. Hoy quedan afuera <b>${fuera.map((d) => `${d.symbol} (${num(d.rsi14, 1)})`).join(' y ')}</b>.`,
     svg('viz-p4b', W, H, 'RSI de 14 ruedas de los 8 activos', orden.map((d) => `${d.symbol} ${num(d.rsi14, 1)}`).join(', '), cuerpo),
-    `Datos: muestra fija de la API del curso (${FECHA_TXT}).`);
+    `API del curso, ${FECHA_TXT}.`);
 }
 
 // ---------- P5 · Riesgo y retorno: activos, carteras y Sharpe ----------
@@ -212,9 +212,9 @@ function p5() {
     ocupado.push(o.b);
     cuerpo += `<text class="${p.tcls}" x="${r1(o.tx)}" y="${r1(o.ty)}" text-anchor="${o.a}">${esc(p.txt)}</text>`;
   });
-  return figura('viz-p5', 'Riesgo contra retorno', `Cada punto gris es un activo; los ámbar, las tres carteras. Combinar activos lleva la cartera <b>hacia arriba y a la izquierda</b>: más retorno por cada punto de riesgo. La línea punteada sale de la tasa libre de riesgo: cuanto más empinada, mejor Sharpe. La mejor hoy: <b>${mejor.s}</b>.`,
+  return figura('viz-p5', 'Riesgo contra retorno', `Gris: activos; ámbar: carteras. Más arriba y a la izquierda, mejor Sharpe. La mejor hoy: <b>${mejor.s}</b>.`,
     svg('viz-p5', W, H, 'Riesgo y retorno anual de 8 activos y 3 carteras', carteras.map((d) => `${d.s}: retorno ${num(d.ret * 100, 1)} %, volatilidad ${num(d.vol * 100, 1)} %, Sharpe ${num(d.sharpe)}`).join('; '), cuerpo),
-    `Datos: versión de rescate al ${FECHA_TXT}. En datos simulados los activos no se mueven juntos, así que la diversificación ayuda más que en la realidad.`);
+    `Datos: versión de rescate al ${FECHA_TXT}.`);
 }
 
 // ---------- P6 · El viaje de un pedido a la API ----------
@@ -263,8 +263,8 @@ function p8() {
   const W = 960, H = 300, y = 40, h = 150, w = 168, g = 22;
   const xs = [10, 10 + (w + g), 10 + 2 * (w + g), 10 + 3 * (w + g), 10 + 4 * (w + g)];
   const cajas = [
-    ['Cada día 9:00', ['Schedule Trigger', 'sin nadie mirando']],
-    ['Pide la API', ['HTTP Request', 'la URL pública del paso 9']],
+    ['Cada día 18:00', ['Schedule Trigger', 'sin nadie mirando']],
+    ['Pide la API', ['HTTP Request', 'la URL pública del curso']],
     ['Filtra señales', ['Code', 'quedan 2: JNJ y KO']],
     ['¿Hay avisos?', ['IF', 'sí → manda · no → corta']],
     ['Manda el mail', ['Email', 'JNJ · KO · 2 avisos']]
@@ -275,9 +275,9 @@ function p8() {
     if (i < 4) cuerpo += flecha(xs[i] + w + 2, y + h / 2, xs[i + 1] - 2, y + h / 2);
   });
   cuerpo += `<text class="v-mut v-sm" x="${W / 2}" y="${y + h + 42}" text-anchor="middle">cada nodo le pasa al siguiente un JSON; si el filtro no encuentra nada, el flujo termina sin mandar correo</text>`;
-  return figura('viz-p8', 'El workflow que corre solo', 'Cinco nodos encadenados: el disparador arranca sin que nadie toque nada, el HTTP pide los datos y el filtro decide si hay algo que avisar. Cambiar la regla del filtro es cambiar <b>una condición</b>, no todo el flujo.',
+  return figura('viz-p8', 'El workflow que corre solo', 'El disparador arranca solo y el filtro decide si hay algo que avisar.',
     svg('viz-p8', W, H, 'Workflow de n8n con cinco nodos encadenados', 'Disparador, pedido HTTP, filtro, condición y correo', cuerpo),
-    'Esquema del paso 8, con la muestra fija de la API del curso.');
+    'Esquema del paso 8.');
 }
 
 // ---------- P9 · Dónde termina el taller y qué agrega la clase 3 ----------
@@ -310,7 +310,7 @@ function p10() {
     `<text class="v-dn v-sm v-b" x="${(xs[0] + w + xs[1]) / 2}" y="${y - 10}" text-anchor="middle">✗ NO</text>` +
     `<text class="v-up v-sm v-b" x="${(xs[1] + w + xs[2]) / 2}" y="${y - 10}" text-anchor="middle">✓ SÍ</text>` +
     `<text class="v-mut v-sm" x="${W / 2}" y="${y + h + 40}" text-anchor="middle">una clave por servicio, con el menor permiso posible: si se filtra, se revoca y se genera otra</text>`;
-  return figura('viz-p10', 'Dónde vive la clave', 'La clave se crea en el panel del proveedor del modelo y se pega <b>una sola vez</b> en las credenciales de n8n. Nunca va en el HTML, ni en el prompt, ni en el workflow exportado: cualquiera que abra el archivo la vería.',
+  return figura('viz-p10', 'Dónde vive la clave', 'La clave se pega <b>una sola vez</b> en n8n. Nunca va en el HTML ni en el workflow.',
     svg('viz-p10', W, H, 'La clave va de la página a n8n y de n8n a la API del modelo', 'Página y n8n no comparten la clave; n8n la usa desde su gestor de credenciales', cuerpo),
     'Esquema del paso 10.');
 }
@@ -372,7 +372,7 @@ function p13() {
       flecha(684, ys[i] + 50, 716, 180);
   });
   cuerpo += nodo(720, 120, 220, 110, 'Decisión', ['tres miradas', 'y los desacuerdos a la vista']);
-  return figura('viz-p13', 'El consejo de agentes', 'Un solo agente tiende a estar de acuerdo consigo mismo. El consejo reparte el trabajo: uno analiza, otro audita y otro redacta. El valor no está en la respuesta, está en el <b>desacuerdo</b> que queda a la vista.',
+  return figura('viz-p13', 'El consejo de agentes', 'El valor no está en la respuesta, sino en el <b>desacuerdo</b> que queda a la vista.',
     svg('viz-p13', W, H, 'Un coordinador reparte la pregunta entre tres agentes y junta la decisión', 'Analista, auditor y redactor; el coordinador junta la respuesta final', cuerpo),
     'Esquema del paso 13.');
 }
