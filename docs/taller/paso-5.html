@@ -34,8 +34,9 @@
 
   <p class="eyebrow">PASO 5 · LA PESTAÑA MÁS “DE FINANZAS”</p>
   <h1>Carteras: retorno, riesgo y Sharpe</h1>
-  <p class="lede">Tres <a class="w" href="glosario.html#cartera">carteras</a> predefinidas que pueden ajustar con controles deslizantes, y las métricas que responden la pregunta de siempre: <b>¿cuánto riesgo asumo por cada punto de retorno?</b></p>
+  <p class="lede">Tres carteras con deslizadores y la pregunta de siempre: ¿cuánto riesgo asumo por cada punto de retorno?</p>
   <div class="meta"><span class="chip"><b>25 MIN</b></span><span class="chip">FINANZAS</span><span class="chip">SALIDA: <b>finlab-v5.html</b></span><a class="chip" href="index.html#niveles">IA · <b>NIVEL 3 DE 5</b></a></div>
+  <div class="note tip"><b>Una idea nueva:</b> <a class="w" href="glosario.html#sharpe">Sharpe</a>: cuánto se gana de más sobre la tasa segura, por cada punto de riesgo. <em>Ejemplo: dos carteras rinden 10 %; con riesgo 10 el Sharpe es (10 − 4,3) ÷ 10 = 0,57, y con riesgo 20 es 0,285. Anualizar es llevar un número diario a un año: el retorno se multiplica por 252 y el riesgo por √252.</em></div>
   <div class="note tip"><b>¿Llegan tarde o se rompió el archivo?</b> Bajen la versión con la que termina el paso 4, guárdenla como <span class="code-inline">finlab.html</span> y arranquen este paso desde ahí. <a class="btn" href="rescate/finlab-v4.html" download="finlab.html">⬇ BAJAR EL PUNTO DE PARTIDA (PASO 4)</a></div>
 
   <section class="block" aria-labelledby="logro">
@@ -116,7 +117,7 @@ Debajo de las tarjetas, una línea en lenguaje simple que interprete el Sharpe (
   <section class="block" aria-labelledby="falla">
     <span class="num"></span>
     <h2 id="falla">Si algo falla</h2>
-    <div class="note tip"><b>¿Se trabaron después de tres intentos?</b> Esta es una versión que ya cumple todo lo de este paso. Pueden abrirla para comparar o bajarla y seguir con el próximo. <a class="btn" href="rescate/finlab-v5.html" target="_blank" rel="noopener">VER EL RESULTADO</a> <a class="btn btn-primary" href="rescate/finlab-v5.html" download="finlab.html">⬇ BAJAR LA VERSIÓN DE RESCATE</a></div>
+    <div class="note tip"><b>Tres intentos y nada:</b> <a class="btn" href="rescate/finlab-v5.html" target="_blank" rel="noopener">ABRIR LA VERSIÓN DE RESCATE</a> <a class="btn btn-primary" href="rescate/finlab-v5.html" download="finlab.html">⬇ BAJAR LA VERSIÓN DE RESCATE</a></div>
     <ul>
       <li><b>La volatilidad de un solo activo no coincide:</b> “Con 100% en KO la volatilidad de la cartera da X, pero la de KO sola da Y. Revisá el cálculo de la matriz de covarianzas y mostrame la fórmula que usás.”</li>
       <li><b>El Sharpe da enorme (más de 5):</b> probablemente mezcló retornos diarios con anuales. Pídanle que muestre las dos cifras antes de dividir.</li>
@@ -135,36 +136,7 @@ Debajo de las tarjetas, una línea en lenguaje simple que interprete el Sharpe (
     <!-- /@viz:p5 -->
   </section>
 
-  <details class="more" id="entender">
-    <summary>Para entender más <small>· cómo funciona y palabras nuevas</small></summary>
-
-  <section class="block" aria-labelledby="flujo">
-    <span class="num"></span>
-    <h2 id="flujo">El flujo: cómo se mide una cartera</h2>
-    <div class="flow">
-      <div class="flow-row"><span class="n">1</span><div><h3>Eligen la cartera</h3><p>Un perfil o pesos a mano; se ajustan para que sumen 100 %.</p></div></div>
-      <div class="flow-row"><span class="n">2</span><div><h3>Los retornos diarios</h3><p>Cuánto subió o bajó cada activo cada día.</p></div></div>
-      <div class="flow-row"><span class="n">3</span><div><h3>Promedio y movimiento conjunto</h3><p>Cuánto rinde cada activo y si se mueven juntos, llevado a un año.</p></div></div>
-      <div class="flow-row"><span class="n">4</span><div><h3>Retorno, riesgo y Sharpe</h3><p>Las tres cifras que resumen la cartera.</p></div></div>
-      <div class="flow-row"><span class="n">5</span><div><h3>El gráfico base 100</h3><p>Su cartera contra una con el mismo peso en todos los activos.</p></div></div>
-    </div>
-    <p style="margin-top:14px"><a class="btn" href="diagramas/p5-carteras.html" target="_blank" rel="noopener">VER EL DIAGRAMA COMPLETO ↗</a></p>
-  </section>
-
-  <section class="block" aria-labelledby="palabras">
-    <span class="num"></span>
-    <h2 id="palabras">Palabras nuevas de este paso</h2>
-    <dl class="terms">
-      <div class="term-card"><dt>Volatilidad</dt><dd>Cuánto se mueve el precio; la medida de riesgo. <a href="glosario.html#volatilidad">Más →</a></dd></div>
-      <div class="term-card"><dt>Covarianza</dt><dd>Si dos activos se mueven juntos o no. <a href="glosario.html#covarianza">Más →</a></dd></div>
-      <div class="term-card"><dt>Sharpe</dt><dd>Retorno extra por unidad de riesgo. <a href="glosario.html#sharpe">Más →</a></dd></div>
-      <div class="term-card"><dt>Base 100</dt><dd>Todo arranca en 100 para comparar recorridos. <a href="glosario.html#base-100">Más →</a></dd></div>
-      <div class="term-card"><dt>Equiponderada</dt><dd>El mismo peso en todos los activos. <a href="glosario.html#equiponderada">Más →</a></dd></div>
-    </dl>
-  </section>
-  </details>
-
-  <div class="pager">
+    <div class="pager">
     <a href="paso-4.html">← PASO 4 · INDICADORES</a>
     <a href="paso-6.html">PASO 6 · API →</a>
   </div>

@@ -71,20 +71,16 @@ test('el taller: 15 pasos en tres clases, cada uno con glosario, prompt copiable
     assert.match(html, /<html lang="es">/, `${file}: falta lang="es"`);
     assert.match(html, /src="taller\.js"/, `${file}: no carga taller.js`);
     assert.match(html, /localStorage\.getItem\("finlab-tema"\)/, `${file}: no aplica el tema guardado antes de pintar`);
-    // Anatomía (plan de reestructura, etapa 3): "Hacer" abierto y "Para entender más" plegado al final.
-    const entender = html.indexOf('<details class="more"');
-    assert.ok(entender > 0, `${file}: falta el bloque plegable "Para entender más"`);
-    for (const id of ['logro', 'prompt', 'hacer', 'comprobar', 'falla']) {
-      const pos = html.indexOf(`aria-labelledby="${id}"`);
-      assert.ok(pos > 0 && pos < entender, `${file}: la sección "${id}" tiene que estar en la zona Hacer`);
-    }
-    for (const id of ['flujo', 'palabras']) {
-      assert.ok(html.indexOf(`aria-labelledby="${id}"`) > entender, `${file}: "${id}" tiene que ir dentro de "Para entender más"`);
+    // Anatomía (autoplan): una idea nueva arriba, después logro → prompt → hacer → comprobar → falla; nada plegado.
+    assert.match(html, /<b>Una idea nueva:<\/b>/, `${file}: falta la caja "Una idea nueva"`);
+    assert.doesNotMatch(html, /<details class="more"/, `${file}: no puede quedar un bloque plegable "Para entender más"`);
+    const idea = html.indexOf('Una idea nueva');
+    for (const id of (n === 7 ? ['logro', 'hacer', 'comprobar', 'falla'] : ['logro', 'prompt', 'hacer', 'comprobar', 'falla'])) {
+      assert.ok(html.indexOf(`aria-labelledby="${id}"`) > idea, `${file}: la sección "${id}" falta o está antes de la idea nueva`);
     }
     assert.doesNotMatch(html, /sección 0\d|class="mission"|<iframe/, `${file}: quedó una referencia "sección 0N", la misión repetida o un diagrama embebido`);
-    assert.match(html, /<div class="flow">/, `${file}: falta la tira del flujo`);
     if (n <= 9) {
-      const diagram = html.match(/<a class="btn" href="(diagramas\/[a-z0-9-]+\.html)"/);
+      const diagram = html.match(/<a href="(diagramas\/[a-z0-9-]+\.html)"/);
       assert.ok(diagram && fs.existsSync(path.join(TALLER, diagram[1])), `${file}: falta el enlace al diagrama completo`);
     }
     assert.match(html, /href="glosario\.html#/, `${file}: no enlaza el glosario`);
@@ -358,4 +354,15 @@ test('el backtest ingenuo muestra los números que salen del CSV de rescate', ()
   for (const valor of esperados) assert.ok(pagina.includes(valor + ' %'), `backtest.html: no aparece ${valor} % (recalculado desde finlab-AAPL.csv)`);
   assert.equal(correr(10, 30).cambios, 7);
   assert.equal(correr(5, 20).cambios, 11);
+});
+
+test('el autoplan cubre todo el material: cada archivo existe y ninguna página del taller queda afuera', () => {
+  const raiz = path.join(__dirname, '..');
+  const { partes } = JSON.parse(fs.readFileSync(path.join(raiz, 'docs', 'autoplan', 'partes.json'), 'utf8'));
+  const cubiertos = new Set(partes.flatMap((p) => p.archivos));
+  for (const archivo of cubiertos) assert.ok(fs.existsSync(path.join(raiz, archivo)), `partes.json: no existe ${archivo}`);
+  for (const f of fs.readdirSync(path.join(raiz, 'docs', 'taller')).filter((n) => n.endsWith('.html'))) {
+    assert.ok(cubiertos.has(`docs/taller/${f}`), `partes.json: falta docs/taller/${f}; agregalo a una parte del autoplan`);
+  }
+  for (const p of partes) assert.ok(fs.existsSync(path.join(raiz, 'docs', 'autoplan', `${p.id}.md`)), `falta docs/autoplan/${p.id}.md (node scripts/loops/autoplan.js --init)`);
 });

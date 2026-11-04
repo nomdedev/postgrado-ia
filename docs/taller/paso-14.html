@@ -34,8 +34,9 @@
 
   <p class="eyebrow">PASO 14 · DEL CHAT AL FLUJO, SIN COPIAR Y PEGAR</p>
   <h1>El MCP de n8n: crear workflows desde el chat</h1>
-  <p class="lede">Hasta acá el asistente opinaba sobre el flujo y ustedes copiaban el JSON a mano. Con el <a class="w" href="glosario.html#mcp">MCP</a> de n8n, el asistente puede listar, leer y crear <a class="w" href="glosario.html#workflow">workflows</a> directamente. Es el mismo <a class="w" href="glosario.html#nodo">nodo</a> de siempre, con una herramienta nueva en la mano.</p>
+  <p class="lede">Con el MCP de n8n, el asistente puede listar, leer y crear workflows directamente, sin copiar el JSON a mano.</p>
   <div class="meta"><span class="chip"><b>20 MIN</b></span><span class="chip">N8N</span><span class="chip">UN ASISTENTE CON MCP</span><span class="chip">SALIDA: <b>UN FLUJO CREADO DESDE EL CHAT</b></span><a class="chip" href="index.html#niveles">IA · <b>NIVEL 5 DE 5</b></a></div>
+  <div class="note tip"><b>Una idea nueva:</b> MCP: un enchufe estándar para que el asistente maneje n8n con permisos, sin copiar y pegar. <em>Ejemplo: el asistente crea un workflow en n8n con una clave de permisos limitados.</em></div>
   <div class="note tip"><b>¿El asistente que usan no soporta MCP?</b> El paso se puede ver en la demostración del docente. Lo importante es entender qué cambia: el asistente deja de proponer texto y pasa a ejecutar acciones con permisos.</div>
 
   <section class="block" aria-labelledby="logro">
@@ -133,34 +134,7 @@ No actives ningún workflow ni cambies credenciales sin que te lo pida explícit
     <!-- /@viz:p14 -->
   </section>
 
-  <details class="more" id="entender">
-    <summary>Para entender más <small>· cómo funciona y palabras nuevas</small></summary>
-
-  <section class="block" aria-labelledby="flujo">
-    <span class="num"></span>
-    <h2 id="flujo">El flujo: quién habla con quién</h2>
-    <div class="flow">
-      <div class="flow-row"><span class="n">1</span><div><h3>El asistente pide</h3><p>“Listá los workflows”, con el token configurado.</p></div></div>
-      <div class="flow-row"><span class="n">2</span><div><h3>El MCP traduce</h3><p>Convierte el pedido en una acción de n8n, con permisos.</p></div></div>
-      <div class="flow-row"><span class="n">3</span><div><h3>n8n responde</h3><p>Devuelve el JSON del workflow, igual que la API del paso 6.</p></div></div>
-      <div class="flow-row"><span class="n">4</span><div><h3>Ustedes revisan</h3><p>El flujo creado queda desactivado hasta que lo aprueben.</p></div></div>
-    </div>
-    <p style="margin-top:14px"><a class="btn" href="diagramas/a3-este-taller.html" target="_blank" rel="noopener">VER CÓMO SE HIZO ESTE TALLER ↗</a></p>
-  </section>
-
-  <section class="block" aria-labelledby="palabras">
-    <span class="num"></span>
-    <h2 id="palabras">Palabras nuevas de este paso</h2>
-    <dl class="terms">
-      <div class="term-card"><dt>MCP</dt><dd>El estándar para que un asistente use herramientas de otro programa. <a href="glosario.html#mcp">Más →</a></dd></div>
-      <div class="term-card"><dt>Workflow</dt><dd>El flujo de nodos que corre en n8n. <a href="glosario.html#workflow">Más →</a></dd></div>
-      <div class="term-card"><dt>Credencial</dt><dd>Donde se guarda el token que usa el MCP. <a href="glosario.html#credencial">Más →</a></dd></div>
-      <div class="term-card"><dt>Clave de API</dt><dd>El token con el que se autoriza cada pedido. <a href="glosario.html#clave-api">Más →</a></dd></div>
-    </dl>
-  </section>
-  </details>
-
-  <div class="pager">
+    <div class="pager">
     <a href="paso-13.html">← PASO 13 · CONSEJO</a>
     <a href="index.html">VOLVER AL MAPA →</a>
   </div>

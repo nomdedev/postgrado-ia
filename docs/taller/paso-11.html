@@ -34,8 +34,9 @@
 
   <p class="eyebrow">PASO 11 · ELEGIR CON CRITERIO, NO POR EL MÁS CARO</p>
   <h1>Modelos en n8n: cuál usar y cómo decidirlo</h1>
-  <p class="lede">En n8n el modelo de un nodo se cambia sin rehacer el flujo. Por eso conviene empezar por el más chico y subir solo si no alcanza: cada consulta larga se paga por <a class="w" href="glosario.html#token">token</a>. En este paso prueban dos <a class="w" href="glosario.html#modelo">modelos</a> con la misma tarea y eligen con evidencia.</p>
+  <p class="lede">El modelo de un nodo se cambia sin rehacer el flujo: prueban dos con la misma tarea y eligen con evidencia.</p>
   <div class="meta"><span class="chip"><b>20 MIN</b></span><span class="chip">N8N</span><span class="chip">UN NODO DE IA</span><span class="chip">SALIDA: <b>UNA DECISIÓN ANOTADA</b></span><a class="chip" href="index.html#niveles">IA · <b>NIVEL 4 DE 5</b></a></div>
+  <div class="note tip"><b>Una idea nueva:</b> Cada modelo responde distinto y cuesta distinto: se elige probando la misma pregunta. <em>Ejemplo: misma pregunta a un modelo chico y a uno grande: se comparan la respuesta y el costo.</em></div>
   <div class="note tip"><b>¿Les falta la credencial?</b> El paso 10 deja una clave guardada en n8n. Sin ella, el nodo de IA no arranca. <a class="btn" href="paso-10.html">VOLVER AL PASO 10</a></div>
 
   <section class="block" aria-labelledby="logro">
@@ -125,33 +126,7 @@ No inventes precios ni nombres de modelos actuales: decime qué tengo que mirar 
     <!-- /@viz:p11 -->
   </section>
 
-  <details class="more" id="entender">
-    <summary>Para entender más <small>· cómo funciona y palabras nuevas</small></summary>
-
-  <section class="block" aria-labelledby="flujo">
-    <span class="num"></span>
-    <h2 id="flujo">El flujo: de la pregunta a la respuesta</h2>
-    <div class="flow">
-      <div class="flow-row"><span class="n">1</span><div><h3>Entra el texto</h3><p>La pregunta o los datos que manda el nodo anterior.</p></div></div>
-      <div class="flow-row"><span class="n">2</span><div><h3>Se cuenta en tokens</h3><p>Entrada más salida: eso es lo que se mide y se cobra.</p></div></div>
-      <div class="flow-row"><span class="n">3</span><div><h3>El modelo responde</h3><p>Un modelo más grande puede entender más contexto, y tarda más.</p></div></div>
-      <div class="flow-row"><span class="n">4</span><div><h3>Se decide por tarea</h3><p>Chico para clasificar, grande para auditar. Siempre el más chico que alcance.</p></div></div>
-    </div>
-  </section>
-
-  <section class="block" aria-labelledby="palabras">
-    <span class="num"></span>
-    <h2 id="palabras">Palabras nuevas de este paso</h2>
-    <dl class="terms">
-      <div class="term-card"><dt>Modelo</dt><dd>El motor de IA que responde; hay tamaños y precios. <a href="glosario.html#modelo">Más →</a></dd></div>
-      <div class="term-card"><dt>Token</dt><dd>La unidad de texto con la que se mide el consumo. <a href="glosario.html#token">Más →</a></dd></div>
-      <div class="term-card"><dt>Costo</dt><dd>Lo que se paga por tokens de entrada y de salida. <a href="glosario.html#costo">Más →</a></dd></div>
-      <div class="term-card"><dt>Límite</dt><dd>El tope de pedidos o de gasto por minuto. <a href="glosario.html#limite">Más →</a></dd></div>
-    </dl>
-  </section>
-  </details>
-
-  <div class="pager">
+    <div class="pager">
     <a href="paso-10.html">← PASO 10 · CLAVES</a>
     <a href="paso-12.html">PASO 12 · AGENTE →</a>
   </div>

@@ -1,0 +1,30 @@
+{
+  "reglas": {
+    "lecturaMax": 450,
+    "oracionLargaPalabras": 25,
+    "oracionesLargasMax": 3,
+    "nota": "lectura = palabras visibles sin prompts (<pre>), scripts, estilos, svg, nav, encabezado ni pie"
+  },
+  "partes": [
+    { "id": "mapa", "nombre": "Mapa del taller", "archivos": ["docs/taller/index.html"] },
+    { "id": "p0", "nombre": "P0 · Preparar", "clase": 1, "archivos": ["docs/taller/paso-0.html"] },
+    { "id": "p1", "nombre": "P1 · Esqueleto", "clase": 1, "archivos": ["docs/taller/paso-1.html"] },
+    { "id": "p2", "nombre": "P2 · Datos", "clase": 1, "archivos": ["docs/taller/paso-2.html"] },
+    { "id": "p3", "nombre": "P3 · Mercado", "clase": 1, "archivos": ["docs/taller/paso-3.html"] },
+    { "id": "p4", "nombre": "P4 · Indicadores", "clase": 1, "archivos": ["docs/taller/paso-4.html"] },
+    { "id": "p5", "nombre": "P5 · Carteras", "clase": 1, "archivos": ["docs/taller/paso-5.html"] },
+    { "id": "p6", "nombre": "P6 · API", "clase": 2, "archivos": ["docs/taller/paso-6.html"] },
+    { "id": "p7", "nombre": "P7 · Colab", "clase": 2, "archivos": ["docs/taller/paso-7.html"] },
+    { "id": "p8", "nombre": "P8 · n8n", "clase": 2, "archivos": ["docs/taller/paso-8.html"] },
+    { "id": "p9", "nombre": "P9 · Guiado", "clase": 2, "archivos": ["docs/taller/paso-9.html"] },
+    { "id": "p10", "nombre": "P10 · Claves", "clase": 3, "archivos": ["docs/taller/paso-10.html"] },
+    { "id": "p11", "nombre": "P11 · Modelos", "clase": 3, "archivos": ["docs/taller/paso-11.html"] },
+    { "id": "p12", "nombre": "P12 · Agente", "clase": 3, "archivos": ["docs/taller/paso-12.html"] },
+    { "id": "p13", "nombre": "P13 · Consejo", "clase": 3, "archivos": ["docs/taller/paso-13.html"] },
+    { "id": "p14", "nombre": "P14 · MCP", "clase": 3, "archivos": ["docs/taller/paso-14.html"] },
+    { "id": "extras", "nombre": "Extras del taller", "archivos": ["docs/taller/errores.html", "docs/taller/traza.html", "docs/taller/backtest.html", "docs/taller/retos.html", "docs/taller/kit.html", "docs/taller/glosario.html"] },
+    { "id": "docente", "nombre": "Guía y hoja del docente", "archivos": ["docs/docente/index.html", "docs/docente/clase.html"] },
+    { "id": "automatizaciones", "nombre": "Ejemplos de automatización", "archivos": ["docs/automatizaciones/index.html", "docs/automatizaciones/aviso-senal.html", "docs/automatizaciones/resumen-diario.html", "docs/automatizaciones/informe-semanal-ia.html", "docs/automatizaciones/precios-a-sheets.html"] },
+    { "id": "terminal", "nombre": "Terminal (bienvenida y EMPEZAR)", "archivos": ["index.html"], "medir": false }
+  ]
+}

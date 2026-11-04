@@ -34,8 +34,9 @@
 
   <p class="eyebrow">PASO 12 · LA IA QUE ELIGE SUS HERRAMIENTAS</p>
   <h1>El agente: la IA que decide qué hacer</h1>
-  <p class="lede">Un prompt común contesta de una vez. Un <a class="w" href="glosario.html#agente">agente</a> elige una <a class="w" href="glosario.html#herramienta">herramienta</a>, mira el resultado y vuelve a decidir. Acá le dan dos herramientas reales —la API del curso y una calculadora— y lo dejan resolver una pregunta de cartera <b>sin respuestas inventadas</b>.</p>
+  <p class="lede">Un agente elige una herramienta, mira el resultado y vuelve a decidir; acá usa la API del curso y una calculadora.</p>
   <div class="meta"><span class="chip"><b>25 MIN</b></span><span class="chip">N8N</span><span class="chip">2 HERRAMIENTAS</span><span class="chip">SALIDA: <b>UN AGENTE QUE RESPONDE CON DATOS</b></span><a class="chip" href="index.html#niveles">IA · <b>NIVEL 5 DE 5</b></a></div>
+  <div class="note tip"><b>Una idea nueva:</b> Un agente elige solo qué herramienta usar y cuándo parar. <em>Ejemplo: ante “¿cuánto varió mi cartera 40/30/30?”, consulta la API y usa la calculadora: +0,56 %.</em></div>
   <div class="note tip"><b>¿Les falta el paso anterior?</b> El agente necesita la credencial probada y una decisión de modelo. <a class="btn" href="paso-10.html">VOLVER AL PASO 10</a> <a class="btn" href="paso-11.html">VOLVER AL PASO 11</a></div>
 
   <section class="block" aria-labelledby="logro">
@@ -89,13 +90,10 @@ Después decime qué tres preguntas de prueba muestran si el agente eligió bien
     <span class="num"></span>
     <h2 id="hacer">Qué hacer, clic por clic</h2>
     <ol class="do">
-      <li><b>Camino corto:</b> descarguen <a href="rescate/agente-api.json" download>agente-api.json</a>, impórtenlo en n8n (menú ⋯ → <em>Import from file</em>), abran el nodo del modelo y elijan la credencial del paso 10. Ya trae el prompt de sistema, las dos herramientas y el tope de 6 pasos: salteen hasta “Pregunten algo concreto”.</li>
-      <li><b>Camino largo:</b> agreguen un nodo AI Agent y conéctenle la credencial del paso 10 y el modelo elegido en el paso 11. La credencial va en el nodo del modelo, que se enchufa al agente.</li>
-      <li><b>Peguen el prompt de sistema</b> en el campo correspondiente, antes de conectar herramientas.</li>
-      <li><b>Agreguen la herramienta HTTP Request</b> apuntando a <span class="code-inline">/api/market/summary</span> de su terminal publicada.</li>
-      <li><b>Agreguen la calculadora</b> (o un nodo Code que haga las cuentas) como segunda herramienta.</li>
-      <li><b>Pongan el tope de pasos</b> en 6 y guarden.</li>
-      <li><b>Pregunten algo concreto:</b> “Mi cartera es 40 % KO, 30 % JNJ y 30 % GGAL: ¿cuánto varió hoy y qué señal tiene cada activo?” y abran la traza. La cuenta a mano: 0,4 × 0,82 + 0,3 × 0,25 + 0,3 × 0,52 = 0,56 %.</li>
+      <li><b>Camino corto:</b> descarguen <a href="rescate/agente-api.json" download>agente-api.json</a>, impórtenlo en n8n (menú ⋯ → <em>Import from file</em>) y elijan en el nodo del modelo la credencial del paso 10. Ya trae el prompt de sistema, las dos herramientas y el tope de 6 pasos: salteen a “Pregunten algo concreto”.</li>
+      <li><b>Camino largo:</b> agreguen un nodo AI Agent, enchúfenle el modelo con la credencial del paso 10 y peguen el prompt de sistema.</li>
+      <li><b>Sumen dos herramientas:</b> HTTP Request a <span class="code-inline">/api/market/summary</span> y la calculadora (o un nodo Code). Pongan el tope de pasos en 6 y guarden.</li>
+      <li><b>Pregunten algo concreto:</b> “Mi cartera es 40 % KO, 30 % JNJ y 30 % GGAL: ¿cuánto varió hoy y qué señal tiene cada activo?” y abran la traza. A mano: 0,4 × 0,82 + 0,3 × 0,25 + 0,3 × 0,52 = 0,56 %.</li>
       <li><b>Repitan con una pregunta imposible</b> (“¿cuánto va a valer AAPL mañana?”) y comprueben que no inventa.</li>
     </ol>
   </section>
@@ -133,34 +131,7 @@ Después decime qué tres preguntas de prueba muestran si el agente eligió bien
     <!-- /@viz:p12 -->
   </section>
 
-  <details class="more" id="entender">
-    <summary>Para entender más <small>· cómo funciona y palabras nuevas</small></summary>
-
-  <section class="block" aria-labelledby="flujo">
-    <span class="num"></span>
-    <h2 id="flujo">El flujo: cómo decide un agente</h2>
-    <div class="flow">
-      <div class="flow-row"><span class="n">1</span><div><h3>Lee la pregunta y las reglas</h3><p>El prompt de sistema dice qué puede y qué no puede hacer.</p></div></div>
-      <div class="flow-row"><span class="n">2</span><div><h3>Elige una herramienta</h3><p>La API para precios y señales; la calculadora para las cuentas.</p></div></div>
-      <div class="flow-row"><span class="n">3</span><div><h3>Lee el resultado</h3><p>Si alcanza, responde; si falta un dato, vuelve a decidir.</p></div></div>
-      <div class="flow-row"><span class="n">4</span><div><h3>Se detiene</h3><p>El tope de pasos evita que el ciclo siga para siempre.</p></div></div>
-    </div>
-    <p style="margin-top:14px"><a class="btn" href="diagramas/a1-ciclo-agente.html" target="_blank" rel="noopener">VER EL CICLO COMPLETO ↗</a></p>
-  </section>
-
-  <section class="block" aria-labelledby="palabras">
-    <span class="num"></span>
-    <h2 id="palabras">Palabras nuevas de este paso</h2>
-    <dl class="terms">
-      <div class="term-card"><dt>Agente</dt><dd>La IA que decide qué herramienta usar y en qué orden. <a href="glosario.html#agente">Más →</a></dd></div>
-      <div class="term-card"><dt>Herramienta</dt><dd>Lo que el agente puede ejecutar: una API, una cuenta. <a href="glosario.html#herramienta">Más →</a></dd></div>
-      <div class="term-card"><dt>Prompt de sistema</dt><dd>Las reglas fijas que el agente no debería romper. <a href="glosario.html#prompt-sistema">Más →</a></dd></div>
-      <div class="term-card"><dt>Límite de pasos</dt><dd>El tope de vueltas para que el ciclo termine. <a href="glosario.html#limite">Más →</a></dd></div>
-    </dl>
-  </section>
-  </details>
-
-  <div class="pager">
+    <div class="pager">
     <a href="paso-11.html">← PASO 11 · MODELOS</a>
     <a href="paso-13.html">PASO 13 · CONSEJO →</a>
   </div>

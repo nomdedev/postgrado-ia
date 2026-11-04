@@ -62,16 +62,8 @@
       <div id="javascript"><dt>JavaScript</dt><dd>El lenguaje que hace que una página haga cosas: calcular, responder a clics, dibujar gráficos. Va dentro del HTML.</dd></div>
       <div id="cdn"><dt>CDN</dt><dd>Un servidor público desde donde la página descarga herramientas ya hechas (React, Recharts) en lugar de instalarlas. Por eso el archivo funciona sin instalar nada, pero necesita internet la primera vez.</dd></div>
       <div id="react"><dt>React</dt><dd>Una herramienta para armar interfaces con piezas reutilizables (<a href="#componente">componentes</a>). La terminal FIN·LAB está hecha con React.</dd></div>
-      <div id="babel"><dt>Babel</dt><dd>Un traductor que convierte el código de React a uno que el navegador entiende. Lo cargamos desde el CDN para no tener que instalar nada.</dd></div>
-      <div id="recharts"><dt>Recharts</dt><dd>Una librería de gráficos para React: líneas, tortas, barras. Es la que dibuja los gráficos de Mercado y Carteras.</dd></div>
-      <div id="componente"><dt>Componente</dt><dd>Una pieza de la pantalla con su propia lógica: la tabla, una tarjeta, el gráfico. Se arman por separado y se combinan.</dd></div>
       <div id="pestana"><dt>Pestaña</dt><dd>Cada sección de la terminal (Mercado, Carteras…). Al hacer clic se muestra solo esa parte.</dd></div>
       <div id="hash"><dt>#/guiado <small>ruta con numeral</small></dt><dd>Lo que va después del <span class="code-inline">#</span> en la dirección indica qué pestaña mostrar. Sin nada después del <span class="code-inline">#</span> se abre INICIO, la bienvenida; <span class="code-inline">#/mercado</span> abre la de Mercado y <span class="code-inline">#/guiado</span>, la de AUTOMATIZAR.</dd></div>
-      <div id="funcion"><dt>Función</dt><dd>Un bloque de código con nombre que recibe datos y devuelve un resultado, como una fórmula de Excel con nombre propio: <span class="code-inline">sma(precios, 20)</span>.</dd></div>
-      <div id="variable"><dt>Variable / constante</dt><dd>Un nombre que guarda un valor. <span class="code-inline">RF = 0.043</span> guarda la tasa libre de riesgo para usarla en varios lugares.</dd></div>
-      <div id="lista"><dt>Lista (array)</dt><dd>Una colección ordenada de valores, entre corchetes: <span class="code-inline">[172.4, 173.1, 171.9]</span>. Una serie de precios es una lista.</dd></div>
-      <div id="objeto"><dt>Objeto</dt><dd>Un conjunto de datos con nombre, entre llaves: <span class="code-inline">{ d: '2026-10-26', c: 308.43, v: 51000000 }</span> es un día con fecha, cierre y volumen.</dd></div>
-      <div id="localstorage"><dt>localStorage</dt><dd>Un pequeño espacio de memoria del navegador donde una página puede guardar datos que sobreviven a la recarga (por ejemplo, tus alertas). Vive solo en esa computadora y ese navegador.</dd></div>
     </dl>
   </section>
 
@@ -103,10 +95,15 @@
       <div id="cartera"><dt>Cartera</dt><dd>Un conjunto de activos con un peso cada uno (por ejemplo, 30% JNJ, 25% KO…). Los pesos suman 100%.</dd></div>
       <div id="normalizar"><dt>Normalizar pesos</dt><dd>Reescalar los pesos para que sumen exactamente 100% sin cambiar sus proporciones.</dd></div>
       <div id="retorno"><dt>Retorno anualizado</dt><dd>El rendimiento promedio diario llevado a un año (× 252). Responde “¿cuánto rindió por año, en promedio?”.</dd></div>
-      <div id="volatilidad"><dt>Volatilidad</dt><dd>Cuánto se mueve un precio alrededor de su promedio (desvío estándar), anualizada con × √252. Es la medida de riesgo más usada.</dd></div>
+      <div id="volatilidad"><dt>Volatilidad</dt><dd>Cuánto suele subir o bajar un precio en un día, llevado al año (desvío estándar × √252). Es la medida de riesgo más usada.</dd></div>
       <div id="covarianza"><dt>Covarianza / correlación</dt><dd>Miden si dos activos tienden a moverse juntos. Si no se mueven igual, combinarlos baja el riesgo: eso es <em>diversificar</em>.</dd></div>
       <div id="tasa-libre"><dt>Tasa libre de riesgo</dt><dd>Lo que rendiría una inversión “segura” (como un bono del Tesoro). En FIN·LAB se usa 4,3% anual.</dd></div>
-      <div id="sharpe"><dt>Ratio de Sharpe</dt><dd>(retorno − tasa libre de riesgo) ÷ volatilidad. Cuánto rendimiento extra da la cartera por cada unidad de riesgo. Más alto es mejor.</dd></div>
+      <div id="sharpe"><dt>Ratio de Sharpe</dt><dd>Cuánto se gana de más sobre la tasa segura, por cada punto de riesgo: (retorno − tasa libre) ÷ volatilidad. Más alto es mejor.</dd></div>
+      <div id="anualizar"><dt>Anualizar</dt><dd>Llevar un número diario a un año: el retorno se multiplica por 252 y el riesgo por √252 (≈ 15,9).</dd></div>
+      <div id="desvio"><dt>Desvío estándar</dt><dd>Cuánto se aleja un día típico del promedio. Es la base de la volatilidad.</dd></div>
+      <div id="backtest"><dt>Backtest</dt><dd>Probar una regla con precios pasados, como si se hubiera usado entonces.</dd></div>
+      <div id="sesgo-anticipacion"><dt>Sesgo de anticipación <small>mirar el futuro</small></dt><dd>Usar sin querer información que todavía no existía; por ejemplo, la señal de hoy para el retorno de hoy.</dd></div>
+      <div id="comprar-mantener"><dt>Comprar y mantener</dt><dd>Comprar el primer día y no tocar nada hasta el final.</dd></div>
       <div id="maxima-caida"><dt>Máxima caída <small>drawdown</small></dt><dd>La peor baja desde un máximo hasta el mínimo siguiente. Responde “¿cuánto llegué a perder en el peor momento?”.</dd></div>
       <div id="base-100"><dt>Base 100</dt><dd>Un gráfico donde todo arranca en 100 para comparar recorridos: si una cartera termina en 112, ganó 12%.</dd></div>
       <div id="equiponderada"><dt>Cartera equiponderada</dt><dd>La que pone el mismo peso en todos los activos. Se usa como punto de comparación (<em>benchmark</em>).</dd></div>
@@ -154,7 +151,7 @@
       <div id="http-request"><dt>Nodo HTTP Request</dt><dd>El nodo que hace un pedido a una API y trae la respuesta en JSON.</dd></div>
       <div id="code-node"><dt>Nodo Code</dt><dd>Un nodo donde se pega un poco de JavaScript para transformar datos (filtrar, calcular, armar un texto). La IA lo escribe por vos.</dd></div>
       <div id="if-node"><dt>Nodo IF</dt><dd>Un nodo que decide: si se cumple la condición, sigue por la salida <em>true</em>; si no, por la <em>false</em>.</dd></div>
-      <div id="credencial"><dt>Credencial</dt><dd>La contraseña o permiso para que n8n use tu correo o tu Telegram. Se carga aparte, en el menú de credenciales: nunca se escribe dentro de un nodo.</dd></div>
+      <div id="credencial"><dt>Credencial</dt><dd>La caja fuerte de n8n: el flujo usa la llave (contraseña, clave de API o token de acceso) sin verla. Nunca se escribe dentro de un nodo.</dd></div>
       <div id="importar"><dt>Importar workflow</dt><dd>Cargar en n8n un archivo JSON con un flujo ya armado: menú <em>⋯</em> → <em>Import from File</em>.</dd></div>
     </dl>
   </section>
@@ -167,10 +164,12 @@
       <div id="modelo"><dt>Modelo <small>LLM</small></dt><dd>El programa de IA que recibe un texto y devuelve otro (responder, resumir, escribir código). Se elige por modelo según la tarea: uno chico y rápido para clasificar, uno grande para razonar.</dd></div>
       <div id="token"><dt>Token</dt><dd>La unidad con la que se mide y se cobra el texto que entra y sale de un modelo: aproximadamente 4 letras o ¾ de palabra. Un prompt largo gasta más tokens que uno corto.</dd></div>
       <div id="prompt-sistema"><dt>Prompt de sistema <small>system</small></dt><dd>La instrucción fija que define el papel del modelo antes de la pregunta: “sos un analista que responde en español y no da recomendaciones de inversión”. En n8n es el campo <em>System Message</em>.</dd></div>
-      <div id="agente"><dt>Agente</dt><dd>Una IA a la que además del texto se le dan <b>herramientas</b> y permiso para decidir cuál usar y en qué orden hasta responder. La diferencia con un workflow: el camino lo elige el modelo, no el dibujo.</dd></div>
+      <div id="agente"><dt>Agente</dt><dd>Una IA que elige sola qué <b>herramienta</b> usar y cuándo parar. Un workflow sigue un mapa; un agente elige el camino.</dd></div>
+      <div id="traza"><dt>Traza</dt><dd>El diario de lo que hizo un agente: qué herramienta, en qué orden y con qué resultado.</dd></div>
+      <div id="tope-pasos"><dt>Tope de pasos</dt><dd>Cuántas vueltas puede dar el agente antes de tener que contestar.</dd></div>
       <div id="herramienta"><dt>Herramienta <small>tool</small></dt><dd>Una acción que el agente puede pedir: consultar una API, leer un archivo, hacer una cuenta, buscar en la web. En n8n se conecta como un sub-nodo del agente.</dd></div>
       <div id="consejo"><dt>Consejo de agentes</dt><dd>Varios agentes con roles distintos que se revisan entre sí: uno redacta, otro audita los números, otro controla el tono. Sirve para lo mismo que la auditoría cruzada del taller: quien hace no se califica a sí mismo.</dd></div>
-      <div id="mcp"><dt>MCP <small>Model Context Protocol</small></dt><dd>Un estándar para que un asistente use herramientas de otro programa. Con el MCP de n8n, el asistente puede listar, leer y crear workflows sin que nadie copie y pegue JSON.</dd></div>
+      <div id="mcp"><dt>MCP <small>Model Context Protocol</small></dt><dd>Un enchufe estándar para que el asistente maneje n8n con permisos, sin copiar y pegar el JSON.</dd></div>
       <div id="limite"><dt>Límite de uso <small>rate limit</small></dt><dd>El máximo de pedidos por minuto que acepta un servicio. Si se pasa, responde con error 429; la solución es esperar o pedir menos.</dd></div>
       <div id="costo"><dt>Costo por token</dt><dd>El precio de cada millón de tokens de entrada y de salida, distinto en cada modelo. Un agente con muchas herramientas gasta más: cada vuelta vuelve a mandar la conversación.</dd></div>
     </dl>

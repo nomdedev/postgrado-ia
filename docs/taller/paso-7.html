@@ -34,8 +34,9 @@
 
   <p class="eyebrow">PASO 7 · EL MISMO CÁLCULO, CON OTRA HERRAMIENTA</p>
   <h1>Del CSV a Google Colab: verificar con Python</h1>
-  <p class="lede">La mejor forma de confiar en un cálculo es hacerlo dos veces con herramientas distintas. Van a llevar el CSV del paso 4 a <a class="w" href="glosario.html#colab">Google Colab</a> y recalcular las medias y el RSI con <a class="w" href="glosario.html#pandas">pandas</a>. Si la página y Python coinciden, el cálculo es confiable.</p>
+  <p class="lede">Recalcular en Colab el CSV del paso 4: si Python y la página coinciden, el cálculo es confiable.</p>
   <div class="meta"><span class="chip"><b>30–35 MIN</b></span><span class="chip">PYTHON</span><span class="chip">CUENTA DE GOOGLE</span><span class="chip">SALIDA: <b>NOTEBOOK + finlab-v7.html</b></span><a class="chip" href="index.html#niveles">IA · <b>NIVEL 3 DE 5</b></a></div>
+  <div class="note tip"><b>Una idea nueva:</b> Hacer el mismo cálculo con dos herramientas lo vuelve confiable. <em>Ejemplo: la SMA20 en Colab y en su página tiene que diferir menos de 0,01.</em></div>
   <div class="note tip"><b>¿Llegan tarde o se rompió el archivo?</b> Bajen la versión con la que termina el paso 6, guárdenla como <span class="code-inline">finlab.html</span> y arranquen este paso desde ahí. <a class="btn" href="rescate/finlab-v6.html" download="finlab.html">⬇ BAJAR EL PUNTO DE PARTIDA (PASO 6)</a></div>
 
   <section class="block" aria-labelledby="logro">
@@ -68,16 +69,12 @@ Diferencia máxima RSI  : 0.003
     <span class="num"></span>
     <h2 id="hacer">Qué hacer, clic por clic</h2>
     <ol class="do">
-      <li><b>Tengan a mano el CSV</b> del paso 4. Si no lo tienen, abran su terminal, elijan un activo y toquen <em>Exportar CSV</em>. ¿Tampoco funciona? Usen el de respaldo: <a class="btn" href="rescate/finlab-AAPL.csv" download>⬇ CSV DE RESPALDO (AAPL)</a></li>
-      <li><b>Entren a <a href="https://colab.research.google.com" target="_blank" rel="noopener">colab.research.google.com</a></b> con una cuenta de Google y elijan <em>Nuevo notebook</em> (o <em>Archivo → Nuevo notebook</em>).</li>
-      <li><b>Copien el bloque A</b> de “El código para pegar en Colab”, más abajo, péguenlo en la primera celda y ejecútenlo con el botón ▶ o <kbd>Shift</kbd> + <kbd>Enter</kbd>.</li>
-      <li><b>Aparece un botón “Elegir archivos”</b> debajo de la celda: elijan el CSV. Al terminar se ve una tabla con las últimas filas.</li>
-      <li><b>Toquen “+ Código”</b> para crear una celda nueva, peguen el <b>bloque B</b> y ejecútenlo. Lean las diferencias.</li>
-      <li><b>Hagan lo mismo con el bloque C</b>: aparece el gráfico.</li>
-      <li><b>Guarden el notebook</b> en su Drive (<em>Archivo → Guardar una copia en Drive</em>) con el nombre del grupo.</li>
-      <li><b>Opcional · en su terminal,</b> peguen el prompt de “Pestaña Python (opcional)”, más abajo, para que la pestaña 04 muestre estos mismos bloques, y guarden <span class="code-inline">finlab-v7.html</span>.</li>
+      <li><b>Tengan a mano el CSV</b> del paso 4 (botón <em>Exportar CSV</em> de su terminal). ¿No lo tienen? <a class="btn" href="rescate/finlab-AAPL.csv" download>⬇ CSV DE RESPALDO (AAPL)</a></li>
+      <li><b>Entren a <a href="https://colab.research.google.com" target="_blank" rel="noopener">colab.research.google.com</a></b> con una cuenta de Google y elijan <em>Nuevo notebook</em>.</li>
+      <li><b>Copien el bloque A</b> de “El código para pegar en Colab”, péguenlo en la primera celda y ejecútenlo con ▶. Cuando aparezca <em>Elegir archivos</em>, elijan el CSV.</li>
+      <li><b>Con “+ Código”</b> creen una celda nueva por bloque, peguen el <b>B</b> y el <b>C</b> y ejecútenlos. Lean las diferencias y miren el gráfico.</li>
     </ol>
-    <div class="note warn"><b>La primera vez,</b> Colab puede tardar unos segundos en “conectarse” (arriba a la derecha dice <em>Conectando</em>). Y si pide permiso para acceder a Drive, no hace falta darlo: el CSV se sube directo.</div>
+    <div class="note warn"><b>La primera vez,</b> Colab tarda unos segundos en “conectarse”. Si pide permiso para Drive, no hace falta darlo: el CSV se sube directo.</div>
   </section>
 
   <section class="block" data-section="prompts" aria-labelledby="codigo">
@@ -155,30 +152,10 @@ plt.show()</pre></div>
     </ul>
   </section>
 
-  <section class="block" aria-labelledby="prompt">
-    <span class="num"></span>
-    <h2 id="prompt">Pestaña Python (opcional): el prompt para su terminal</h2>
-    <div class="note tip"><b>Esta parte es opcional.</b> La verificación del paso ya la hicieron en Colab. Si les sobra tiempo, este prompt agrega los tres bloques de código a la pestaña “04 · Python &amp; Colab” de su terminal.</div>
-    <div class="prompt">
-      <div class="prompt-h"><div><span class="t">PROMPT · PASO 7</span><div class="d">Pegar debajo el archivo del paso 6 y los tres bloques.</div></div><button class="copy" data-copy="#p7" type="button">COPIAR</button></div>
-      <div class="prompt-b"><pre id="p7">Paso 7. En la pestaña "04 · Python & Colab" mostrá 3 bloques de código Python, cada uno con:
-- un título (A · Leer el CSV, B · Recalcular y comparar, C · Graficar)
-- una explicación de 2 líneas para alguien que nunca programó
-- el código en un recuadro con tipografía monoespaciada y un botón "Copiar"
-- debajo, una lista de 3 pasos para usarlo en Google Colab (nuevo notebook, pegar en una celda, ejecutar con Shift+Enter)
-
-Usá exactamente este código, sin cambiarlo:
-
-[pegar los bloques A, B y C]
-
-[pegar el archivo completo]</pre></div>
-    </div>
-  </section>
-
-  <section class="block" aria-labelledby="falla">
+    <section class="block" aria-labelledby="falla">
     <span class="num"></span>
     <h2 id="falla">Si algo falla</h2>
-    <div class="note tip"><b>¿Se trabaron después de tres intentos?</b> Esta es una versión que ya cumple todo lo de este paso. Pueden abrirla para comparar o bajarla y seguir con el próximo. <a class="btn" href="rescate/finlab-v7.html" target="_blank" rel="noopener">VER EL RESULTADO</a> <a class="btn btn-primary" href="rescate/finlab-v7.html" download="finlab.html">⬇ BAJAR LA VERSIÓN DE RESCATE</a></div>
+    <div class="note tip"><b>Tres intentos y nada:</b> <a class="btn" href="rescate/finlab-v7.html" target="_blank" rel="noopener">ABRIR LA VERSIÓN DE RESCATE</a> <a class="btn btn-primary" href="rescate/finlab-v7.html" download="finlab.html">⬇ BAJAR LA VERSIÓN DE RESCATE</a></div>
     <ul>
       <li><b>StopIteration o KeyError:</b> el CSV tiene otros nombres de columna. Miren la lista que imprime el bloque A y pídanle a la IA: “Adaptá este código a un CSV con estas columnas: [pegar la lista]”.</li>
       <li><b>La diferencia del RSI es grande (más de 0,01):</b> miren <em>dónde</em> está la diferencia. Agreguen una celda con <span class="code-inline c">print((mi_rsi - datos[columna("rsi")]).abs().round(3).tail(10))</span>. Si al final es casi 0 y solo difiere en las primeras ~100 filas, es el <em>arranque</em> del suavizado: su página no empezó con el promedio simple de 14 que pide el paso 4. Si difiere en todas las filas, una de las dos versiones usa promedio simple en lugar del suavizado de Wilder. En los dos casos, pídanle a la IA que corrija la función <span class="code-inline">rsi</span> para que siga exactamente la definición del prompt del paso 4.</li>
@@ -197,34 +174,7 @@ Usá exactamente este código, sin cambiarlo:
     <!-- /@viz:p7 -->
   </section>
 
-  <details class="more" id="entender">
-    <summary>Para entender más <small>· cómo funciona y palabras nuevas</small></summary>
-
-  <section class="block" aria-labelledby="flujo">
-    <span class="num"></span>
-    <h2 id="flujo">El flujo: del botón “Exportar” a la comparación</h2>
-    <div class="flow">
-      <div class="flow-row"><span class="n">1</span><div><h3>Exportan el CSV</h3><p>Desde su terminal, con el botón del paso 4.</p></div></div>
-      <div class="flow-row"><span class="n">2</span><div><h3>Lo suben a Google Colab</h3><p>Con el bloque A, sin instalar nada.</p></div></div>
-      <div class="flow-row"><span class="n">3</span><div><h3>Python recalcula</h3><p>Las mismas medias y el mismo RSI, con otra herramienta.</p></div></div>
-      <div class="flow-row"><span class="n">4</span><div><h3>Comparan</h3><p>Si la diferencia es menor a 0,01, la página calculó bien.</p></div></div>
-    </div>
-    <p style="margin-top:14px"><a class="btn" href="diagramas/p7-colab.html" target="_blank" rel="noopener">VER EL DIAGRAMA COMPLETO ↗</a></p>
-  </section>
-
-  <section class="block" aria-labelledby="palabras">
-    <span class="num"></span>
-    <h2 id="palabras">Palabras nuevas de este paso</h2>
-    <dl class="terms">
-      <div class="term-card"><dt>Python</dt><dd>El lenguaje más usado en análisis de datos. <a href="glosario.html#python">Más →</a></dd></div>
-      <div class="term-card"><dt>Google Colab</dt><dd>Python en el navegador, sin instalar nada. <a href="glosario.html#colab">Más →</a></dd></div>
-      <div class="term-card"><dt>Notebook · celda</dt><dd>Un documento hecho de bloques que se ejecutan de a uno. <a href="glosario.html#celda">Más →</a></dd></div>
-      <div class="term-card"><dt>pandas</dt><dd>Una planilla manejada con código. <a href="glosario.html#pandas">Más →</a></dd></div>
-    </dl>
-  </section>
-  </details>
-
-  <div class="pager">
+    <div class="pager">
     <a href="paso-6.html">← PASO 6 · API</a>
     <a href="paso-8.html">PASO 8 · N8N →</a>
   </div>

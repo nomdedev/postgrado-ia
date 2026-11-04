@@ -34,8 +34,9 @@
 
   <p class="eyebrow">PASO 4 · DONDE MÁS SE EQUIVOCA LA IA</p>
   <h1>Indicadores y señales: SMA, EMA y RSI</h1>
-  <p class="lede">Entra el análisis técnico. Es el paso donde la IA más se equivoca: confunde el <a class="w" href="glosario.html#rsi">RSI</a> simple con el de Wilder o calcula medias con menos datos de los que dice. Por eso este paso termina con la <b>primera verificación en una planilla</b>.</p>
+  <p class="lede">Entra el análisis técnico (SMA, EMA y RSI), justo donde la IA más se equivoca; por eso se verifica en una planilla.</p>
   <div class="meta"><span class="chip"><b>30 MIN</b></span><span class="chip">GOOGLE SHEETS</span><span class="chip">SALIDA: <b>finlab-v4.html + CSV</b></span><a class="chip" href="index.html#niveles">IA · <b>NIVEL 3 DE 5</b></a></div>
+  <div class="note tip"><b>Una idea nueva:</b> El RSI mide si últimamente el precio subió más de lo que bajó, de 0 a 100. <em>Ejemplo: si en 14 días las subas suman 6 y las bajas 4, el RSI es 100 − 100 ÷ (1 + 6/4) = 60.</em></div>
   <div class="note tip"><b>¿Llegan tarde o se rompió el archivo?</b> Bajen la versión con la que termina el paso 3, guárdenla como <span class="code-inline">finlab.html</span> y arranquen este paso desde ahí. <a class="btn" href="rescate/finlab-v3.html" download="finlab.html">⬇ BAJAR EL PUNTO DE PARTIDA (PASO 3)</a></div>
 
   <section class="block" aria-labelledby="logro">
@@ -117,7 +118,7 @@ Además agregá un botón "Exportar CSV" que descargue fecha, cierre, SMA20, SMA
     <span class="num"></span>
     <h2 id="falla">Si algo falla</h2>
     <div class="note tip"><b>¿El número no coincide?</b> Antes de reintentar, miren la <a href="errores.html">galería de errores de la IA en finanzas</a>: el RSI con promedio simple y la anualización con 365 son dos causas frecuentes. Y si la duda es si la señal “habría funcionado”, está el <a href="backtest.html">backtest ingenuo</a>.</div>
-    <div class="note tip"><b>¿Se trabaron después de tres intentos?</b> Esta es una versión que ya cumple todo lo de este paso. Pueden abrirla para comparar o bajarla y seguir con el próximo. <a class="btn" href="rescate/finlab-v4.html" target="_blank" rel="noopener">VER EL RESULTADO</a> <a class="btn btn-primary" href="rescate/finlab-v4.html" download="finlab.html">⬇ BAJAR LA VERSIÓN DE RESCATE</a></div>
+    <div class="note tip"><b>Tres intentos y nada:</b> <a class="btn" href="rescate/finlab-v4.html" target="_blank" rel="noopener">ABRIR LA VERSIÓN DE RESCATE</a> <a class="btn btn-primary" href="rescate/finlab-v4.html" download="finlab.html">⬇ BAJAR LA VERSIÓN DE RESCATE</a></div>
     <div class="prompt">
       <div class="prompt-h"><div><span class="t">PROMPT DE RESCATE · EL NÚMERO NO COINCIDE</span><div class="d">Peguen los 20 cierres que usaron en la planilla.</div></div><button class="copy" data-copy="#r4" type="button">COPIAR</button></div>
       <div class="prompt-b"><pre id="r4">En el CSV, la SMA20 del último día da X, pero en la planilla me da Y con estos 20 cierres:
@@ -143,36 +144,7 @@ Encontrá el error en la función sma, mostrame el cálculo paso a paso con esto
     <!-- /@viz:p4 -->
   </section>
 
-  <details class="more" id="entender">
-    <summary>Para entender más <small>· cómo funciona y palabras nuevas</small></summary>
-
-  <section class="block" aria-labelledby="flujo">
-    <span class="num"></span>
-    <h2 id="flujo">El flujo: de los cierres a la señal</h2>
-    <div class="flow">
-      <div class="flow-row"><span class="n">1</span><div><h3>Los precios de cierre</h3><p>La serie del activo elegido.</p></div></div>
-      <div class="flow-row"><span class="n">2</span><div><h3>Los promedios móviles</h3><p>De 20 y 50 días (SMA) y de 12 y 26 días (EMA).</p></div></div>
-      <div class="flow-row"><span class="n">3</span><div><h3>El RSI</h3><p>Compara subas y bajas de 14 días; va de 0 a 100.</p></div></div>
-      <div class="flow-row"><span class="n">4</span><div><h3>La señal</h3><p>¿Los promedios cortos están por encima de los largos? COMPRA, VENTA o NEUTRAL.</p></div></div>
-      <div class="flow-row"><span class="n">5</span><div><h3>La verificación</h3><p>Exportan un CSV y recalculan un promedio a mano en Google Sheets.</p></div></div>
-    </div>
-    <p style="margin-top:14px"><a class="btn" href="diagramas/p4-indicadores.html" target="_blank" rel="noopener">VER EL DIAGRAMA COMPLETO ↗</a></p>
-  </section>
-
-  <section class="block" aria-labelledby="palabras">
-    <span class="num"></span>
-    <h2 id="palabras">Palabras nuevas de este paso</h2>
-    <dl class="terms">
-      <div class="term-card"><dt>SMA</dt><dd>Media móvil simple: promedio de los últimos N cierres. <a href="glosario.html#sma">Más →</a></dd></div>
-      <div class="term-card"><dt>EMA</dt><dd>Media móvil que pesa más lo reciente. <a href="glosario.html#ema">Más →</a></dd></div>
-      <div class="term-card"><dt>RSI 14 (Wilder)</dt><dd>Fuerza de las subas vs. bajas, de 0 a 100. <a href="glosario.html#rsi">Más →</a></dd></div>
-      <div class="term-card"><dt>Señal</dt><dd>Etiqueta que resume una regla; no es una recomendación. <a href="glosario.html#senal">Más →</a></dd></div>
-      <div class="term-card"><dt>CSV</dt><dd>Una tabla como texto, que abre cualquier planilla. <a href="glosario.html#csv">Más →</a></dd></div>
-    </dl>
-  </section>
-  </details>
-
-  <div class="pager">
+    <div class="pager">
     <a href="paso-3.html">← PASO 3 · MERCADO</a>
     <a href="paso-5.html">PASO 5 · CARTERAS →</a>
   </div>

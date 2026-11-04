@@ -34,8 +34,9 @@
 
   <p class="eyebrow">PASO 10 · LA LLAVE QUE NO SE MUESTRA</p>
   <h1>Claves de API: dónde se guardan y por qué</h1>
-  <p class="lede">Para que n8n pueda hablar con un modelo de IA hace falta una <a class="w" href="glosario.html#clave-api">clave de API</a>: una contraseña larga que identifica su cuenta y que se paga por uso. La clave <b>no va en la página</b>: va en una <a class="w" href="glosario.html#credencial">credencial</a> del servidor. En este paso la crean, la guardan y comprueban que no quedó a la vista.</p>
+  <p class="lede">Para que n8n hable con un modelo de IA hace falta una clave: se crea, se guarda en una credencial y no queda a la vista.</p>
   <div class="meta"><span class="chip"><b>20 MIN</b></span><span class="chip">N8N</span><span class="chip">SIN CÓDIGO EN PANTALLA</span><span class="chip">SALIDA: <b>UNA CREDENCIAL QUE FUNCIONA</b></span><a class="chip" href="index.html#niveles">IA · <b>NIVEL 4 DE 5</b></a></div>
+  <div class="note tip"><b>Una idea nueva:</b> La <a class="w" href="glosario.html#credencial">credencial</a> es una caja fuerte: el flujo usa la llave sin verla. <em>Ejemplo: la clave se pega una sola vez en n8n, nunca en el HTML.</em></div>
   <div class="note tip"><b>¿Llegan sin cuenta de n8n?</b> La clase 3 se trabaja dentro de n8n, así que conviene tener el acceso del paso 8 a mano. Si no lo tienen, hagan el paso mirando a otro grupo y prueben las claves en el chat. <a class="btn" href="paso-8.html">VER EL PASO 8</a></div>
 
   <section class="block" aria-labelledby="logro">
@@ -125,33 +126,7 @@ Después armame una lista de verificación de 5 puntos para comprobar que la cla
     <!-- /@viz:p10 -->
   </section>
 
-  <details class="more" id="entender">
-    <summary>Para entender más <small>· cómo funciona y palabras nuevas</small></summary>
-
-  <section class="block" aria-labelledby="flujo">
-    <span class="num"></span>
-    <h2 id="flujo">El flujo: de la clave a la respuesta</h2>
-    <div class="flow">
-      <div class="flow-row"><span class="n">1</span><div><h3>Se crea en el proveedor</h3><p>Una clave por servicio, con el permiso más chico que alcance.</p></div></div>
-      <div class="flow-row"><span class="n">2</span><div><h3>Se guarda en n8n</h3><p>En Credenciales: cifrada, fuera del flujo y fuera del archivo.</p></div></div>
-      <div class="flow-row"><span class="n">3</span><div><h3>El nodo la usa</h3><p>n8n la adjunta al pedido; el workflow solo ve la respuesta.</p></div></div>
-      <div class="flow-row"><span class="n">4</span><div><h3>Se rota o se revoca</h3><p>Si se filtra, se invalida desde el panel y se genera otra.</p></div></div>
-    </div>
-  </section>
-
-  <section class="block" aria-labelledby="palabras">
-    <span class="num"></span>
-    <h2 id="palabras">Palabras nuevas de este paso</h2>
-    <dl class="terms">
-      <div class="term-card"><dt>Clave de API</dt><dd>La contraseña larga que identifica su cuenta. <a href="glosario.html#clave-api">Más →</a></dd></div>
-      <div class="term-card"><dt>Credencial</dt><dd>El lugar donde el servidor guarda esa clave. <a href="glosario.html#credencial">Más →</a></dd></div>
-      <div class="term-card"><dt>Token</dt><dd>La unidad con la que se mide y se cobra el texto. <a href="glosario.html#token">Más →</a></dd></div>
-      <div class="term-card"><dt>Límite de uso</dt><dd>El tope de pedidos o de gasto por minuto. <a href="glosario.html#limite">Más →</a></dd></div>
-    </dl>
-  </section>
-  </details>
-
-  <div class="pager">
+    <div class="pager">
     <a href="paso-9.html">← PASO 9 · #/GUIADO</a>
     <a href="paso-11.html">PASO 11 · MODELOS →</a>
   </div>

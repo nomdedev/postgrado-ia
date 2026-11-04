@@ -44,3 +44,7 @@ Tareas solo lectura → NO ejecutar evals.
 ### WIP
 
 - Máximo **1** feature en `in_progress` (ver `.claude/state/STATE.md`).
+## Autoplan (simplificar el material)
+
+`/autoplan [parte]` mejora una parte del material con `docente-didactico` y `simplificador-implacable`, medida contra un presupuesto de texto.
+Partes y presupuesto: `docs/autoplan/partes.json` · estado: `docs/autoplan/ESTADO.md` (`node scripts/loops/autoplan.js`) · plan de cada parte: `docs/autoplan/<id>.md`.

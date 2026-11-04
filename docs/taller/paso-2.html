@@ -34,8 +34,9 @@
 
   <p class="eyebrow">PASO 2 · SIN DATOS NO HAY ANÁLISIS</p>
   <h1>Un año de precios simulados que no cambia</h1>
-  <p class="lede">La terminal genera 252 <a class="w" href="glosario.html#rueda">ruedas</a> (un año hábil) para cada activo. Parecen aleatorias, pero salen <b>iguales en cada recarga</b> gracias a una <a class="w" href="glosario.html#semilla">semilla</a>. Ojo con lo que garantiza: <b>con el mismo código</b>, cualquiera obtiene los mismos números. Cada grupo tiene su propio código (lo escribió su IA), así que sus números no van a coincidir con los de otro grupo.</p>
+  <p class="lede">Un año de precios simulados, siempre iguales con el mismo código; cada grupo tiene el suyo, así que sus números pueden diferir.</p>
   <div class="meta"><span class="chip"><b>20 MIN</b></span><span class="chip">CONSOLA</span><span class="chip">SALIDA: <b>finlab-v2.html</b></span><a class="chip" href="index.html#niveles">IA · <b>NIVEL 2 DE 5</b></a></div>
+  <div class="note tip"><b>Una idea nueva:</b> Una semilla fija hace que el azar sea siempre el mismo. <em>Ejemplo: con la misma semilla, AAPL termina siempre el año en +103,2 %.</em></div>
   <div class="note tip"><b>¿Llegan tarde o se rompió el archivo?</b> Bajen la versión con la que termina el paso 1, guárdenla como <span class="code-inline">finlab.html</span> y arranquen este paso desde ahí. <a class="btn" href="rescate/finlab-v1.html" download="finlab.html">⬇ BAJAR EL PUNTO DE PARTIDA (PASO 1)</a></div>
 
   <section class="block" aria-labelledby="logro">
@@ -112,7 +113,7 @@ Explicame en 3 líneas, para alguien que no programa, qué es una semilla y por 
   <section class="block" aria-labelledby="falla">
     <span class="num"></span>
     <h2 id="falla">Si algo falla</h2>
-    <div class="note tip"><b>¿Se trabaron después de tres intentos?</b> Esta es una versión que ya cumple todo lo de este paso. Pueden abrirla para comparar o bajarla y seguir con el próximo. <a class="btn" href="rescate/finlab-v2.html" target="_blank" rel="noopener">VER EL RESULTADO</a> <a class="btn btn-primary" href="rescate/finlab-v2.html" download="finlab.html">⬇ BAJAR LA VERSIÓN DE RESCATE</a></div>
+    <div class="note tip"><b>Tres intentos y nada:</b> <a class="btn" href="rescate/finlab-v2.html" target="_blank" rel="noopener">ABRIR LA VERSIÓN DE RESCATE</a> <a class="btn btn-primary" href="rescate/finlab-v2.html" download="finlab.html">⬇ BAJAR LA VERSIÓN DE RESCATE</a></div>
     <ul>
       <li><b>“simulateSeries is not defined”:</b> la función quedó “encerrada” dentro del código de React. Pídanle a la IA: “Exponé TICKERS y simulateSeries en <span class="code-inline">window</span> para poder probarlas desde la consola”.</li>
       <li><b>Los números cambian al recargar:</b> la IA usó <span class="code-inline">Math.random()</span>, que no tiene semilla. Pidan que use solo el generador con semilla.</li>
@@ -131,34 +132,7 @@ Explicame en 3 líneas, para alguien que no programa, qué es una semilla y por 
     <!-- /@viz:p2 -->
   </section>
 
-  <details class="more" id="entender">
-    <summary>Para entender más <small>· cómo funciona y palabras nuevas</small></summary>
-
-  <section class="block" aria-labelledby="flujo">
-    <span class="num"></span>
-    <h2 id="flujo">El flujo: cómo nace un precio simulado</h2>
-    <div class="flow">
-      <div class="flow-row"><span class="n">1</span><div><h3>Una lista de activos</h3><p>Ocho acciones, cada una con su precio inicial y cuánto suele moverse.</p></div></div>
-      <div class="flow-row"><span class="n">2</span><div><h3>Una semilla</h3><p>Un número fijo que hace que el “azar” salga siempre igual con el mismo código.</p></div></div>
-      <div class="flow-row"><span class="n">3</span><div><h3>Un año de precios</h3><p>252 días hábiles de cierres por activo, sin fines de semana.</p></div></div>
-      <div class="flow-row"><span class="n">4</span><div><h3>Una tabla de control</h3><p>En la consola del navegador, para verificar antes de que haya pantalla.</p></div></div>
-    </div>
-    <p style="margin-top:14px"><a class="btn" href="diagramas/p2-datos.html" target="_blank" rel="noopener">VER EL DIAGRAMA COMPLETO ↗</a></p>
-  </section>
-
-  <section class="block" aria-labelledby="palabras">
-    <span class="num"></span>
-    <h2 id="palabras">Palabras nuevas de este paso</h2>
-    <dl class="terms">
-      <div class="term-card"><dt>Semilla</dt><dd>El número de arranque que hace repetible al azar. <a href="glosario.html#semilla">Más →</a></dd></div>
-      <div class="term-card"><dt>Rueda</dt><dd>Un día hábil de mercado; un año tiene ~252. <a href="glosario.html#rueda">Más →</a></dd></div>
-      <div class="term-card"><dt>Función</dt><dd>Un bloque de código con nombre, como una fórmula. <a href="glosario.html#funcion">Más →</a></dd></div>
-      <div class="term-card"><dt>Objeto { d, c, v }</dt><dd>Un día con fecha, cierre y volumen. <a href="glosario.html#objeto">Más →</a></dd></div>
-    </dl>
-  </section>
-  </details>
-
-  <div class="pager">
+    <div class="pager">
     <a href="paso-1.html">← PASO 1 · ESQUELETO</a>
     <a href="paso-3.html">PASO 3 · MERCADO →</a>
   </div>

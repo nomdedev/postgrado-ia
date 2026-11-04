@@ -101,6 +101,18 @@
     <p><a class="btn btn-primary" href="../taller/retos.html" target="_blank" rel="noopener">ABRIR EL MENÚ DE RETOS</a></p>
   </section>
 
+  <section class="block" aria-labelledby="local">
+    <span class="num"></span>
+    <h2 id="local">Paso 9 sin internet: servidor local</h2>
+    <p>Con la carpeta del proyecto descomprimida, abran una terminal en ella y escriban uno de estos comandos; después abran <span class="code-inline">http://127.0.0.1:4173/#/guiado</span>. Para apagarlo: <kbd>Ctrl</kbd> + <kbd>C</kbd>.</p>
+    <ul>
+      <li><b>Windows con Python:</b> <span class="code-inline">py -m http.server 4173 --bind 127.0.0.1</span></li>
+      <li><b>Mac con Python:</b> <span class="code-inline">python3 -m http.server 4173 --bind 127.0.0.1</span></li>
+      <li><b>Cualquier sistema con Node.js:</b> <span class="code-inline">npx serve -l 4173</span></li>
+    </ul>
+    <p class="hint">Si el puerto 4173 está ocupado, cambien el número en el comando y en la dirección.</p>
+  </section>
+
   <p class="hint">Los minutos incluyen una vuelta de corrección por paso; no suman la puesta en común ni el recreo.<a href="index.html">guía del docente</a> tiene el cronograma con tiempos reales estimados, qué mirar en cada grupo y las respuestas.</p>
 </main>
 
