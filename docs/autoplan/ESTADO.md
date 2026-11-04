@@ -18,12 +18,12 @@
 | P9 · Guiado | 735 | 450 | 108 | 4 | 3 | 7 | EXCEDE |
 | P10 · Claves | 768 | 450 | 101 | 4 | 4 | 7 | EXCEDE |
 | P11 · Modelos | 714 | 450 | 106 | 5 | 4 | 7 | EXCEDE |
-| P12 · Agente | 848 | 450 | 132 | 4 | 5 | 7 | EXCEDE |
+| P12 · Agente | 574 | 450 | 132 | 3 | 3 | 7 | EXCEDE |
 | P13 · Consejo | 777 | 450 | 131 | 3 | 5 | 7 | EXCEDE |
-| P14 · MCP | 870 | 450 | 100 | 3 | 4 | 7 | EXCEDE |
+| P14 · MCP | 452 | 450 | 100 | 1 | 1 | 7 | EXCEDE |
 | Extras del taller | 3152 | 2700 | 782 | 21 | 7 | 29 | EXCEDE |
-| Guía y hoja del docente | 1058 | 900 | 0 | 3 | 2 | 9 | EXCEDE |
-| Ejemplos de automatización | 1576 | 2250 | 829 | 13 | 0 | 29 | OK |
+| Guía y hoja del docente | 1194 | 900 | 0 | 3 | 2 | 10 | EXCEDE |
+| Ejemplos de automatización | 2081 | 2700 | 988 | 17 | 0 | 36 | OK |
 | Terminal (bienvenida y EMPEZAR) | — | — | — | — | — | — | a mano |
 
-**Total de lectura:** 17292 palabras · **Partes que exceden:** 18 de 19
+**Total de lectura:** 17241 palabras · **Partes que exceden:** 18 de 19

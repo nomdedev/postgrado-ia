@@ -16,7 +16,7 @@
 <header class="top">
   <div class="top-in">
     <a class="brand" href="index.html"><span class="brand-dot"></span><b>FIN·LAB</b> AUTOMATIZACIONES</a>
-    <span class="crumb">EJEMPLO 01 / 04 · AVISOS</span>
+    <span class="crumb">EJEMPLO 01 / 05 · AVISOS</span>
   </div>
 </header>
 
@@ -46,11 +46,11 @@ Muestra educativa fija de FIN·LAB. No es una recomendación de inversión.</pre
     <span class="num">02</span>
     <h2 id="como">Cómo funciona</h2>
     <div class="flow">
-      <div class="flow-row"><span class="n">1</span><div><h3>Cada día 18:00</h3><div class="io">ENTRA: la hora · SALE: una ejecución</div></div></div>
-      <div class="flow-row"><span class="n">2</span><div><h3>Consultar API FIN·LAB</h3><div class="io">ENTRA: URL · SALE: JSON con data.tickers[]</div></div></div>
-      <div class="flow-row"><span class="n">3</span><div><h3>Filtrar señales</h3><div class="io">SALE: hasSignal, symbols, texto</div></div></div>
+      <div class="flow-row"><span class="n">1</span><div><h3>Cada día 18:00</h3><div class="io">ENTRA: la hora (18:00) · SALE: una ejecución</div></div></div>
+      <div class="flow-row"><span class="n">2</span><div><h3>Consultar API FIN·LAB</h3><div class="io">SALE: 8 activos (AAPL, MSFT, JNJ…)</div></div></div>
+      <div class="flow-row"><span class="n">3</span><div><h3>Filtrar señales</h3><div class="io">SALE: hasSignal: true · JNJ</div></div></div>
       <div class="flow-row"><span class="n">4</span><div><h3>¿Hay señales?</h3><div class="io">VERDADERO: sigue · FALSO: termina</div></div></div>
-      <div class="flow-row"><span class="n">5</span><div><h3>Enviar aviso por email</h3><div class="io">ENTRA: texto · SALE: un correo</div></div></div>
+      <div class="flow-row"><span class="n">5</span><div><h3>Enviar aviso por email</h3><div class="io">SALE: un correo con JNJ · RSI 28,1</div></div></div>
     </div>
   </section>
 

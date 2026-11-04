@@ -24,7 +24,7 @@
     { "id": "p14", "nombre": "P14 · MCP", "clase": 3, "archivos": ["docs/taller/paso-14.html"] },
     { "id": "extras", "nombre": "Extras del taller", "archivos": ["docs/taller/errores.html", "docs/taller/traza.html", "docs/taller/backtest.html", "docs/taller/retos.html", "docs/taller/kit.html", "docs/taller/glosario.html"] },
     { "id": "docente", "nombre": "Guía y hoja del docente", "archivos": ["docs/docente/index.html", "docs/docente/clase.html"] },
-    { "id": "automatizaciones", "nombre": "Ejemplos de automatización", "archivos": ["docs/automatizaciones/index.html", "docs/automatizaciones/aviso-senal.html", "docs/automatizaciones/resumen-diario.html", "docs/automatizaciones/informe-semanal-ia.html", "docs/automatizaciones/precios-a-sheets.html"] },
+    { "id": "automatizaciones", "nombre": "Ejemplos de automatización", "archivos": ["docs/automatizaciones/index.html", "docs/automatizaciones/aviso-senal.html", "docs/automatizaciones/resumen-diario.html", "docs/automatizaciones/informe-semanal-ia.html", "docs/automatizaciones/precios-a-sheets.html", "docs/automatizaciones/calendario-eventos.html"] },
     { "id": "terminal", "nombre": "Terminal (bienvenida y EMPEZAR)", "archivos": ["index.html"], "medir": false }
   ]
 }

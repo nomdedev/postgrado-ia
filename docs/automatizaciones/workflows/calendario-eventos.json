@@ -1,0 +1,177 @@
+{
+  "name": "FINLAB - Calendario de eventos de empresas (completar credenciales)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 8 * * 1"
+            }
+          ]
+        }
+      },
+      "id": "1c000000-0000-4000-8000-000000000001",
+      "name": "Cada lunes 8:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        240,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://postgrado-ia.vercel.app/api/market/calendar",
+        "options": {
+          "timeout": 10000
+        }
+      },
+      "id": "1c000000-0000-4000-8000-000000000002",
+      "name": "Consultar calendario FIN·LAB",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "// Cuántos días hacia adelante mirar.\nconst DIAS = 7;\n\nconst response = $input.first().json;\nif (!response.ok || !response.data || !Array.isArray(response.data.events)) {\n  throw new Error('La API no devolvió una lista de eventos válida.');\n}\n\nconst proximos = response.data.events.filter((e) => e.days_until <= DIAS);\nconst lineas = proximos.map((e) => '- ' + e.date + ' · ' + e.symbol + ' (' + e.name + '): ' + e.type);\nconst texto = 'Eventos de los próximos ' + DIAS + ' días (' + response.data.session + '):\\n\\n' + lineas.join('\\n') +\n  '\\n\\nCalendario de ejemplo de FIN·LAB: las fechas no son reales.';\n\nreturn [{ json: { hasEvents: proximos.length > 0, count: proximos.length, session: response.data.session, texto } }];"
+      },
+      "id": "1c000000-0000-4000-8000-000000000003",
+      "name": "Eventos de la semana",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "1c000000-0000-4000-8000-0000000000aa",
+              "leftValue": "={{ $json.hasEvents }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "1c000000-0000-4000-8000-000000000004",
+      "name": "¿Hay eventos?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        960,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "tu-correo@ejemplo.com",
+        "toEmail": "destinatario@ejemplo.com",
+        "subject": "=FIN·LAB · {{ $json.count }} eventos esta semana · {{ $json.session }}",
+        "text": "={{ $json.texto }}",
+        "options": {}
+      },
+      "id": "1c000000-0000-4000-8000-000000000005",
+      "name": "Enviar calendario por email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1200,
+        220
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "1c000000-0000-4000-8000-000000000006",
+      "name": "Semana tranquila",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        420
+      ]
+    }
+  ],
+  "connections": {
+    "Cada lunes 8:00": {
+      "main": [
+        [
+          {
+            "node": "Consultar calendario FIN·LAB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consultar calendario FIN·LAB": {
+      "main": [
+        [
+          {
+            "node": "Eventos de la semana",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Eventos de la semana": {
+      "main": [
+        [
+          {
+            "node": "¿Hay eventos?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Hay eventos?": {
+      "main": [
+        [
+          {
+            "node": "Enviar calendario por email",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Semana tranquila",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "tags": []
+}

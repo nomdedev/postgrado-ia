@@ -32,22 +32,15 @@
   </ul></nav>
 <!-- /@nav -->
 
-  <p class="eyebrow">PASO 14 · DEL CHAT AL FLUJO, SIN COPIAR Y PEGAR</p>
+  <p class="eyebrow">PASO 14 · MCP</p>
   <h1>El MCP de n8n: crear workflows desde el chat</h1>
-  <p class="lede">Con el MCP de n8n, el asistente puede listar, leer y crear workflows directamente, sin copiar el JSON a mano.</p>
   <div class="meta"><span class="chip"><b>20 MIN</b></span><span class="chip">N8N</span><span class="chip">UN ASISTENTE CON MCP</span><span class="chip">SALIDA: <b>UN FLUJO CREADO DESDE EL CHAT</b></span><a class="chip" href="index.html#niveles">IA · <b>NIVEL 5 DE 5</b></a></div>
-  <div class="note tip"><b>Una idea nueva:</b> MCP: un enchufe estándar para que el asistente maneje n8n con permisos, sin copiar y pegar. <em>Ejemplo: el asistente crea un workflow en n8n con una clave de permisos limitados.</em></div>
-  <div class="note tip"><b>¿El asistente que usan no soporta MCP?</b> El paso se puede ver en la demostración del docente. Lo importante es entender qué cambia: el asistente deja de proponer texto y pasa a ejecutar acciones con permisos.</div>
+  <div class="note tip"><b>Una idea nueva:</b> <a class="w" href="glosario.html#mcp">MCP</a>: un enchufe para que el asistente maneje n8n. <em>Ejemplo: le piden “copiá el aviso del RSI con el umbral en 25” y aparece el workflow nuevo en n8n.</em></div>
 
   <section class="block" aria-labelledby="logro">
     <span class="num"></span>
     <h2 id="logro">Qué van a lograr</h2>
-    <p>El servidor MCP de n8n conectado a su asistente, y un workflow creado desde el chat que después abren en n8n para comprobar que existe, que tiene los nodos pedidos y que quedó <b>desactivado</b> hasta que lo revisen.</p>
-    <div class="mock" aria-label="Ejemplo de conversación con el MCP de n8n">
-      <table><thead><tr><th>PEDIDO EN EL CHAT</th><th>LO QUE HACE EL MCP</th><th>QUÉ SE VE EN N8N</th></tr></thead>
-      <tbody><tr><td>“listá mis workflows”</td><td>lee la lista</td><td>los mismos nombres de siempre</td></tr><tr><td>“copiá el del RSI y cambiá el umbral a 25”</td><td>lee uno y crea otro</td><td>un workflow nuevo, desactivado</td></tr><tr><td>“probalo con los datos de hoy”</td><td>ejecuta la prueba</td><td>la corrida queda en el historial</td></tr></tbody></table>
-      <div class="mock-foot">El MCP no reemplaza la revisión: crea y prueba. Activar un flujo con datos reales sigue siendo una decisión humana.</div>
-    </div>
+    <p>Un workflow creado desde el chat que, en n8n, aparece con los nodos pedidos y <b>desactivado</b>.</p>
   </section>
 
   <!-- @avance -->
@@ -67,7 +60,7 @@
     <span class="num"></span>
     <h2 id="prompt">El prompt</h2>
     <div class="prompt">
-      <div class="prompt-h"><div><span class="t">PROMPT · PASO 14</span><div class="d">Para el asistente conectado al MCP de n8n.</div></div><button class="copy" data-copy="#p14" type="button">COPIAR</button></div>
+      <div class="prompt-h"><div><span class="t">PROMPT · PASO 14</span></div><button class="copy" data-copy="#p14" type="button">COPIAR</button></div>
       <div class="prompt-b"><pre id="p14">Estoy conectado al MCP de n8n. Antes de tocar nada:
 
 1. listá mis workflows y decime cuál corresponde al aviso por RSI
@@ -78,24 +71,19 @@
 
 No actives ningún workflow ni cambies credenciales sin que te lo pida explícitamente.</pre></div>
     </div>
-    <div class="note tip"><b>Puente con el proyecto real:</b> este taller se armó con un asistente que usa herramientas (archivos, tests, navegador) y pide permiso antes de actuar. El MCP de n8n aplica la misma idea a sus workflows. El diagrama <em>“Así se hizo este taller”</em> muestra ese circuito.</div>
   </section>
 
   <section class="block" aria-labelledby="hacer">
     <span class="num"></span>
     <h2 id="hacer">Qué hacer, clic por clic</h2>
     <ol class="do">
-      <li><b>Activen el servidor MCP</b> en su instancia de n8n : <b>Settings → Instance-level MCP → Enable MCP access</b>. Si no aparece, la versión de n8n es anterior: pidan al docente que la actualice.</li>
-      <li><b>Copien la dirección</b> (termina en <code>/mcp-server/http</code>) <b>y la clave de acceso</b> que muestra n8n. Es una <a href="glosario.html#clave-api">clave</a>: va en la configuración del asistente, no en el chat.</li>
-      <li><b>Agreguen el servidor MCP</b> en su asistente (Claude, ChatGPT o el que usen) con esa dirección y esa clave. En Claude Code es una sola línea; cambien el dominio por el de su n8n:
+      <li><b>Activen el MCP en n8n:</b> Settings → Instance-level MCP → Enable MCP access. Copien la dirección (termina en <code>/mcp-server/http</code>) y la <a class="w" href="glosario.html#clave-api">clave</a>. Esa clave le da al asistente el mismo poder que ustedes tienen en n8n: usen una instancia de prueba, no la de la empresa.</li>
+      <li><b>Agréguenlas a su asistente</b>, en su configuración y no en el chat. En Claude Code, con el dominio de su n8n:
         <div class="prompt">
-          <div class="prompt-h"><div><span class="t">TERMINAL · CLAUDE CODE</span><div class="d">Después les pide iniciar sesión en n8n.</div></div><button class="copy" data-copy="#mcp14" type="button">COPIAR</button></div>
+          <div class="prompt-h"><div><span class="t">TERMINAL · CLAUDE CODE</span></div><button class="copy" data-copy="#mcp14" type="button">COPIAR</button></div>
           <div class="prompt-b"><pre id="mcp14">claude mcp add --transport http n8n https://SU-DOMINIO/mcp-server/http</pre></div>
         </div></li>
-      <li><b>Pidan la lista de workflows</b> y compárenla con la que ven en n8n.</li>
-      <li><b>Pidan la copia con el umbral cambiado</b> y revisen el JSON antes de ejecutar.</li>
-      <li><b>Abran n8n</b>, comprueben que la copia existe y que está desactivada. Prueben y después decidan si la activan.</li>
-      <li><b>Borren la copia de prueba</b> y revoquen la clave si era una temporal.</li>
+      <li><b>Peguen el prompt.</b> La lista que devuelve tiene que mostrar los mismos nombres que ven en n8n. Revisen el JSON de la copia antes de ejecutar; después borren la copia y revoquen la clave si era temporal.</li>
     </ol>
   </section>
 
@@ -103,23 +91,19 @@ No actives ningún workflow ni cambies credenciales sin que te lo pida explícit
     <span class="num"></span>
     <h2 id="comprobar">Cómo comprobar</h2>
     <ul class="check">
-      <li><b>El flujo existe:</b> la copia aparece en n8n con el nombre que pidieron y los nodos del original.</li>
-      <li><b>El cambio es el pedido:</b> el umbral quedó en 25 y el resto del flujo no cambió.</li>
+      <li><b>La copia existe</b> en n8n, con el umbral en 25 y el resto del flujo igual.</li>
       <li><b>Nada se activó solo:</b> la copia está desactivada y el original sigue igual.</li>
-      <li><b>La clave no quedó en el chat:</b> se cargó en la configuración del asistente, no en un mensaje.</li>
+      <li><b>La clave no quedó en el chat:</b> está en la configuración del asistente.</li>
     </ul>
   </section>
 
   <section class="block" aria-labelledby="falla">
     <span class="num"></span>
     <h2 id="falla">Si algo falla</h2>
-    <div class="note tip"><b>¿Se trabaron después de tres intentos?</b> El MCP depende de la versión de n8n y del asistente. Si no conecta, prueben con el asistente del docente y sigan el paso mirando la pantalla.</div>
     <ul>
-      <li><b>“No se puede conectar”:</b> la instancia no es accesible desde internet o la dirección está incompleta. Prueben primero en local.</li>
-      <li><b>“Sin permiso”:</b> la clave no tiene el alcance necesario, o se revocó. Generen una nueva y vuelvan a cargarla en el asistente.</li>
-      <li><b>Su n8n no tiene la opción MCP:</b> existe un servidor comunitario (<em>n8n-mcp</em>, código abierto) que usa la API de n8n con una clave propia. Ojo: la prueba gratis de n8n Cloud no incluye la API.</li>
-      <li><b>El asistente no ve las herramientas:</b> hay que reiniciar la conversación después de agregar el servidor MCP.</li>
-      <li><b>Creó el flujo dos veces:</b> pasa cuando se reintenta el pedido. Revisen la lista y borren el duplicado.</li>
+      <li><b>“No se puede conectar” o “Sin permiso”:</b> la dirección está incompleta, n8n no es accesible desde internet o la clave no alcanza. Revisen la dirección o generen otra clave.</li>
+      <li><b>El asistente no ve las herramientas:</b> reinicien la conversación.</li>
+      <li><b>Su n8n o su asistente no tiene MCP, o no tienen n8n propio:</b> sigan la demostración del docente y hagan solo la comprobación.</li>
     </ul>
   </section>
 
@@ -129,7 +113,7 @@ No actives ningún workflow ni cambies credenciales sin que te lo pida explícit
     <!-- @viz:p14 -->
     <figure class="viz" id="viz-p14" data-titulo="El MCP de n8n">
       <div class="viz-grafico"><svg class="viz-svg" viewBox="0 0 960 320" role="img" aria-labelledby="viz-p14-t viz-p14-d"><title id="viz-p14-t">El asistente, el servidor MCP de n8n y los workflows</title><desc id="viz-p14-d">Pedidos y respuestas en JSON en los dos tramos</desc><g><rect class="v-card " x="10" y="70" width="250" height="140" rx="10"/><text class="v-ink v-b" x="26" y="98">El asistente</text><text class="v-mut v-sm" x="26" y="120">el chat donde trabajan</text><text class="v-mut v-sm" x="26" y="140">no sabe nada de n8n</text><text class="v-mut v-sm" x="26" y="160">hasta que recibe la herramienta</text></g><g><rect class="v-card " x="355" y="70" width="250" height="140" rx="10"/><text class="v-ink v-b" x="371" y="98">MCP de n8n</text><text class="v-mut v-sm" x="371" y="120">listar workflows</text><text class="v-mut v-sm" x="371" y="140">leer uno por id</text><text class="v-mut v-sm" x="371" y="160">crear o actualizar</text><text class="v-mut v-sm" x="371" y="180">probarlo desde el chat</text></g><g><rect class="v-card " x="700" y="70" width="250" height="140" rx="10"/><text class="v-ink v-b" x="716" y="98">Tus workflows</text><text class="v-mut v-sm" x="716" y="120">los mismos de siempre</text><text class="v-mut v-sm" x="716" y="140">con las credenciales</text><text class="v-mut v-sm" x="716" y="160">que ya configuraron</text></g><line class="v-axis " x1="264" y1="115" x2="342" y2="115"/><path class="v-axis-fill" d="M351,115 L342,120 L342,110 Z"/><line class="v-axis " x1="351" y1="165" x2="273" y2="165"/><path class="v-axis-fill" d="M264,165 L273,160 L273,170 Z"/><line class="v-axis " x1="609" y1="115" x2="687" y2="115"/><path class="v-axis-fill" d="M696,115 L687,120 L687,110 Z"/><line class="v-axis " x1="696" y1="165" x2="618" y2="165"/><path class="v-axis-fill" d="M609,165 L618,160 L618,170 Z"/><text class="v-mut v-sm" x="307.5" y="60" text-anchor="middle">pide</text><text class="v-mut v-sm" x="307.5" y="225" text-anchor="middle">devuelve JSON</text><text class="v-mut v-sm" x="480" y="280" text-anchor="middle">MCP es el estándar que permite ese ida y vuelta; sin él, copiar y pegar el JSON a mano</text></svg></div>
-      <figcaption><b>El MCP de n8n.</b> El <b>MCP</b> es un estándar para que un asistente use las herramientas de otro programa. Con el MCP de n8n, el chat puede listar, leer y crear workflows sin que nadie copie y pegue JSON: el asistente deja de opinar sobre el flujo y pasa a tocarlo.<small>Esquema del paso 14.</small></figcaption>
+      <figcaption><b>El MCP de n8n.</b> El chat lista, lee y crea workflows sin copiar y pegar.<small>Esquema del paso 14.</small></figcaption>
     </figure>
     <!-- /@viz:p14 -->
   </section>

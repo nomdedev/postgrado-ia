@@ -5,13 +5,13 @@ const path = require('node:path');
 
 const DIR = path.join(__dirname, '..', 'docs', 'automatizaciones');
 const WORKFLOWS = path.join(DIR, 'workflows');
-const EXAMPLES = ['aviso-senal.html', 'resumen-diario.html', 'informe-semanal-ia.html', 'precios-a-sheets.html'];
+const EXAMPLES = ['aviso-senal.html', 'resumen-diario.html', 'informe-semanal-ia.html', 'precios-a-sheets.html', 'calendario-eventos.html'];
 
 function read(file) {
   return fs.readFileSync(path.join(DIR, file), 'utf8');
 }
 
-test('el índice y los cuatro ejemplos cargan la hoja de estilos y el script compartidos', () => {
+test('el índice y los cinco ejemplos cargan la hoja de estilos y el script compartidos', () => {
   for (const file of ['index.html', ...EXAMPLES]) {
     const html = read(file);
     assert.match(html, /<html lang="es">/, `${file}: falta lang="es"`);
@@ -252,7 +252,7 @@ test('cada fuente de diagrama tiene su HTML generado y al revés', () => {
 
 test('los workflows de n8n son válidos y sus conexiones apuntan a nodos que existen', () => {
   const files = fs.readdirSync(WORKFLOWS).filter((file) => file.endsWith('.json'));
-  assert.equal(files.length, 4, 'se esperan cuatro workflows');
+  assert.equal(files.length, 5, 'se esperan cinco workflows');
 
   for (const file of files) {
     const workflow = JSON.parse(fs.readFileSync(path.join(WORKFLOWS, file), 'utf8'));

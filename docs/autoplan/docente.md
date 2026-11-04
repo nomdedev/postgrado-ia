@@ -35,3 +35,7 @@ _Auditoría 2026-11-03. Los ahorros son estimaciones del agente._
 ## Estado
 
 Cerrada en la pasada 2 · lectura 1058 de 900: el excedente son dos tablas de consulta (señales y respuestas) que el docente protege; ≤3 oraciones largas, tests 20/20.
+
+## Pasada 3 (2026-11-04)
+
+- Sección "Clase de 2 horas: dashboard y automatización" en la hoja de clase (6 filas con minutos). Lectura 1194 de 900: es contenido nuevo pedido por el docente.

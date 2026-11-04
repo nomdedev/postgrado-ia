@@ -350,7 +350,7 @@ function p12() {
     flecha(xs[1] + w / 2, y + h + 70, xs[1] + w / 2, y + h + 4) +
     `<text class="v-mut v-sm" x="${(xs[1] + xs[3]) / 2 + w / 2}" y="${y + h + 60}" text-anchor="middle">si falta algo, vuelve a decidir</text>` +
     `<text class="v-up v-sm v-b" x="${xs[1] + w / 2}" y="${y - 12}" text-anchor="middle">si ya está, responde</text>`;
-  return figura('viz-p12', 'El ciclo del agente', 'Un agente no responde de memoria: <b>decide qué herramienta usar</b>, la usa, lee el resultado y vuelve a decidir. Repite hasta que tiene con qué contestar. Ahí está la diferencia con un prompt común, que contesta de una sola vez.',
+  return figura('viz-p12', 'El ciclo del agente', 'Decide, usa una herramienta, lee el resultado y repite hasta poder responder.',
     svg('viz-p12', W, H, 'Ciclo de un agente: pregunta, decisión, herramienta y resultado', 'Del resultado vuelve a la decisión hasta poder responder', cuerpo),
     'Esquema del paso 12.');
 }
@@ -390,7 +390,7 @@ function p14() {
     `<text class="v-mut v-sm" x="${(xs[0] + w + xs[1]) / 2}" y="${y - 10}" text-anchor="middle">pide</text>` +
     `<text class="v-mut v-sm" x="${(xs[0] + w + xs[1]) / 2}" y="${y + 155}" text-anchor="middle">devuelve JSON</text>` +
     `<text class="v-mut v-sm" x="${W / 2}" y="${y + 210}" text-anchor="middle">MCP es el estándar que permite ese ida y vuelta; sin él, copiar y pegar el JSON a mano</text>`;
-  return figura('viz-p14', 'El MCP de n8n', 'El <b>MCP</b> es un estándar para que un asistente use las herramientas de otro programa. Con el MCP de n8n, el chat puede listar, leer y crear workflows sin que nadie copie y pegue JSON: el asistente deja de opinar sobre el flujo y pasa a tocarlo.',
+  return figura('viz-p14', 'El MCP de n8n', 'El chat lista, lee y crea workflows sin copiar y pegar.',
     svg('viz-p14', W, H, 'El asistente, el servidor MCP de n8n y los workflows', 'Pedidos y respuestas en JSON en los dos tramos', cuerpo),
     'Esquema del paso 14.');
 }

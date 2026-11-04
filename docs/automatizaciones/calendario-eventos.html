@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ejemplo 01 · Aviso de señal de venta · FIN·LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lab.css">
+<script>try{var t=localStorage.getItem("finlab-tema");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index.html"><span class="brand-dot"></span><b>FIN·LAB</b> AUTOMATIZACIONES</a>
+    <span class="crumb">EJEMPLO 05 / 05 · CALENDARIO</span>
+  </div>
+</header>
+
+<main class="page" id="contenido">
+  <p class="eyebrow">EJEMPLO 05 · AUTOMATIZACIÓN SIN IA</p>
+  <h1>Calendario de eventos de las empresas</h1>
+  <p class="lede">Cada lunes a las 8:00 te llega un correo con los resultados, dividendos y juntas de la semana.</p>
+
+  <section class="block" aria-labelledby="resuelve">
+    <span class="num">01</span>
+    <h2 id="resuelve">Qué resuelve</h2>
+    <div class="panel">
+      <div class="panel-h"><span class="panel-t">RESULTADO ESPERADO · CORREO</span></div>
+      <div class="panel-b">
+        <pre>Asunto: FIN·LAB · 4 eventos esta semana · 2026-11-04
+
+Eventos de los próximos 7 días (2026-11-04):
+
+- 2026-11-06 · KO (Coca-Cola Co.): DIVIDENDO
+- 2026-11-07 · AAPL (Apple Inc.): RESULTADOS
+- 2026-11-09 · MSFT (Microsoft Corp.): RESULTADOS
+- 2026-11-10 · GGAL (Grupo Financiero Galicia): JUNTA
+
+Calendario de ejemplo de FIN·LAB: las fechas no son reales.</pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="como">
+    <span class="num">02</span>
+    <h2 id="como">Cómo funciona</h2>
+    <div class="flow">
+      <div class="flow-row"><span class="n">1</span><div><h3>Cada lunes 8:00</h3><div class="io">ENTRA: la hora · SALE: una ejecución</div></div></div>
+      <div class="flow-row"><span class="n">2</span><div><h3>Consultar calendario FIN·LAB</h3><div class="io">SALE: 8 eventos con su fecha</div></div></div>
+      <div class="flow-row"><span class="n">3</span><div><h3>Eventos de la semana</h3><div class="io">SALE: los 4 que faltan 7 días o menos</div></div></div>
+      <div class="flow-row"><span class="n">4</span><div><h3>¿Hay eventos?</h3><div class="io">VERDADERO: sigue · FALSO: termina</div></div></div>
+      <div class="flow-row"><span class="n">5</span><div><h3>Enviar calendario por email</h3><div class="io">SALE: un correo con la lista</div></div></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="armar">
+    <span class="num">03</span>
+    <h2 id="armar">Armalo paso a paso</h2>
+    <p style="margin-top:16px"><a class="btn btn-primary" href="workflows/calendario-eventos.json" download>DESCARGAR WORKFLOW (.JSON)</a></p>
+    <ol>
+      <li><b>Importá</b> <span class="code-inline">calendario-eventos.json</span> en n8n (menú de workflows → <em>Import from File</em>). La URL ya apunta a la API del curso: no la cambies.</li>
+      <li><b>Conectá el correo.</b> En <em>Enviar calendario por email</em> creá la credencial SMTP (la llave de tu correo, guardada aparte) y reemplazá <span class="code-inline">tu-correo@ejemplo.com</span> y <span class="code-inline">destinatario@ejemplo.com</span> por tu dirección.</li>
+      <li><b>Ejecutá a mano</b> (<em>Execute workflow</em>): <em>Eventos de la semana</em> tiene que mostrar <span class="code-inline">hasEvents: true</span> y 4 eventos. Activá el flujo cuando el correo llegue.</li>
+    </ol>
+  </section>
+
+  <section class="block" aria-labelledby="cron">
+    <span class="num">04</span>
+    <h2 id="cron">Cómo se programa: el cron</h2>
+    <p>El horario del primer nodo es una receta de cinco campos: <span class="code-inline">minuto hora día-del-mes mes día-de-la-semana</span>. Un <span class="code-inline">*</span> significa “cualquiera”.</p>
+    <table class="tbl">
+      <thead><tr><th>CRON</th><th>CUÁNDO CORRE</th><th>DÓNDE</th></tr></thead>
+      <tbody>
+        <tr><td><span class="code-inline">0 8 * * 1</span></td><td>lunes a las 8:00</td><td>esta página</td></tr>
+        <tr><td><span class="code-inline">0 18 * * 1-5</span></td><td>lunes a viernes a las 18:00</td><td>ejemplo 01</td></tr>
+        <tr><td><span class="code-inline">0 17 * * 5</span></td><td>viernes a las 17:00</td><td>ejemplo 03</td></tr>
+        <tr><td><span class="code-inline">0 8 * * *</span></td><td>todos los días a las 8:00</td><td>ejemplo 02 (a las 8:00)</td></tr>
+      </tbody>
+    </table>
+    <p class="hint">La hora es la de la zona horaria configurada en n8n. Para probar un cambio sin esperar al lunes, usá <em>Execute workflow</em>.</p>
+  </section>
+
+  <section class="block" data-section="prompts" aria-labelledby="ia">
+    <span class="num">05</span>
+    <h2 id="ia">Hablá con la IA</h2>
+
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">EL CÓDIGO DEL FILTRO</span></div><button class="copy" data-copy="#p2" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="p2">Escribime el código JavaScript de un nodo Code de n8n en modo "Run Once for All Items" que:
+- reciba la respuesta de la API en $input.first().json
+- se quede con los eventos de data.events donde days_until sea 7 o menos
+- devuelva UN solo item con: hasEvents (boolean), count (cantidad) y texto (el cuerpo del email, con un renglón por evento: fecha, símbolo, nombre y tipo)
+- si la respuesta no trae data.events, tire un Error con un mensaje claro en español
+
+Sin librerías externas. Comentá solo lo necesario y decime después cómo probarlo con el caso de cero eventos.</pre></div>
+    </div>
+
+    <div class="prompt">
+      <div class="prompt-h"><div><span class="t">EL HORARIO (CRON)</span></div><button class="copy" data-copy="#p3" type="button">COPIAR</button></div>
+      <div class="prompt-b"><pre id="p3">Quiero que un workflow de n8n corra [DESCRIBÍ CUÁNDO, por ejemplo: el primer día hábil de cada mes a las 9:00].
+Dame la expresión cron de cinco campos, explicame campo por campo qué significa y decime las próximas tres fechas en que correría, para comprobarlas a mano. Si no se puede con un solo cron, decime por qué.</pre></div>
+    </div>
+
+    <div class="builder" data-builder>
+      <div class="builder-h"><span class="t">ADAPTÁ ESTE FLUJO A TU CASO</span><span class="t" style="color:var(--dim)">EDITÁ Y COPIÁ</span></div>
+      <div class="fields">
+        <div class="field"><label for="b-tipo">EVENTO A AVISAR</label><select id="b-tipo" data-key="tipo"><option>todos los tipos</option><option>RESULTADOS</option><option>DIVIDENDO</option><option>JUNTA</option></select></div>
+        <div class="field"><label for="b-dias">DÍAS HACIA ADELANTE</label><input id="b-dias" data-key="dias" value="7"></div>
+        <div class="field"><label for="b-cuando">CUÁNDO CORRE</label><input id="b-cuando" data-key="cuando" value="los lunes a las 8:00"></div>
+        <div class="field"><label for="b-destino">DESTINATARIO</label><input id="b-destino" data-key="destino" value="mi-correo@ejemplo.com"></div>
+      </div>
+      <pre id="b-out" data-output></pre>
+      <script type="text/template">Quiero adaptar un workflow de n8n que ya funciona. Hoy consulta /api/market/calendar cada lunes a las 8:00 y manda por email los eventos de los próximos 7 días.
+
+Cambios que necesito:
+- que avise solo de eventos de tipo {tipo}
+- que mire {dias} días hacia adelante
+- que corra {cuando}
+- que envíe el aviso a {destino}
+
+Los datos vienen en data.events[], con symbol, name, type (RESULTADOS, DIVIDENDO o JUNTA), date y days_until.
+
+No me reescribas el workflow entero: decime qué nodo tengo que editar, qué valor va en cada campo (incluida la expresión cron) y cómo lo pruebo sin esperar al horario.</script>
+      <div class="builder-foot"><button class="copy" data-copy="#b-out" type="button">COPIAR PROMPT</button></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="verificar">
+    <span class="num">06</span>
+    <h2 id="verificar">Cómo saber si funciona</h2>
+    <ul class="check">
+      <li><b>La salida de “Eventos de la semana”</b> muestra <span class="code-inline">hasEvents: true</span> y 4 eventos, y el correo llega a tu casilla.</li>
+      <li><b>Probá el caso vacío:</b> poné <span class="code-inline">const DIAS = 1</span> en el código. Con cero eventos no se envía nada y el flujo no se rompe.</li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="limites">
+    <span class="num">07</span>
+    <h2 id="limites">Límites de este ejemplo</h2>
+    <ul>
+      <li>Las fechas <b>no son reales</b>: la API las calcula desde hoy para que siempre haya eventos. Con fechas de verdad habría que conectar un proveedor de datos.</li>
+      <li>Avisa que hay un evento; no dice qué hacer con él.</li>
+      <li>Si lo activás y te olvidás, llega un correo cada lunes.</li>
+    </ul>
+  </section>
+
+  <div class="pager">
+    <a href="precios-a-sheets.html">← EJEMPLO 04</a>
+    <a href="index.html">VOLVER AL ÍNDICE →</a>
+  </div>
+</main>
+
+<footer>
+  FIN·LAB · material didáctico del posgrado de IA aplicada a Finanzas (UNLP).<br>
+  Datos simulados con fines educativos. No es asesoramiento financiero.
+</footer>
+
+<script src="lab.js"></script>
+</body>
+</html>

@@ -32,21 +32,20 @@
   </ul></nav>
 <!-- /@nav -->
 
-  <p class="eyebrow">PASO 12 · LA IA QUE ELIGE SUS HERRAMIENTAS</p>
+  <p class="eyebrow">PASO 12 · AGENTE</p>
   <h1>El agente: la IA que decide qué hacer</h1>
-  <p class="lede">Un agente elige una herramienta, mira el resultado y vuelve a decidir; acá usa la API del curso y una calculadora.</p>
-  <div class="meta"><span class="chip"><b>25 MIN</b></span><span class="chip">N8N</span><span class="chip">2 HERRAMIENTAS</span><span class="chip">SALIDA: <b>UN AGENTE QUE RESPONDE CON DATOS</b></span><a class="chip" href="index.html#niveles">IA · <b>NIVEL 5 DE 5</b></a></div>
-  <div class="note tip"><b>Una idea nueva:</b> Un agente elige solo qué herramienta usar y cuándo parar. <em>Ejemplo: ante “¿cuánto varió mi cartera 40/30/30?”, consulta la API y usa la calculadora: +0,56 %.</em></div>
-  <div class="note tip"><b>¿Les falta el paso anterior?</b> El agente necesita la credencial probada y una decisión de modelo. <a class="btn" href="paso-10.html">VOLVER AL PASO 10</a> <a class="btn" href="paso-11.html">VOLVER AL PASO 11</a></div>
+  <p class="lede">Armen un agente en n8n que consulta la API y calcula.</p>
+  <div class="meta"><span class="chip"><b>25 MIN</b></span><span class="chip">N8N</span><span class="chip">SALIDA: <b>UN AGENTE QUE RESPONDE CON DATOS</b></span><a class="chip" href="index.html#niveles">IA · <b>NIVEL 5 DE 5</b></a></div>
+  <div class="note tip"><b>Una idea nueva:</b> Un <a class="w" href="glosario.html#agente">agente</a> elige solo qué <a class="w" href="glosario.html#herramienta">herramienta</a> usar y cuándo parar. <em>Ejemplo: ante “¿cuánto varió mi cartera 40/30/30?”, consulta la API y usa la calculadora: +0,56 %.</em></div>
+  <div class="note tip"><b>Antes:</b> la clave (<a href="paso-10.html">paso 10</a>) y un modelo elegido (<a href="paso-11.html">paso 11</a>).</div>
 
   <section class="block" aria-labelledby="logro">
     <span class="num"></span>
     <h2 id="logro">Qué van a lograr</h2>
-    <p>Un nodo <em>AI Agent</em> en n8n con un <a class="w" href="glosario.html#prompt-sistema">prompt de sistema</a>, dos herramientas conectadas y un tope de pasos. Le preguntan algo que <b>solo se puede responder consultando la API</b> y el agente elige la herramienta correcta.</p>
+    <p>Un <em>AI Agent</em> en n8n con <a class="w" href="glosario.html#prompt-sistema">prompt de sistema</a> y 2 herramientas. Le preguntan algo que solo la API puede responder, y abren su <a class="w" href="glosario.html#traza">traza</a> (el registro de lo que hizo).</p>
     <div class="mock" aria-label="Ejemplo de la traza de un agente">
       <table><thead><tr><th>PASO</th><th>QUÉ HIZO</th><th>RESULTADO</th></tr></thead>
-      <tbody><tr><td>1</td><td>eligió <em>HTTP Request</em> a /api/market/summary</td><td>8 activos, con RSI y señal</td></tr><tr><td>2</td><td>eligió <em>Calculadora</em> para ponderar la variación de cada activo</td><td>variación de la cartera: +0,56 %</td></tr><tr><td>3</td><td>respondió con los números de la API</td><td>“La cartera subió 0,56 %; JNJ tiene señal VENTA”</td></tr></tbody></table>
-      <div class="mock-foot">La traza es lo que hay que mirar: muestra qué herramienta eligió y en qué orden. Si no usó ninguna, no es un agente: es un prompt.</div>
+      <tbody><tr><td>1</td><td>eligió <em>HTTP Request</em> a /api/market/summary</td><td>8 activos, con RSI y señal</td></tr><tr><td>2</td><td>eligió <em>Calculadora</em> para ponderar la variación</td><td>variación de la cartera: +0,56 %</td></tr><tr><td>3</td><td>respondió con los números de la API</td><td>“La cartera subió 0,56 %; JNJ tiene señal VENTA”</td></tr></tbody></table>
     </div>
   </section>
 
@@ -70,7 +69,7 @@
     <span class="num"></span>
     <h2 id="prompt">El prompt</h2>
     <div class="prompt">
-      <div class="prompt-h"><div><span class="t">PROMPT · PASO 12</span><div class="d">Para configurar el agente y para pedirle ayuda si se traba.</div></div><button class="copy" data-copy="#p12" type="button">COPIAR</button></div>
+      <div class="prompt-h"><div><span class="t">PROMPT · PASO 12</span></div><button class="copy" data-copy="#p12" type="button">COPIAR</button></div>
       <div class="prompt-b"><pre id="p12">Paso 12 de un taller de finanzas con n8n. Voy a configurar un AI Agent.
 
 Ayudame a escribir el prompt de sistema con estas reglas:
@@ -82,19 +81,16 @@ Ayudame a escribir el prompt de sistema con estas reglas:
 
 Después decime qué tres preguntas de prueba muestran si el agente eligió bien las herramientas, y qué mirar en la traza para saberlo.</pre></div>
     </div>
-    <div class="note tip"><b>¿Sin cuenta o sin clave?</b> Miren la <a href="traza.html">traza completa de un comité de agentes</a>, armada a mano con los datos de la API, y sigan desde ahí.</div>
-    <div class="note tip"><b>Puente con el proyecto real:</b> el agente de la pestaña <span class="code-inline">06 · Agentes</span> de la terminal está guionado, pero consulta una API interna que devuelve la misma muestra fija que la pública. Cuando le conectan un modelo con la credencial del paso 10, pasa a decidir de verdad. El prompt de sistema es lo que mantiene ese cambio bajo control.</div>
+    <div class="note tip"><b>¿Sin cuenta o sin clave?</b> Sigan con la <a href="traza.html">traza armada a mano</a>.</div>
   </section>
 
   <section class="block" aria-labelledby="hacer">
     <span class="num"></span>
     <h2 id="hacer">Qué hacer, clic por clic</h2>
     <ol class="do">
-      <li><b>Camino corto:</b> descarguen <a href="rescate/agente-api.json" download>agente-api.json</a>, impórtenlo en n8n (menú ⋯ → <em>Import from file</em>) y elijan en el nodo del modelo la credencial del paso 10. Ya trae el prompt de sistema, las dos herramientas y el tope de 6 pasos: salteen a “Pregunten algo concreto”.</li>
-      <li><b>Camino largo:</b> agreguen un nodo AI Agent, enchúfenle el modelo con la credencial del paso 10 y peguen el prompt de sistema.</li>
-      <li><b>Sumen dos herramientas:</b> HTTP Request a <span class="code-inline">/api/market/summary</span> y la calculadora (o un nodo Code). Pongan el tope de pasos en 6 y guarden.</li>
-      <li><b>Pregunten algo concreto:</b> “Mi cartera es 40 % KO, 30 % JNJ y 30 % GGAL: ¿cuánto varió hoy y qué señal tiene cada activo?” y abran la traza. A mano: 0,4 × 0,82 + 0,3 × 0,25 + 0,3 × 0,52 = 0,56 %.</li>
-      <li><b>Repitan con una pregunta imposible</b> (“¿cuánto va a valer AAPL mañana?”) y comprueben que no inventa.</li>
+      <li><b>Importen</b> <a href="rescate/agente-api.json" download>agente-api.json</a> (menú ⋯ → <em>Import from file</em>) y elijan en el nodo del modelo la credencial del paso 10. Ya trae el prompt, las dos herramientas y el <a class="w" href="glosario.html#tope-pasos">tope de pasos</a>. Sin el archivo: Chat Trigger + AI Agent (el prompt va en <em>System Message</em>) + HTTP Request a <span class="code-inline">/api/market/summary</span> + Calculator, con <em>Max Iterations</em> = 6.</li>
+      <li><b>Abran el chat del workflow</b> (<em>Open chat</em>) y pregunten: “Mi cartera es 40 % KO, 30 % JNJ y 30 % GGAL: ¿cuánto varió y qué señal tiene cada activo?”. Despliegen <em>Logs</em>: cada herramienta usada es un paso. A mano, con el <span class="code-inline">change_pct</span> de cada activo: 0,4 × 0,82 + 0,3 × 0,25 + 0,3 × 0,52 = 0,56 %.</li>
+      <li><b>Pregunten algo imposible:</b> “¿cuánto va a valer AAPL mañana?”. No debe inventar.</li>
     </ol>
   </section>
 
@@ -102,21 +98,19 @@ Después decime qué tres preguntas de prueba muestran si el agente eligió bien
     <span class="num"></span>
     <h2 id="comprobar">Cómo comprobar</h2>
     <ul class="check">
-      <li><b>Usó una herramienta:</b> la traza muestra al menos una consulta a la API antes de responder.</li>
-      <li><b>Los números coinciden:</b> el precio, el RSI y la señal de la respuesta son los que devuelve <span class="code-inline">/api/market/summary</span> (ábranla en el navegador y busquen el mismo activo). La variación de la cartera da 0,56 % con una calculadora.</li>
-      <li><b>No inventa:</b> con la API caída o una pregunta sobre el futuro, aclara que no tiene el dato.</li>
-      <li><b>Se detiene:</b> la traza no pasa de 6 pasos y la respuesta final llega igual.</li>
+      <li><b>Usó una herramienta:</b> los <em>Logs</em> muestran una consulta a la API antes de responder. Si no usó ninguna, es un prompt, no un agente.</li>
+      <li><b>Los números coinciden:</b> precio, RSI y señal son los de <span class="code-inline">/api/market/summary</span>, y la cartera da 0,56 %.</li>
+      <li><b>No inventa y para:</b> sobre el futuro dice que no tiene el dato, y no pasa de 6 pasos.</li>
     </ul>
   </section>
 
   <section class="block" aria-labelledby="falla">
     <span class="num"></span>
     <h2 id="falla">Si algo falla</h2>
-    <div class="note tip"><b>¿Se trabaron después de tres intentos?</b> Bájenlo a una sola herramienta y una sola pregunta. Si así funciona, el problema está en cómo el prompt de sistema elige entre las dos.</div>
     <ul>
-      <li><b>Entra en un bucle:</b> el agente repite la misma consulta. Bajen el tope de pasos y pidan en el prompt que no repita una herramienta con los mismos argumentos.</li>
-      <li><b>Responde sin consultar:</b> la herramienta no está conectada o el prompt de sistema no la nombra. Nombren la URL exacta en las reglas.</li>
-      <li><b>La API devuelve 404:</b> la URL de su terminal cambió. Pruébenla en el navegador antes de culpar al agente.</li>
+      <li><b>Entra en un bucle:</b> bajen el tope y pidan en el prompt que no repita la misma consulta. Si sigue, prueben con una sola herramienta y una sola pregunta.</li>
+      <li><b>Responde sin consultar:</b> nombren la URL exacta en las reglas.</li>
+      <li><b>404:</b> abran la URL en el navegador; puede haber cambiado.</li>
     </ul>
   </section>
 
@@ -126,7 +120,7 @@ Después decime qué tres preguntas de prueba muestran si el agente eligió bien
     <!-- @viz:p12 -->
     <figure class="viz" id="viz-p12" data-titulo="El ciclo del agente">
       <div class="viz-grafico"><svg class="viz-svg" viewBox="0 0 960 300" role="img" aria-labelledby="viz-p12-t viz-p12-d"><title id="viz-p12-t">Ciclo de un agente: pregunta, decisión, herramienta y resultado</title><desc id="viz-p12-d">Del resultado vuelve a la decisión hasta poder responder</desc><g><rect class="v-card " x="15" y="60" width="210" height="110" rx="10"/><text class="v-ink v-b" x="31" y="88">1 · La pregunta</text><text class="v-mut v-sm" x="31" y="110">“¿qué cartera conviene?”</text><text class="v-mut v-sm" x="31" y="130">en castellano</text></g><line class="v-axis " x1="229" y1="115" x2="242" y2="115"/><path class="v-axis-fill" d="M251,115 L242,120 L242,110 Z"/><g><rect class="v-card " x="255" y="60" width="210" height="110" rx="10"/><text class="v-ink v-b" x="271" y="88">2 · El modelo decide</text><text class="v-mut v-sm" x="271" y="110">¿qué herramienta sirve?</text><text class="v-mut v-sm" x="271" y="130">¿en qué orden?</text></g><line class="v-axis " x1="469" y1="115" x2="482" y2="115"/><path class="v-axis-fill" d="M491,115 L482,120 L482,110 Z"/><g><rect class="v-card " x="495" y="60" width="210" height="110" rx="10"/><text class="v-ink v-b" x="511" y="88">3 · Usa la herramienta</text><text class="v-mut v-sm" x="511" y="110">la API, el CSV, la calculadora</text><text class="v-mut v-sm" x="511" y="130">una por vez</text></g><line class="v-axis " x1="709" y1="115" x2="722" y2="115"/><path class="v-axis-fill" d="M731,115 L722,120 L722,110 Z"/><g><rect class="v-card " x="735" y="60" width="210" height="110" rx="10"/><text class="v-ink v-b" x="751" y="88">4 · Lee el resultado</text><text class="v-mut v-sm" x="751" y="110">¿alcanza para responder?</text><text class="v-mut v-sm" x="751" y="130">¿falta un dato?</text></g><path class="v-axis v-dash" fill="none" d="M840,170 V240 H360"/><line class="v-axis " x1="360" y1="240" x2="360" y2="183"/><path class="v-axis-fill" d="M360,174 L365,183 L355,183 Z"/><text class="v-mut v-sm" x="600" y="230" text-anchor="middle">si falta algo, vuelve a decidir</text><text class="v-up v-sm v-b" x="360" y="48" text-anchor="middle">si ya está, responde</text></svg></div>
-      <figcaption><b>El ciclo del agente.</b> Un agente no responde de memoria: <b>decide qué herramienta usar</b>, la usa, lee el resultado y vuelve a decidir. Repite hasta que tiene con qué contestar. Ahí está la diferencia con un prompt común, que contesta de una sola vez.<small>Esquema del paso 12.</small></figcaption>
+      <figcaption><b>El ciclo del agente.</b> Decide, usa una herramienta, lee el resultado y repite hasta poder responder.<small>Esquema del paso 12.</small></figcaption>
     </figure>
     <!-- /@viz:p12 -->
   </section>

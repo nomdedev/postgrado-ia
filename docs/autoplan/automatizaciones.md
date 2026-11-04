@@ -38,3 +38,9 @@ _Auditoría 2026-11-03. Los ahorros son estimaciones del agente._
 ## Estado
 
 Cerrada el 2026-11-03 · lectura 1576 de 2.250 palabras (dentro del presupuesto)
+
+## Pasada 3 (2026-11-04)
+
+- Nuevo ejemplo 05 "Calendario de eventos" (`calendario-eventos.html`, `workflows/calendario-eventos.json`, `api/market/calendar.js`): cron semanal, fechas de ejemplo calculadas desde hoy, sección "Cómo se programa: el cron".
+- La secuencia de "Cómo funciona" de los cinco ejemplos ahora muestra el dato concreto que pasa por cada caja (por ejemplo, 6.628,2 USD en el resumen).
+- Lectura: 2081 de 2700 (el máximo subió con la quinta página).
