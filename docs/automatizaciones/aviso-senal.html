@@ -23,20 +23,13 @@
 <main class="page" id="contenido">
   <p class="eyebrow">EJEMPLO 01 · AUTOMATIZACIÓN SIN IA</p>
   <h1>Aviso cuando aparece una señal de venta</h1>
-  <p class="lede">Todos los días a las 18:00, el flujo consulta la API, se queda con los activos que tienen señal de venta y manda un correo con la lista. Si no hay ninguno, no manda nada. Es la automatización más simple que igual resuelve algo real: no tener que mirar el tablero todos los días.</p>
-  <div class="meta">
-    <span class="chip"><b>5</b> NODOS</span>
-    <span class="chip"><b>15 MIN</b></span>
-    <span class="chip">NIVEL <b>INICIAL</b></span>
-    <span class="chip">N8N</span>
-    <span class="chip">SALIDA: <b>EMAIL</b></span>
-  </div>
+  <p class="lede">Cada día a las 18:00 te llega un correo, pero solo si algún activo tiene señal de venta.</p>
 
   <section class="block" aria-labelledby="resuelve">
     <span class="num">01</span>
     <h2 id="resuelve">Qué resuelve</h2>
     <div class="panel">
-      <div class="panel-h"><span class="panel-t">RESULTADO ESPERADO · CORREO</span><span class="panel-t" style="color:var(--dim)">1 VEZ POR DÍA</span></div>
+      <div class="panel-h"><span class="panel-t">RESULTADO ESPERADO · CORREO</span></div>
       <div class="panel-b">
         <pre>Asunto: FIN·LAB · señal VENTA · 2026-10-26
 
@@ -47,53 +40,37 @@ Señal VENTA en la sesión 2026-10-26:
 Muestra educativa fija de FIN·LAB. No es una recomendación de inversión.</pre>
       </div>
     </div>
-    <div class="note tip"><b>El detalle que hace la diferencia:</b> el correo solo sale si hay coincidencias. Un flujo que te manda “no pasó nada” todos los días termina en la carpeta de spam mental.</div>
   </section>
 
   <section class="block" aria-labelledby="como">
     <span class="num">02</span>
     <h2 id="como">Cómo funciona</h2>
     <div class="flow">
-      <div class="flow-row"><span class="n">1</span><div><h3>Cada día 18:00</h3><p>Un disparador por horario. En n8n es el nodo <b>Schedule Trigger</b>.</p><div class="io">ENTRA: la hora · SALE: una ejecución</div></div></div>
-      <div class="flow-row"><span class="n">2</span><div><h3>Consultar API FIN·LAB</h3><p>Un pedido HTTP GET a la URL pública. Devuelve ocho activos de ejemplo.</p><div class="io">ENTRA: URL · SALE: JSON con data.tickers[]</div></div></div>
-      <div class="flow-row"><span class="n">3</span><div><h3>Filtrar señales</h3><p>Un nodo <b>Code</b> recorre los activos y deja solo los que tienen la señal buscada. También arma el texto del correo.</p><div class="io">SALE: hasSignal, symbols, texto</div></div></div>
-      <div class="flow-row"><span class="n">4</span><div><h3>¿Hay señales?</h3><p>Un nodo <b>If</b> con dos salidas: verdadero y falso.</p><div class="io">VERDADERO: sigue · FALSO: termina</div></div></div>
-      <div class="flow-row"><span class="n">5</span><div><h3>Enviar aviso por email</h3><p>Solo por la salida verdadera. La salida falsa va a <b>Sin novedades</b>, que no hace nada.</p><div class="io">ENTRA: texto · SALE: un correo</div></div></div>
+      <div class="flow-row"><span class="n">1</span><div><h3>Cada día 18:00</h3><div class="io">ENTRA: la hora · SALE: una ejecución</div></div></div>
+      <div class="flow-row"><span class="n">2</span><div><h3>Consultar API FIN·LAB</h3><div class="io">ENTRA: URL · SALE: JSON con data.tickers[]</div></div></div>
+      <div class="flow-row"><span class="n">3</span><div><h3>Filtrar señales</h3><div class="io">SALE: hasSignal, symbols, texto</div></div></div>
+      <div class="flow-row"><span class="n">4</span><div><h3>¿Hay señales?</h3><div class="io">VERDADERO: sigue · FALSO: termina</div></div></div>
+      <div class="flow-row"><span class="n">5</span><div><h3>Enviar aviso por email</h3><div class="io">ENTRA: texto · SALE: un correo</div></div></div>
     </div>
   </section>
 
   <section class="block" aria-labelledby="armar">
     <span class="num">03</span>
     <h2 id="armar">Armalo paso a paso</h2>
-    <p>Podés importar el archivo y completar cuatro cosas, o armarlo desde cero con los mismos nodos. Las dos formas enseñan, pero importar primero te deja ver el recorrido completo funcionando.</p>
-    <p style="margin-top:16px"><a class="btn btn-primary" href="workflows/aviso-senal.json" download>DESCARGAR WORKFLOW (.JSON)</a> <a class="btn" href="index.html">VOLVER AL ÍNDICE</a></p>
+    <p style="margin-top:16px"><a class="btn btn-primary" href="workflows/aviso-senal.json" download>DESCARGAR WORKFLOW (.JSON)</a></p>
     <ol>
-      <li><b>Importá el archivo</b> en n8n: menú de workflows → <em>Import from File</em> → elegí <span class="code-inline">aviso-senal.json</span>.</li>
-      <li><b>Revisá la URL.</b> El nodo <em>Consultar API FIN·LAB</em> ya apunta a la API del curso (<span class="code-inline">postgrado-ia.vercel.app</span>). Cambiala solo si publicaste tu propio despliegue.</li>
-      <li><b>Conectá el correo.</b> Abrí el nodo <em>Enviar aviso por email</em> y creá la credencial SMTP. Poné tu dirección en <em>from</em> y <em>to</em>: la primera prueba te la mandás a vos.</li>
-      <li><b>Ejecutá a mano.</b> Botón <em>Execute workflow</em>. Mirá la salida del nodo <em>Filtrar señales</em>: tiene que decir <span class="code-inline">hasSignal: true</span> y el símbolo JNJ.</li>
-      <li><b>Ajustá la señal.</b> En el código del nodo <em>Filtrar señales</em>, la primera línea es <span class="code-inline">const SENAL = 'VENTA'</span>. Cambiala por <span class="code-inline">'COMPRA'</span> o <span class="code-inline">'NEUTRAL'</span> y volvé a ejecutar.</li>
-      <li><b>Activá el flujo</b> recién cuando el correo llegue bien. Antes no.</li>
+      <li><b>Importá</b> <span class="code-inline">aviso-senal.json</span> en n8n (menú de workflows → <em>Import from File</em>). La URL ya apunta a la API del curso: no la cambies.</li>
+      <li><b>Conectá el correo.</b> En <em>Enviar aviso por email</em> creá la credencial SMTP (la llave de tu correo, guardada aparte) y reemplazá <span class="code-inline">tu-correo@ejemplo.com</span> y <span class="code-inline">destinatario@ejemplo.com</span> por tu dirección.</li>
+      <li><b>Ejecutá a mano</b> (<em>Execute workflow</em>): <em>Filtrar señales</em> tiene que mostrar <span class="code-inline">hasSignal: true</span> y JNJ. Activá el flujo cuando el correo llegue.</li>
     </ol>
-    <div class="note"><b>Si no querés usar email:</b> reemplazá el último nodo por <b>Telegram → Send Message</b>, con el <span class="code-inline">chatId</span> de tu chat y el texto <span class="code-inline">{{ $json.texto }}</span>. Necesitás un bot creado con BotFather. El resto del flujo queda igual.</div>
   </section>
 
   <section class="block" data-section="prompts" aria-labelledby="ia">
     <span class="num">04</span>
     <h2 id="ia">Hablá con la IA</h2>
-    <p>Estos tres pedidos son los que realmente vas a necesitar: uno para entender, uno para escribir el código del filtro y uno para arreglar cuando algo falla. Copialos y completá lo que está entre corchetes.</p>
 
     <div class="prompt">
-      <div class="prompt-h"><div><span class="t">PROMPT 1 · QUE TE EXPLIQUE EL PLAN</span><div class="d">Antes de escribir código. Sirve para no aceptar un workflow a ciegas.</div></div><button class="copy" data-copy="#p1" type="button">COPIAR</button></div>
-      <div class="prompt-b"><pre id="p1">Quiero armar en n8n un flujo que todos los días a las 18:00 consulte https://postgrado-ia.vercel.app/api/market/summary y me mande un email solo si hay al menos un activo con signal === 'VENTA'.
-
-Los datos vienen en data.tickers[], y cada activo tiene symbol, name, last, change_pct y rsi14.
-
-Todavía no me escribas el JSON ni el código. Contame en 5 pasos qué nodo usarías en cada uno, qué información entra y qué sale, y qué credenciales necesito.</pre></div>
-    </div>
-
-    <div class="prompt">
-      <div class="prompt-h"><div><span class="t">PROMPT 2 · EL CÓDIGO DEL FILTRO</span><div class="d">Para el nodo Code. Pedile también el caso vacío.</div></div><button class="copy" data-copy="#p2" type="button">COPIAR</button></div>
+      <div class="prompt-h"><div><span class="t">EL CÓDIGO DEL FILTRO</span></div><button class="copy" data-copy="#p2" type="button">COPIAR</button></div>
       <div class="prompt-b"><pre id="p2">Escribime el código JavaScript de un nodo Code de n8n en modo "Run Once for All Items" que:
 - reciba la respuesta de la API en $input.first().json
 - filtre los activos donde signal === 'VENTA'
@@ -104,7 +81,7 @@ Sin librerías externas. Comentá solo lo necesario y decime después cómo prob
     </div>
 
     <div class="prompt">
-      <div class="prompt-h"><div><span class="t">PROMPT 3 · CUANDO ALGO FALLA</span><div class="d">Pegá el error real. No lo resumas.</div></div><button class="copy" data-copy="#p3" type="button">COPIAR</button></div>
+      <div class="prompt-h"><div><span class="t">CUANDO ALGO FALLA</span></div><button class="copy" data-copy="#p3" type="button">COPIAR</button></div>
       <div class="prompt-b"><pre id="p3">Mi workflow de n8n tiene estos nodos: Schedule Trigger → HTTP Request → Code (filtro) → If → Email.
 
 Al ejecutar a mano, el nodo Code falla con este error:
@@ -144,11 +121,8 @@ No me reescribas el workflow entero: decime qué nodo tengo que editar, qué val
     <span class="num">05</span>
     <h2 id="verificar">Cómo saber si funciona</h2>
     <ul class="check">
-      <li><b>La salida del filtro</b> muestra <span class="code-inline">hasSignal: true</span> y el símbolo esperado (en la muestra fija, JNJ).</li>
-      <li><b>El correo llega</b> a tu propia casilla con el asunto y el renglón del activo.</li>
-      <li><b>Cambiá la señal a</b> <span class="code-inline">'NEUTRAL'</span> y volvé a ejecutar: tiene que llegar el correo con GGAL.</li>
-      <li><b>Probá el caso vacío:</b> poné una señal que no exista (<span class="code-inline">'NADA'</span>). No debe enviar nada y el flujo no debe romperse.</li>
-      <li><b>Revisá la zona horaria</b> de la instancia de n8n: el horario del disparador se calcula con la zona del servidor, no con la tuya.</li>
+      <li><b>La salida del filtro</b> muestra <span class="code-inline">hasSignal: true</span> y JNJ, y el correo llega a tu casilla.</li>
+      <li><b>Probá el caso vacío:</b> con la señal <span class="code-inline">'NADA'</span> no se envía nada y el flujo no se rompe.</li>
     </ul>
   </section>
 
@@ -156,12 +130,10 @@ No me reescribas el workflow entero: decime qué nodo tengo que editar, qué val
     <span class="num">06</span>
     <h2 id="limites">Límites de este ejemplo</h2>
     <ul>
-      <li>La API devuelve <b>una muestra fija</b>: los números no cambian entre corridas. Para precios reales hay que cambiar la fuente de datos, no el resto del flujo.</li>
-      <li>Un correo por corrida como máximo. Si querés agrupar varios activos, eso ya lo hace el filtro.</li>
-      <li>No evalúa si conviene vender: solo avisa que la señal aparece. La decisión sigue siendo tuya.</li>
-      <li>Si la API no responde, el nodo HTTP falla y la corrida queda en rojo. Configurá <em>Retry On Fail</em> si te molesta.</li>
+      <li>La API devuelve <b>una muestra fija</b>: los números no cambian entre corridas.</li>
+      <li>Solo avisa que la señal aparece; no dice si conviene vender.</li>
+      <li>Si lo activás y te olvidás, llega un correo por día hábil.</li>
     </ul>
-    <div class="note warn"><b>Cuidado con el correo:</b> si activás el flujo y te olvidás, vas a recibir un correo por día hábil. Empezá con un destinatario propio y un horario que puedas revisar.</div>
   </section>
 
   <div class="pager">

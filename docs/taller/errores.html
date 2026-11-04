@@ -34,12 +34,11 @@
 
   <p class="eyebrow">GALERÍA · VERIFICAR LO QUE DICE LA IA</p>
   <h1>Cuatro errores típicos de la IA en finanzas</h1>
-  <p class="lede">La IA se equivoca con seguridad. Cada error trae el número correcto, el equivocado, cómo se caza y un prompt que lo evita.</p>
+  <p class="lede">La IA se equivoca con seguridad. Cada error trae la cuenta correcta, la equivocada y un prompt que lo evita.</p>
   <div class="meta">
-    <span class="chip"><b>4</b> ERRORES</span>
     <a class="chip" href="index.html#niveles">IA · <b>NIVEL 3 DE 5</b></a>
   </div>
-  <div class="note tip">Los números salen de <a href="rescate/finlab-AAPL.csv" download>finlab-AAPL.csv</a> (AAPL, versión de rescate) y se recalculan en una planilla. No probé estos prompts con un modelo en particular: son errores posibles. Con datos reales, pidan siempre precios ajustados por dividendos y splits.</div>
+  <div class="note tip">Los números salen de <a href="rescate/finlab-AAPL.csv" download>finlab-AAPL.csv</a> (AAPL, versión de rescate) y se recalculan en una planilla. Son errores posibles; no se probaron con un modelo en particular. Con datos reales, usen precios ajustados por dividendos.</div>
 
   <section class="block" aria-labelledby="e1">
     <span class="num"></span>
@@ -48,9 +47,9 @@
       <table><thead><tr><th>CUENTA</th><th>VOLATILIDAD ANUAL</th></tr></thead>
       <tbody><tr><td>desvío diario × √252 (correcta)</td><td><b>23,92 %</b></td></tr><tr><td>desvío diario × √365 (error)</td><td>28,78 %</td></tr></tbody></table>
     </div>
-    <p><b>Se detecta:</b> buscar <span class="code-inline">365</span> en el código. El desvío diario × 15,87 (que es √252) tiene que dar 23,92 %.</p>
+    <p><b>Se detecta:</b> preguntarle al chat qué número usó para anualizar (tiene que ser 252) o buscar <span class="code-inline">365</span> en el código.</p>
     <div class="prompt">
-      <div class="prompt-h"><div><span class="t">PROMPT QUE LO EVITA</span></div><button class="copy" data-copy="#e1p" type="button">COPIAR</button></div>
+      <div class="prompt-h"><div><span class="t">PROMPT</span></div><button class="copy" data-copy="#e1p" type="button">COPIAR</button></div>
       <div class="prompt-b"><pre id="e1p">Calculá la volatilidad anual de cada activo: desvío estándar de los retornos diarios por la raíz de 252 (el mercado opera unos 252 días al año). Mostrá el 252 como una constante con nombre.</pre></div>
     </div>
   </section>
@@ -62,9 +61,9 @@
       <table><thead><tr><th>MÉTODO</th><th>RSI(14) DE LA ÚLTIMA RUEDA</th></tr></thead>
       <tbody><tr><td>suavizado de Wilder, el estándar (coincide con el CSV)</td><td><b>62,16</b></td></tr><tr><td>promedio común de 14 días (error)</td><td>60,01</td></tr></tbody></table>
     </div>
-    <p><b>Se detecta:</b> compararlo con la columna <span class="code-inline">rsi14</span> del CSV o con el bloque B de Colab del <a href="paso-7.html">paso 7</a>: la diferencia tiene que ser menor a 0,01.</p>
+    <p><b>Se detecta:</b> compararlo con la columna <span class="code-inline">rsi14</span> del CSV: la diferencia tiene que ser menor a 0,01.</p>
     <div class="prompt">
-      <div class="prompt-h"><div><span class="t">PROMPT QUE LO EVITA</span></div><button class="copy" data-copy="#e2p" type="button">COPIAR</button></div>
+      <div class="prompt-h"><div><span class="t">PROMPT</span></div><button class="copy" data-copy="#e2p" type="button">COPIAR</button></div>
       <div class="prompt-b"><pre id="e2p">Calculá el RSI de 14 ruedas con el suavizado de Wilder: el primer promedio de subas y bajas es el promedio simple de los primeros 14 cambios, y después cada promedio es (promedio anterior × 13 + valor nuevo) / 14. RSI = 100 − 100 / (1 + suba promedio / baja promedio). Dejá null mientras no haya 14 cambios.</pre></div>
     </div>
   </section>
@@ -76,9 +75,9 @@
       <table><thead><tr><th>MEDIDA</th><th>AAPL EN EL AÑO</th></tr></thead>
       <tbody><tr><td>variación del año (último ÷ primero − 1)</td><td><b>103,2 %</b></td></tr><tr><td>media diaria × 252</td><td>74,1 %</td></tr></tbody></table>
     </div>
-    <p><b>Se detecta:</b> la variación del año son dos celdas: <span class="code-inline">=B253/B2-1</span>. Si el informe dice “retorno del año” y no coincide, pregunten cuál de las dos usó.</p>
+    <p><b>Se detecta:</b> la variación del año son dos celdas: <span class="code-inline">=B253/B2-1</span>. Si el informe dice “retorno del año” y no coincide, pregunten cuál de las dos usó: la primera es cuánto subió; la segunda, cuánto subiría si todos los días fueran el día promedio.</p>
     <div class="prompt">
-      <div class="prompt-h"><div><span class="t">PROMPT QUE LO EVITA</span></div><button class="copy" data-copy="#e3p" type="button">COPIAR</button></div>
+      <div class="prompt-h"><div><span class="t">PROMPT</span></div><button class="copy" data-copy="#e3p" type="button">COPIAR</button></div>
       <div class="prompt-b"><pre id="e3p">Mostrame dos columnas con nombres distintos: "Variación del año" = cierre final ÷ cierre inicial − 1, y "Retorno medio anualizado" = media de los retornos diarios × 252. No las mezcles ni las llames igual.</pre></div>
     </div>
   </section>
@@ -92,12 +91,11 @@
     </div>
     <p><b>Se detecta:</b> la tasa libre (4,3 %) tiene que verse en pantalla. A mano: (74,1 % − 4,3 %) ÷ 23,92 % = 2,92.</p>
     <div class="prompt">
-      <div class="prompt-h"><div><span class="t">PROMPT QUE LO EVITA</span></div><button class="copy" data-copy="#e4p" type="button">COPIAR</button></div>
+      <div class="prompt-h"><div><span class="t">PROMPT</span></div><button class="copy" data-copy="#e4p" type="button">COPIAR</button></div>
       <div class="prompt-b"><pre id="e4p">Calculá el Sharpe como (retorno medio anualizado − tasa libre de riesgo) ÷ volatilidad anual. Definí RF = 0.043 como una constante con nombre y mostrala en pantalla junto al resultado.</pre></div>
     </div>
   </section>
 
-  <p class="hint">Para ver cada cálculo en su lugar: pasos <a href="paso-4.html">4</a>, <a href="paso-5.html">5</a> y <a href="paso-7.html">7</a>. También: la <a href="traza.html">traza de un comité de agentes</a> y el <a href="backtest.html">backtest</a>.</p>
 </main>
 
 <!-- @pie -->

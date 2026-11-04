@@ -34,19 +34,19 @@
 
   <p class="eyebrow">EJEMPLO · SIN CUENTA NI CLAVE</p>
   <h1>Cómo trabaja un comité de agentes: el paso a paso</h1>
-  <p class="lede">La traza es el diario de un agente: qué herramienta usó, en qué orden y con qué resultado. Esta es la de tres agentes que responden una pregunta.</p>
+  <p class="lede">La traza es el diario de un agente: qué herramienta usó, en qué orden y con qué resultado.</p>
   <div class="meta">
     <span class="chip"><b>3</b> AGENTES</span>
     <span class="chip">10 A 15 MIN</span>
     <a class="chip" href="index.html#niveles">IA · <b>NIVEL 5 DE 5</b></a>
   </div>
-  <div class="note warn"><b>Ejemplo armado a mano,</b> no la salida de un modelo en vivo. Con un modelo real cambian las palabras; no cambian el orden ni la objeción del auditor.</div>
+  <div class="note warn"><b>Ejemplo armado a mano,</b> no la salida de un modelo en vivo.</div>
 
   <section class="block" aria-labelledby="pregunta">
     <span class="num"></span>
     <h2 id="pregunta">La pregunta</h2>
     <p>“Tengo 40 % KO, 30 % JNJ y 30 % GGAL: ¿qué objeciones hay antes de mantenerla hoy?”</p>
-    <p>Es la misma que se usa en los <a href="paso-12.html">pasos 12</a> y <a href="paso-13.html">13</a>. Se puede verificar con la API y con una calculadora.</p>
+    <p>Es la de los <a href="paso-12.html">pasos 12</a> y <a href="paso-13.html">13</a>.</p>
   </section>
 
   <section class="block" aria-labelledby="analista">
@@ -61,33 +61,24 @@
         <tr><td>4</td><td>respondió</td><td>texto de abajo</td></tr>
       </tbody></table>
     </div>
-    <div class="note tip"><b>Respuesta del analista (ejemplo):</b> “La cartera subió 0,56 % en la rueda. KO tiene señal de COMPRA y RSI 70,7; JNJ tiene señal de VENTA y RSI 28,1; GGAL está en NEUTRAL. Propongo mantener los pesos y revisar JNJ.”</div>
+    <div class="note tip"><b>Respuesta del analista (ejemplo):</b> “La cartera subió 0,56 %. Propongo mantener los pesos y revisar JNJ.”</div>
   </section>
 
   <section class="block" aria-labelledby="auditor">
     <span class="num"></span>
-    <h2 id="auditor">2 · Auditor: busca el error, el dato que falta y el supuesto no dicho</h2>
-    <div class="mock" aria-label="Traza del auditor">
-      <table><thead><tr><th>PASO</th><th>QUÉ HIZO</th><th>RESULTADO</th></tr></thead>
-      <tbody>
-        <tr><td>1</td><td>leyó la salida del analista (sin proponer otra cartera)</td><td>tres datos citados, una cuenta, una propuesta</td></tr>
-        <tr><td>2</td><td>revisó la cuenta con la calculadora</td><td>0,56 %: coincide</td></tr>
-        <tr><td>3</td><td>buscó qué no se dijo</td><td>cuatro objeciones, abajo</td></tr>
-      </tbody></table>
-    </div>
+    <h2 id="auditor">2 · Auditor: recalcula la cuenta (0,56 %, coincide) y busca lo que falta</h2>
     <div class="note tip"><b>Objeciones del auditor (ejemplo):</b>
       <ul>
-        <li><b>Una sola rueda:</b> 0,56 % es lo que pasó hoy; no dice nada del riesgo de la cartera.</li>
-        <li><b>El RSI y la señal miden cosas distintas:</b> JNJ está en sobreventa (RSI 28,1) y a la vez con señal de VENTA por tendencia. “Muy castigada” no es lo mismo que “está cerca de dar vuelta”.</li>
+        <li><b>Una sola rueda y sin riesgo:</b> 0,56 % es lo de hoy; la API no trae volatilidad ni correlaciones, así que no se puede hablar del riesgo de la cartera.</li>
+        <li><b>El RSI y la señal miden cosas distintas:</b> JNJ está en sobreventa (RSI 28,1) y a la vez con señal de VENTA por tendencia.</li>
         <li><b>KO con RSI 70,7:</b> pasa el umbral de sobrecompra de 70; el propio analista lo citó y no lo comentó.</li>
-        <li><b>Faltan datos:</b> la API no trae volatilidad ni correlaciones, así que no se puede hablar de riesgo de la cartera.</li>
       </ul>
     </div>
   </section>
 
   <section class="block" aria-labelledby="redactor">
     <span class="num"></span>
-    <h2 id="redactor">3 · Redactor: cinco líneas para un cliente, con el objeción incluido</h2>
+    <h2 id="redactor">3 · Redactor: cinco líneas para un cliente, con la objeción incluida</h2>
     <div class="note tip"><b>Informe (ejemplo):</b>
       <ol>
         <li>La cartera subió 0,56 % en la rueda de hoy.</li>

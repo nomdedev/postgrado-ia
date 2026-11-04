@@ -295,10 +295,10 @@ test('los enlaces y recursos relativos de las páginas existen en disco', () => 
   }
 });
 
-test('el menú de retos tiene 6 ejercicios con prompt para copiar y tres comprobaciones', () => {
+test('el menú de retos tiene 5 ejercicios con prompt para copiar y tres comprobaciones', () => {
   const html = fs.readFileSync(path.join(__dirname, '..', 'docs', 'taller', 'retos.html'), 'utf8');
   const retos = html.match(/<section class="block reto"[\s\S]*?<\/section>/g) || [];
-  assert.equal(retos.length, 6, 'tienen que ser 6 retos');
+  assert.equal(retos.length, 5, 'tienen que ser 5 retos');
   for (const r of retos) {
     const id = r.match(/aria-labelledby="([^"]+)"/)[1];
     assert.match(r, /<button class="copy" data-copy="#p-[a-z-]+"/, `${id}: falta el botón COPIAR`);

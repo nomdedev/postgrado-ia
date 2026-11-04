@@ -5,7 +5,7 @@
 
 | Parte | Lectura | Máx. | Prompts | Oraciones largas | Notas | Bloques | Estado |
 |---|---:|---:|---:|---:|---:|---:|---|
-| Mapa del taller | 1006 | 450 | 0 | 8 | 2 | 7 | EXCEDE |
+| Mapa del taller | 488 | 450 | 0 | 3 | 0 | 7 | EXCEDE |
 | P0 · Preparar | 541 | 450 | 0 | 5 | 2 | 6 | EXCEDE |
 | P1 · Esqueleto | 605 | 450 | 140 | 3 | 3 | 6 | EXCEDE |
 | P2 · Datos | 684 | 450 | 144 | 3 | 5 | 7 | EXCEDE |
@@ -19,11 +19,11 @@
 | P10 · Claves | 768 | 450 | 101 | 4 | 4 | 7 | EXCEDE |
 | P11 · Modelos | 714 | 450 | 106 | 5 | 4 | 7 | EXCEDE |
 | P12 · Agente | 848 | 450 | 132 | 4 | 5 | 7 | EXCEDE |
-| P13 · Consejo | 784 | 450 | 131 | 3 | 5 | 7 | EXCEDE |
+| P13 · Consejo | 777 | 450 | 131 | 3 | 5 | 7 | EXCEDE |
 | P14 · MCP | 870 | 450 | 100 | 3 | 4 | 7 | EXCEDE |
-| Extras del taller | 4784 | 2700 | 840 | 21 | 8 | 31 | EXCEDE |
-| Guía y hoja del docente | 2023 | 900 | 0 | 10 | 2 | 13 | EXCEDE |
-| Ejemplos de automatización | 4339 | 2250 | 1182 | 21 | 13 | 30 | EXCEDE |
+| Extras del taller | 3152 | 2700 | 782 | 21 | 7 | 29 | EXCEDE |
+| Guía y hoja del docente | 1058 | 900 | 0 | 3 | 2 | 9 | EXCEDE |
+| Ejemplos de automatización | 1576 | 2250 | 829 | 13 | 0 | 29 | OK |
 | Terminal (bienvenida y EMPEZAR) | — | — | — | — | — | — | a mano |
 
-**Total de lectura:** 23177 palabras · **Partes que exceden:** 19 de 19
+**Total de lectura:** 17292 palabras · **Partes que exceden:** 18 de 19

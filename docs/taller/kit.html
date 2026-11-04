@@ -32,38 +32,16 @@
   </ul></nav>
 <!-- /@nav -->
 
-  <p class="eyebrow">KIT DEL GRUPO · TODO LO QUE SE DESCARGA, EN UN SOLO LUGAR</p>
+  <p class="eyebrow">KIT DEL GRUPO · TODO LO QUE SE DESCARGA</p>
   <h1>Kit del grupo</h1>
-  <p class="lede">Si perdieron un archivo, se cerró el chat o un compañero llega tarde, acá está todo. Los prompts viven en cada paso, con su botón <b>⧉ COPIAR</b>: desde esta página se llega directo a cada uno.</p>
+  <p class="lede">Si perdieron un archivo o se cerró el chat, acá está todo.</p>
 
-  <section class="block" aria-labelledby="prompts">
-    <span class="num"></span>
-    <h2 id="prompts">Los prompts de cada paso</h2>
-    <div class="cards">
-      <a class="card" href="paso-0.html#prompt"><span class="k">PASO 0</span><h3>Prompt de contexto</h3><p>El primero de todos. Si se cierra el chat, se vuelve a pegar este.</p></a>
-      <a class="card" href="paso-1.html#prompt"><span class="k">PASO 1</span><h3>El esqueleto</h3><p>Encabezado y cuatro pestañas.</p></a>
-      <a class="card" href="paso-2.html#prompt"><span class="k">PASO 2</span><h3>Los datos</h3><p>Un año de precios con semilla.</p></a>
-      <a class="card" href="paso-3.html#prompt"><span class="k">PASO 3</span><h3>Mercado</h3><p>Tarjetas, tabla y gráfico.</p></a>
-      <a class="card" href="paso-4.html#prompt"><span class="k">PASO 4</span><h3>Indicadores</h3><p>SMA, EMA, RSI de Wilder y CSV.</p></a>
-      <a class="card" href="paso-5.html#prompt"><span class="k">PASO 5</span><h3>Carteras</h3><p>Retorno, volatilidad y Sharpe.</p></a>
-      <a class="card" href="paso-6.html#prompt"><span class="k">PASO 6</span><h3>API &amp; Alertas</h3><p>Los datos en JSON.</p></a>
-      <a class="card" href="paso-7.html#codigo"><span class="k">PASO 7</span><h3>Código para Colab</h3><p>Los bloques A, B y C.</p></a>
-      <a class="card" href="paso-8.html#prompt"><span class="k">PASO 8</span><h3>Adaptar el workflow</h3><p>Aviso por señal y RSI en n8n.</p></a>
-      <a class="card" href="paso-9.html#prompt"><span class="k">PASO 9</span><h3>Auditoría cruzada</h3><p>Para revisar el archivo de otro grupo.</p></a>
-      <a class="card" href="paso-10.html#prompt"><span class="k">PASO 10</span><h3>Claves de API</h3><p>Antes de crear la clave.</p></a>
-      <a class="card" href="paso-11.html#prompt"><span class="k">PASO 11</span><h3>Modelos en n8n</h3><p>Elegir por tarea, con criterio.</p></a>
-      <a class="card" href="paso-12.html#prompt"><span class="k">PASO 12</span><h3>El agente</h3><p>Prompt de sistema y dos herramientas.</p></a>
-      <a class="card" href="paso-13.html#prompt"><span class="k">PASO 13</span><h3>El consejo</h3><p>Tres roles que se controlan.</p></a>
-      <a class="card" href="paso-14.html#prompt"><span class="k">PASO 14</span><h3>El MCP de n8n</h3><p>Crear workflows desde el chat.</p></a>
-    </div>
-  </section>
-
-  <section class="block" aria-labelledby="archivos">
+    <section class="block" aria-labelledby="archivos">
     <span class="num"></span>
     <h2 id="archivos">Archivos para descargar</h2>
-    <p>La <b>versión de rescate</b> de un paso es el archivo como queda al terminarlo. Para arrancar un paso desde cero, bajen la del paso anterior. Todas se descargan como <span class="code-inline">finlab.html</span>.</p>
+    <p>Para arrancar un paso desde cero, bajen la versión de rescate del paso anterior (se descarga como <span class="code-inline">finlab.html</span>).</p>
     <table class="tbl">
-      <thead><tr><th>PASO</th><th>VERSIÓN DE RESCATE (ASÍ QUEDA)</th><th>OTROS ARCHIVOS</th></tr></thead>
+      <thead><tr><th>PASO</th><th>VERSIÓN DE RESCATE</th><th>OTROS ARCHIVOS</th></tr></thead>
       <tbody>
         <tr><td>P1 · Esqueleto</td><td><a href="rescate/finlab-v1.html" download="finlab.html">finlab-v1.html</a></td><td>—</td></tr>
         <tr><td>P2 · Datos</td><td><a href="rescate/finlab-v2.html" download="finlab.html">finlab-v2.html</a></td><td>—</td></tr>
@@ -73,9 +51,7 @@
         <tr><td>P6 · API</td><td><a href="rescate/finlab-v6.html" download="finlab.html">finlab-v6.html</a></td><td>—</td></tr>
         <tr><td>P7 · Colab</td><td><a href="rescate/finlab-v7.html" download="finlab.html">finlab-v7.html</a></td><td><a href="rescate/finlab-AAPL.csv" download>CSV de respaldo (AAPL)</a> · <a href="../../notebooks/finlab-api.ipynb" download>notebook que consulta la API</a></td></tr>
         <tr><td>P8 · n8n</td><td><a href="rescate/aviso-rsi.json" download>aviso-rsi.json</a></td><td><a href="rescate/aviso-rsi-sin-url.json" download>versión sin internet</a> · <a href="../automatizaciones/workflows/aviso-senal.json" download>workflow de partida (aviso-senal.json)</a></td></tr>
-        <tr><td>P9 · #/guiado</td><td>—</td><td>El workflow lo genera la terminal, en la pestaña AUTOMATIZAR.</td></tr>
-        <tr><td>P12 · El agente</td><td><a href="rescate/agente-api.json" download>agente-api.json</a></td><td>Chat + AI Agent + API + calculadora. Falta conectar la credencial del paso 10 en el nodo del modelo.</td></tr>
-        <tr><td>P10, P11, P13, P14 · Clase 3</td><td>—</td><td>No hay archivo propio: se trabaja en n8n y en el chat, con la cuenta del paso 8.</td></tr>
+        <tr><td>P12 · El agente</td><td><a href="rescate/agente-api.json" download>agente-api.json</a></td><td>Falta conectar la credencial del paso 10 en el nodo del modelo.</td></tr>
       </tbody>
     </table>
   </section>
@@ -84,15 +60,10 @@
     <span class="num"></span>
     <h2 id="mas">Para seguir</h2>
     <ul>
-      <li><a href="../automatizaciones/index.html">Cuatro automatizaciones más con n8n</a>: aviso de señal, resumen de cartera, informe redactado por IA y precios a Google Sheets, cada una con su workflow para importar.</li>
-      <li><a href="glosario.html">Glosario</a>: todas las palabras raras, explicadas sin jerga.</li>
+      <li><a href="../automatizaciones/index.html">Cuatro automatizaciones más con n8n</a>, cada una con su workflow para importar.</li>
     </ul>
   </section>
 
-  <div class="pager">
-    <a href="index.html">← MAPA DEL TALLER</a>
-    <a href="paso-0.html">EMPEZAR · PASO 0 →</a>
-  </div>
 </main>
 
 <!-- @pie -->

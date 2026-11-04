@@ -15,10 +15,6 @@
 .hoja .muted,h2 .muted{color:var(--mut);font-size:13px;font-weight:400}
 .hoja .acciones{white-space:nowrap;text-align:right}
 .tabla-scroll{overflow-x:auto}
-.rutina{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
-.rutina div{border:1px solid var(--line);border-radius:8px;padding:12px 14px;background:var(--panel)}
-.rutina b{display:block;color:var(--amb);font-family:var(--mono);font-size:12px;letter-spacing:.06em;margin-bottom:4px}
-@media (max-width:720px){.rutina{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -34,28 +30,22 @@
 
 <main class="page" id="contenido">
   <p class="eyebrow">SOLO PARA DOCENTES · PARA TENER ABIERTA EN CLASE</p>
-  <h1>Los ejercicios del taller</h1>
-  <p class="lede">Cada paso es un ejercicio en grupo; al final, el menú de retos suma seis ejercicios libres. Todo lo demás del sitio (terminal, rescates, kit, glosario, automatizaciones) es apoyo.</p>
-
-  <div class="rutina" aria-label="Cómo dar cada paso">
-    <div><b>1 · PRESENTAR</b>Proyectan el paso con ▶ PRESENTAR: 5 o 6 diapositivas, unos 3 minutos.</div>
-    <div><b>2 · HACER</b>Los grupos abren la página del paso y siguen "Qué hacer, clic por clic".</div>
-    <div><b>3 · COMPROBAR</b>Cada grupo muestra lo que se lleva (última columna). Si se trabó, usa la versión de rescate.</div>
-  </div>
+  <h1>Hoja de clase</h1>
+  <p class="lede">Cada paso: ▶ PRESENTAR (unos 3 minutos), los grupos hacen “Qué hacer” y muestran lo que se llevan. Si se traban, usan el rescate. Minutos y respuestas: <a href="index.html">guía del docente</a>.</p>
 
   <section class="block" aria-labelledby="c1">
     <span class="num"></span>
-    <h2 id="c1">CLASE 1 · Construir la página <small class="muted">· 130–140 min</small></h2>
+    <h2 id="c1">CLASE 1 · Construir la página</h2>
     <div class="tabla-scroll">
       <table class="tbl hoja">
-        <thead><tr><th>Paso</th><th>Qué hacen</th><th>Min</th><th>Se llevan</th><th><span class="sr-only">Abrir</span></th></tr></thead>
+        <thead><tr><th>Paso</th><th>Se llevan</th><th><span class="sr-only">Abrir</span></th></tr></thead>
         <tbody>
-        <tr><td><b>P0</b><br><span class="muted">Nivel 1</span></td><td><b>Preparar</b><br><span class="muted">Arman el grupo y le dan contexto al chat de IA</span></td><td>10–15</td><td>El chat preparado</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-0.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-0.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
-        <tr><td><b>P1</b><br><span class="muted">Nivel 2</span></td><td><b>Esqueleto</b><br><span class="muted">Encabezado y 4 pestañas vacías</span></td><td>25–30</td><td>finlab-v1.html</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-1.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-1.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
-        <tr><td><b>P2</b><br><span class="muted">Nivel 2</span></td><td><b>Datos</b><br><span class="muted">Un año de precios simulados de 8 activos</span></td><td>20</td><td>finlab-v2.html</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-2.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-2.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
-        <tr><td><b>P3</b><br><span class="muted">Nivel 2</span></td><td><b>Mercado</b><br><span class="muted">Pestaña Mercado: tabla y gráfico</span></td><td>20</td><td>finlab-v3.html</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-3.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-3.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
-        <tr><td><b>P4</b><br><span class="muted">Nivel 3</span></td><td><b>Indicadores</b><br><span class="muted">Medias móviles, RSI y señales de compra o venta</span></td><td>30</td><td>finlab-v4.html y un CSV</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-4.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-4.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
-        <tr><td><b>P5</b><br><span class="muted">Nivel 3</span></td><td><b>Carteras</b><br><span class="muted">Retorno, riesgo y Sharpe de tres carteras</span></td><td>25</td><td>finlab-v5.html</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-5.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-5.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
+        <tr><td><b>P0</b> · Preparar</td><td>El chat preparado</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-0.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-0.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
+        <tr><td><b>P1</b> · Esqueleto</td><td>finlab-v1.html</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-1.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-1.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
+        <tr><td><b>P2</b> · Datos</td><td>finlab-v2.html</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-2.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-2.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
+        <tr><td><b>P3</b> · Mercado</td><td>finlab-v3.html</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-3.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-3.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
+        <tr><td><b>P4</b> · Indicadores</td><td>finlab-v4.html y un CSV</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-4.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-4.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
+        <tr><td><b>P5</b> · Carteras</td><td>finlab-v5.html</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-5.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-5.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
         </tbody>
       </table>
     </div>
@@ -63,15 +53,15 @@
 
   <section class="block" aria-labelledby="c2">
     <span class="num"></span>
-    <h2 id="c2">CLASE 2 · Conectar con otras herramientas <small class="muted">· 105–120 min</small></h2>
+    <h2 id="c2">CLASE 2 · Conectar con otras herramientas</h2>
     <div class="tabla-scroll">
       <table class="tbl hoja">
-        <thead><tr><th>Paso</th><th>Qué hacen</th><th>Min</th><th>Se llevan</th><th><span class="sr-only">Abrir</span></th></tr></thead>
+        <thead><tr><th>Paso</th><th>Se llevan</th><th><span class="sr-only">Abrir</span></th></tr></thead>
         <tbody>
-        <tr><td><b>P6</b><br><span class="muted">Nivel 3</span></td><td><b>API</b><br><span class="muted">La página entrega sus datos en JSON</span></td><td>20</td><td>finlab-v6.html</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-6.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-6.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
-        <tr><td><b>P7</b><br><span class="muted">Nivel 3</span></td><td><b>Colab</b><br><span class="muted">Verifican los cálculos con Python en Google Colab</span></td><td>30–35</td><td>Un notebook</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-7.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-7.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
-        <tr><td><b>P8</b><br><span class="muted">Nivel 4</span></td><td><b>n8n</b><br><span class="muted">Un workflow que avisa cuando hay una señal</span></td><td>30–40</td><td>Un workflow que funciona</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-8.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-8.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
-        <tr><td><b>P9</b><br><span class="muted">Nivel 4</span></td><td><b>#/guiado</b><br><span class="muted">Usan la terminal terminada y resuelven 3 preguntas</span></td><td>25</td><td>3 de 3 ejercicios</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-9.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-9.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
+        <tr><td><b>P6</b> · API</td><td>finlab-v6.html</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-6.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-6.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
+        <tr><td><b>P7</b> · Colab</td><td>Un notebook</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-7.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-7.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
+        <tr><td><b>P8</b> · n8n</td><td>Un workflow que funciona</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-8.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-8.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
+        <tr><td><b>P9</b> · Terminal terminada</td><td>3 de 3 ejercicios</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-9.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-9.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
         </tbody>
       </table>
     </div>
@@ -79,16 +69,16 @@
 
   <section class="block" aria-labelledby="c3">
     <span class="num"></span>
-    <h2 id="c3">CLASE 3 · Agentes de IA <small class="muted">· 115 min</small></h2>
+    <h2 id="c3">CLASE 3 · Agentes de IA</h2>
     <div class="tabla-scroll">
       <table class="tbl hoja">
-        <thead><tr><th>Paso</th><th>Qué hacen</th><th>Min</th><th>Se llevan</th><th><span class="sr-only">Abrir</span></th></tr></thead>
+        <thead><tr><th>Paso</th><th>Se llevan</th><th><span class="sr-only">Abrir</span></th></tr></thead>
         <tbody>
-        <tr><td><b>P10</b><br><span class="muted">Nivel 4</span></td><td><b>Claves de API</b><br><span class="muted">Crean una clave y la guardan en n8n</span></td><td>20</td><td>Una credencial que funciona</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-10.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-10.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
-        <tr><td><b>P11</b><br><span class="muted">Nivel 4</span></td><td><b>Modelos</b><br><span class="muted">Prueban dos modelos con la misma tarea y eligen uno</span></td><td>20</td><td>Una decisión anotada</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-11.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-11.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
-        <tr><td><b>P12</b><br><span class="muted">Nivel 5</span></td><td><b>El agente</b><br><span class="muted">Un agente con dos herramientas: la API y una calculadora</span></td><td>25</td><td>Un agente que responde con datos</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-12.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-12.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
-        <tr><td><b>P13</b><br><span class="muted">Nivel 5</span></td><td><b>Consejo</b><br><span class="muted">Tres agentes en cadena: analista, auditor y redactor</span></td><td>30</td><td>Un informe con reparos</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-13.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-13.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
-        <tr><td><b>P14</b><br><span class="muted">Nivel 5</span></td><td><b>MCP de n8n</b><br><span class="muted">Crean un workflow desde el chat</span></td><td>20</td><td>Un flujo creado desde el chat</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-14.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-14.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
+        <tr><td><b>P10</b> · Claves de API</td><td>Una credencial que funciona</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-10.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-10.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
+        <tr><td><b>P11</b> · Modelos</td><td>Una decisión anotada</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-11.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-11.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
+        <tr><td><b>P12</b> · El agente</td><td>Un agente que responde con datos</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-12.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-12.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
+        <tr><td><b>P13</b> · Consejo</td><td>Un informe con reparos</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-13.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-13.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
+        <tr><td><b>P14</b> · MCP de n8n</td><td>Un flujo creado desde el chat</td><td class="acciones"><a class="btn btn-primary" href="../taller/paso-14.html?presentar" target="_blank" rel="noopener">▶ PRESENTAR</a> <a class="btn" href="../taller/paso-14.html" target="_blank" rel="noopener">PÁGINA</a></td></tr>
         </tbody>
       </table>
     </div>
@@ -96,24 +86,15 @@
 
   <section class="block" aria-labelledby="c4">
     <span class="num"></span>
-    <h2 id="c4">Menú de retos · Para cerrar cualquier clase <small class="muted">· 20 a 30 min</small></h2>
-    <p>Diez ejercicios independientes para crear y automatizar otras cosas con IA (calculadoras, Colab, n8n y agentes). Cada grupo elige uno, lo hace y lo muestra. Sirve como cierre de cualquier clase o para el grupo que termina antes.</p>
+    <h2 id="c4">Cierre de cualquier clase</h2>
     <p><a class="btn btn-primary" href="../taller/retos.html" target="_blank" rel="noopener">ABRIR EL MENÚ DE RETOS</a></p>
   </section>
 
   <section class="block" aria-labelledby="local">
     <span class="num"></span>
     <h2 id="local">Paso 9 sin internet: servidor local</h2>
-    <p>Con la carpeta del proyecto descomprimida, abran una terminal en ella y escriban uno de estos comandos; después abran <span class="code-inline">http://127.0.0.1:4173/#/guiado</span>. Para apagarlo: <kbd>Ctrl</kbd> + <kbd>C</kbd>.</p>
-    <ul>
-      <li><b>Windows con Python:</b> <span class="code-inline">py -m http.server 4173 --bind 127.0.0.1</span></li>
-      <li><b>Mac con Python:</b> <span class="code-inline">python3 -m http.server 4173 --bind 127.0.0.1</span></li>
-      <li><b>Cualquier sistema con Node.js:</b> <span class="code-inline">npx serve -l 4173</span></li>
-    </ul>
-    <p class="hint">Si el puerto 4173 está ocupado, cambien el número en el comando y en la dirección.</p>
+    <p>En la carpeta del proyecto, escriban <span class="code-inline">py -m http.server 4173 --bind 127.0.0.1</span> (Mac: <span class="code-inline">python3 -m http.server 4173 --bind 127.0.0.1</span>; con Node.js: <span class="code-inline">npx serve -l 4173</span>) y abran <span class="code-inline">http://127.0.0.1:4173/#/guiado</span>. Se apaga con <kbd>Ctrl</kbd> + <kbd>C</kbd>. Si el puerto está ocupado, cambien el número en el comando y en la dirección.</p>
   </section>
-
-  <p class="hint">Los minutos incluyen una vuelta de corrección por paso; no suman la puesta en común ni el recreo.<a href="index.html">guía del docente</a> tiene el cronograma con tiempos reales estimados, qué mirar en cada grupo y las respuestas.</p>
 </main>
 
 <footer>
