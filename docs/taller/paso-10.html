@@ -46,7 +46,7 @@
     <div class="mock" aria-label="Cómo se ve la credencial dentro de n8n">
       <table><thead><tr><th>CREDENCIAL</th><th>DÓNDE VIVE</th><th>QUIÉN LA VE</th><th>SI SE FILTRA</th></tr></thead>
       <tbody><tr><td>Modelo de IA</td><td>n8n · Credenciales</td><td>solo quien administra el flujo</td><td>se revoca y se genera otra</td></tr><tr><td>API del curso</td><td>pública, sin clave</td><td>cualquiera</td><td>no aplica</td></tr></tbody></table>
-      <div class="mock-foot">Una credencial guarda la clave cifrada y le entrega al workflow solo el resultado de usarla. El flujo nunca muestra el valor.</div>
+      <div class="mock-foot">La credencial es una caja fuerte: el flujo usa la llave sin verla.</div>
     </div>
   </section>
 
@@ -58,7 +58,7 @@
     <p class="hint">En este paso la terminal no cambia: lo nuevo pasa en n8n o en el asistente. El diagrama muestra cómo.</p>
     <figure class="viz" data-titulo="El diagrama del paso">
       <div class="viz-grafico"><a href="diagramas/p10-claves.html" target="_blank" rel="noopener"><img src="../img/diagramas/p10-claves.webp" width="1346" height="673" loading="lazy" alt="Diagrama: P10 · La clave se guarda una vez y nunca se muestra"></a></div>
-      <figcaption><b>El diagrama.</b> P10 · La clave se guarda una vez y nunca se muestra. Cada caja es una parte; las flechas marcan el orden.<small>Diagrama hecho con Archify. Clic para abrir la versión interactiva (zoom, búsqueda, modo presentación).</small></figcaption>
+      <figcaption><b>El diagrama.</b> P10 · La clave se guarda una vez y nunca se muestra.<small>Clic para abrirlo en grande.</small></figcaption>
     </figure>
   </section>
 <!-- /@avance -->

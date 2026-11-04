@@ -35,7 +35,6 @@
   <section class="block" aria-labelledby="resuelve">
     <span class="num">01</span>
     <h2 id="resuelve">Qué resuelve</h2>
-    <p>Mirar precios a mano todos los días es aburrido y se olvida. Este flujo hace exactamente lo que harías vos en dos minutos, pero sin acordarte: pide los datos, aplica un filtro y te avisa <b>solo cuando hay algo para mirar</b>.</p>
     <div class="panel">
       <div class="panel-h"><span class="panel-t">RESULTADO ESPERADO · CORREO</span><span class="panel-t" style="color:var(--dim)">1 VEZ POR DÍA</span></div>
       <div class="panel-b">
@@ -76,17 +75,6 @@ Muestra educativa fija de FIN·LAB. No es una recomendación de inversión.</pre
       <li><b>Ajustá la señal.</b> En el código del nodo <em>Filtrar señales</em>, la primera línea es <span class="code-inline">const SENAL = 'VENTA'</span>. Cambiala por <span class="code-inline">'COMPRA'</span> o <span class="code-inline">'NEUTRAL'</span> y volvé a ejecutar.</li>
       <li><b>Activá el flujo</b> recién cuando el correo llegue bien. Antes no.</li>
     </ol>
-
-    <h3 style="margin-top:26px">Qué hay que completar en el archivo</h3>
-    <table class="tbl">
-      <thead><tr><th>NODO</th><th>CAMPO</th><th>QUÉ PONER</th></tr></thead>
-      <tbody>
-        <tr><td>Consultar API</td><td>url</td><td>La API del curso o la de tu propio despliegue.</td></tr>
-        <tr><td>Enviar aviso</td><td>fromEmail / toEmail</td><td>Tu correo. En la prueba, el mismo en los dos campos.</td></tr>
-        <tr><td>Enviar aviso</td><td>credencial SMTP</td><td>Se crea en n8n, no se escribe en el workflow.</td></tr>
-        <tr><td>Cada día 18:00</td><td>cronExpression</td><td><span class="code-inline">0 18 * * 1-5</span> = 18:00 de lunes a viernes.</td></tr>
-      </tbody>
-    </table>
     <div class="note"><b>Si no querés usar email:</b> reemplazá el último nodo por <b>Telegram → Send Message</b>, con el <span class="code-inline">chatId</span> de tu chat y el texto <span class="code-inline">{{ $json.texto }}</span>. Necesitás un bot creado con BotFather. El resto del flujo queda igual.</div>
   </section>
 

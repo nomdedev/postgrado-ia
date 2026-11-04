@@ -12,8 +12,13 @@ Auditoría del 2026-11-03 (docente-didactico + simplificador-implacable). Reglas
 | Error 5 de la galería (dividendos) | Borrar | No lo cuestiona | Pendiente de decisión del docente |
 | Backtest y traza | Cortar avisos y repasos | Definir términos | Cortar avisos y agregar las definiciones como entrada de glosario, no como párrafos |
 
-## Pendiente de decisión del docente
+## Decisiones aplicadas (2026-11-03)
 
-- Borrar los retos 2, 5, 9 y 10, y el error 5 de la galería.
-- Sacar la escalera de 4 peldaños de la bienvenida de la terminal.
-- Mover los caminos 2 y 3 del paso 9 (servidor local) a la hoja docente, o borrarlos.
+- Retos 2, 5, 9 y 10 borrados (el 5 remite a backtest) y error 5 de la galería (dividendos) borrado; la advertencia de dividendos quedó en una línea.
+- Escalera de 4 peldaños fuera de la bienvenida y de la presentación (quedan las 4 etapas).
+- Caminos 2 y 3 del paso 9 movidos a la hoja del docente.
+
+## Lo que queda
+
+- Todas las partes siguen sobre el presupuesto de 450 palabras de lectura (ver ESTADO.md). El próximo paso es recortar "Qué van a lograr", las listas de "Si algo falla" y las maquetas.
+- El diagrama del ciclo del agente (a1) trae un "agente auditor" antes de que el paso 13 lo presente; es un diagrama generado y no se tocó.

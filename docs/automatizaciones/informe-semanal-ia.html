@@ -35,7 +35,6 @@
   <section class="block" aria-labelledby="resuelve">
     <span class="num">01</span>
     <h2 id="resuelve">Qué resuelve</h2>
-    <p>Un informe semanal es un trabajo de redacción, no de cálculo. El flujo ya sabe los precios, las señales y la amplitud del mercado; lo que falta es contarlo en cinco renglones. Ahí sí tiene sentido un modelo de lenguaje: <b>transformar una tabla en un párrafo</b>, todas las semanas, sin que nadie se siente a escribirlo.</p>
     <div class="panel">
       <div class="panel-h"><span class="panel-t">RESULTADO ESPERADO · CORREO</span><span class="panel-t" style="color:var(--dim)">VIERNES 17:00</span></div>
       <div class="panel-b">
@@ -62,7 +61,6 @@ encabezan las subas de la sesión.</pre>
       <div class="flow-row"><span class="n">5</span><div><h3>Armar informe</h3><p>Se queda solo con el texto y <b>falla fuerte</b> si vino vacío, en lugar de mandar un correo en blanco.</p><div class="io">SALE: texto limpio</div></div></div>
       <div class="flow-row"><span class="n">6</span><div><h3>Enviar informe</h3><p><b>Email</b> con el texto del modelo.</p><div class="io">SALE: un correo por semana</div></div></div>
     </div>
-    <div class="note"><b>El mismo nodo sirve para cualquier proveedor.</b> OpenAI, Anthropic, Gemini o un modelo local con Ollama: cambia la URL, el header de autenticación y la forma del cuerpo. El resto del flujo no se toca. Por eso conviene tener el paso 4 separado del paso 3.</div>
   </section>
 
   <section class="block" aria-labelledby="armar">
@@ -77,18 +75,6 @@ encabezan las subas de la sesión.</pre>
       <li><b>Ejecutá a mano</b> y leé el nodo <em>Armar informe</em>. Después abrí el correo y compará tres números con la respuesta de la API.</li>
       <li><b>Activá</b> solo cuando el texto te parezca confiable y no invente datos.</li>
     </ol>
-
-    <h3 style="margin-top:26px">Qué hay que completar en el archivo</h3>
-    <table class="tbl">
-      <thead><tr><th>NODO</th><th>CAMPO</th><th>QUÉ PONER</th></tr></thead>
-      <tbody>
-        <tr><td>Consultar API</td><td>url</td><td>Tu dominio de Vercel.</td></tr>
-        <tr><td>Pedir informe</td><td>url</td><td>El endpoint del proveedor (<span class="code-inline">/v1/chat/completions</span> en OpenAI).</td></tr>
-        <tr><td>Pedir informe</td><td>credencial</td><td>Header Auth con tu clave. No se escribe en el JSON.</td></tr>
-        <tr><td>Pedir informe</td><td>jsonBody → model</td><td>El nombre del modelo habilitado en tu cuenta.</td></tr>
-        <tr><td>Enviar informe</td><td>fromEmail / toEmail</td><td>Tu correo para la primera prueba.</td></tr>
-      </tbody>
-    </table>
     <div class="note warn"><b>Ojo con los costos:</b> una corrida por semana con 8 activos es baratísima, pero el flujo activo consume todos los viernes para siempre. Si lo dejás en un repositorio compartido, no pongas tu clave: usá credenciales de n8n.</div>
   </section>
 

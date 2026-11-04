@@ -33,19 +33,19 @@
 <!-- /@nav -->
 
   <p class="eyebrow">EJEMPLO · SIN CUENTA NI CLAVE</p>
-  <h1>Cómo se ve la traza de un comité de agentes</h1>
-  <p class="lede">Una pregunta de inversión pasa por tres agentes: analista, auditor y redactor. Acá está el recorrido completo, paso por paso, para mirarlo en el proyector o para seguirlo si en el aula no hay cuenta ni clave.</p>
+  <h1>Cómo trabaja un comité de agentes: el paso a paso</h1>
+  <p class="lede">La traza es el diario de un agente: qué herramienta usó, en qué orden y con qué resultado. Esta es la de tres agentes que responden una pregunta.</p>
   <div class="meta">
     <span class="chip"><b>3</b> AGENTES</span>
     <span class="chip">10 A 15 MIN</span>
     <a class="chip" href="index.html#niveles">IA · <b>NIVEL 5 DE 5</b></a>
   </div>
-  <div class="note warn"><b>Ejemplo armado a mano.</b> Los datos son los reales de la muestra de la API del curso (simulados, no son cotizaciones). Los textos de los agentes <b>no son la salida de un modelo en vivo</b>: están escritos para mostrar la forma que tiene una traza. Con un modelo de verdad, las palabras cambian; lo que tiene que mantenerse es el orden, las herramientas usadas y el reparo del auditor.</div>
+  <div class="note warn"><b>Ejemplo armado a mano,</b> no la salida de un modelo en vivo. Con un modelo real cambian las palabras; no cambian el orden ni la objeción del auditor.</div>
 
   <section class="block" aria-labelledby="pregunta">
     <span class="num"></span>
     <h2 id="pregunta">La pregunta</h2>
-    <p>“Tengo 40 % KO, 30 % JNJ y 30 % GGAL: ¿qué reparos hay antes de mantenerla hoy?”</p>
+    <p>“Tengo 40 % KO, 30 % JNJ y 30 % GGAL: ¿qué objeciones hay antes de mantenerla hoy?”</p>
     <p>Es la misma que se usa en los <a href="paso-12.html">pasos 12</a> y <a href="paso-13.html">13</a>. Se puede verificar con la API y con una calculadora.</p>
   </section>
 
@@ -72,25 +72,25 @@
       <tbody>
         <tr><td>1</td><td>leyó la salida del analista (sin proponer otra cartera)</td><td>tres datos citados, una cuenta, una propuesta</td></tr>
         <tr><td>2</td><td>revisó la cuenta con la calculadora</td><td>0,56 %: coincide</td></tr>
-        <tr><td>3</td><td>buscó qué no se dijo</td><td>cuatro reparos, abajo</td></tr>
+        <tr><td>3</td><td>buscó qué no se dijo</td><td>cuatro objeciones, abajo</td></tr>
       </tbody></table>
     </div>
-    <div class="note tip"><b>Reparos del auditor (ejemplo):</b>
+    <div class="note tip"><b>Objeciones del auditor (ejemplo):</b>
       <ul>
         <li><b>Una sola rueda:</b> 0,56 % es lo que pasó hoy; no dice nada del riesgo de la cartera.</li>
         <li><b>El RSI y la señal miden cosas distintas:</b> JNJ está en sobreventa (RSI 28,1) y a la vez con señal de VENTA por tendencia. “Muy castigada” no es lo mismo que “está cerca de dar vuelta”.</li>
         <li><b>KO con RSI 70,7:</b> pasa el umbral de sobrecompra de 70; el propio analista lo citó y no lo comentó.</li>
-        <li><b>Faltan datos:</b> la API no trae volatilidad ni correlaciones, así que no se puede hablar de riesgo de la cartera. Y los datos son simulados.</li>
+        <li><b>Faltan datos:</b> la API no trae volatilidad ni correlaciones, así que no se puede hablar de riesgo de la cartera.</li>
       </ul>
     </div>
   </section>
 
   <section class="block" aria-labelledby="redactor">
     <span class="num"></span>
-    <h2 id="redactor">3 · Redactor: cinco líneas para un cliente, con el reparo incluido</h2>
+    <h2 id="redactor">3 · Redactor: cinco líneas para un cliente, con el objeción incluido</h2>
     <div class="note tip"><b>Informe (ejemplo):</b>
       <ol>
-        <li>La cartera subió 0,56 % en la rueda de hoy (datos simulados de una muestra educativa).</li>
+        <li>La cartera subió 0,56 % en la rueda de hoy.</li>
         <li>KO tiene señal de COMPRA, pero su RSI de 70,7 está en zona de sobrecompra.</li>
         <li>JNJ tiene señal de VENTA y RSI de 28,1: está muy castigada, y la tendencia sigue a la baja.</li>
         <li>Con estos datos no se puede medir el riesgo de la cartera: faltan volatilidad y correlaciones.</li>
@@ -99,34 +99,7 @@
     </div>
   </section>
 
-  <section class="block" aria-labelledby="solo">
-    <span class="num"></span>
-    <h2 id="solo">Un solo agente contra el comité</h2>
-    <div class="mock" aria-label="Comparación entre un agente y el comité">
-      <table><thead><tr><th></th><th>UN SOLO AGENTE (PASO 12)</th><th>COMITÉ (PASO 13)</th></tr></thead>
-      <tbody>
-        <tr><td>Respuesta</td><td>“La cartera subió 0,56 %. JNJ tiene señal de VENTA. KO y GGAL, COMPRA y NEUTRAL.”</td><td>las cinco líneas de arriba</td></tr>
-        <tr><td>Reparos</td><td>ninguno</td><td>cuatro, y el informe incluye los dos más importantes</td></tr>
-        <tr><td>Se nota que los datos son simulados</td><td>no</td><td>sí</td></tr>
-        <tr><td>Costo</td><td>una consulta al modelo</td><td>tres consultas al modelo</td></tr>
-      </tbody></table>
-      <div class="mock-foot">El comité vale la pena solo si el auditor agrega algo que el agente solo no dijo. Si no lo agrega, sobra.</div>
-    </div>
-  </section>
-
-  <section class="block" aria-labelledby="mirar">
-    <span class="num"></span>
-    <h2 id="mirar">Qué mirar en una traza real</h2>
-    <ul class="check">
-      <li><b>Quién llamó a qué:</b> la API la consulta el analista y la calculadora la usan el analista y el auditor. Si el redactor llama a la API, tiene demasiado poder.</li>
-      <li><b>Qué dato citó cada uno:</b> todos los números de las respuestas tienen que estar en el resultado de la API. Un número que no aparece ahí es inventado.</li>
-      <li><b>Dónde aparece el reparo:</b> el informe final menciona al menos un reparo del auditor.</li>
-      <li><b>Qué no dice:</b> ninguna línea dice “comprá” ni “vendé”.</li>
-      <li><b>Cuántos pasos dio:</b> no pasa del tope de 6 de cada agente.</li>
-    </ul>
-    <p class="hint">Para armarlo en n8n, el <a href="paso-12.html">paso 12</a> trae un rescate (<a href="rescate/agente-api.json" download>agente-api.json</a>) y el <a href="paso-13.html">paso 13</a> los prompts de los tres roles. Para practicar a cazar errores de cálculo, la <a href="errores.html">galería de errores</a>.</p>
-  </section>
-</main>
+    </main>
 
 <!-- @pie -->
 <footer>

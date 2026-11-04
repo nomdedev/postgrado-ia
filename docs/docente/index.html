@@ -25,7 +25,7 @@
 <main class="page" id="contenido">
   <p class="eyebrow">SOLO PARA DOCENTES · NO ESTÁ ENLAZADA DESDE LA VISTA DEL ALUMNO</p>
   <h1>Guía del docente</h1>
-  <p class="lede">Cómo conducir el taller en dos clases (y una tercera opcional de agentes): cronograma, qué preparar antes, qué tipo de ejercicio hace cada parte, qué mirar al recorrer los grupos y las respuestas esperadas.</p>
+  <p class="lede">Cómo conducir el taller en dos clases (y una tercera opcional de agentes): cronograma, qué preparar antes, qué mirar al recorrer los grupos y las respuestas esperadas.</p>
   <div class="note warn"><b>Ojo:</b> el sitio es público, así que esta página también. No aparece en ningún menú ni enlace de los alumnos y los buscadores no la indexan, pero no compartan la dirección con el curso: tiene las respuestas.</div>
   <p style="margin-top:14px"><a class="btn btn-primary" href="clase.html">VER LA HOJA DE CLASE: TODOS LOS EJERCICIOS EN UNA PÁGINA →</a></p>
 
@@ -81,56 +81,7 @@
     </ul>
   </section>
 
-  <section class="block" aria-labelledby="ejercicios">
-    <span class="num"></span>
-    <h2 id="ejercicios">Mapa de ejercicios</h2>
-    <p>El taller no es una sola actividad repetida: combina ocho tipos de ejercicio. El que más pesa es <b>verificar</b>, porque es lo que el alumno se lleva al trabajo: la IA escribe rápido, pero la responsabilidad por el número sigue siendo suya.</p>
-    <table class="tbl">
-      <thead><tr><th>TIPO DE EJERCICIO</th><th>DÓNDE</th><th>QUÉ EJERCITA</th></tr></thead>
-      <tbody>
-        <tr><td>Construir con IA</td><td>P1–P6 (y P7 opcional)</td><td>Pedir con precisión, pegar el contexto completo, guardar versiones.</td></tr>
-        <tr><td>Personalizar un prompt</td><td>P0 (constructor), P3 (otras tarjetas), P5 (perfiles propios), automatización 03 (audiencia y tono)</td><td>Ver cómo cambia el resultado cuando cambia el pedido.</td></tr>
-        <tr><td>Verificar a mano</td><td>P3 calculadora · P4 Google Sheets · P5 Sharpe y “100 % en KO” · P6 API contra tabla · P8 contar avisos en la API</td><td>Desconfiar del número hasta comprobarlo.</td></tr>
-        <tr><td>Verificar con otra herramienta</td><td>P7 (Python en Colab recalcula las medias y el RSI)</td><td>Validación cruzada: dos herramientas, un mismo resultado.</td></tr>
-        <tr><td>Diagnosticar y pedir correcciones</td><td>Prompts de rescate (P1 página en blanco, P4 número que no coincide)</td><td>Describir el error con evidencia en lugar de “no anda”.</td></tr>
-        <tr><td>Predecir y comprobar</td><td>Pestaña AUTOMATIZAR (#/guiado): 3 ejercicios con COMPROBAR</td><td>Razonar el flujo antes de ejecutarlo.</td></tr>
-        <tr><td>Discutir en grupo</td><td>P2 (qué garantiza la semilla) · P5 (correlación y Sharpe) · cierre de cada clase</td><td>Interpretar, no solo calcular.</td></tr>
-        <tr><td>Auditar el trabajo de otro grupo</td><td>P9 parte B (auditoría cruzada con un chat nuevo)</td><td>Revisar con criterio y separar hallazgos reales de inventados.</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-  <section class="block" aria-labelledby="integraciones">
-    <span class="num"></span>
-    <h2 id="integraciones">Cómo se muestran las automatizaciones y las integraciones</h2>
-    <p>Todas las herramientas se conectan a través de <b>una sola fuente de datos</b>: la API publicada <span class="code-inline">/api/market/summary</span> (muestra fija, solo lectura). Eso permite mostrar que una automatización es siempre lo mismo: <b>algo la dispara → consulta datos → decide → deja un resultado en otro lado</b>.</p>
-    <table class="tbl">
-      <thead><tr><th>HERRAMIENTA</th><th>PARA QUÉ SE USA</th><th>DÓNDE APARECE</th></tr></thead>
-      <tbody>
-        <tr><td>Chat de IA</td><td>Escribe el código que el grupo pide y verifica</td><td>P0–P8 y la auditoría cruzada (ChatGPT, Claude o Gemini)</td></tr>
-        <tr><td>API publicada (Vercel)</td><td>Fuente común de datos para n8n y Colab</td><td>P6 (la simulan dentro de la página), P8, notebook, automatizaciones</td></tr>
-        <tr><td>n8n</td><td>Automatizar: disparador → HTTP → Code → IF → salida</td><td>P8 (aviso por señal y RSI, con rescates), P9 / AUTOMATIZAR (workflow generado por la terminal) y las 4 automatizaciones</td></tr>
-        <tr><td>Google Sheets</td><td>Verificar una fórmula y guardar un histórico</td><td>P4 (verificación de la SMA) y automatización 04 (una fila por activo por día)</td></tr>
-        <tr><td>Google Colab y Python</td><td>Recalcular con otra herramienta y consultar la API</td><td>P7 (CSV + pandas), <span class="code-inline">notebooks/finlab-api.ipynb</span> y la pestaña Python de la terminal (4 bloques: yfinance, pandas, Sharpe, requests)</td></tr>
-        <tr><td>Correo</td><td>La salida de un aviso o informe</td><td>Automatizaciones 01–03 y P8 (en los rescates viene desactivado para correr sin credenciales)</td></tr>
-        <tr><td>Un modelo de IA dentro del flujo</td><td>Redactar un informe a partir de datos, con reglas para que no invente</td><td>Automatización 03</td></tr>
-      </tbody>
-    </table>
-    <h3 style="margin-top:22px">Las cuatro automatizaciones de <a href="../automatizaciones/index.html">docs/automatizaciones</a></h3>
-    <table class="tbl">
-      <thead><tr><th>AUTOMATIZACIÓN</th><th>RECORRIDO EN N8N</th><th>QUÉ ENSEÑA</th></tr></thead>
-      <tbody>
-        <tr><td>01 · Aviso de señal</td><td>Cada día 18:00 → API → filtrar señales → ¿hay? → email</td><td>La estructura básica y la salida condicional (si no hay nada, no avisa).</td></tr>
-        <tr><td>02 · Resumen de cartera</td><td>Cada día 08:00 → mi cartera → API → calcular valor → email</td><td>Cruzar datos propios con datos externos, sin IA.</td></tr>
-        <tr><td>03 · Informe semanal con IA</td><td>Viernes 17:00 → API → preparar hechos → pedir informe al modelo → armar → email</td><td>IA como un paso más del flujo y cómo auditar que no invente.</td></tr>
-        <tr><td>04 · Precios a Google Sheets</td><td>Cada día 18:30 → API → aplanar activos → agregar filas</td><td>Guardar histórico para analizar después; el problema de los duplicados.</td></tr>
-      </tbody>
-    </table>
-    <p style="margin-top:14px">Cada una trae: qué resuelve, el recorrido nodo por nodo, cómo armarla paso a paso, prompts para copiar (con un constructor), cómo verificarla, sus límites y el workflow <span class="code-inline">.json</span> para importar.</p>
-    <div class="note tip"><b>Dónde ubicarlas:</b> el taller usa n8n en P8, P9 y toda la clase 3 (P10–P14); las cuatro automatizaciones quedan como profundización. Propuesta: 01 y 02 como tarea en grupo después de la clase 2 (reusan lo del P8), 03 como demostración del docente (pide una clave de API) y 04 si el curso trabaja con planillas.</div>
-  </section>
-
-  <section class="block" aria-labelledby="pasos">
+      <section class="block" aria-labelledby="pasos">
     <span class="num"></span>
     <h2 id="pasos">Qué mirar en cada paso</h2>
     <p><b>Criterio de rescate:</b> si un grupo lleva más de 10 minutos trabado o tres intentos fallidos con la IA, que baje la versión de rescate del paso y siga. Lo importante es que haga la comprobación.</p>

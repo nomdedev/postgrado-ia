@@ -55,7 +55,7 @@ test('el taller: 15 pasos en tres clases, cada uno con glosario, prompt copiable
   assert.match(terminal, /\['agentes','06 · AGENTES'\]/, 'falta la pestaña 06 · AGENTES');
   assert.match(terminal, /async function runAgent[\s\S]*api\.request\('GET','\/api\/market\/summary'\)[\s\S]*api\.request\('GET','\/api\/portfolio\/analyze/, 'el agente simulado tiene que usar la API interna como herramienta');
   assert.match(terminal, /IA SIMULADA · DATOS REALES DE ESTA TERMINAL/, 'la pestaña de agentes tiene que avisar que la IA está simulada');
-  assert.match(terminal, /const ESCALERA=\[[\s\S]*'Prompt'[\s\S]*'Automatización'[\s\S]*'Agente'[\s\S]*'Consejo de agentes'/, 'la bienvenida tiene que mostrar la escalera de 4 escalones');
+  assert.doesNotMatch(terminal, /const ESCALERA=/, 'la bienvenida ya no lleva la escalera: una sola clasificación de los pasos (las 4 etapas)');
   const mapa = fs.readFileSync(path.join(TALLER, 'index.html'), 'utf8');
   assert.match(mapa, /id="clase1"[\s\S]*href="paso-5\.html"[\s\S]*id="clase2"[\s\S]*href="paso-9\.html"[\s\S]*id="clase3"[\s\S]*href="paso-14\.html"/, 'el mapa tiene que mostrar la clase 1 (P0–P5), la clase 2 (P6–P9) y la clase 3 (P10–P14)');
   assert.match(mapa, /id="corto"[\s\S]*href="rescate\/finlab-v5\.html"/, 'el mapa tiene que ofrecer el camino corto con los rescates');
@@ -295,10 +295,10 @@ test('los enlaces y recursos relativos de las páginas existen en disco', () => 
   }
 });
 
-test('el menú de retos tiene 10 ejercicios con prompt para copiar y tres comprobaciones', () => {
+test('el menú de retos tiene 6 ejercicios con prompt para copiar y tres comprobaciones', () => {
   const html = fs.readFileSync(path.join(__dirname, '..', 'docs', 'taller', 'retos.html'), 'utf8');
   const retos = html.match(/<section class="block reto"[\s\S]*?<\/section>/g) || [];
-  assert.equal(retos.length, 10, 'tienen que ser 10 retos');
+  assert.equal(retos.length, 6, 'tienen que ser 6 retos');
   for (const r of retos) {
     const id = r.match(/aria-labelledby="([^"]+)"/)[1];
     assert.match(r, /<button class="copy" data-copy="#p-[a-z-]+"/, `${id}: falta el botón COPIAR`);

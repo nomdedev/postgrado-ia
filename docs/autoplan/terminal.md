@@ -7,7 +7,7 @@
 | | Lectura | Oraciones largas | Notas |
 |---|---:|---:|---:|
 | Antes | — | — | — |
-| Después | | | |
+| Después | — | — | — |
 
 ## Docente didáctico (¿se entiende fácil?)
 
@@ -24,8 +24,8 @@ _Auditoría 2026-11-03. Los ahorros son estimaciones del agente._
 
 ## Cambios aplicados
 
-- *(ninguno)*
+- Bienvenida sin la escalera de 4 peldaños; presentación de 4 a 3 diapositivas; párrafo principal más corto; ejercicios de EMPEZAR sin "backend", "router" ni "arreglo".
 
 ## Estado
 
-Auditada el 2026-11-03 · sin aplicar (falta decidir qué se borra)
+Fase 1 aplicada el 2026-11-03 · terminal revisada a mano

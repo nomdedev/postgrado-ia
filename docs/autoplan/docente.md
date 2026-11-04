@@ -7,7 +7,7 @@
 | | Lectura | Oraciones largas | Notas |
 |---|---:|---:|---:|
 | Antes | 2639 | 19 | 3 |
-| Después | | | |
+| Después | 2023 | 10 | 2 |
 
 ## Docente didáctico (¿se entiende fácil?)
 
@@ -24,8 +24,8 @@ _Auditoría 2026-11-03. Los ahorros son estimaciones del agente._
 
 ## Cambios aplicados
 
-- *(ninguno)*
+- Borrados "Mapa de ejercicios" y "Cómo se muestran las automatizaciones"; nueva sección "Paso 9 sin internet: servidor local" en la hoja de clase; "seis ejercicios libres".
 
 ## Estado
 
-Auditada el 2026-11-03 · sin aplicar (falta decidir qué se borra)
+Fase 1 aplicada el 2026-11-03 · lectura 2023 de 900 palabras (todavía excede el presupuesto)

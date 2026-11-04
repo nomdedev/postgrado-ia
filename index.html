@@ -320,15 +320,7 @@ tbody tr{transition:background .12s}
 .ag-borrador{border-left-color:var(--line2);border-style:dashed} .ag-audita{border-left-color:var(--dn);background:var(--dn-soft)} .ag-respuesta{border-left-color:var(--up);background:var(--up-soft)}
 @keyframes agIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.ag-step{animation:none}}
-.wl-escalera{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-items:end;margin-top:4px}
-.wl-escalera li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;padding:14px;background:var(--panel);border:1px solid var(--line);border-radius:8px;margin-top:calc((4 - var(--i)) * 26px)}
-.wl-escalera li:nth-child(n+3){border-color:var(--amb)}
-.wl-escalera b{display:block;font-size:16px}
-.wl-escalera span:not(.wl-n){display:block;color:var(--mut);font-size:14px;line-height:1.5;margin-top:3px}
-.wl-escalera small{display:block;margin-top:6px;font:12px var(--mono);color:var(--amb)}
-.wl-escalera-nota{margin-top:14px;color:var(--mut);font-size:14px;line-height:1.6;max-width:900px}
-.wl-escalera-nota b{color:var(--txt)}
-@media(max-width:900px){.ag-intro{grid-template-columns:1fr}.wl-escalera{grid-template-columns:1fr}.wl-escalera li{margin-top:0}}
+@media(max-width:900px){.ag-intro{grid-template-columns:1fr}}
 /* ---------- INICIO: bienvenida al taller ---------- */
 .welcome{max-width:1180px;margin:0 auto}
 .wl-hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:36px;align-items:center;padding:18px 0 30px;border-bottom:1px solid var(--line)}
@@ -372,7 +364,7 @@ tbody tr{transition:background .12s}
 .pres-wl-titulo{font-size:clamp(26px,4.6vw,52px);line-height:1.1;margin:0;text-wrap:balance}
 .pres-wl-sub{color:var(--mut);font-size:clamp(15px,1.7vw,21px);line-height:1.55;max-width:62ch;margin:0}
 .pres-wl-sub b{color:var(--txt)}
-.pres-wl-slide .wl-escalera,.pres-wl-slide .wl-etapas{font-size:clamp(13px,1.2vw,16px)}
+.pres-wl-slide .wl-etapas{font-size:clamp(13px,1.2vw,16px)}
 .pres-wl-bar{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;color:var(--dim);font:600 12px var(--mono)}
 .pres-wl-bar button{background:var(--panel2);border:1px solid var(--line2);color:var(--txt);border-radius:6px;padding:8px 12px;font:600 12px var(--mono);cursor:pointer}
 .pres-wl-bar button:disabled{opacity:.4;cursor:default}
@@ -1917,7 +1909,7 @@ function GuidedAutomation({notify}){
         </div>
       </div>
 
-      <div className="guide-caveat"><b>Importante:</b> esta versión es una práctica segura con datos inventados. La API de esta página vive dentro del navegador y n8n no puede llamarla. Para vigilar cotizaciones reales habrá que publicar un backend accesible y configurar una conexión HTTP; este archivo no envía avisos reales ni contiene credenciales.</div>
+      <div className="guide-caveat"><b>Importante:</b> esta versión es una práctica segura con datos inventados. La API de esta página vive dentro del navegador y n8n no puede llamarla. Para vigilar cotizaciones reales habrá que publicar la API en internet y conectarla desde n8n; este archivo no envía avisos reales ni contiene credenciales.</div>
       <GroupExercises signal={signal}/>
     </div>
   );
@@ -1925,8 +1917,8 @@ function GuidedAutomation({notify}){
 
 const TEAM_EXERCISES=[
   {id:'sequence',title:'Ordenen el recorrido',time:'4 MIN',prompt:'Después de iniciar la prueba, ¿qué hace el workflow?',answer:'sample',options:[['trigger','Envía una alerta real por correo'],['sample','Revisa la muestra de activos incluida'],['api','Consulta la API del navegador']],explain:'Primero lee una muestra local incluida en el JSON. Todavía no consulta cotizaciones ni envía mensajes.'},
-  {id:'branch',title:'Predigan qué activo aparece',time:'5 MIN',prompt:'Con la señal elegida arriba, ¿qué ticker creen que coincide?',answerForSignal:{VENTA:'YPF',COMPRA:'AAPL',NEUTRAL:'GGAL'},options:[['AAPL','AAPL'],['GGAL','GGAL'],['YPF','YPF']],explain:'La condición se compara con cada fila del arreglo de ejemplo. Cambien la señal arriba y hagan una nueva predicción.'},
-  {id:'production',title:'Detecten qué falta para usar datos reales',time:'6 MIN',prompt:'¿Qué habría que preparar antes de conectar n8n a cotizaciones reales?',answer:'backend',options:[['backend','Publicar una API accesible desde n8n'],['storage','Guardar el HTML en localStorage'],['diagram','Exportar el diagrama Archify como imagen']],explain:'n8n necesita una URL HTTP que pueda alcanzar. El router actual vive dentro del navegador y localStorage no es una API.'}
+  {id:'branch',title:'Predigan qué activo aparece',time:'5 MIN',prompt:'Con la señal elegida arriba, ¿qué ticker creen que coincide?',answerForSignal:{VENTA:'YPF',COMPRA:'AAPL',NEUTRAL:'GGAL'},options:[['AAPL','AAPL'],['GGAL','GGAL'],['YPF','YPF']],explain:'La condición se compara con cada uno de los activos de ejemplo. Cambien la señal arriba y hagan una nueva predicción.'},
+  {id:'production',title:'Detecten qué falta para usar datos reales',time:'6 MIN',prompt:'¿Qué habría que preparar antes de conectar n8n a cotizaciones reales?',answer:'backend',options:[['backend','Publicar una API accesible desde n8n'],['storage','Guardar la página en el navegador'],['diagram','Exportar el diagrama Archify como imagen']],explain:'n8n necesita una dirección en internet a la que llamar. La API de esta página solo existe dentro del navegador, y guardar la página en el navegador no la reemplaza.'}
 ];
 
 function GroupExercises({signal}){
@@ -2160,11 +2152,6 @@ const ETAPAS=[
   {n:'2',t:'Medirlo',d:'Medias móviles, RSI, señales y el riesgo de una cartera (Sharpe).',p:'Pasos 4–5',c:'Clase 1'},
   {n:'3',t:'Sacarlo afuera',d:'Una API, la verificación en Google Colab y una alerta automática en n8n.',p:'Pasos 6–9',c:'Clase 2'},
   {n:'4',t:'Delegar en agentes',d:'Claves de API, modelos en n8n, agentes y el MCP de n8n para crear flujos desde un asistente.',p:'Pasos 10–14',c:'Clase 3 (opcional)'}];
-const ESCALERA=[
-  {n:'1',t:'Prompt',d:'Le piden algo a la IA y verifican lo que devuelve.',d2:'Pasos 0–7'},
-  {n:'2',t:'Automatización',d:'Un flujo fijo que corre solo: algo lo dispara, consulta datos, decide y avisa.',d2:'Pasos 8–9 · n8n'},
-  {n:'3',t:'Agente',d:'La IA decide qué herramientas usar y en qué orden para responder.',d2:'Pestaña 06 · Agentes · Pasos 12–13'},
-  {n:'4',t:'Consejo de agentes',d:'Varios agentes con roles: uno analiza, otro audita, otro redacta.',d2:'Paso 13 · Clase 3'}];
 
 /* ---------- PÁGINA #/agentes · UN AGENTE SIMULADO, PASO A PASO ----------
    La IA está guionada (no hay modelo ni clave de API), pero cada herramienta llama de verdad
@@ -2286,7 +2273,7 @@ function Welcome(){
         <div className="wl-copy">
           <span className="wl-flag">TALLER EN GRUPO · NO HACE FALTA SABER PROGRAMAR</span>
           <h1>Construyan su propia terminal financiera, con IA</h1>
-          <p>En dos clases le van a pedir el código a una IA, paso a paso, y van a <b>comprobar que los números estén bien</b>. Terminan con una terminal como esta: precios, indicadores, riesgo de carteras y una alerta que llega sola. Es lo que un analista mira todos los días, armado por ustedes.</p>
+          <p>En dos clases le piden el código a una IA, paso a paso, y <b>comprueban que los números estén bien</b>. Terminan con una terminal con precios, indicadores, riesgo de carteras y una alerta.</p>
           <ul className="wl-meta"><li><b>2 clases</b> de unas 2 h 30</li><li>grupos de <b>3 o 4</b></li><li>sin instalar nada</li></ul>
           <div className="wl-cta">
             <a className="btn btn-primary wl-go" href="docs/taller/paso-0.html">EMPEZAR EL TALLER · PASO 0 →</a>
@@ -2303,13 +2290,6 @@ function Welcome(){
           <figcaption><span>ASÍ TERMINAN</span>esta misma terminal · <a href="#/mercado">explorala →</a></figcaption>
         </figure>
       </div>
-      <h2 className="wl-h">La escalera del curso: de pedirle algo a la IA a delegar en agentes</h2>
-      <ol className="wl-escalera">
-        {ESCALERA.map(e=>(
-          <li key={e.n} style={{"--i":e.n}}><span className="wl-n">{e.n}</span><div><b>{e.t}</b><span>{e.d}</span><small>{e.d2}</small></div></li>
-        ))}
-      </ol>
-      <p className="wl-escalera-nota">En una <b>automatización</b> ustedes dibujan el camino. En un <b>agente</b>, la IA elige el camino dentro de los límites que le ponen. En un <b>consejo</b>, un agente controla a otro: quien hace no se califica a sí mismo.</p>
       <h2 className="wl-h">El recorrido en 4 etapas</h2>
       <ol className="wl-etapas">
         {ETAPAS.map(e=>(
@@ -2322,11 +2302,11 @@ function Welcome(){
   );
 }
 /* ---------- MODO PRESENTACIÓN DE LA BIENVENIDA ----------
-   Cuatro diapositivas con los mismos datos de la página: título, escalera, etapas y qué necesita cada grupo.
+   Tres diapositivas con los mismos datos de la página: título, etapas y qué necesita cada grupo.
    Se abre con el botón de la cabecera o con ?presentar. Teclado: → ← espacio, Inicio/Fin, Esc. */
 function Presentacion({setAbierto}){
   const [i,setI]=useState(0);
-  const capa=useRef(null), TOTAL=4;
+  const capa=useRef(null), TOTAL=3;
   const ir=n=>setI(Math.max(0,Math.min(TOTAL-1,n)));
   useEffect(()=>{
     const el=capa.current, previo=document.activeElement;
@@ -2361,13 +2341,6 @@ function Presentacion({setAbierto}){
       <p className="pres-wl-eyebrow">TALLER EN GRUPO · POSGRADO DE IA APLICADA A FINANZAS</p>
       <h2 className="pres-wl-titulo">Construyan su propia terminal financiera, con IA</h2>
       <p className="pres-wl-sub">Dos clases para pedirle el código a una IA, paso a paso, y <b>comprobar que los números estén bien</b>.</p>
-    </React.Fragment>,
-    <React.Fragment key="e">
-      <h2 className="pres-wl-titulo">La escalera del curso</h2>
-      <ol className="wl-escalera">
-        {ESCALERA.map(e=>(<li key={e.n} style={{"--i":e.n}}><span className="wl-n">{e.n}</span><div><b>{e.t}</b><span>{e.d}</span><small>{e.d2}</small></div></li>))}
-      </ol>
-      <p className="pres-wl-sub">En una <b>automatización</b> ustedes dibujan el camino; en un <b>agente</b>, la IA elige el camino; en un <b>consejo</b>, un agente controla a otro.</p>
     </React.Fragment>,
     <React.Fragment key="r">
       <h2 className="pres-wl-titulo">El recorrido en 4 etapas</h2>

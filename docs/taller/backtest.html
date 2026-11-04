@@ -33,19 +33,19 @@
 <!-- /@nav -->
 
   <p class="eyebrow">EJEMPLO · MEDIR UNA SEÑAL</p>
-  <h1>¿Habría funcionado la señal? Un backtest ingenuo y qué no prueba</h1>
-  <p class="lede">La pregunta de cualquier alumno después del <a href="paso-4.html">paso 4</a> es si comprar cuando la media corta cruza a la larga habría dado plata. Acá hay una prueba simple con AAPL del archivo de rescate. Lo importante no es el resultado: es ver <b>cuántas cosas pueden torcerlo</b> sin que nadie se dé cuenta.</p>
+  <h1>¿Habría funcionado la señal? Probarla con el pasado y sus trampas</h1>
+  <p class="lede">Un <a class="w" href="glosario.html#backtest">backtest</a> prueba una regla con precios pasados. La pregunta de cualquier alumno después del <a href="paso-4.html">paso 4</a> es si comprar cuando la media corta cruza a la larga habría dado plata. Acá hay una prueba simple con AAPL del archivo de rescate. Lo importante no es el resultado: es ver <b>cuántas cosas pueden torcerlo</b> sin que nadie se dé cuenta.</p>
   <div class="meta">
     <span class="chip">1 ACTIVO · 252 RUEDAS</span>
     <span class="chip">15 A 20 MIN</span>
     <a class="chip" href="index.html#niveles">IA · <b>NIVEL 3 DE 5</b></a>
   </div>
-  <div class="note warn"><b>Esto no es una recomendación ni una prueba de que una estrategia funcione.</b> Los datos son simulados (<a href="rescate/finlab-AAPL.csv" download>finlab-AAPL.csv</a>) y el resultado de un activo en un año no dice nada sobre el futuro. Sirve para aprender a desconfiar de un backtest.</div>
+  <div class="note warn">Datos simulados de AAPL: sirve para aprender a desconfiar de un resultado, no para operar.</div>
 
   <section class="block" aria-labelledby="regla">
     <span class="num"></span>
     <h2 id="regla">La regla que se prueba</h2>
-    <p>Se está <b>comprado</b> cuando la media de 20 ruedas (SMA 20) está por encima de la de 50 (SMA 50), y <b>afuera</b> cuando está por debajo. El retorno de cada día cuenta solo si ayer, al cierre, ya se estaba comprado. Se compara contra <b>comprar y mantener</b> durante el mismo período.</p>
+    <p>Se está <b>comprado</b> cuando la media de 20 ruedas (SMA 20) está por encima de la de 50 (SMA 50), y <b>afuera</b> cuando está por debajo. El retorno de cada día cuenta solo si ayer, al cierre, ya se estaba comprado. Se compara contra <a class="w" href="glosario.html#comprar-mantener">comprar y mantener</a> durante el mismo período.</p>
   </section>
 
   <section class="block" aria-labelledby="resultado">
@@ -76,12 +76,9 @@
         <tr><td>con sesgo: la señal de hoy decide el retorno de hoy</td><td>72,9 %</td></tr>
         <tr><td>correcta, con 0,1 % de costo por cada cambio de posición</td><td>61,2 %</td></tr>
       </tbody></table>
-      <div class="mock-foot">La variante con sesgo “mira el futuro”: usa el cierre de hoy para decidir si ya estaba comprado hoy. En la vida real, esa señal recién se conoce al cierre.</div>
     </div>
     <ol class="do">
-      <li><b>Mirar el futuro.</b> Un desfase de un día en una fila de código sube el resultado 10 puntos. La IA lo comete con facilidad y el gráfico se ve igual de prolijo.</li>
-      <li><b>No contar los costos.</b> Siete cambios de posición con 0,1 % cada uno restan 1,1 puntos. Con más operaciones, más.</li>
-      <li><b>Mostrar solo la mejor.</b> Probar muchas combinaciones y presentar la que salió bien es el error de las tres filas de arriba.</li>
+      <li><b>Mirar el futuro</b> (<a class="w" href="glosario.html#sesgo-anticipacion">sesgo de anticipación</a>): un desfase de un día en una fila de código sube el resultado 10 puntos, y el gráfico se ve igual de prolijo.</li>
     </ol>
   </section>
 

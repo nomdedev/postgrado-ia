@@ -58,7 +58,7 @@
     <p class="hint">En este paso la terminal no cambia: lo nuevo pasa en n8n o en el asistente. El diagrama muestra cómo.</p>
     <figure class="viz" data-titulo="El diagrama del paso">
       <div class="viz-grafico"><a href="diagramas/p14-mcp.html" target="_blank" rel="noopener"><img src="../img/diagramas/p14-mcp.webp" width="1346" height="673" loading="lazy" alt="Diagrama: P14 · El MCP de n8n: el asistente crea, ustedes deciden"></a></div>
-      <figcaption><b>El diagrama.</b> P14 · El MCP de n8n: el asistente crea, ustedes deciden. Cada caja es una parte; las flechas marcan el orden.<small>Diagrama hecho con Archify. Clic para abrir la versión interactiva (zoom, búsqueda, modo presentación).</small></figcaption>
+      <figcaption><b>El diagrama.</b> P14 · El MCP de n8n: el asistente crea, ustedes deciden.<small>Clic para abrirlo en grande.</small></figcaption>
     </figure>
   </section>
 <!-- /@avance -->
@@ -86,8 +86,8 @@ No actives ningún workflow ni cambies credenciales sin que te lo pida explícit
     <h2 id="hacer">Qué hacer, clic por clic</h2>
     <ol class="do">
       <li><b>Activen el servidor MCP</b> en su instancia de n8n : <b>Settings → Instance-level MCP → Enable MCP access</b>. Si no aparece, la versión de n8n es anterior: pidan al docente que la actualice.</li>
-      <li><b>Copien la dirección</b> (termina en <code>/mcp-server/http</code>) <b>y el token</b> que muestra n8n. El token es una <a href="glosario.html#clave-api">clave</a>: va en la configuración del asistente, no en el chat.</li>
-      <li><b>Agreguen el servidor MCP</b> en su asistente (Claude, ChatGPT o el que usen) con esa dirección y ese token. En Claude Code es una sola línea; cambien el dominio por el de su n8n:
+      <li><b>Copien la dirección</b> (termina en <code>/mcp-server/http</code>) <b>y la clave de acceso</b> que muestra n8n. Es una <a href="glosario.html#clave-api">clave</a>: va en la configuración del asistente, no en el chat.</li>
+      <li><b>Agreguen el servidor MCP</b> en su asistente (Claude, ChatGPT o el que usen) con esa dirección y esa clave. En Claude Code es una sola línea; cambien el dominio por el de su n8n:
         <div class="prompt">
           <div class="prompt-h"><div><span class="t">TERMINAL · CLAUDE CODE</span><div class="d">Después les pide iniciar sesión en n8n.</div></div><button class="copy" data-copy="#mcp14" type="button">COPIAR</button></div>
           <div class="prompt-b"><pre id="mcp14">claude mcp add --transport http n8n https://SU-DOMINIO/mcp-server/http</pre></div>
@@ -95,7 +95,7 @@ No actives ningún workflow ni cambies credenciales sin que te lo pida explícit
       <li><b>Pidan la lista de workflows</b> y compárenla con la que ven en n8n.</li>
       <li><b>Pidan la copia con el umbral cambiado</b> y revisen el JSON antes de ejecutar.</li>
       <li><b>Abran n8n</b>, comprueben que la copia existe y que está desactivada. Prueben y después decidan si la activan.</li>
-      <li><b>Borren la copia de prueba</b> y revoquen el token si era uno temporal.</li>
+      <li><b>Borren la copia de prueba</b> y revoquen la clave si era una temporal.</li>
     </ol>
   </section>
 
@@ -106,7 +106,7 @@ No actives ningún workflow ni cambies credenciales sin que te lo pida explícit
       <li><b>El flujo existe:</b> la copia aparece en n8n con el nombre que pidieron y los nodos del original.</li>
       <li><b>El cambio es el pedido:</b> el umbral quedó en 25 y el resto del flujo no cambió.</li>
       <li><b>Nada se activó solo:</b> la copia está desactivada y el original sigue igual.</li>
-      <li><b>El token no quedó en el chat:</b> se cargó en la configuración del asistente, no en un mensaje.</li>
+      <li><b>La clave no quedó en el chat:</b> se cargó en la configuración del asistente, no en un mensaje.</li>
     </ul>
   </section>
 
@@ -116,7 +116,7 @@ No actives ningún workflow ni cambies credenciales sin que te lo pida explícit
     <div class="note tip"><b>¿Se trabaron después de tres intentos?</b> El MCP depende de la versión de n8n y del asistente. Si no conecta, prueben con el asistente del docente y sigan el paso mirando la pantalla.</div>
     <ul>
       <li><b>“No se puede conectar”:</b> la instancia no es accesible desde internet o la dirección está incompleta. Prueben primero en local.</li>
-      <li><b>“Sin permiso”:</b> el token no tiene el alcance necesario, o se revocó. Generen uno nuevo y vuelvan a cargarlo en el asistente.</li>
+      <li><b>“Sin permiso”:</b> la clave no tiene el alcance necesario, o se revocó. Generen una nueva y vuelvan a cargarla en el asistente.</li>
       <li><b>Su n8n no tiene la opción MCP:</b> existe un servidor comunitario (<em>n8n-mcp</em>, código abierto) que usa la API de n8n con una clave propia. Ojo: la prueba gratis de n8n Cloud no incluye la API.</li>
       <li><b>El asistente no ve las herramientas:</b> hay que reiniciar la conversación después de agregar el servidor MCP.</li>
       <li><b>Creó el flujo dos veces:</b> pasa cuando se reintenta el pedido. Revisen la lista y borren el duplicado.</li>

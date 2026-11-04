@@ -7,7 +7,7 @@
 | | Lectura | Oraciones largas | Notas |
 |---|---:|---:|---:|
 | Antes | 4833 | 21 | 14 |
-| Después | | | |
+| Después | 4339 | 21 | 13 |
 
 ## Docente didáctico (¿se entiende fácil?)
 
@@ -23,8 +23,8 @@ _Auditoría 2026-11-03. Los ahorros son estimaciones del agente._
 
 ## Cambios aplicados
 
-- *(ninguno)*
+- En las cuatro: borrado el párrafo de "Qué resuelve" y la tabla "Qué hay que completar"; en informe-semanal-ia, también la nota de proveedores.
 
 ## Estado
 
-Auditada el 2026-11-03 · sin aplicar (falta decidir qué se borra)
+Fase 1 aplicada el 2026-11-03 · lectura 4339 de 2250 palabras (todavía excede el presupuesto)

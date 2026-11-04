@@ -33,17 +33,16 @@
 <!-- /@nav -->
 
   <p class="eyebrow">MENÚ DE RETOS · ELIJAN UNO</p>
-  <h1>Diez cosas para crear y automatizar con IA</h1>
+  <h1>Seis cosas para crear y automatizar con IA</h1>
   <p class="lede">Retos cortos e independientes: no hace falta haber terminado la terminal. Cada uno tiene un prompt para copiar, un tiempo y una forma de comprobar que salió bien. El grupo elige uno, lo hace y lo muestra.</p>
 
   <section class="block" aria-labelledby="menu">
     <span class="num"></span>
     <h2 id="menu">El menú</h2>
     <div class="reto-menu">
-      <div class="reto-grupo"><h3>Crear con IA</h3><p class="hint">Solo el chat de IA y el navegador</p><ul><li><a href="#prestamo">Calculadora de cuotas de un préstamo</a> <span class="hint">· 25 min</span></li><li><a href="#plazo-fijo">Plazo fijo contra inflación</a> <span class="hint">· 20 min</span></li><li><a href="#gastos">Tablero de gastos desde un CSV</a> <span class="hint">· 30 min</span></li></ul></div>
-      <div class="reto-grupo"><h3>Analizar con Python</h3><p class="hint">Google Colab y el chat de IA</p><ul><li><a href="#correlacion">Correlación entre dos activos</a> <span class="hint">· 25 min</span></li><li><a href="#backtest">Probar una regla de medias móviles</a> <span class="hint">· 30 min</span></li></ul></div>
+      <div class="reto-grupo"><h3>Crear con IA</h3><p class="hint">Solo el chat de IA y el navegador</p><ul><li><a href="#prestamo">Calculadora de cuotas de un préstamo</a> <span class="hint">· 25 min</span></li><li><a href="#gastos">Tablero de gastos desde un CSV</a> <span class="hint">· 30 min</span></li></ul></div>
+      <div class="reto-grupo"><h3>Analizar con Python</h3><p class="hint">Google Colab y el chat de IA</p><ul><li><a href="#correlacion">Correlación entre dos activos</a> <span class="hint">· 25 min</span></li><li><a href="backtest.html">Probar una regla de medias móviles</a> <span class="hint">· ejemplo resuelto</span></li></ul></div>
       <div class="reto-grupo"><h3>Automatizar con n8n</h3><p class="hint">Una cuenta de n8n (la del paso 8) y el chat de IA</p><ul><li><a href="#dolar">La cotización del dólar a Telegram</a> <span class="hint">· 25 min</span></li><li><a href="#noticias">Resumen de noticias con IA por mail</a> <span class="hint">· 30 min</span></li><li><a href="#planilla">De la planilla al informe semanal</a> <span class="hint">· 30 min</span></li></ul></div>
-      <div class="reto-grupo"><h3>Agentes</h3><p class="hint">n8n con una clave de API guardada (paso 10)</p><ul><li><a href="#agente-cartera">Un agente que contesta sobre su cartera</a> <span class="hint">· 30 min</span></li><li><a href="#agente-balance">Un agente que revisa un balance</a> <span class="hint">· 30 min</span></li></ul></div>
     </div>
     <div class="note tip"><b>Cómo se trabaja un reto:</b> copian el prompt, lo pegan en el chat de IA y siguen sus instrucciones. Si algo falla, le pegan el error al chat. Al final comprueban con los tres puntos de "Cómo comprobar" y lo muestran al resto.</div>
   </section>
@@ -72,30 +71,7 @@ Al final explicame en 3 líneas la fórmula que usaste, sin jerga.</pre></div>
     </ul>
   </section>
 
-  <section class="block reto" aria-labelledby="plazo-fijo">
-    <span class="num"></span>
-    <p class="eyebrow">CREAR CON IA · RETO 2</p>
-    <h2 id="plazo-fijo">Plazo fijo contra inflación</h2>
-    <p>Una página que responde una pregunta concreta: ¿el plazo fijo le gana a la inflación?</p>
-    <div class="meta"><span class="chip"><b>20 MIN</b></span><span class="chip">SOLO EL CHAT DE IA Y EL NAVEGADOR</span><span class="chip">SE LLEVAN: <b>PLAZO-FIJO.HTML</b></span></div>
-    <div class="prompt">
-      <div class="prompt-h"><div><span class="t">PROMPT · RETO 2</span><div class="d">Cópienlo y péguenlo en el chat de IA. Después sigan lo que les responde.</div></div><button class="copy" data-copy="#p-plazo-fijo" type="button">COPIAR</button></div>
-      <div class="prompt-b"><pre id="p-plazo-fijo">Creá un solo archivo HTML (CSS y JavaScript adentro) que compare un plazo fijo con la inflación.
-- Campos: monto, TNA del plazo fijo (%), inflación mensual esperada (%) y cantidad de meses
-- Resultado: tasa mensual del plazo fijo, tasa real mensual y si le gana o pierde contra la inflación, con una frase clara
-- Un gráfico de líneas simple (en SVG, sin librerías) con el dinero nominal y el dinero ajustado por inflación, mes a mes
-- Formato argentino para los números y textos en castellano
-Usá la tasa real exacta: (1 + tasa) / (1 + inflación) - 1, no la resta.</pre></div>
-    </div>
-    <h3>Cómo comprobar</h3>
-    <ul class="check">
-      <li><b>Caso conocido:</b> TNA 36 % (3 % mensual) con inflación de 2,5 % mensual da una tasa real de <b>0,49 % por mes</b>: le gana, por poco.</li>
-      <li><b>Si la inflación es mayor que la tasa,</b> la frase dice que pierde y la tasa real es negativa.</li>
-      <li><b>El gráfico</b> arranca con el mismo monto en las dos líneas.</li>
-    </ul>
-  </section>
-
-  <section class="block reto" aria-labelledby="gastos">
+    <section class="block reto" aria-labelledby="gastos">
     <span class="num"></span>
     <p class="eyebrow">CREAR CON IA · RETO 3</p>
     <h2 id="gastos">Tablero de gastos desde un CSV</h2>
@@ -151,30 +127,7 @@ Si yfinance falla, que el notebook lo diga claro y sugiera subir un CSV.</pre></
     </ul>
   </section>
 
-  <section class="block reto" aria-labelledby="backtest">
-    <span class="num"></span>
-    <p class="eyebrow">ANALIZAR CON PYTHON · RETO 5</p>
-    <h2 id="backtest">Probar una regla de medias móviles</h2>
-    <p>La señal del paso 4 (cruce de medias), probada contra el pasado: ¿le hubiera ganado a comprar y quedarse?</p>
-    <div class="meta"><span class="chip"><b>30 MIN</b></span><span class="chip">GOOGLE COLAB Y EL CHAT DE IA</span><span class="chip">SE LLEVAN: <b>UN NOTEBOOK</b></span></div>
-    <div class="prompt">
-      <div class="prompt-h"><div><span class="t">PROMPT · RETO 5</span><div class="d">Cópienlo y péguenlo en el chat de IA. Después sigan lo que les responde.</div></div><button class="copy" data-copy="#p-backtest" type="button">COPIAR</button></div>
-      <div class="prompt-b"><pre id="p-backtest">Escribime un notebook de Google Colab, en celdas cortas y comentadas en castellano, que pruebe esta regla con datos de yfinance (2 años de un activo que yo elija, por defecto AAPL):
-- comprar cuando la media de 20 días cruza hacia arriba la de 50, vender cuando cruza hacia abajo
-- comparar el resultado con comprar el primer día y mantener hasta el final
-- mostrar: retorno total de cada estrategia, cantidad de operaciones y máxima caída
-- un gráfico con las dos curvas de capital
-Agregá al final una advertencia: por qué un resultado del pasado no garantiza nada.</pre></div>
-    </div>
-    <h3>Cómo comprobar</h3>
-    <ul class="check">
-      <li><b>Hay operaciones:</b> la cantidad es mayor que cero; si es cero, la regla nunca se activó.</li>
-      <li><b>Las dos curvas</b> arrancan del mismo capital.</li>
-      <li><b>Discutan en grupo:</b> ¿la regla ganó o perdió contra mantener? ¿Pasa lo mismo con otro activo?</li>
-    </ul>
-  </section>
-
-  <section class="block reto" aria-labelledby="dolar">
+    <section class="block reto" aria-labelledby="dolar">
     <span class="num"></span>
     <p class="eyebrow">AUTOMATIZAR CON N8N · RETO 6</p>
     <h2 id="dolar">La cotización del dólar a Telegram</h2>
@@ -244,52 +197,7 @@ Dame también 10 filas de ejemplo para cargar en la planilla.</pre></div>
     </ul>
   </section>
 
-  <section class="block reto" aria-labelledby="agente-cartera">
-    <span class="num"></span>
-    <p class="eyebrow">AGENTES · RETO 9</p>
-    <h2 id="agente-cartera">Un agente que contesta sobre su cartera</h2>
-    <p>Un chat al que le preguntan "¿cómo viene mi cartera?" y responde con datos reales de la API, no de memoria.</p>
-    <div class="meta"><span class="chip"><b>30 MIN</b></span><span class="chip">N8N CON UNA CLAVE DE API GUARDADA (PASO 10)</span><span class="chip">SE LLEVAN: <b>UN AGENTE EN N8N</b></span></div>
-    <div class="prompt">
-      <div class="prompt-h"><div><span class="t">PROMPT · RETO 9</span><div class="d">Cópienlo y péguenlo en el chat de IA. Después sigan lo que les responde.</div></div><button class="copy" data-copy="#p-agente-cartera" type="button">COPIAR</button></div>
-      <div class="prompt-b"><pre id="p-agente-cartera">Ayudame a armar en n8n un AI Agent con un Chat Trigger para hacerle preguntas sobre una cartera.
-- Herramienta: HTTP Request a https://postgrado-ia.vercel.app/api/market/summary (precio, RSI y señal de 8 activos)
-- Herramienta: Calculator, para las cuentas
-- En el prompt de sistema va la cartera: 40 % KO, 30 % JNJ, 30 % GGAL
-- Reglas: responde solo con datos de las herramientas; si no tiene un dato, lo dice; no da recomendaciones de compra o venta
-Dame tres preguntas de prueba y decime qué mirar en la ejecución para saber qué herramienta usó.</pre></div>
-    </div>
-    <h3>Cómo comprobar</h3>
-    <ul class="check">
-      <li><b>Usó la herramienta:</b> en la ejecución se ve la consulta a la API antes de la respuesta.</li>
-      <li><b>Los números coinciden</b> con los de la pestaña Mercado de la terminal.</li>
-      <li><b>Pregunta trampa:</b> "¿cuánto va a valer KO mañana?" Tiene que decir que no lo sabe.</li>
-    </ul>
-  </section>
-
-  <section class="block reto" aria-labelledby="agente-balance">
-    <span class="num"></span>
-    <p class="eyebrow">AGENTES · RETO 10</p>
-    <h2 id="agente-balance">Un agente que revisa un balance</h2>
-    <p>Le pegan los números de un balance y el agente calcula los indicadores y marca lo que llama la atención.</p>
-    <div class="meta"><span class="chip"><b>30 MIN</b></span><span class="chip">N8N CON UNA CLAVE DE API GUARDADA (PASO 10)</span><span class="chip">SE LLEVAN: <b>UN AGENTE EN N8N</b></span></div>
-    <div class="prompt">
-      <div class="prompt-h"><div><span class="t">PROMPT · RETO 10</span><div class="d">Cópienlo y péguenlo en el chat de IA. Después sigan lo que les responde.</div></div><button class="copy" data-copy="#p-agente-balance" type="button">COPIAR</button></div>
-      <div class="prompt-b"><pre id="p-agente-balance">Ayudame a armar en n8n un AI Agent con un Chat Trigger que revise balances.
-- Herramienta: Calculator (todas las cuentas se hacen con ella, ninguna de memoria)
-- Calcula: liquidez corriente, endeudamiento (pasivo / patrimonio neto), ROE y margen neto
-- Para cada indicador: el valor, qué significa en una línea y si llama la atención
-- Antes de calcular, verifica que activo = pasivo + patrimonio neto; si no cierra, avisa y no sigue
-Balance de prueba (empresa ficticia, en millones): activo corriente 500, activo total 1.200, pasivo corriente 250, pasivo total 700, patrimonio neto 500, ventas 1.500, resultado neto 90.</pre></div>
-    </div>
-    <h3>Cómo comprobar</h3>
-    <ul class="check">
-      <li><b>Con el balance de prueba:</b> liquidez 2,0 · endeudamiento 1,4 · ROE 18 % · margen neto 6 %.</li>
-      <li><b>Usó la calculadora:</b> se ve en la ejecución, una vez por indicador.</li>
-      <li><b>Rómpanlo a propósito:</b> cambien el patrimonio neto a 400. Tiene que avisar que el balance no cierra.</li>
-    </ul>
-  </section>
-</main>
+    </main>
 
 <!-- @pie -->
 <footer>

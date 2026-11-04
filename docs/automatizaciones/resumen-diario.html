@@ -35,7 +35,6 @@
   <section class="block" aria-labelledby="resuelve">
     <span class="num">01</span>
     <h2 id="resuelve">Qué resuelve</h2>
-    <p>Acá aparece la idea central de casi toda automatización útil: <b>cruzar tus datos con datos de afuera</b>. Tus tenencias viven en una lista que escribís una vez; los precios llegan por HTTP. El flujo los junta y hace la cuenta.</p>
     <div class="panel">
       <div class="panel-h"><span class="panel-t">RESULTADO ESPERADO · CORREO</span><span class="panel-t" style="color:var(--dim)">08:00 · LUN A VIE</span></div>
       <div class="panel-b">
@@ -80,17 +79,6 @@ Muestra educativa fija de FIN·LAB. No es una recomendación de inversión.</pre
       <li><b>Ejecutá a mano</b> y hacé la cuenta con calculadora. Si el total no coincide, el problema está en el código, no en el correo.</li>
       <li><b>Activá</b> el flujo. La primera corrida real la vas a ver al día hábil siguiente.</li>
     </ol>
-
-    <h3 style="margin-top:26px">Qué hay que completar en el archivo</h3>
-    <table class="tbl">
-      <thead><tr><th>NODO</th><th>CAMPO</th><th>QUÉ PONER</th></tr></thead>
-      <tbody>
-        <tr><td>Mi cartera</td><td>lista cartera</td><td>Tus símbolos y cantidades. Es el único lugar donde vive tu cartera.</td></tr>
-        <tr><td>Consultar API</td><td>url</td><td>La API del curso o la de tu propio despliegue.</td></tr>
-        <tr><td>Enviar resumen</td><td>fromEmail / toEmail</td><td>Tu correo, igual en los dos campos para la prueba.</td></tr>
-        <tr><td>Cada día 08:00</td><td>cronExpression</td><td><span class="code-inline">0 8 * * 1-5</span> = 08:00 de lunes a viernes.</td></tr>
-      </tbody>
-    </table>
     <div class="note"><b>Un problema que vas a tener:</b> si tu cartera cambia seguido, editar un nodo de código no es cómodo. La solución natural es leer las tenencias de una planilla de Google Sheets y reemplazar el nodo <em>Mi cartera</em> por un nodo de Sheets. Ese es, de hecho, el <a href="precios-a-sheets.html">ejemplo 04</a> al revés.</div>
   </section>
 

@@ -89,7 +89,7 @@ const avance = (p) => {
     <figure class="viz avance-fig" data-titulo="${n === 0 ? 'A dónde vamos' : 'Así va quedando'}">
       <div class="viz-grafico"><ol class="piezas" aria-label="Partes de la terminal">${piezas}</ol>
         <a href="${cap[2]}" target="_blank" rel="noopener">${img(`avance/${cap[0]}.webp`, 'Captura: ' + cap[1])}</a></div>
-      <figcaption><b>${n === 0 ? 'A dónde vamos.' : 'Así va quedando.'}</b> ${cap[1]}<small>Captura con datos simulados. Clic en la imagen para abrirla.</small></figcaption>
+      <figcaption><b>${n === 0 ? 'A dónde vamos.' : 'Así va quedando.'}</b> ${cap[1]}<small>Datos simulados. Clic para ampliar.</small></figcaption>
     </figure>` : `
     <div class="viz-grafico"><ol class="piezas" aria-label="Partes de la terminal">${piezas}</ol></div>
     <p class="hint">En este paso la terminal no cambia: lo nuevo pasa en n8n o en el asistente. El diagrama muestra cómo.</p>`;
@@ -98,7 +98,7 @@ const avance = (p) => {
     <h2 id="avance">${n === 0 ? 'A dónde vamos' : 'Así va quedando'}</h2>${captura}
     <figure class="viz" data-titulo="El diagrama del paso">
       <div class="viz-grafico"><a href="diagramas/${diag}.html" target="_blank" rel="noopener">${img(`diagramas/${diag}.webp`, 'Diagrama: ' + titulo)}</a></div>
-      <figcaption><b>El diagrama.</b> ${titulo}. Cada caja es una parte; las flechas marcan el orden.<small>Diagrama hecho con Archify. Clic para abrir la versión interactiva (zoom, búsqueda, modo presentación).</small></figcaption>
+      <figcaption><b>El diagrama.</b> ${titulo}.<small>Clic para abrirlo en grande.</small></figcaption>
     </figure>
   </section>`;
 };

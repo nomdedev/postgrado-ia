@@ -7,7 +7,7 @@
 | | Lectura | Oraciones largas | Notas |
 |---|---:|---:|---:|
 | Antes | 6270 | 31 | 8 |
-| Después | | | |
+| Después | 4784 | 21 | 8 |
 
 ## Docente didáctico (¿se entiende fácil?)
 
@@ -30,8 +30,9 @@ _Auditoría 2026-11-03. Los ahorros son estimaciones del agente._
 
 ## Cambios aplicados
 
-- *(ninguno)*
+- errores: de 5 a 4 errores, una línea "Se detecta" por error, sin jerga; traza: sin comparación ni lista de qué mirar, "reparo" → "objeción", un solo aviso; backtest: aviso de una línea y una sola viñeta, con enlaces al glosario; retos: de 10 a 6 (el backtest remite a su página).
+- Glosario: fuera Babel, Recharts, Componente, Función, Variable, Lista, Objeto y localStorage; nuevas: anualizar, desvío estándar, backtest, sesgo de anticipación, comprar y mantener, traza, tope de pasos; frases más claras en volatilidad, Sharpe, covarianza, credencial, agente y MCP.
 
 ## Estado
 
-Auditada el 2026-11-03 · sin aplicar (falta decidir qué se borra)
+Fase 1 aplicada el 2026-11-03 · lectura 4784 de 2700 palabras (todavía excede el presupuesto)

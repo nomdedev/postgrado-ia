@@ -35,7 +35,6 @@
   <section class="block" aria-labelledby="resuelve">
     <span class="num">01</span>
     <h2 id="resuelve">Qué resuelve</h2>
-    <p>Toda automatización que solo manda mensajes se olvida. Una que <b>guarda datos</b> deja un rastro que podés graficar, comparar entre semanas y usar como entrada de otro proceso. Acá la planilla hace de memoria.</p>
     <div class="panel">
       <div class="panel-h"><span class="panel-t">RESULTADO ESPERADO · PLANILLA</span><span class="panel-t" style="color:var(--dim)">8 FILAS POR CORRIDA</span></div>
       <div class="panel-b">
@@ -77,18 +76,6 @@
       <li><b>Ejecutá a mano</b> y contá las filas nuevas: tienen que ser ocho, con la fecha de hoy.</li>
       <li><b>Ejecutá de nuevo.</b> Vas a tener 16 filas. Eso no es un error: es <em>append</em>. En el punto 06 está cómo evitarlo si no lo querés.</li>
     </ol>
-
-    <h3 style="margin-top:26px">Qué hay que completar en el archivo</h3>
-    <table class="tbl">
-      <thead><tr><th>NODO</th><th>CAMPO</th><th>QUÉ PONER</th></tr></thead>
-      <tbody>
-        <tr><td>Consultar API</td><td>url</td><td>Tu dominio de Vercel.</td></tr>
-        <tr><td>Agregar filas</td><td>credencial</td><td>Cuenta de Google autorizada desde n8n.</td></tr>
-        <tr><td>Agregar filas</td><td>documentId</td><td>El ID de tu planilla, no la URL completa.</td></tr>
-        <tr><td>Agregar filas</td><td>sheetName</td><td>El nombre exacto de la hoja, por ejemplo <span class="code-inline">Hoja 1</span>.</td></tr>
-        <tr><td>Cada día 18:30</td><td>cronExpression</td><td><span class="code-inline">30 18 * * 1-5</span> = 18:30 de lunes a viernes.</td></tr>
-      </tbody>
-    </table>
     <div class="note"><b>Si el nodo de Sheets te pide otra cosa</b> (la versión del nodo cambia entre instalaciones de n8n), elegí el documento y la hoja con los desplegables y dejá <em>Mapping Column Mode</em> en <em>Auto-map input data</em>. No escribas el ID a mano si podés elegirlo de la lista.</div>
   </section>
 
