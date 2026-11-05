@@ -72,9 +72,9 @@ function p2() {
       `<circle class="v-s1-fill" cx="${r1(sx(s.length - 1))}" cy="${r1(sy(s.at(-1)))}" r="4"/></g>`;
   });
   const desc = D.TICKERS.map((t) => { const s = SERIES[t.symbol]; return `${t.symbol} ${num((s.at(-1).c / s[0].c - 1) * 100, 1)} %`; }).join(', ');
-  return figura('viz-p2', 'Un año de precios simulados', 'Cada activo tiene su carácter: algunos suben parejo, otros saltan mucho. Ese “saltar” es la <b>volatilidad</b>, y la van a medir en el paso 5.',
+  return figura('viz-p2', 'Un año de precios simulados', 'Cada activo salta distinto; ese “saltar” es la <b>volatilidad</b> (paso 5).',
     svg('viz-p2', W, H, 'Un año de precios simulados de los 8 activos', 'Variación del año: ' + desc, cuerpo),
-    `Datos: versión de rescate al ${FECHA_TXT} (252 ruedas). Los de su página van a ser otros.`);
+    `Datos de rescate al ${FECHA_TXT}.`);
 }
 
 // ---------- P3 · La variación del día: barras divergentes ----------
@@ -93,9 +93,10 @@ function p3() {
   });
   cuerpo += `<line class="v-axis" x1="${r1(cero)}" x2="${r1(cero)}" y1="${y0 - 10}" y2="${y0 + fila * datos.length}"/>`;
   const suben = API.filter((d) => d.change_pct > 0).length;
-  return figura('viz-p3', 'El mercado en un vistazo', `Una barra por activo: a la derecha los que subieron, a la izquierda los que bajaron. Hoy <b>${suben} suben y ${API.length - suben} bajan</b>; el que más se movió fue <b>${datos[0].symbol}</b>.`,
+  const mayor = [...API].sort((a, b) => Math.abs(b.change_pct) - Math.abs(a.change_pct))[0].symbol;
+  return figura('viz-p3', 'El mercado en un vistazo', `Verde sube, rojo baja. Hoy <b>${suben} suben y ${API.length - suben} bajan</b>; el que más se movió fue <b>${mayor}</b>.`,
     svg('viz-p3', W, H, 'Variación del día de los 8 activos', datos.map((d) => `${d.symbol} ${num(d.change_pct)} %`).join(', '), cuerpo),
-    `Datos: muestra fija de la API del curso (${FECHA_TXT}).`);
+    'Datos de la API del curso; su tabla usa precios simulados y dará otros.');
 }
 
 // ---------- P4 · Medias móviles y el cruce que da la señal ----------
@@ -222,7 +223,7 @@ function p6() {
   const W = 960, H = 260, y = 60, w = 210, h = 120, xs = [15, 255, 495, 735];
   const cajas = [
     ['Un programa pregunta', ['GET /api/market/summary', 'sin pantalla, sin clics']],
-    ['La página revisa', ['¿el activo existe?', '¿la sesión es de hoy?']],
+    ['Su simulador revisa', ['¿el activo existe?', 'la API real no lo hace']],
     ['Responde en JSON', ['{ ok: true, data: … }', 'los mismos números de la tabla']],
     ['Y las alertas', ['precio > 0 → se dispara', 'RSI < 30 → se dispara']]
   ];
@@ -232,9 +233,9 @@ function p6() {
     if (i < 3) cuerpo += flecha(xs[i] + w + 4, y + h / 2, xs[i + 1] - 4, y + h / 2);
   });
   cuerpo += `<text class="v-dn v-sm v-b" x="${xs[1] + w / 2}" y="${y + h + 34}" text-anchor="middle">si no existe: 404 y un mensaje claro</text>`;
-  return figura('viz-p6', 'El viaje de un pedido', 'Un programa pide, la página revisa y contesta en JSON. Las <b>alertas</b> son reglas guardadas que se comparan con esos mismos datos: todavía no avisan solas, eso llega con n8n en el paso 8.',
+  return figura('viz-p6', 'El viaje de un pedido', 'Una <b>alerta</b> es una regla guardada: avisa si el dato cumple la condición. Todavía no avisa sola; eso llega con n8n (paso 8).',
     svg('viz-p6', W, H, 'Un pedido a la API recorriendo cuatro etapas', 'Programa → revisión → JSON → alertas', cuerpo),
-    'Esquema del paso 6: no usa datos de mercado.');
+    'Esquema: no usa datos de mercado.');
 }
 
 // ---------- P7 · Dos herramientas, los mismos números ----------
@@ -252,8 +253,8 @@ function p7() {
   const cuerpo = caja(60, 'La página del paso 4', 'JavaScript, en el navegador') +
     caja(520, 'Colab con pandas', 'Python, en la nube') +
     `<text class="v-ink v-b" x="480" y="${y + h / 2 + 14}" text-anchor="middle" style="font-size:46px">=</text>` +
-    `<text class="v-mut v-sm" x="480" y="${y + h + 42}" text-anchor="middle">diferencia máxima: 0,004</text>`;
-  return figura('viz-p7', 'Dos herramientas, los mismos números', 'La página y pandas llegan al mismo precio, las mismas medias y el mismo RSI. Lo que cambia es <b>quién hace la cuenta</b>, no el resultado: por eso sirve para verificar. Una diferencia mayor a 0,01 avisa que una de las dos fórmulas está mal.',
+    `<text class="v-mut v-sm" x="480" y="${y + h + 42}" text-anchor="middle">diferencia máxima: 0,005</text>`;
+  return figura('viz-p7', 'Dos herramientas, los mismos números', 'La página y pandas dan los mismos números. Una diferencia mayor a 0,01 avisa que una fórmula está mal.',
     svg('viz-p7', W, H, 'Comparación de los indicadores de AAPL calculados por la página y por pandas', filas.map(([k, v]) => `${k} ${v}`).join(', ') + ' en las dos herramientas', cuerpo),
     `Datos: versión de rescate al ${FECHA_TXT}, AAPL, última rueda.`);
 }
@@ -286,15 +287,14 @@ function p9() {
   const cuerpo = nodo(40, y, w, h, 'Lo que ya funciona al terminar el paso 8', [
     'la terminal publicada, con sus pestañas',
     'la API con datos y alertas',
-    'un workflow de n8n que avisa solo',
-    'una auditoría hecha por otro grupo'
+    'un workflow de n8n que avisa solo'
   ]) + flecha(464, y + h / 2, 496, y + h / 2) + nodo(500, y, w, h, 'Lo que agrega la clase 3', [
     'claves de API guardadas donde corresponde',
     'un modelo de IA elegido con criterio',
     'un agente que decide qué herramienta usar',
     'un consejo de agentes y el MCP de n8n'
   ]);
-  return figura('viz-p9', 'El recorrido completo', 'Al terminar el paso 9 el circuito funciona de punta a punta: página, API, n8n y auditoría. La clase 3 no agrega pantallas nuevas: le pone <b>un agente arriba</b> a lo que ya construyeron.',
+  return figura('viz-p9', 'El recorrido completo', 'La clase 3 no agrega pantallas: le pone <b>un agente arriba</b> a lo que ya construyeron.',
     svg('viz-p9', W, H, 'Lo construido hasta el paso 8 y lo que agrega la clase 3', 'Dos columnas: lo que ya funciona y lo que sigue', cuerpo),
     'Esquema del paso 9.');
 }
@@ -326,9 +326,9 @@ function p11() {
   let cuerpo = flecha(20, 34, 940, 34) + `<text class="v-mut v-sm" x="480" y="24" text-anchor="middle">más contexto por consulta → más costo y más espera</text>`;
   cajas.forEach(([t, ls], i) => { cuerpo += nodo(xs[i], y, w, h, t, ls); });
   cuerpo += `<text class="v-ink v-sm v-b" x="${W / 2}" y="${y + h + 40}" text-anchor="middle">regla: el más chico que resuelva la tarea; si falla, subí un escalón</text>`;
-  return figura('viz-p11', 'Elegir modelo', 'No hay un “mejor modelo”: hay uno adecuado para cada tarea. En n8n se cambia el modelo de un nodo sin rehacer el flujo, así que conviene empezar por el más chico y subir solo si la respuesta no alcanza.',
+  return figura('viz-p11', 'Elegir modelo', 'Empiecen por el más chico y suban solo si no alcanza.',
     svg('viz-p11', W, H, 'Tres tamaños de modelo y para qué sirve cada uno', 'Chico para clasificar y extraer; mediano para redactar; grande para decidir y auditar', cuerpo),
-    'Recomendación del paso 11; los precios y nombres cambian con cada proveedor.');
+    'Precios y nombres cambian con cada proveedor.');
 }
 
 // ---------- P12 · El ciclo del agente ----------

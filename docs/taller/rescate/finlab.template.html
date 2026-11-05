@@ -187,7 +187,7 @@ function Mercado() {
           {/* @if 4 */}
           <th>RSI 14</th><th>SEÑAL</th>
           {/* @endif */}
-          <th>30 DÍAS</th></tr></thead>
+          <th>30 RUEDAS</th></tr></thead>
         <tbody>{MARKET.map(m => (
           <tr key={m.symbol} className={m.symbol === sel ? 'sel' : ''} onClick={() => setSel(m.symbol)}>
             <td><b>{m.symbol}</b></td><td>{m.name}</td><td>{fmt(m.last)}</td>

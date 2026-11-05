@@ -32,20 +32,20 @@
   </ul></nav>
 <!-- /@nav -->
 
-  <p class="eyebrow">PASO 7 · EL MISMO CÁLCULO, CON OTRA HERRAMIENTA</p>
+  <p class="eyebrow">PASO 7 · COLAB</p>
   <h1>Del CSV a Google Colab: verificar con Python</h1>
-  <p class="lede">Recalcular en Colab el CSV del paso 4: si Python y la página coinciden, el cálculo es confiable.</p>
-  <div class="meta"><span class="chip"><b>30–35 MIN</b></span><span class="chip">PYTHON</span><span class="chip">CUENTA DE GOOGLE</span><span class="chip">SALIDA: <b>NOTEBOOK + finlab-v7.html</b></span><a class="chip" href="index.html#niveles">IA · <b>NIVEL 3 DE 5</b></a></div>
-  <div class="note tip"><b>Una idea nueva:</b> Hacer el mismo cálculo con dos herramientas lo vuelve confiable. <em>Ejemplo: la SMA20 en Colab y en su página tiene que diferir menos de 0,01.</em></div>
-  <div class="note tip"><b>¿Llegan tarde o se rompió el archivo?</b> Bajen la versión con la que termina el paso 6, guárdenla como <span class="code-inline">finlab.html</span> y arranquen este paso desde ahí. <a class="btn" href="rescate/finlab-v6.html" download="finlab.html">⬇ BAJAR EL PUNTO DE PARTIDA (PASO 6)</a></div>
+  <p class="lede">Recalculen en Colab el CSV del paso 4: si coinciden, el cálculo es confiable.</p>
+  <div class="meta"><span class="chip"><b>30–35 MIN</b></span><span class="chip">PYTHON</span><span class="chip">CUENTA DE GOOGLE</span><a class="chip" href="index.html#niveles">IA · <b>NIVEL 3 DE 5</b></a></div>
+  <div class="note tip"><b>Una idea nueva:</b> Dos herramientas que dan el mismo número confirman el cálculo. <em>Ejemplo: la SMA20 en Colab y en su página difiere menos de 0,01 (el CSV redondea a dos decimales).</em></div>
+  <div class="note tip"><b>¿Llegan tarde?</b> <a class="btn" href="rescate/finlab-v6.html" download="finlab.html">⬇ BAJAR EL PUNTO DE PARTIDA (PASO 6)</a></div>
 
   <section class="block" aria-labelledby="logro">
     <span class="num"></span>
     <h2 id="logro">Qué van a lograr</h2>
-    <p>Un <a class="w" href="glosario.html#notebook">notebook</a> de Colab con tres <a class="w" href="glosario.html#celda">celdas</a> que lee su CSV, recalcula los indicadores y les dice cuánto difieren de la página:</p>
-    <div class="panel"><div class="panel-h"><span class="panel-t">RESULTADO ESPERADO · SALIDA DE LA CELDA B</span></div><div class="panel-b"><pre>Diferencia máxima SMA20: 0.004
-Diferencia máxima SMA50: 0.004
-Diferencia máxima RSI  : 0.003
+    <p>Un <a class="w" href="glosario.html#notebook">notebook</a> de Colab que lee su CSV con pandas (la librería de Python para tablas) y recalcula los indicadores. Dice cuánto difieren de la página. El bloque A muestra las columnas y 5 filas; el B, esto:</p>
+    <div class="panel"><div class="panel-h"><span class="panel-t">SALIDA ESPERADA · BLOQUE B</span></div><div class="panel-b"><pre>Diferencia máxima SMA20: 0.005
+Diferencia máxima SMA50: 0.005
+Diferencia máxima RSI  : 0.005
 ✅ La página y Python coinciden (todas las diferencias son menores a 0,01)</pre></div></div>
   </section>
 
@@ -67,22 +67,19 @@ Diferencia máxima RSI  : 0.003
 
   <section class="block" aria-labelledby="hacer">
     <span class="num"></span>
-    <h2 id="hacer">Qué hacer, clic por clic</h2>
+    <h2 id="hacer">Qué hacer</h2>
     <ol class="do">
-      <li><b>Tengan a mano el CSV</b> del paso 4 (botón <em>Exportar CSV</em> de su terminal). ¿No lo tienen? <a class="btn" href="rescate/finlab-AAPL.csv" download>⬇ CSV DE RESPALDO (AAPL)</a></li>
-      <li><b>Entren a <a href="https://colab.research.google.com" target="_blank" rel="noopener">colab.research.google.com</a></b> con una cuenta de Google y elijan <em>Nuevo notebook</em>.</li>
-      <li><b>Copien el bloque A</b> de “El código para pegar en Colab”, péguenlo en la primera celda y ejecútenlo con ▶. Cuando aparezca <em>Elegir archivos</em>, elijan el CSV.</li>
-      <li><b>Con “+ Código”</b> creen una celda nueva por bloque, peguen el <b>B</b> y el <b>C</b> y ejecútenlos. Lean las diferencias y miren el gráfico.</li>
+      <li><b>Tengan el CSV</b> del paso 4. ¿Sin CSV? <a class="btn" href="rescate/finlab-AAPL.csv" download>⬇ CSV DE RESPALDO (AAPL)</a></li>
+      <li><b>Abran <a href="https://colab.research.google.com" target="_blank" rel="noopener">colab.research.google.com</a></b> con su cuenta de Google y elijan <em>Nuevo notebook</em>.</li>
+      <li><b>Peguen los bloques A, B y C</b> de abajo, en ese orden, cada uno en su celda (<em>+ Código</em>). Ejecuten con ▶. En el A, toquen <em>Elegir archivos</em> bajo la celda, suban el CSV y esperen a que termine.</li>
     </ol>
-    <div class="note warn"><b>La primera vez,</b> Colab tarda unos segundos en “conectarse”. Si pide permiso para Drive, no hace falta darlo: el CSV se sube directo.</div>
   </section>
 
   <section class="block" data-section="prompts" aria-labelledby="codigo">
     <span class="num"></span>
     <h2 id="codigo">El código para pegar en Colab</h2>
-    <p>Este código ya está probado. Pueden usarlo tal cual o pedirle a la IA que se lo explique línea por línea.</p>
     <div class="prompt code">
-      <div class="prompt-h"><div><span class="t">BLOQUE A · LEER EL CSV</span><div class="d">Sube el archivo y muestra las últimas 5 filas.</div></div><button class="copy" data-copy="#cA" type="button">COPIAR</button></div>
+      <div class="prompt-h"><div><span class="t">BLOQUE A · LEER EL CSV</span></div><button class="copy" data-copy="#cA" type="button">COPIAR</button></div>
       <div class="prompt-b"><pre id="cA">from google.colab import files
 import pandas as pd
 
@@ -94,7 +91,7 @@ print("Columnas:", datos.columns.tolist())
 datos.tail()</pre></div>
     </div>
     <div class="prompt code">
-      <div class="prompt-h"><div><span class="t">BLOQUE B · RECALCULAR Y COMPARAR</span><div class="d">Las mismas fórmulas del paso 4, en pandas.</div></div><button class="copy" data-copy="#cB" type="button">COPIAR</button></div>
+      <div class="prompt-h"><div><span class="t">BLOQUE B · RECALCULAR Y COMPARAR</span></div><button class="copy" data-copy="#cB" type="button">COPIAR</button></div>
       <div class="prompt-b"><pre id="cB">columna = lambda prefijo: next(c for c in datos.columns if c.startswith(prefijo))
 cierre = datos[columna("cierre")]
 
@@ -125,7 +122,7 @@ for nombre_ind, dif in difs.items():
 print("✅ La página y Python coinciden" if max(difs.values()) &lt; 0.01 else "❌ Hay diferencias: revisen la fórmula en la página")</pre></div>
     </div>
     <div class="prompt code">
-      <div class="prompt-h"><div><span class="t">BLOQUE C · GRAFICAR</span><div class="d">Precio y medias, como el gráfico de la terminal.</div></div><button class="copy" data-copy="#cC" type="button">COPIAR</button></div>
+      <div class="prompt-h"><div><span class="t">BLOQUE C · GRAFICAR</span></div><button class="copy" data-copy="#cC" type="button">COPIAR</button></div>
       <div class="prompt-b"><pre id="cC">import matplotlib.pyplot as plt
 
 fechas = datos[datos.columns[0]]        # la primera columna es la fecha
@@ -139,27 +136,26 @@ plt.legend()
 plt.tight_layout()
 plt.show()</pre></div>
     </div>
-    <div class="note tip"><b>¿Y si en lugar del CSV quieren los datos “en vivo”?</b> El proyecto trae un notebook que consulta la API publicada en Vercel: <a href="../../notebooks/finlab-api.ipynb" download>finlab-api.ipynb</a>. En Colab: <em>Archivo → Subir notebook</em>, y ejecutan las celdas en orden: ya apunta a la API del curso.</div>
   </section>
 
   <section class="block" aria-labelledby="comprobar">
     <span class="num"></span>
     <h2 id="comprobar">Cómo comprobar</h2>
     <ul class="check">
-      <li><b>El bloque B imprime ✅</b>: todas las diferencias son menores a 0,01.</li>
-      <li><b>El gráfico de Colab</b> se parece al de la terminal para el mismo activo.</li>
-      <li><b>La pestaña 04</b> de su terminal muestra los tres bloques y el botón “Copiar” funciona.</li>
+      <li><b>El bloque B imprime ✅:</b> todas las diferencias son menores a 0,01.</li>
+      <li><b>El gráfico de Colab</b> se parece al de su terminal.</li>
     </ul>
   </section>
 
     <section class="block" aria-labelledby="falla">
     <span class="num"></span>
     <h2 id="falla">Si algo falla</h2>
-    <div class="note tip"><b>Tres intentos y nada:</b> <a class="btn" href="rescate/finlab-v7.html" target="_blank" rel="noopener">ABRIR LA VERSIÓN DE RESCATE</a> <a class="btn btn-primary" href="rescate/finlab-v7.html" download="finlab.html">⬇ BAJAR LA VERSIÓN DE RESCATE</a></div>
+    <div class="note tip"><b>Tres intentos y nada:</b> <a class="btn btn-primary" href="rescate/finlab-v7.html" download="finlab.html">⬇ BAJAR LA VERSIÓN DE RESCATE</a></div>
     <ul>
-      <li><b>StopIteration o KeyError:</b> el CSV tiene otros nombres de columna. Miren la lista que imprime el bloque A y pídanle a la IA: “Adaptá este código a un CSV con estas columnas: [pegar la lista]”.</li>
-      <li><b>La diferencia del RSI es grande (más de 0,01):</b> miren <em>dónde</em> está la diferencia. Agreguen una celda con <span class="code-inline c">print((mi_rsi - datos[columna("rsi")]).abs().round(3).tail(10))</span>. Si al final es casi 0 y solo difiere en las primeras ~100 filas, es el <em>arranque</em> del suavizado: su página no empezó con el promedio simple de 14 que pide el paso 4. Si difiere en todas las filas, una de las dos versiones usa promedio simple en lugar del suavizado de Wilder. En los dos casos, pídanle a la IA que corrija la función <span class="code-inline">rsi</span> para que siga exactamente la definición del prompt del paso 4.</li>
-      <li><b>Los números salen como texto o muy grandes:</b> el CSV usa coma decimal. Agreguen <span class="code-inline c">decimal=","</span> dentro de <span class="code-inline">pd.read_csv(...)</span>.</li>
+      <li><b>StopIteration o KeyError:</b> el CSV tiene otras columnas. Pídanle a la IA: “Adaptá este código a un CSV con estas columnas: [la lista que imprime el bloque A]”.</li>
+      <li><b>La diferencia del RSI supera 0,01:</b> pídanle a la IA que corrija la función <span class="code-inline">rsi</span> de su página según el prompt del paso 4. Ahí se pide el promedio simple de 14 al inicio y después el suavizado de Wilder.</li>
+      <li><b>Números como texto o enormes:</b> el CSV usa coma decimal. Agreguen <span class="code-inline">decimal=","</span> dentro de <span class="code-inline">pd.read_csv(...)</span>.</li>
+      <li><b>No tienen cuenta de Google:</b> miren el gráfico de abajo y sigan con el paso 8.</li>
     </ul>
   </section>
 
@@ -168,8 +164,8 @@ plt.show()</pre></div>
     <h2 id="grafico">La idea, en un gráfico</h2>
     <!-- @viz:p7 -->
     <figure class="viz" id="viz-p7" data-titulo="Dos herramientas, los mismos números">
-      <div class="viz-grafico"><svg class="viz-svg" viewBox="0 0 960 280" role="img" aria-labelledby="viz-p7-t viz-p7-d"><title id="viz-p7-t">Comparación de los indicadores de AAPL calculados por la página y por pandas</title><desc id="viz-p7-d">Último cierre 347,89, SMA 20 337,89, SMA 50 328,24, RSI 14 62,2 en las dos herramientas</desc><g><rect class="v-card " x="60" y="40" width="380" height="170" rx="10"/><text class="v-ink v-b" x="76" y="68">La página del paso 4</text><text class="v-mut v-sm" x="76" y="90">Último cierre: 347,89</text><text class="v-mut v-sm" x="76" y="110">SMA 20: 337,89</text><text class="v-mut v-sm" x="76" y="130">SMA 50: 328,24</text><text class="v-mut v-sm" x="76" y="150">RSI 14: 62,2</text><text class="v-mut v-sm" x="76" y="170">JavaScript, en el navegador</text></g><g><rect class="v-card " x="520" y="40" width="380" height="170" rx="10"/><text class="v-ink v-b" x="536" y="68">Colab con pandas</text><text class="v-mut v-sm" x="536" y="90">Último cierre: 347,89</text><text class="v-mut v-sm" x="536" y="110">SMA 20: 337,89</text><text class="v-mut v-sm" x="536" y="130">SMA 50: 328,24</text><text class="v-mut v-sm" x="536" y="150">RSI 14: 62,2</text><text class="v-mut v-sm" x="536" y="170">Python, en la nube</text></g><text class="v-ink v-b" x="480" y="139" text-anchor="middle" style="font-size:46px">=</text><text class="v-mut v-sm" x="480" y="252" text-anchor="middle">diferencia máxima: 0,004</text></svg></div>
-      <figcaption><b>Dos herramientas, los mismos números.</b> La página y pandas llegan al mismo precio, las mismas medias y el mismo RSI. Lo que cambia es <b>quién hace la cuenta</b>, no el resultado: por eso sirve para verificar. Una diferencia mayor a 0,01 avisa que una de las dos fórmulas está mal.<small>Datos: versión de rescate al 26/10/2026, AAPL, última rueda.</small></figcaption>
+      <div class="viz-grafico"><svg class="viz-svg" viewBox="0 0 960 280" role="img" aria-labelledby="viz-p7-t viz-p7-d"><title id="viz-p7-t">Comparación de los indicadores de AAPL calculados por la página y por pandas</title><desc id="viz-p7-d">Último cierre 347,89, SMA 20 337,89, SMA 50 328,24, RSI 14 62,2 en las dos herramientas</desc><g><rect class="v-card " x="60" y="40" width="380" height="170" rx="10"/><text class="v-ink v-b" x="76" y="68">La página del paso 4</text><text class="v-mut v-sm" x="76" y="90">Último cierre: 347,89</text><text class="v-mut v-sm" x="76" y="110">SMA 20: 337,89</text><text class="v-mut v-sm" x="76" y="130">SMA 50: 328,24</text><text class="v-mut v-sm" x="76" y="150">RSI 14: 62,2</text><text class="v-mut v-sm" x="76" y="170">JavaScript, en el navegador</text></g><g><rect class="v-card " x="520" y="40" width="380" height="170" rx="10"/><text class="v-ink v-b" x="536" y="68">Colab con pandas</text><text class="v-mut v-sm" x="536" y="90">Último cierre: 347,89</text><text class="v-mut v-sm" x="536" y="110">SMA 20: 337,89</text><text class="v-mut v-sm" x="536" y="130">SMA 50: 328,24</text><text class="v-mut v-sm" x="536" y="150">RSI 14: 62,2</text><text class="v-mut v-sm" x="536" y="170">Python, en la nube</text></g><text class="v-ink v-b" x="480" y="139" text-anchor="middle" style="font-size:46px">=</text><text class="v-mut v-sm" x="480" y="252" text-anchor="middle">diferencia máxima: 0,005</text></svg></div>
+      <figcaption><b>Dos herramientas, los mismos números.</b> La página y pandas dan los mismos números. Una diferencia mayor a 0,01 avisa que una fórmula está mal.<small>Datos: versión de rescate al 26/10/2026, AAPL, última rueda.</small></figcaption>
     </figure>
     <!-- /@viz:p7 -->
   </section>

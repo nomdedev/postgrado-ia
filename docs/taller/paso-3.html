@@ -32,22 +32,22 @@
   </ul></nav>
 <!-- /@nav -->
 
-  <p class="eyebrow">PASO 3 · EL PRIMER DASHBOARD</p>
-  <h1>Mercado: tarjetas, tabla y un gráfico</h1>
-  <p class="lede">Ahora los datos se ven: tarjetas de resumen, una tabla por activo y el gráfico del que elijan.</p>
-  <div class="meta"><span class="chip"><b>20 MIN</b></span><span class="chip">DASHBOARD</span><span class="chip">SALIDA: <b>finlab-v3.html</b></span><a class="chip" href="index.html#niveles">IA · <b>NIVEL 2 DE 5</b></a></div>
-  <div class="note tip"><b>Una idea nueva:</b> La <a class="w" href="glosario.html#variacion">variación del día</a> compara el cierre de hoy con el de ayer. <em>Ejemplo: de 100 a 102 es +2 %.</em></div>
-  <div class="note tip"><b>¿Llegan tarde o se rompió el archivo?</b> Bajen la versión con la que termina el paso 2, guárdenla como <span class="code-inline">finlab.html</span> y arranquen este paso desde ahí. <a class="btn" href="rescate/finlab-v2.html" download="finlab.html">⬇ BAJAR EL PUNTO DE PARTIDA (PASO 2)</a></div>
+  <p class="eyebrow">PASO 3 · MERCADO</p>
+  <h1>Mercado: tarjetas, tabla y gráfico</h1>
+  <p class="lede">Los datos, a la vista.</p>
+  <div class="meta"><span class="chip"><b>20 MIN</b></span><span class="chip">SALIDA: <b>finlab-v3.html</b></span><a class="chip" href="index.html#niveles">IA · <b>NIVEL 2 DE 5</b></a></div>
+  <div class="note tip"><b>Una idea nueva:</b> La <a class="w" href="glosario.html#variacion">variación del día</a> compara el cierre (último precio de la rueda) de hoy con el de ayer. <em>Ejemplo: de 100 a 102 es +2 %; de 100 a 98, −2 %.</em></div>
+  <div class="note tip"><b>¿Sin el paso 2?</b> <a class="btn" href="rescate/finlab-v2.html" download="finlab.html">⬇ BAJAR EL PUNTO DE PARTIDA (PASO 2)</a></div>
 
   <section class="block" aria-labelledby="logro">
     <span class="num"></span>
     <h2 id="logro">Qué van a lograr</h2>
     <div class="mock" aria-label="Maqueta de la pestaña Mercado">
       <div class="mock-cards"><div><small>SUBEN HOY</small><b class="up">5</b></div><div><small>BAJAN HOY</small><b class="dn">3</b></div><div><small>MAYOR MOVIMIENTO</small><b>PAM <span class="up">+2,33 %</span></b></div></div>
-      <table><thead><tr><th>SÍMBOLO</th><th>NOMBRE</th><th>PRECIO</th><th>HOY</th><th>30 DÍAS</th></tr></thead>
-      <tbody><tr><td>AAPL</td><td>Apple Inc.</td><td>308,43</td><td class="dn">−0,74 %</td><td aria-hidden="true">〰️</td></tr><tr><td>GGAL</td><td>Grupo Fin. Galicia</td><td>28,75</td><td class="up">+0,52 %</td><td aria-hidden="true">〰️</td></tr><tr><td>PAM</td><td>Pampa Energía</td><td>59,63</td><td class="up">+2,33 %</td><td aria-hidden="true">〰️</td></tr></tbody></table>
+      <table><thead><tr><th>SÍMBOLO</th><th>NOMBRE</th><th>PRECIO</th><th>VAR. DÍA</th><th>30 RUEDAS</th></tr></thead>
+      <tbody><tr><td>AAPL</td><td>Apple Inc.</td><td>308,43</td><td class="dn">−0,74 %</td><td aria-hidden="true">〰️</td></tr>$1</td><td>Pampa Energía</td><td>59,63</td><td class="up">+2,33 %</td><td aria-hidden="true">〰️</td></tr></tbody></table>
       <div class="mock-btns"><span class="ghost">1M</span><span class="ghost">3M</span><span class="ghost">6M</span><span>1A</span></div>
-      <div class="mock-foot">Valores de la muestra fija de la API del curso (26/10/2026); los suyos van a ser otros. Debajo, el gráfico de línea del activo que elijan en la tabla.</div>
+      <div class="mock-foot">Valores de ejemplo: en su tabla serán otros.</div>
     </div>
   </section>
 
@@ -71,54 +71,47 @@
     <span class="num"></span>
     <h2 id="prompt">El prompt</h2>
     <div class="prompt">
-      <div class="prompt-h"><div><span class="t">PROMPT · PASO 3</span><div class="d">Pegar debajo el archivo del paso 2.</div></div><button class="copy" data-copy="#p3" type="button">COPIAR</button></div>
+      <div class="prompt-h"><div><span class="t">PROMPT · PASO 3</span></div><button class="copy" data-copy="#p3" type="button">COPIAR</button></div>
       <div class="prompt-b"><pre id="p3">Paso 3. En la pestaña "01 · Mercado" mostrá:
-- 3 tarjetas arriba: cantidad de activos que suben hoy, cantidad que bajan y el activo con mayor variación del día
-- una tabla con: símbolo, nombre, último precio, variación % del día (verde si sube, rojo si baja) y una sparkline de los últimos 30 días
-- al hacer clic en una fila, un gráfico de línea (Recharts) con los 252 cierres de ese activo, con selector de rango 1M / 3M / 6M / 1A
-- el tooltip del gráfico muestra la fecha y el precio con 2 decimales
+- 3 tarjetas: activos que suben hoy, que bajan y el que más se movió (mayor %, suba o baje)
+- una tabla: símbolo, nombre, precio, variación % del día (verde si sube, rojo si baja) y sparkline de las últimas 30 ruedas
+- al hacer clic en una fila, gráfico de línea (Recharts) con los 252 cierres y rangos 1M / 3M / 6M / 1A, con fecha y precio al pasar el mouse
 
-La variación del día es (cierre de hoy / cierre de ayer − 1) × 100.
-
-Mantené TICKERS y simulateSeries disponibles como window.TICKERS y window.simulateSeries, para seguir probándolas desde la consola.
+Variación del día = (cierre de hoy / cierre de ayer − 1) × 100.
+Dejá TICKERS y simulateSeries como window.TICKERS y window.simulateSeries.
 
 [pegar el archivo completo]</pre></div>
     </div>
-    <div class="note tip"><b>Para personalizar:</b> cambien el pedido de las tarjetas por otras que les interesen (“volumen total del día”, “cantidad de activos en máximo de 30 días”). Es un buen ejercicio para ver qué tan bien entiende la IA una métrica nueva.</div>
   </section>
 
   <section class="block" aria-labelledby="hacer">
     <span class="num"></span>
-    <h2 id="hacer">Qué hacer, clic por clic</h2>
+    <h2 id="hacer">Qué hacer</h2>
     <ol class="do">
-      <li><b>Copien el archivo actual</b> completo (<kbd>Ctrl</kbd> + <kbd>A</kbd>, <kbd>Ctrl</kbd> + <kbd>C</kbd> desde el Bloc de notas).</li>
-      <li><b>Peguen el prompt y, debajo, el archivo,</b> y envíen.</li>
-      <li><b>Guarden la respuesta</b> en <span class="code-inline">finlab.html</span> y ábranla.</li>
-      <li><b>Hagan clic en dos o tres filas</b> y prueben los botones de rango del gráfico.</li>
-      <li><b>El auditor comprueba</b> la variación con la calculadora (ver “Cómo comprobar”). Si todo está bien, guardan <span class="code-inline">finlab-v3.html</span>.</li>
+      <li><b>Peguen el prompt y, debajo, el archivo del paso 2</b> (<kbd>Ctrl</kbd> + <kbd>A</kbd>, <kbd>Ctrl</kbd> + <kbd>C</kbd>), y envíen.</li>
+      <li><b>Guarden la respuesta</b> como <span class="code-inline">finlab.html</span>, ábranla y prueben dos filas y los botones de rango.</li>
+      <li><b>Comprueben</b> abajo. Si está todo bien, guarden <span class="code-inline">finlab-v3.html</span>.</li>
     </ol>
   </section>
 
   <section class="block" aria-labelledby="comprobar">
     <span class="num"></span>
     <h2 id="comprobar">Cómo comprobar</h2>
-    <div class="note warn"><b>Si la consola no deja pegar:</b> la primera vez, Chrome y Firefox muestran un aviso de seguridad y no pegan nada. Escriban a mano la frase que pide el aviso (en Chrome suele ser <span class="code-inline">allow pasting</span>), presionen <kbd>Enter</kbd> y vuelvan a pegar. Es una protección normal del navegador: peguen solo código de este taller.</div>
+    <div class="note warn"><b>¿Chrome no deja pegar?</b> Escriban <span class="code-inline">allow pasting</span>, <kbd>Enter</kbd>, y peguen de nuevo.</div>
     <ul class="check">
-      <li><b>Variación con calculadora:</b> en la consola escriban <span class="code-inline c">simulateSeries(TICKERS[0]).slice(-2)</span>. Con los dos cierres que aparecen, calculen (hoy ÷ ayer − 1) × 100. Tiene que coincidir con la tabla.</li>
+      <li><b>Variación:</b> en la consola, <span class="code-inline c">simulateSeries(TICKERS[0]).slice(-2)</span>. Calculen (hoy ÷ ayer − 1) × 100: tiene que coincidir con la tabla.</li>
       <li><b>Las tarjetas cierran:</b> suben + bajan (+ sin cambio) = cantidad de activos.</li>
-      <li><b>El rango 1M</b> muestra unas 21 ruedas, no 30 días corridos.</li>
-      <li><b>Colores:</b> ningún número negativo aparece en verde.</li>
+      <li><b>El rango 1M</b> muestra unas 21 <a class="w" href="glosario.html#rueda">ruedas</a> (días con mercado abierto), no 30 días corridos.</li>
     </ul>
   </section>
 
   <section class="block" aria-labelledby="falla">
     <span class="num"></span>
     <h2 id="falla">Si algo falla</h2>
-    <div class="note tip"><b>Tres intentos y nada:</b> <a class="btn" href="rescate/finlab-v3.html" target="_blank" rel="noopener">ABRIR LA VERSIÓN DE RESCATE</a> <a class="btn btn-primary" href="rescate/finlab-v3.html" download="finlab.html">⬇ BAJAR LA VERSIÓN DE RESCATE</a></div>
+    <div class="note tip"><b>Tres intentos y nada:</b> <a class="btn btn-primary" href="rescate/finlab-v3.html" download="finlab.html">⬇ BAJAR LA VERSIÓN DE RESCATE</a></div>
     <ul>
-      <li><b>“Recharts is not defined”</b> o el gráfico no aparece: pídanle que revise el orden de los <span class="code-inline">&lt;script&gt;</span>. Recharts necesita que React y PropTypes estén cargados antes.</li>
+      <li><b>“Recharts is not defined”</b> o no hay gráfico: pídanle que cargue React y PropTypes antes de la librería de gráficos.</li>
       <li><b>La variación no coincide:</b> “La variación de AAPL en la tabla da X pero con los cierres A y B me da Y. Revisá la función y mostrame la cuenta.”</li>
-      <li><b>La página quedó en blanco:</b> usen el <a href="paso-1.html#falla">prompt de rescate</a>.</li>
     </ul>
   </section>
 
@@ -128,7 +121,7 @@ Mantené TICKERS y simulateSeries disponibles como window.TICKERS y window.simul
     <!-- @viz:p3 -->
     <figure class="viz" id="viz-p3" data-titulo="El mercado en un vistazo">
       <div class="viz-grafico"><svg class="viz-svg" viewBox="0 0 960 430" role="img" aria-labelledby="viz-p3-t viz-p3-d"><title id="viz-p3-t">Variación del día de los 8 activos</title><desc id="viz-p3-d">PAM 2,33 %, YPF 2,29 %, KO 0,82 %, GGAL 0,52 %, JNJ 0,25 %, AAPL -0,74 %, MSFT -1,00 %, PG -1,78 %</desc><line class="v-grid" x1="291.7" x2="291.7" y1="24" y2="398"/><text class="v-mut v-sm" x="291.7" y="420" text-anchor="middle">-2 %</text><line class="v-grid" x1="535" x2="535" y1="24" y2="398"/><text class="v-mut v-sm" x="535" y="420" text-anchor="middle">0 %</text><line class="v-grid" x1="778.3" x2="778.3" y1="24" y2="398"/><text class="v-mut v-sm" x="778.3" y="420" text-anchor="middle">2 %</text><text class="v-ink v-b" x="156" y="58" text-anchor="end">PAM</text><rect class="v-up-fill" x="536" y="39" width="282.5" height="28" rx="4"><title>PAM: 2,33 % en el día (cierra 59,63)</title></rect><text class="v-ink v-sm" x="826.5" y="58" text-anchor="start">▲ +2,33 %</text><text class="v-ink v-b" x="156" y="104" text-anchor="end">YPF</text><rect class="v-up-fill" x="536" y="85" width="277.6" height="28" rx="4"><title>YPF: 2,29 % en el día (cierra 26,33)</title></rect><text class="v-ink v-sm" x="821.6" y="104" text-anchor="start">▲ +2,29 %</text><text class="v-ink v-b" x="156" y="150" text-anchor="end">KO</text><rect class="v-up-fill" x="536" y="131" width="98.8" height="28" rx="4"><title>KO: 0,82 % en el día (cierra 66,09)</title></rect><text class="v-ink v-sm" x="642.8" y="150" text-anchor="start">▲ +0,82 %</text><text class="v-ink v-b" x="156" y="196" text-anchor="end">GGAL</text><rect class="v-up-fill" x="536" y="177" width="62.3" height="28" rx="4"><title>GGAL: 0,52 % en el día (cierra 28,75)</title></rect><text class="v-ink v-sm" x="606.3" y="196" text-anchor="start">▲ +0,52 %</text><text class="v-ink v-b" x="156" y="242" text-anchor="end">JNJ</text><rect class="v-up-fill" x="536" y="223" width="29.4" height="28" rx="4"><title>JNJ: 0,25 % en el día (cierra 117,88)</title></rect><text class="v-ink v-sm" x="573.4" y="242" text-anchor="start">▲ +0,25 %</text><text class="v-ink v-b" x="156" y="288" text-anchor="end">AAPL</text><rect class="v-dn-fill" x="444" y="269" width="89" height="28" rx="4"><title>AAPL: -0,74 % en el día (cierra 308,43)</title></rect><text class="v-ink v-sm" x="437" y="288" text-anchor="end">▼ -0,74 %</text><text class="v-ink v-b" x="156" y="334" text-anchor="end">MSFT</text><rect class="v-dn-fill" x="412.3" y="315" width="120.7" height="28" rx="4"><title>MSFT: -1,00 % en el día (cierra 471,79)</title></rect><text class="v-ink v-sm" x="405.3" y="334" text-anchor="end">▼ -1,00 %</text><text class="v-ink v-b" x="156" y="380" text-anchor="end">PG</text><rect class="v-dn-fill" x="317.4" y="361" width="215.6" height="28" rx="4"><title>PG: -1,78 % en el día (cierra 162,55)</title></rect><text class="v-ink v-sm" x="310.4" y="380" text-anchor="end">▼ -1,78 %</text><line class="v-axis" x1="535" x2="535" y1="20" y2="398"/></svg></div>
-      <figcaption><b>El mercado en un vistazo.</b> Una barra por activo: a la derecha los que subieron, a la izquierda los que bajaron. Hoy <b>5 suben y 3 bajan</b>; el que más se movió fue <b>PAM</b>.<small>Datos: muestra fija de la API del curso (26/10/2026).</small></figcaption>
+      <figcaption><b>El mercado en un vistazo.</b> Verde sube, rojo baja. Hoy <b>5 suben y 3 bajan</b>; el que más se movió fue <b>PAM</b>.<small>Datos de la API del curso; su tabla usa precios simulados y dará otros.</small></figcaption>
     </figure>
     <!-- /@viz:p3 -->
   </section>

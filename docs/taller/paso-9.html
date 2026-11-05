@@ -32,23 +32,16 @@
   </ul></nav>
 <!-- /@nav -->
 
-  <p class="eyebrow">PASO 9 · CIERRE DEL TALLER</p>
-  <h1>La terminal terminada: <span class="code-inline">127.0.0.1:4173/#/guiado</span></h1>
-  <p class="lede">Abren la terminal completa en la pestaña 05 · AUTOMATIZAR, prueban su automatización en n8n y la comparan con la suya.</p>
-  <div class="meta"><span class="chip">PARTE A · <b>25 MIN</b></span><span class="chip">PARTE B · <b>20 MIN</b></span><span class="chip">SIN INSTALAR NADA</span><span class="chip">N8N</span><span class="chip">SALIDA: <b>3/3 EJERCICIOS</b></span><a class="chip" href="index.html#niveles">IA · <b>NIVEL 4 DE 5</b></a></div>
+  <p class="eyebrow">PASO 9 · GUIADO</p>
+  <h1>La terminal terminada: la automatización guiada</h1>
+  <p class="lede">Prueben la automatización guiada en n8n y auditen el <span class="code-inline">finlab.html</span> de otro grupo.</p>
+  <div class="meta"><span class="chip">PARTE A · <b>25 MIN</b></span><span class="chip">PARTE B · <b>20 MIN</b></span><span class="chip">SALIDA: <b>3/3 EJERCICIOS</b></span><a class="chip" href="index.html#niveles">IA · <b>NIVEL 4 DE 5</b></a></div>
   <div class="note tip"><b>Una idea nueva:</b> Una <a class="w" href="glosario.html#workflow">automatización</a> es un mapa: dato, condición, aviso. <em>Ejemplo: API de precios → ¿RSI menor a 30? → correo.</em></div>
 
   <section class="block" aria-labelledby="logro">
     <span class="num"></span>
     <h2 id="logro">Qué van a lograr</h2>
-    <p>Ver en el navegador la pantalla “Armá tu primera automatización”, descargar el workflow que genera, ejecutarlo en n8n y resolver los tres ejercicios en grupo del final de la página hasta que el contador diga <b>3/3 RESUELTOS</b>.</p>
-    <div class="mock" aria-label="Maqueta de la pestaña AUTOMATIZAR">
-      <b>Armá tu primera automatización</b> <span class="tag flat">MODO DE PRUEBA · SIN CUENTAS</span>
-      <div class="mock-tabs"><span>1 · Iniciar prueba</span><span>2 · Revisar ejemplos</span><span>3 · Buscar una señal</span><span>Si encuentra</span><span>Si no encuentra</span></div>
-      <div style="color:var(--mut)">¿Qué señal querés que el flujo encuentre? <b style="color:var(--txt)">Señal de venta ▾</b></div>
-      <div class="mock-btns"><span>DESCARGAR PARA N8N</span><span class="ghost">COPIAR JSON</span><span class="ghost">VER DIAGRAMA</span></div>
-      <div class="mock-foot">Más abajo: <b>Pónganlo a prueba en equipo</b> · 15 MIN · 0/3 RESUELTOS</div>
-    </div>
+    <p>Una automatización corriendo en n8n y el contador en <b>3/3 RESUELTOS</b>.</p>
   </section>
 
   <!-- @avance -->
@@ -69,26 +62,11 @@
 
   <section class="block" aria-labelledby="hacer">
     <span class="num"></span>
-    <h2 id="hacer">Qué hacer, clic por clic</h2>
-    <h3 style="margin-top:14px">A · Abrir la terminal</h3>
+    <h2 id="hacer">Qué hacer</h2>
     <ol class="do">
-      <li><b>Abran en el navegador</b> <span class="code-inline c">https://postgrado-ia.vercel.app/#/guiado</span> y toquen la pestaña <em>05 · AUTOMATIZAR</em>. Sin internet, pídanle al docente la versión local.</li>
-    </ol>
-
-    <h3 style="margin-top:18px">B · Recorrer la automatización guiada</h3>
-    <ol class="do">
-      <li><b>Lean los cinco pasos</b> dibujados arriba (Iniciar prueba → … → Registrar resultado): es el flujo del paso 8, simplificado.</li>
-      <li><b>En “1 · Elegí qué querés buscar”</b> seleccionen <em>Señal de venta</em> y predigan en grupo qué activo va a aparecer.</li>
-      <li><b>Toquen “DESCARGAR PARA N8N”,</b> impórtenlo en n8n (<em>Create workflow</em> → <em>⋯</em> → <em>Import from File…</em>) y toquen <em>Execute workflow</em>.</li>
-      <li><b>Miren cuál salida se puso verde</b> después de <em>¿Hay una señal?</em>. ¿Coincide con lo que predijeron?</li>
-      <li><b>Repitan</b> con <em>Señal de compra</em> y <em>Señal neutral</em>.</li>
-    </ol>
-
-    <h3 style="margin-top:18px">C · Los ejercicios en grupo</h3>
-    <ol class="do">
-      <li><b>Bajen hasta “Pónganlo a prueba en equipo”</b> y asignen los cuatro roles (piloto, redactor, auditor, presentador).</li>
-      <li><b>En cada ejercicio,</b> cada integrante justifica en una frase por qué elegiría su opción; recién después toquen <em>COMPROBAR</em>.</li>
-      <li><b>El contador</b> de arriba a la derecha tiene que llegar a <b>3/3 RESUELTOS</b>.</li>
+      <li><b>Abran</b> <span class="code-inline">https://postgrado-ia.vercel.app/#/guiado</span> y toquen <em>05 · AUTOMATIZAR</em>. Sin internet, el docente les pasa un enlace local.</li>
+      <li><b>Elijan “Señal de venta”</b> (no la cambien después) y anoten qué activo creen que sale. Toquen <em>DESCARGAR PARA N8N</em> (baja <span class="code-inline">monitor-mercado-n8n.json</span>), impórtenlo (<em>Import from File…</em>) y toquen <em>Execute workflow</em>: la salida que se pone verde es la rama que cumplió la condición. ¿Coincide?</li>
+      <li><b>Bajen a “Pónganlo a prueba en equipo”,</b> repartan los roles que muestra la terminal y justifiquen cada opción en una frase antes de tocar <em>COMPROBAR</em>.</li>
     </ol>
   </section>
 
@@ -96,21 +74,19 @@
     <span class="num"></span>
     <h2 id="comprobar">Cómo comprobar</h2>
     <ul class="check">
-      <li><b>La dirección</b> del navegador termina en <span class="code-inline">/#/guiado</span> (o tocaron la pestaña 05 · AUTOMATIZAR) y esa pestaña está marcada.</li>
-      <li><b>En n8n,</b> la salida que se activa coincide con la predicción que anotaron, o pueden explicar por qué no.</li>
-      <li><b>El contador</b> de ejercicios dice 3/3.</li>
-      <li><b>Cada grupo presenta</b> un hallazgo de la auditoría que confirmó a mano y uno que la IA reportó y resultó falso.</li>
+      <li><b>En n8n,</b> la salida verde coincide con su predicción, o explican por qué no.</li>
+      <li><b>El contador</b> dice 3/3.</li>
+      <li><b>Cada grupo muestra</b> un hallazgo de la auditoría <em>confirmado</em> (lo recalculó a mano y da igual que la IA) y uno <em>falso</em> (da distinto: la IA se equivocó).</li>
     </ul>
-    <div class="note tip"><b>Pregunta de cierre del taller:</b> ¿en qué paso la IA se equivocó más y cómo lo detectaron? Esa respuesta es el aprendizaje más importante: la IA escribe rápido, pero la verificación sigue siendo trabajo de ustedes.</div>
+    <div class="note tip"><b>Pregunta de cierre:</b> ¿en qué paso la IA se equivocó más y cómo lo detectaron?</div>
   </section>
 
   <section class="block" data-section="prompts" aria-labelledby="prompt">
     <span class="num"></span>
     <h2 id="prompt">Parte B · El prompt de cierre: auditoría cruzada</h2>
-    <div class="note tip"><b>Parte B · 20 minutos.</b> Si la clase no da para más, háganla al comienzo de la clase siguiente: solo necesitan su <span class="code-inline">finlab.html</span> y un chat nuevo.</div>
-    <p>Cada grupo le pasa su <span class="code-inline">finlab.html</span> a otro. El grupo que lo recibe usa este prompt en un chat <b>nuevo</b> (la IA que escribió el código no debería corregirse a sí misma) y después verifica a mano dos de los hallazgos.</p>
+    <p>Pásenle su <span class="code-inline">finlab.html</span> a otro grupo (20 minutos). Ellos lo auditan con este prompt en un chat <b>nuevo</b> y verifican a mano dos hallazgos. Si no hay tiempo, queda para la clase siguiente. No peguen claves ni datos personales.</p>
     <div class="prompt">
-      <div class="prompt-h"><div><span class="t">PROMPT · AUDITORÍA</span><div class="d">Chat nuevo, archivo de otro grupo.</div></div><button class="copy" data-copy="#p9" type="button">COPIAR</button></div>
+      <div class="prompt-h"><div><span class="t">PROMPT · AUDITORÍA</span></div><button class="copy" data-copy="#p9" type="button">COPIAR</button></div>
       <div class="prompt-b"><pre id="p9">Sos auditor de una herramienta educativa de análisis financiero. Te paso un archivo HTML completo.
 
 Revisá solamente:
@@ -118,7 +94,7 @@ Revisá solamente:
 2. Consistencia: ¿la tabla, el gráfico y la API muestran los mismos números?
 3. Comunicación: ¿en algún lugar se presentan los datos como reales o se sugiere una recomendación de inversión?
 
-Para cada hallazgo indicá: dónde está (nombre de la función o sección), qué está mal, cómo lo verificaría una persona sin programar y la corrección. Si no encontrás problemas en un punto, decilo; no inventes hallazgos.
+Para cada hallazgo indicá: dónde está (nombre de la función o sección), qué está mal, cómo lo verificaría una persona sin programar y la corrección. Si no encontrás problemas en un punto, o algo no está en el archivo, decilo; no inventes hallazgos.
 
 [pegar el archivo]</pre></div>
     </div>
@@ -128,8 +104,9 @@ Para cada hallazgo indicá: dónde está (nombre de la función o sección), qu�
     <span class="num"></span>
     <h2 id="falla">Si algo falla</h2>
     <ul>
-      <li><b>La página abre en INICIO o en otra pestaña:</b> toquen la pestaña <em>05 · AUTOMATIZAR</em> o agreguen <span class="code-inline">#/guiado</span> al final de la dirección.</li>
-      <li><b>No abre o no hay internet:</b> pídanle al docente la versión local.</li>
+      <li><b>Abre en INICIO:</b> toquen <em>05 · AUTOMATIZAR</em>.</li>
+      <li><b>No abre o no hay internet:</b> pídanle la versión local al docente.</li>
+      <li><b>No tienen n8n:</b> usen <em>COPIAR JSON</em> y <em>VER DIAGRAMA</em> en la terminal.</li>
     </ul>
   </section>
 
@@ -138,8 +115,8 @@ Para cada hallazgo indicá: dónde está (nombre de la función o sección), qu�
     <h2 id="grafico">La idea, en un gráfico</h2>
     <!-- @viz:p9 -->
     <figure class="viz" id="viz-p9" data-titulo="El recorrido completo">
-      <div class="viz-grafico"><svg class="viz-svg" viewBox="0 0 960 290" role="img" aria-labelledby="viz-p9-t viz-p9-d"><title id="viz-p9-t">Lo construido hasta el paso 8 y lo que agrega la clase 3</title><desc id="viz-p9-d">Dos columnas: lo que ya funciona y lo que sigue</desc><g><rect class="v-card " x="40" y="50" width="420" height="180" rx="10"/><text class="v-ink v-b" x="56" y="78">Lo que ya funciona al terminar el paso 8</text><text class="v-mut v-sm" x="56" y="100">la terminal publicada, con sus pestañas</text><text class="v-mut v-sm" x="56" y="120">la API con datos y alertas</text><text class="v-mut v-sm" x="56" y="140">un workflow de n8n que avisa solo</text><text class="v-mut v-sm" x="56" y="160">una auditoría hecha por otro grupo</text></g><line class="v-axis " x1="464" y1="140" x2="487" y2="140"/><path class="v-axis-fill" d="M496,140 L487,145 L487,135 Z"/><g><rect class="v-card " x="500" y="50" width="420" height="180" rx="10"/><text class="v-ink v-b" x="516" y="78">Lo que agrega la clase 3</text><text class="v-mut v-sm" x="516" y="100">claves de API guardadas donde corresponde</text><text class="v-mut v-sm" x="516" y="120">un modelo de IA elegido con criterio</text><text class="v-mut v-sm" x="516" y="140">un agente que decide qué herramienta usar</text><text class="v-mut v-sm" x="516" y="160">un consejo de agentes y el MCP de n8n</text></g></svg></div>
-      <figcaption><b>El recorrido completo.</b> Al terminar el paso 9 el circuito funciona de punta a punta: página, API, n8n y auditoría. La clase 3 no agrega pantallas nuevas: le pone <b>un agente arriba</b> a lo que ya construyeron.<small>Esquema del paso 9.</small></figcaption>
+      <div class="viz-grafico"><svg class="viz-svg" viewBox="0 0 960 290" role="img" aria-labelledby="viz-p9-t viz-p9-d"><title id="viz-p9-t">Lo construido hasta el paso 8 y lo que agrega la clase 3</title><desc id="viz-p9-d">Dos columnas: lo que ya funciona y lo que sigue</desc><g><rect class="v-card " x="40" y="50" width="420" height="180" rx="10"/><text class="v-ink v-b" x="56" y="78">Lo que ya funciona al terminar el paso 8</text><text class="v-mut v-sm" x="56" y="100">la terminal publicada, con sus pestañas</text><text class="v-mut v-sm" x="56" y="120">la API con datos y alertas</text><text class="v-mut v-sm" x="56" y="140">un workflow de n8n que avisa solo</text></g><line class="v-axis " x1="464" y1="140" x2="487" y2="140"/><path class="v-axis-fill" d="M496,140 L487,145 L487,135 Z"/><g><rect class="v-card " x="500" y="50" width="420" height="180" rx="10"/><text class="v-ink v-b" x="516" y="78">Lo que agrega la clase 3</text><text class="v-mut v-sm" x="516" y="100">claves de API guardadas donde corresponde</text><text class="v-mut v-sm" x="516" y="120">un modelo de IA elegido con criterio</text><text class="v-mut v-sm" x="516" y="140">un agente que decide qué herramienta usar</text><text class="v-mut v-sm" x="516" y="160">un consejo de agentes y el MCP de n8n</text></g></svg></div>
+      <figcaption><b>El recorrido completo.</b> La clase 3 no agrega pantallas: le pone <b>un agente arriba</b> a lo que ya construyeron.<small>Esquema del paso 9.</small></figcaption>
     </figure>
     <!-- /@viz:p9 -->
   </section>

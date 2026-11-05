@@ -7,17 +7,17 @@
 |---|---:|---:|---:|---:|---:|---:|---|
 | Mapa del taller | 488 | 450 | 0 | 3 | 0 | 7 | EXCEDE |
 | P0 · Preparar | 541 | 450 | 0 | 5 | 2 | 6 | EXCEDE |
-| P1 · Esqueleto | 605 | 450 | 140 | 3 | 3 | 6 | EXCEDE |
-| P2 · Datos | 684 | 450 | 144 | 3 | 5 | 7 | EXCEDE |
-| P3 · Mercado | 651 | 450 | 135 | 3 | 5 | 7 | EXCEDE |
+| P1 · Esqueleto | 415 | 450 | 140 | 1 | 3 | 6 | OK |
+| P2 · Datos | 497 | 450 | 144 | 2 | 3 | 7 | EXCEDE |
+| P3 · Mercado | 441 | 450 | 111 | 3 | 4 | 7 | OK |
 | P4 · Indicadores | 577 | 450 | 223 | 3 | 4 | 7 | EXCEDE |
 | P5 · Carteras | 511 | 450 | 174 | 3 | 4 | 7 | EXCEDE |
-| P6 · API | 669 | 450 | 201 | 2 | 4 | 7 | EXCEDE |
-| P7 · Colab | 761 | 450 | 251 | 2 | 5 | 7 | EXCEDE |
+| P6 · API | 509 | 450 | 201 | 2 | 3 | 7 | EXCEDE |
+| P7 · Colab | 496 | 450 | 251 | 3 | 3 | 7 | EXCEDE |
 | P8 · n8n | 518 | 450 | 149 | 3 | 2 | 7 | EXCEDE |
-| P9 · Guiado | 735 | 450 | 108 | 4 | 3 | 7 | EXCEDE |
+| P9 · Guiado | 454 | 450 | 115 | 1 | 2 | 7 | EXCEDE |
 | P10 · Claves | 479 | 450 | 101 | 1 | 2 | 7 | EXCEDE |
-| P11 · Modelos | 714 | 450 | 106 | 5 | 4 | 7 | EXCEDE |
+| P11 · Modelos | 415 | 450 | 106 | 2 | 1 | 7 | OK |
 | P12 · Agente | 574 | 450 | 132 | 3 | 3 | 7 | EXCEDE |
 | P13 · Consejo | 504 | 450 | 131 | 1 | 2 | 7 | EXCEDE |
 | P14 · MCP | 452 | 450 | 100 | 1 | 1 | 7 | EXCEDE |
@@ -26,4 +26,4 @@
 | Ejemplos de automatización | 2081 | 2700 | 988 | 17 | 0 | 36 | OK |
 | Terminal (bienvenida y EMPEZAR) | — | — | — | — | — | — | a mano |
 
-**Total de lectura:** 15888 palabras · **Partes que exceden:** 18 de 19
+**Total de lectura:** 14296 palabras · **Partes que exceden:** 15 de 19

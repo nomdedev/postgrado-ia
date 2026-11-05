@@ -32,21 +32,20 @@
   </ul></nav>
 <!-- /@nav -->
 
-  <p class="eyebrow">PASO 1 · EL PRIMER ARCHIVO Y EL CICLO DE TRABAJO</p>
+  <p class="eyebrow">PASO 1 · ESQUELETO</p>
   <h1>El esqueleto: encabezado y cuatro pestañas</h1>
-  <p class="lede">Primero el armazón vacío; lo importante es el ciclo pedir, guardar, abrir y comprobar, que repiten en todos los pasos.</p>
-  <div class="meta"><span class="chip"><b>25–30 MIN</b></span><span class="chip">NAVEGADOR</span><span class="chip">SALIDA: <b>finlab-v1.html</b></span><a class="chip" href="index.html#niveles">IA · <b>NIVEL 2 DE 5</b></a></div>
-  <div class="note tip"><b>Una idea nueva:</b> Todo el taller repite un ciclo: pedir, guardar, probar, comprobar. <em>Ejemplo: piden el esqueleto, lo guardan como finlab.html, lo abren con doble clic y revisan la lista.</em></div>
+  <p class="lede">El armazón vacío de la terminal.</p>
+  <div class="meta"><span class="chip"><b>25–30 MIN</b></span><span class="chip">SALIDA: <b>finlab-v1.html</b></span><a class="chip" href="index.html#niveles">IA · <b>NIVEL 2 DE 5</b></a></div>
+  <div class="note tip"><b>Una idea nueva:</b> Todo el taller repite un ciclo: pedir, guardar, abrir, comprobar. <em>Ejemplo: piden el esqueleto, lo guardan como finlab.html, lo abren con doble clic y revisan la lista.</em></div>
 
   <section class="block" aria-labelledby="logro">
     <span class="num"></span>
     <h2 id="logro">Qué van a lograr</h2>
-    <p>Una página que abre con doble clic, con el nombre de su terminal arriba y cuatro <a class="w" href="glosario.html#pestana">pestañas</a>: <em>Mercado</em>, <em>Carteras</em>, <em>API &amp; Alertas</em> y <em>Python &amp; Colab</em>. Son las mismas que tiene la terminal final.</p>
+    <p>Una página que abre con doble clic y tiene cuatro <a class="w" href="glosario.html#pestana">pestañas</a>, como en la maqueta.</p>
     <div class="mock" aria-label="Maqueta de cómo se ve la página al terminar el paso 1">
       <b>FIN·LAB Grupo 1</b> <span style="color:var(--dim)">· lunes 26/10/2026</span>
       <div class="mock-tabs"><span class="on">01 · Mercado</span><span>02 · Carteras</span><span>03 · API &amp; Alertas</span><span>04 · Python &amp; Colab</span></div>
       <b>Mercado</b><br><span style="color:var(--mut)">En construcción</span>
-      <div class="mock-foot">Datos simulados con fines educativos. No es asesoramiento financiero.</div>
     </div>
   </section>
 
@@ -70,7 +69,7 @@
     <span class="num"></span>
     <h2 id="prompt">El prompt</h2>
     <div class="prompt">
-      <div class="prompt-h"><div><span class="t">PROMPT · PASO 1</span><div class="d">Arranca de cero: todavía no hay archivo para pegar.</div></div><button class="copy" data-copy="#p1" type="button">COPIAR</button></div>
+      <div class="prompt-h"><div><span class="t">PROMPT · PASO 1</span></div><button class="copy" data-copy="#p1" type="button">COPIAR</button></div>
       <div class="prompt-b"><pre id="p1">Paso 1. Creá el archivo inicial:
 - un encabezado con el nombre de la terminal y la fecha de hoy
 - una barra de 4 pestañas: "01 · Mercado", "02 · Carteras", "03 · API & Alertas", "04 · Python & Colab"
@@ -84,26 +83,22 @@ Todavía no agregues datos ni gráficos.</pre></div>
 
   <section class="block" aria-labelledby="hacer">
     <span class="num"></span>
-    <h2 id="hacer">Qué hacer, clic por clic</h2>
+    <h2 id="hacer">Qué hacer</h2>
     <ol class="do">
-      <li><b>Copien el prompt</b> de arriba y péguenlo en el mismo chat del paso 0.</li>
-      <li><b>Esperen la respuesta completa.</b> Tiene que empezar con <span class="code-inline">&lt;!DOCTYPE html&gt;</span> y terminar con <span class="code-inline">&lt;/html&gt;</span>. La mayoría de los chats muestran un botón <em>Copiar</em> arriba del bloque de código.</li>
-      <li><b>Creen el archivo:</b> en Windows, abran el Bloc de notas, peguen, y en <em>Archivo → Guardar como</em> elijan la carpeta <span class="code-inline">finlab</span>, pongan de nombre <span class="code-inline">finlab.html</span> y en <em>Tipo</em> elijan <em>Todos los archivos</em>. En Mac, usen TextEdit en <em>Formato → Convertir a texto sin formato</em>.</li>
-      <li><b>Hagan doble clic</b> en <span class="code-inline">finlab.html</span>. Se abre en el navegador.</li>
-      <li><b>Abran la consola</b> con <kbd>F12</kbd> → pestaña <em>Console</em>. No debería haber líneas en rojo.</li>
-      <li><b>El auditor comprueba</b> la lista de “Cómo comprobar”.</li>
-      <li><b>Guarden una copia</b> del archivo como <span class="code-inline">finlab-v1.html</span>. A partir de ahora siempre trabajan sobre <span class="code-inline">finlab.html</span> y guardan copias numeradas.</li>
+      <li><b>Copien el prompt</b> y péguenlo en el chat del paso 0.</li>
+      <li><b>Guarden el código completo</b> (de <span class="code-inline">&lt;!DOCTYPE html&gt;</span> a <span class="code-inline">&lt;/html&gt;</span>; si falta el final, se cortó) como <span class="code-inline">finlab.html</span> en la carpeta <span class="code-inline">finlab</span>. Bloc de notas: <em>Tipo → Todos los archivos</em>. Mac: TextEdit → <em>Formato → Convertir a texto sin formato</em>.</li>
+      <li><b>Doble clic</b> en <span class="code-inline">finlab.html</span> y guarden una copia como <span class="code-inline">finlab-v1.html</span>. Siempre se trabaja sobre <span class="code-inline">finlab.html</span>.</li>
     </ol>
-    <div class="note warn"><b>Ojo con el Bloc de notas:</b> si el archivo queda como <span class="code-inline">finlab.html.txt</span>, el navegador no lo abre como página. En el Explorador de archivos, activen <em>Ver → Extensiones de nombre de archivo</em> para verlo.</div>
+    <div class="note warn"><b>Ojo:</b> si queda como <span class="code-inline">finlab.html.txt</span>, no abre. En el Explorador: <em>Ver → Extensiones de nombre de archivo</em>.</div>
   </section>
 
   <section class="block" aria-labelledby="comprobar">
     <span class="num"></span>
     <h2 id="comprobar">Cómo comprobar</h2>
     <ul class="check">
-      <li><b>Abre con doble clic</b> y la consola (F12) no muestra errores en rojo.</li>
-      <li><b>Las 4 pestañas cambian</b> el contenido y la activa se distingue de las demás.</li>
-      <li><b>Achiquen la ventana</b> al ancho de un celular (o <kbd>F12</kbd> → ícono de celular): no aparece una barra de desplazamiento horizontal.</li>
+      <li><b>Abre con doble clic</b> y la consola (<kbd>F12</kbd> → <em>Console</em>, el registro de errores) no muestra líneas rojas.</li>
+      <li><b>Las 4 pestañas cambian</b> el contenido y la activa se distingue.</li>
+      <li><b>En ancho de celular</b> (<kbd>F12</kbd> → ícono de celular) no hay barra horizontal.</li>
       <li><b>El pie</b> dice que los datos son simulados.</li>
     </ul>
   </section>
@@ -111,9 +106,9 @@ Todavía no agregues datos ni gráficos.</pre></div>
   <section class="block" aria-labelledby="falla">
     <span class="num"></span>
     <h2 id="falla">Si algo falla</h2>
-    <div class="note tip"><b>Tres intentos y nada:</b> <a class="btn" href="rescate/finlab-v1.html" target="_blank" rel="noopener">ABRIR LA VERSIÓN DE RESCATE</a> <a class="btn btn-primary" href="rescate/finlab-v1.html" download="finlab.html">⬇ BAJAR LA VERSIÓN DE RESCATE</a></div>
+    <div class="note tip"><b>Tres intentos y nada:</b> <a class="btn btn-primary" href="rescate/finlab-v1.html" download="finlab.html">⬇ BAJAR LA VERSIÓN DE RESCATE</a> (necesita internet; sin conexión, pídanla al docente)</div>
     <div class="prompt">
-      <div class="prompt-h"><div><span class="t">PROMPT DE RESCATE · PÁGINA EN BLANCO</span><div class="d">Sirve para cualquier paso. Copien el error exacto de la consola.</div></div><button class="copy" data-copy="#r1" type="button">COPIAR</button></div>
+      <div class="prompt-h"><div><span class="t">PROMPT DE RESCATE · PÁGINA EN BLANCO</span><div class="d">Para cualquier paso.</div></div><button class="copy" data-copy="#r1" type="button">COPIAR</button></div>
       <div class="prompt-b"><pre id="r1">Después de tu último cambio la página queda en blanco. La consola del navegador muestra este error:
 
 [pegar el error exacto, la línea roja]
@@ -123,9 +118,8 @@ Te paso el archivo completo. No agregues funciones nuevas: encontrá la causa, e
 [pegar el archivo]</pre></div>
     </div>
     <ul>
-      <li><b>La respuesta se corta a la mitad:</b> escriban “seguí exactamente desde donde te cortaste” y peguen las dos partes una detrás de la otra.</li>
-      <li><b>La IA “mejora” cosas que no pidieron:</b> recuérdenle la regla 5 del contexto y pidan “solo el cambio del paso 1”.</li>
-      <li><b>Nada funciona después de tres intentos:</b> vuelvan a la última versión guardada y pidan el cambio en partes más chicas.</li>
+      <li><b>La respuesta se corta:</b> escriban “seguí desde donde te cortaste” y peguen las dos partes.</li>
+      <li><b>La IA cambia lo que no pidieron:</b> recuérdenle “devolveme siempre el archivo completo” y pidan “solo el cambio del paso 1”.</li>
     </ul>
   </section>
 
