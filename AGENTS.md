@@ -48,3 +48,7 @@ Tareas solo lectura → NO ejecutar evals.
 
 `/autoplan [parte]` mejora una parte del material con `docente-didactico` y `simplificador-implacable`, medida contra un presupuesto de texto.
 Partes y presupuesto: `docs/autoplan/partes.json` · estado: `docs/autoplan/ESTADO.md` (`node scripts/loops/autoplan.js`) · plan de cada parte: `docs/autoplan/<id>.md`.
+
+## Glosario
+
+El vocabulario de dominio vive en `GLOSSARY.md` (raíz) y se mantiene al día: cada término trae su definición, la ruta del código donde vive y los sinónimos a evitar.
